@@ -1,5 +1,19 @@
 xml.instruct!
 xml.Response do
-  xml.Say "Welcome to I Heart Psychics. Please enter the psychic extension if you have one or wait on the line to be transferred.", :voice => "woman"
-  xml.Say "You are calling from #{params[:From]}"
+  if @client
+    xml.Gather(action: calls_url_for("pin", phone_number)) do
+      xml.Say <<-EOS.strip_heredoc, voice: "woman"
+        Welcome back #{@client.first_name}.
+        Please enter your five digit PIN number and press the pound key.
+      EOS
+    end
+  else
+    xml.Gather(action: calls_url_for("user", phone_number)) do
+      xml.Say <<-EOS.strip_heredoc, voice: "woman"
+        Welcome to I Heart Psychics.
+        Please enter your ten digits phone number press the pound key.
+        If you don't have an account, please press zero and the pound key.
+      EOS
+    end
+  end
 end
