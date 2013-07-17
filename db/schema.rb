@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130717173448) do
+ActiveRecord::Schema.define(version: 20130717230723) do
+
+  create_table "client_calls", force: true do |t|
+    t.integer  "client_id"
+    t.string   "sid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "processed"
+  end
 
   create_table "client_phones", force: true do |t|
     t.integer  "client_id"
