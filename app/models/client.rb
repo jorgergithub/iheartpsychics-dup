@@ -1,6 +1,7 @@
 class Client < ActiveRecord::Base
   belongs_to :user
-  before_save :set_encrypted_pin
+  after_save :set_encrypted_pin
+  delegate :first_name, :last_name, to: :user
 
   has_many :phones, :class_name => "ClientPhone"
 

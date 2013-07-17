@@ -23,7 +23,7 @@ class CallsController < ApplicationController
     end
 
     @phone_number = "+1#{params[:Digits]}"
-    @client_phone = ClientPhone.where(phone: @phone_number).take
+    @client_phone = ClientPhone.where(number: @phone_number).take
     if @client_phone
       @client = @client_phone.client
       logger.info "Got client: #{@client.inspect}"
@@ -57,7 +57,7 @@ class CallsController < ApplicationController
 
   def phone_number
     if @client_phone
-      @client_phone.phone
+      @client_phone.number
     elsif incoming_number
       incoming_number
     elsif digits = params[:Digits]
@@ -76,7 +76,7 @@ class CallsController < ApplicationController
 
   def identify_client
     logger.info "Trying to get client for: #{incoming_number}"
-    @client_phone = ClientPhone.where(phone: incoming_number).take
+    @client_phone = ClientPhone.where(number: incoming_number).take
     logger.info "Client phone: #{@client_phone.inspect}"
     @client = @client_phone.client if @client_phone
     logger.info "Client: #{@client.inspect}"

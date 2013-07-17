@@ -7,4 +7,16 @@ class User < ActiveRecord::Base
 
   has_one :psychic
   has_one :client
+
+  def client?
+    client.present?
+  end
+
+  def psychic?
+    psychic.present?
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

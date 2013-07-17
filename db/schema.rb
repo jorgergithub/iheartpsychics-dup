@@ -11,19 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130717032030) do
+ActiveRecord::Schema.define(version: 20130717173448) do
 
   create_table "client_phones", force: true do |t|
     t.integer  "client_id"
-    t.string   "phone"
+    t.string   "number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "desc"
   end
 
   create_table "clients", force: true do |t|
     t.integer  "user_id"
-    t.string   "first_name"
-    t.string   "last_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "encrypted_pin"
@@ -31,8 +30,6 @@ ActiveRecord::Schema.define(version: 20130717032030) do
 
   create_table "psychics", force: true do |t|
     t.integer  "user_id"
-    t.string   "first_name"
-    t.string   "last_name"
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -51,6 +48,8 @@ ActiveRecord::Schema.define(version: 20130717032030) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

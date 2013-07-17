@@ -9,4 +9,11 @@ IHeartPsychics::Application.routes.draw do
       post 'pin(:.format)'    , action: :pin
     end
   end
+
+  resource :clients do
+    resource :phones, controller: 'client_phones' do
+    end
+  end
+
+  root to: 'home#show'
 end
