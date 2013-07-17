@@ -7,6 +7,7 @@ class CallsController < ApplicationController
 
   def index
     logger.info "Index for: #{incoming_number}"
+    record_call
   end
 
   def user
@@ -26,6 +27,7 @@ class CallsController < ApplicationController
     @client_phone = ClientPhone.where(number: @phone_number).take
     if @client_phone
       @client = @client_phone.client
+      record_call
       logger.info "Got client: #{@client.inspect}"
     else
       logger.info "No client."
@@ -67,6 +69,10 @@ class CallsController < ApplicationController
   end
 
   private
+
+  def record_call
+    @client.calls.create(sid: params[:CallSid]) if @client
+  end
 
   def incoming_number
     number = params[:From] || params[:Caller]

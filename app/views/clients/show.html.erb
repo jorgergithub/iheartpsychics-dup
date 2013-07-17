@@ -51,6 +51,32 @@
 
 <div class="row-fluid">
   <div class="span12">
+    <h3>Calls</h3>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Call ID</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @client.calls.each do |call| %>
+          <tr>
+            <td><%= call.created_at %>
+            <td><%= call.sid %></td>
+            <td>-</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="row-fluid">
+  <div class="span12">
     <h3>Preferred Psychics</h3>
   </div>
 </div>
