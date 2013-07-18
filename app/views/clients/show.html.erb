@@ -14,7 +14,7 @@
   <div class="span6">
     <table class="table">
       <tbody>
-        <tr><td>Credit</td><td>$ 30.00</td></tr>
+        <tr><td>Minutes</td><td><%= @client.minutes %></td></tr>
       </tbody>
     </table>
   </div>
@@ -56,17 +56,21 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Date</th>
-          <th>Call ID</th>
-          <th>Description</th>
+          <th>From</th>
+          <th>Started</th>
+          <th>Ended</th>
+          <th>Status</th>
+          <th>Duration</th>
         </tr>
       </thead>
       <tbody>
-        <% @client.calls.each do |call| %>
+        <% @client.calls.processed.each do |call| %>
           <tr>
-            <td><%= call.created_at %>
-            <td><%= call.sid %></td>
-            <td>-</td>
+            <td><%= call.from %></td>
+            <td><%= call.parsed_start_time %></td>
+            <td><%= call.parsed_end_time %></td>
+            <td><%= call.status.capitalize %></td>
+            <td class="right"><%= call.formatted_duration %></td>
           </tr>
         <% end %>
       </tbody>

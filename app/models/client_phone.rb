@@ -4,6 +4,8 @@ class ClientPhone < ActiveRecord::Base
   def formatted_number
     if number =~ /^\+(\d)(\d{3})(\d{3})(\d{4})$/
       "+#{$1}-#{$2}-#{$3}-#{$4}"
+    else
+      number
     end
   end
 end
