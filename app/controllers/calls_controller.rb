@@ -55,7 +55,19 @@ class CallsController < ApplicationController
     end
 
     logger.info "Pin valid - client: #{@client.inspect}"
-    @psychic   = Psychic.first
+  end
+
+  def transfer
+    unless params[:Digits].present? and params[:Digits].length == 4
+      render :transfer_error
+      return
+    end
+
+    unless @psychic = Psychic.where(extension: params[:Digits]).take
+      render :transfer_error
+      return
+    end
+
     @caller_id = incoming_number || "+1-866-866-8288"
   end
 

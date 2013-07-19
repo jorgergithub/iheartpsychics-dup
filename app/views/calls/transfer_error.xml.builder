@@ -1,8 +1,8 @@
 xml.instruct!
 xml.Response do
-  xml.Gather(action: calls_url_for("transfer", phone_number)) do
-    xml.Say <<-EOS, voice: "woman"
-      Thank you.
+  xml.Gather do
+    xml.Say <<-EOS.strip_heredoc, voice: "woman"
+      I'm sorry, the extension you entered is invalid.
       Please enter the four digit extension of your psychic followed by the pound sign.
     EOS
   end
