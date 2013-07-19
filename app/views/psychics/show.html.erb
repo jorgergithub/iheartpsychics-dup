@@ -5,8 +5,28 @@
 </div>
 
 <div class="row-fluid">
-  <div class="span12">
+  <div class="span6">
     <h3>Account info</h3>
+
+    <%= form_for @psychic do |f| %>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Your Extension</td>
+            <td><%= @psychic.extension %></td>
+          </tr>
+          <tr>
+            <td>Phone</td>
+            <td>
+              <div class="input-append">
+                <%= f.text_field :phone, class: "input-small", style: "width: 120px" %>
+                <%= f.submit "Save", class: "btn" %>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
   </div>
 </div>
 
