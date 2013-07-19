@@ -3,6 +3,7 @@ class Client < ActiveRecord::Base
 
   has_many :calls,  class_name: "ClientCall"
   has_many :phones, class_name: "ClientPhone"
+  has_many :credits
 
   has_and_belongs_to_many :favorite_psychics, class_name: "Psychic"
 
@@ -27,13 +28,17 @@ class Client < ActiveRecord::Base
     encrypted_pin.present?
   end
 
-  def discount_minutes(m)
+  def discount_minutes(m, call)
+    m = m.to_i
+    credits.create(minutes: -m,
+      description: "Call with #{call.psychic.full_name}", target: call)
     self.minutes ||= 0
-    self.minutes -= m.to_i
+    self.minutes -= m
     self.save
   end
 
   def add_minutes(m)
+    credits.create(minutes: m, description: "Added minutes")
     self.minutes ||= 0
     self.minutes += m.to_i
     self.save

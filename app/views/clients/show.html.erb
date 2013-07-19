@@ -157,3 +157,34 @@
     <% end %>
   </div>
 </div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <h3>Credit Summary</h3>
+
+    <% if @client.credits.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Date and time</th>
+            <th>Minutes</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @client.credits.by_date.each do |call| %>
+            <tr>
+              <td><%= call.created_at %></td>
+              <td><%= call.minutes %></td>
+              <td><%= call.description %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="blank-state">
+        No credit operations yet.
+      </div>
+    <% end %>
+  </div>
+</div>

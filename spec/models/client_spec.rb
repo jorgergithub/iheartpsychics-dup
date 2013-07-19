@@ -74,19 +74,27 @@ describe Client do
   end
 
   describe "#discount_minutes" do
+    let(:call)   { FactoryGirl.create(:client_call) }
+    let(:credit) { client.credits.first }
+
     context "with an user with no minutes" do
       before do
         client.update_attributes(minutes: nil)
-        client.discount_minutes(10)
+        client.discount_minutes(10, call)
       end
 
       it "removes minutes" do
         expect(client.minutes).to eql(-10)
       end
+
+      it "records the credit summary" do
+        expect(credit.description).to eql("Call with John Doe")
+        expect(credit.minutes).to eql(-10)
+      end
     end
 
     context "with an user with minutes" do
-      before { client.discount_minutes(10) }
+      before { client.discount_minutes(10, call) }
 
       it "removes minutes" do
         expect(client.minutes).to eql(50)
@@ -100,7 +108,7 @@ describe Client do
 
     context "with a string as parameter" do
       it "works" do
-        client.discount_minutes("10")
+        client.discount_minutes("10", call)
         expect(client.minutes).to eql(50)
       end
     end

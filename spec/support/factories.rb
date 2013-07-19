@@ -20,9 +20,14 @@ FactoryGirl.define do
     minutes 60
   end
 
+  factory :psychic do
+    association :user
+  end
+
   factory :client_call do
     sid "CAc1ffa7a744d25480e5ee009dfd7b2fc4"
     association :client
+    association :psychic
     date_created "Wed, 17 Jul 2013 23:50:32 +0000"
     date_updated "Wed, 17 Jul 2013 23:51:57 +0000"
     account_sid "AC4d5e48e4d4647262b5c4314e36e3d26e"

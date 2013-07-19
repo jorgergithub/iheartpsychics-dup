@@ -5,6 +5,7 @@ require "phone_formatter"
 class ClientCall < ActiveRecord::Base
   belongs_to :client
   belongs_to :psychic
+  has_many :credits, as: :target
 
   before_save :calculate_duration
 
@@ -68,7 +69,7 @@ class ClientCall < ActiveRecord::Base
     attributes.each { |a| self.send("#{a}=", twilio_call.send(a)) }
 
     self.duration = CallDurationRounder.new(twilio_call.duration).round
-    self.client.discount_minutes(duration)
+    self.client.discount_minutes(duration, self)
 
     self.original_duration = twilio_call.duration
     self.processed = true
