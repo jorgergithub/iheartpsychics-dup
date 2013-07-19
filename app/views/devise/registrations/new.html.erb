@@ -1,6 +1,6 @@
-<h2>Sign up</h2>
-
 <% create_as = params[:user].try(:[], :create_as) || "client" %>
+
+<h2><%= create_as.capitalize %> sign up</h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => 'form form-horizontal', :autocomplete => 'off' }) do |f| %>
   <%= devise_error_messages! %>

@@ -19,7 +19,7 @@
             <td>Phone</td>
             <td>
               <div class="input-append">
-                <%= f.text_field :phone, class: "input-small", style: "width: 120px" %>
+                <%= f.text_field :phone, class: "input-small", style: "width: 120px", autofocus: !@psychic.phone.present? %>
                 <%= f.submit "Save", class: "btn" %>
               </div>
             </td>

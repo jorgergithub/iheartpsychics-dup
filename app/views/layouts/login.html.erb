@@ -14,7 +14,8 @@
       <ul class="nav">
       </ul>
       <ul class="nav pull-right">
-        <li><%= link_to "Register", new_user_registration_path %></li>
+        <li><%= link_to "I'm a psychic", new_user_registration_path(user: {create_as: "psychic"}) %></li>
+        <li><%= link_to "Sign up", new_user_registration_path %></li>
         <li><%= link_to "Sign in", new_user_session_path %></li>
       </ul>
     </div>
