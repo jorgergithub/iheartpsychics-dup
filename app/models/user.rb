@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   after_create :create_client_or_psychic
-  attr_accessor :create_as
+  attr_accessor :create_as, :phone_number
 
   has_one :psychic
   has_one :client
@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
 
   def create_client_or_psychic
     if create_as == 'client'
-      self.client = Client.create
+      self.client = Client.create(phone_number: phone_number)
     end
   end
 end

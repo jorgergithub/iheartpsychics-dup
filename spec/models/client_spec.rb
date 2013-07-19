@@ -4,6 +4,17 @@ describe Client do
   let(:user)   { User.create(email: "felipe.coury@gmail.com", password: "pass123")}
   let(:client) { Client.create(user: user, pin: "12345", minutes: 60) }
 
+  describe "creating a client with a phone number" do
+    let!(:client) {
+      Client.create(user: user, pin: "12345", phone_number: "7641233322")
+    }
+
+    it "saves the phone number" do
+      client.reload
+      client.phones.first.number.should == "+17641233322"
+    end
+  end
+
   describe "#pin" do
     it "saves the encrypted pin" do
       client.reload

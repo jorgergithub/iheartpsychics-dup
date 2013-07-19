@@ -6,9 +6,11 @@ class Client < ActiveRecord::Base
 
   before_save :set_encrypted_pin
   after_create :set_encrypted_pin
+  after_create :add_phone_number
+
   delegate :first_name, :last_name, to: :user
 
-  attr_accessor :pin
+  attr_accessor :pin, :phone_number
 
   def valid_pin?(pin)
     self.pin = pin
@@ -49,5 +51,10 @@ class Client < ActiveRecord::Base
     return unless self.pin
 
     self.encrypted_pin = calc_encrypted_pin
+  end
+
+  def add_phone_number
+    return unless self.phone_number
+    self.phones.create(number: self.phone_number, desc: "Main")
   end
 end

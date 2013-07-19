@@ -1,6 +1,18 @@
 require "spec_helper"
 
 describe User do
+  describe "creating a client with a phone number" do
+    let(:user) { User.create(email: "felipe.coury@gmail.com", password: "teste123", phone_number: "3054502983", create_as: "client") }
+
+    it "creates the client" do
+      expect(user.client).to_not be_nil
+    end
+
+    it "creats a client with a phone number" do
+      user.client.phones.first.number.should == "+13054502983"
+    end
+  end
+
   describe "#full_name" do
     let(:user) { User.new(first_name: "Felipe", last_name: "Coury") }
     it "joins first and last names" do

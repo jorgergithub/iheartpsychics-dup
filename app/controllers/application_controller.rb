@@ -8,7 +8,9 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :first_name, :last_name, :create_as) }
+    devise_parameter_sanitizer.for(:sign_up) do |u|
+      u.permit(:email, :password, :first_name, :last_name, :create_as, :phone_number)
+    end
   end
 
   def layout_by_resource
