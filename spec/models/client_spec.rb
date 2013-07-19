@@ -22,16 +22,73 @@ describe Client do
     end
   end
 
-  describe "#discount_minutes" do
-    before { client.discount_minutes(10) }
+  describe "#add_minutes" do
+    context "with an user with no minutes" do
+      before do
+        client.update_attributes(minutes: nil)
+        client.add_minutes(10)
+      end
 
-    it "removes minutes" do
-      expect(client.minutes).to eql(50)
+      it "removes minutes" do
+        expect(client.minutes).to eql(10)
+      end
     end
 
-    it "saves the minutes" do
-      client.reload
-      expect(client.minutes).to eql(50)
+    context "with an user with minutes" do
+      before { client.add_minutes(10) }
+
+      it "removes minutes" do
+        expect(client.minutes).to eql(70)
+      end
+
+      it "saves the minutes" do
+        client.reload
+        expect(client.minutes).to eql(70)
+      end
+    end
+
+    context "with a string as parameter" do
+      it "works" do
+        client.add_minutes("10")
+        expect(client.minutes).to eql(70)
+      end
+    end
+  end
+
+  describe "#discount_minutes" do
+    context "with an user with no minutes" do
+      before do
+        client.update_attributes(minutes: nil)
+        client.discount_minutes(10)
+      end
+
+      it "removes minutes" do
+        expect(client.minutes).to eql(-10)
+      end
+    end
+
+    context "with an user with minutes" do
+      before { client.discount_minutes(10) }
+
+      it "removes minutes" do
+        expect(client.minutes).to eql(50)
+      end
+
+      it "saves the minutes" do
+        client.reload
+        expect(client.minutes).to eql(50)
+      end
+    end
+
+    context "with a string as parameter" do
+      it "works" do
+        client.discount_minutes("10")
+        expect(client.minutes).to eql(50)
+      end
+    end
+
+    context "with an user with zero minutes" do
+      pending
     end
   end
 

@@ -15,8 +15,23 @@ class Client < ActiveRecord::Base
     self.encrypted_pin == calc_encrypted_pin
   end
 
+  def minutes?
+    minutes.present? and minutes != 0
+  end
+
+  def pin?
+    encrypted_pin.present?
+  end
+
   def discount_minutes(m)
-    self.minutes -= m
+    self.minutes ||= 0
+    self.minutes -= m.to_i
+    self.save
+  end
+
+  def add_minutes(m)
+    self.minutes ||= 0
+    self.minutes += m.to_i
     self.save
   end
 
