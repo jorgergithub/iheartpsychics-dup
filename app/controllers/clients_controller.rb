@@ -26,6 +26,15 @@ class ClientsController < AuthorizedController
     end
   end
 
+  def make_favorite
+    @client.favorite_psychic_id = params[:psychic_id]
+    if @client.save
+      redirect_to client_path, notice: "New psychic marked as favorite."
+    else
+      redirect_to client_path, error: "Could not mark as favorite."
+    end
+  end
+
   protected
 
   def find_client

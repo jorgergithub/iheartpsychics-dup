@@ -44,7 +44,7 @@ class Client < ActiveRecord::Base
   end
 
   def psychics
-    unique_ids = [favorite_psychic_id, calls.pluck("DISTINCT psychic_id")].uniq
+    unique_ids = [favorite_psychic_id, calls.pluck("DISTINCT psychic_id")].flatten.uniq
     Psychic.where("id IN (?)", unique_ids)
   end
 

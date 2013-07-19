@@ -79,6 +79,8 @@
           <%= psychic.full_name %>
           <% if psychic == @client.favorite_psychic %>
             <span class="label label-success">Favorite</span>
+          <% else %>
+            [<%= link_to "make favorite", make_favorite_client_path(psychic_id: psychic.id) %>]
           <% end %>
         </li>
       <% end %>

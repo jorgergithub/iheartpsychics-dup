@@ -7,6 +7,7 @@ IHeartPsychics::Application.routes.draw do
       get  'notify(:.format)'         , action: :notify
       post 'user(:.format)'           , action: :user
       post 'pin(:.format)'            , action: :pin
+      post 'transfer(:.format)'       , action: :transfer
       post 'call_finished(:.format)'  , action: :call_finished
     end
   end
