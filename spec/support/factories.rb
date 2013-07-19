@@ -3,10 +3,15 @@ FactoryGirl.define do
     "john#{n}@doe.com"
   end
 
+  sequence :username do |n|
+    "johndoe#{n}"
+  end
+
   factory :user do
     first_name "John"
     last_name "Doe"
     email { generate(:email) }
+    username { generate(:username) }
     password "testpass"
   end
 

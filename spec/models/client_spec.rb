@@ -36,7 +36,7 @@ describe Client do
     end
 
     it "is false when PIN mismatches" do
-      expect(client.valid_pin?("1234")).to be_false
+      expect(client.valid_pin?("1233")).to be_false
     end
   end
 

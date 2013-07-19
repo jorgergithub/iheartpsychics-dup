@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe User do
   describe "creating a client with a phone number" do
-    let(:user) { User.create(email: "felipe.coury@gmail.com", password: "teste123", phone_number: "3054502983", create_as: "client") }
+    let(:user) { FactoryGirl.create(:user, phone_number: "3054502983", create_as: "client") }
 
     it "creates the client" do
       expect(user.client).to_not be_nil
@@ -14,7 +14,7 @@ describe User do
   end
 
   describe "creating a psychic" do
-    let(:user) { User.create(email: "felipe.coury@gmail.com", password: "teste123", phone_number: "3054502983", create_as: "psychic") }
+    let(:user) { FactoryGirl.create(:user, create_as: "psychic") }
 
     it "creates the psychic" do
       expect(user.psychic).to_not be_nil
