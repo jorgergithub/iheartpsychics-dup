@@ -28,8 +28,8 @@
       </tbody>
     </table>
 
-    <%= link_to "#{@client.pin? ? "Reset" : "Set"} my PIN", reset_pin_client_path, class: "btn btn-primary" %>
-    <%= link_to "Add minutes", add_minutes_client_path, class: "btn btn-primary" %>
+    <%= link_to "#{@client.pin? ? "Reset" : "Set"} my PIN", reset_pin_client_path, class: "btn btn-small" %>
+    <%= link_to "Add minutes", add_minutes_client_path, class: "btn btn-small" %>
   </div>
 </div>
 
@@ -65,7 +65,7 @@
       </div>
     <% end %>
 
-    <%= link_to "Add new phone", new_client_client_phone_path, class: "btn btn-primary" %>
+    <%= link_to "Add new phone", new_client_client_phone_path, class: "btn btn-small" %>
   </div>
 </div>
 
