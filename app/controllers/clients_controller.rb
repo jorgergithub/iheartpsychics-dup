@@ -17,7 +17,7 @@ class ClientsController < AuthorizedController
 
   def reset_pin
     if params[:client]
-      @client.pin = params.require(:client).permit(:pin)
+      @client.pin = params.require(:client).permit(:pin)[:pin]
       if @client.save
         redirect_to client_path, notice: "Your PIN has been reset."
       else

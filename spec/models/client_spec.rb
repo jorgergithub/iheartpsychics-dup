@@ -2,11 +2,11 @@ require "spec_helper"
 
 describe Client do
   let(:user)   { User.create(email: "felipe.coury@gmail.com", password: "pass123")}
-  let(:client) { Client.create(user: user, pin: "12345", minutes: 60) }
+  let(:client) { Client.create(user: user, pin: "1234", minutes: 60) }
 
   describe "creating a client with a phone number" do
     let!(:client) {
-      Client.create(user: user, pin: "12345", phone_number: "7641233322")
+      Client.create(user: user, pin: "1234", phone_number: "7641233322")
     }
 
     it "saves the phone number" do
@@ -21,15 +21,22 @@ describe Client do
       expect(client.encrypted_pin).not_to be_nil
       expect(client.encrypted_pin).not_to be_empty
     end
+
+    it "allows resetting the pin" do
+      client.reload
+      client.pin = "1232"
+      client.save
+      expect(client.valid_pin?("1232")).to be_true
+    end
   end
 
   describe "#valid_pin?" do
     it "is true when PIN matches" do
-      expect(client.valid_pin?("12345")).to be_true
+      expect(client.valid_pin?("1234")).to be_true
     end
 
     it "is false when PIN mismatches" do
-      expect(client.valid_pin?("12344")).to be_false
+      expect(client.valid_pin?("1234")).to be_false
     end
   end
 
