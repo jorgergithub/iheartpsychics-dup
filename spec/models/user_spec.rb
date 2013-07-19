@@ -21,6 +21,28 @@ describe User do
     end
   end
 
+  describe "deleting an user with a client" do
+    let(:user) { FactoryGirl.create(:user, create_as: "client") }
+    let(:client) { user.client }
+
+    it "cascades the deletion to client" do
+      expect(client).to_not be_nil
+      user.destroy
+      expect { Client.find(client.id) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
+
+  describe "deleting an user with a psychic" do
+    let(:user) { FactoryGirl.create(:user, create_as: "psychic") }
+    let(:psychic) { user.psychic }
+
+    it "cascades the deletion to psychic" do
+      expect(psychic).to_not be_nil
+      user.destroy
+      expect { Psychic.find(psychic.id) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
+
   describe "#full_name" do
     let(:user) { User.new(first_name: "Felipe", last_name: "Coury") }
     it "joins first and last names" do

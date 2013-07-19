@@ -15,8 +15,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username
   validates_presence_of :username
 
-  has_one :psychic
-  has_one :client
+  has_one :psychic, dependent: :destroy
+  has_one :client , dependent: :destroy
 
   def client?
     client.present?
