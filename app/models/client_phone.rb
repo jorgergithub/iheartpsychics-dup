@@ -1,11 +1,17 @@
+require "phone_formatter"
+
 class ClientPhone < ActiveRecord::Base
   belongs_to :client
+  before_save :strip_number_formatting
 
   def formatted_number
-    if number =~ /^\+(\d)(\d{3})(\d{3})(\d{4})$/
-      "+#{$1}-#{$2}-#{$3}-#{$4}"
-    else
-      number
-    end
+    PhoneFormatter.format(number)
+  end
+
+  private
+
+  def strip_number_formatting
+    self.number.gsub!("-", "")
+    self.number = "+1#{self.number}" unless self.number =~ /^\+1/
   end
 end
