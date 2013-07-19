@@ -5,13 +5,14 @@ class ClientsController < AuthorizedController
   end
 
   def add_minutes
-    logger.info "Added minutes: #{params[:client].inspect}"
     if params[:client]
       if @client.add_minutes(params[:client][:minutes])
         redirect_to client_path, notice: "Minutes added to your account."
       else
         render action: "add_minutes"
       end
+    else
+      @client.minutes = nil
     end
   end
 
