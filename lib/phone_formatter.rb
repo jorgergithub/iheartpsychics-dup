@@ -6,4 +6,12 @@ class PhoneFormatter
       number
     end
   end
+
+  def self.parse(number)
+    number.gsub!("-", "")
+    unless number =~ /^\+1/
+      number = "+1#{number}"
+    end
+    number
+  end
 end

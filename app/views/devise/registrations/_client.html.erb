@@ -1,15 +1,15 @@
 <div class="control-group">
   <%= f.label :first_name, "Name", :class => 'control-label' %>
   <div class="controls">
-    <%= f.text_field :first_name, placeholder: "First name", autofocus: true %>
-    <%= f.text_field :last_name, placeholder: "Last name" %>
+    <%= f.text_field :first_name, placeholder: "First name", autofocus: true, autocomplete: 'on' %>
+    <%= f.text_field :last_name, placeholder: "Last name", autocomplete: 'on' %>
   </div>
 </div>
 
 <div class="control-group">
-  <%= f.label :phone_number, :class => 'control-label' %>
+  <%= f.label :username, :class => 'control-label' %>
   <div class="controls">
-    <%= f.text_field :phone_number, data: { mask: "999-999-9999" } %>
+    <%= f.text_field :username %>
   </div>
 </div>
 
@@ -17,6 +17,13 @@
   <%= f.label :email, :class => 'control-label' %>
   <div class="controls">
     <%= f.email_field :email %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= f.label :phone_number, :class => 'control-label' %>
+  <div class="controls">
+    <%= f.text_field :phone_number, data: { mask: "999-999-9999" } %>
   </div>
 </div>
 
