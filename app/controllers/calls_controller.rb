@@ -36,7 +36,7 @@ class CallsController < ApplicationController
   end
 
   def pin
-    unless params[:Digits].present? and params[:Digits].length == 5
+    unless params[:Digits].present? and params[:Digits].length == 4
       render :pin_error
       return
     end
