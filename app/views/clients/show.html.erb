@@ -62,6 +62,7 @@
     <% else %>
       <div class="blank-state">
         No phones added yet.
+        <%= link_to "Add one now.", new_client_client_phone_path %>
       </div>
     <% end %>
 
@@ -73,38 +74,45 @@
   <div class="span12">
     <h3>My Psychics</h3>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Psychic</th>
-          <th>Extension</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @client.psychics.each do |psychic| %>
+    <% if @client.psychics.any? %>
+      <table class="table">
+        <thead>
           <tr>
-            <td>
-              <% if @client.favorite?(psychic) %>
-                <%= link_to '<i class="icon-remove"></i>'.html_safe, remove_favorite_client_path(psychic_id: psychic.id) %>
-              <% else %>
-                <%= link_to '<i class="icon-ok"></i>'.html_safe, make_favorite_client_path(psychic_id: psychic.id) %>
-              <% end %>
-            </td>
-            <td><%= psychic.full_name %></td>
-            <td><%= psychic.extension %></td>
-            <td>
-              <% if @client.favorite?(psychic) %>
-                <span class="label label-success">Favorite</span>
-              <% else %>
-                <span class="label label-info">Recently Contacted</span>
-              <% end %>
-            </td>
+            <th></th>
+            <th>Psychic</th>
+            <th>Extension</th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @client.psychics.each do |psychic| %>
+            <tr>
+              <td>
+                <% if @client.favorite?(psychic) %>
+                  <%= link_to '<i class="icon-remove"></i>'.html_safe, remove_favorite_client_path(psychic_id: psychic.id) %>
+                <% else %>
+                  <%= link_to '<i class="icon-ok"></i>'.html_safe, make_favorite_client_path(psychic_id: psychic.id) %>
+                <% end %>
+              </td>
+              <td><%= psychic.full_name %></td>
+              <td><%= psychic.extension %></td>
+              <td>
+                <% if @client.favorite?(psychic) %>
+                  <span class="label label-success">Favorite</span>
+                <% else %>
+                  <span class="label label-info">Recently Contacted</span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="blank-state">
+        No psychics favorited yet.
+        <%= link_to "Browse the complete list.", search_psychic_path %>
+      </div>
+    <% end %>
 
     <%= form_tag(search_psychic_path, method: "get") do %>
       <div class="input-append">
