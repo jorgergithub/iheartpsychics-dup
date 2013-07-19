@@ -15,6 +15,20 @@ describe Client do
     end
   end
 
+  describe "deleting a client" do
+    context "with a phone" do
+      let!(:client) {
+        Client.create(user: user, pin: "1234", phone_number: "7641233322")
+      }
+      let!(:phone) { client.phones.first }
+
+      it "deletes the phone" do
+        client.destroy
+        expect { ClientPhone.find(phone.id) }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
+
   describe "#pin" do
     it "saves the encrypted pin" do
       client.reload
