@@ -23,29 +23,36 @@
 <div class="row-fluid">
   <div class="span12">
     <h3>Phone numbers</h3>
-  </div>
-</div>
 
-<div class="row-fluid">
-  <div class="span12">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Number</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @client.phones.each do |phone| %>
+    <% if @client.phones.any? %>
+      <table class="table">
+        <thead>
           <tr>
-            <td><%= phone.formatted_number %></td>
-            <td><%= phone.desc %></td>
+            <th></th>
+            <th>Number</th>
+            <th>Description</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @client.phones.each do |phone| %>
+            <tr>
+              <td>
+                <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_client_phone_path(phone) %>
+                <%= link_to '<i class="icon-remove"></i>'.html_safe, phone, :confirm => "Are you sure?", :method => "delete" %>
+              </td>
+              <td><%= phone.formatted_number %></td>
+              <td><%= phone.desc %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="blank-state">
+        No phones added yet.
+      </div>
+    <% end %>
 
-    <%= link_to "Add new phone", new_clients_phones_path, class: "btn btn-primary" %>
+    <%= link_to "Add new phone", new_client_client_phone_path, class: "btn btn-primary" %>
   </div>
 </div>
 
