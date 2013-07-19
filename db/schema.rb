@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130718193441) do
+ActiveRecord::Schema.define(version: 20130719020140) do
 
   create_table "client_calls", force: true do |t|
     t.integer  "client_id"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20130718193441) do
     t.string   "caller_name"
     t.string   "uri"
     t.integer  "duration"
+    t.integer  "psychic_id"
   end
 
   create_table "client_phones", force: true do |t|
@@ -47,12 +48,15 @@ ActiveRecord::Schema.define(version: 20130718193441) do
     t.string   "desc"
   end
 
+  add_index "client_phones", ["number"], name: "index_client_phones_on_number", unique: true, using: :btree
+
   create_table "clients", force: true do |t|
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "encrypted_pin"
     t.integer  "minutes"
+    t.integer  "favorite_psychic_id"
   end
 
   create_table "psychics", force: true do |t|

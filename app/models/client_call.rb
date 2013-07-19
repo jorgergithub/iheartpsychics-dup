@@ -4,6 +4,7 @@ require "phone_formatter"
 
 class ClientCall < ActiveRecord::Base
   belongs_to :client
+  belongs_to :psychic
 
   before_save :calculate_duration
 
