@@ -10,7 +10,7 @@ class Client < ActiveRecord::Base
   after_create :set_encrypted_pin
   after_create :add_phone_number
 
-  delegate :first_name, :last_name, to: :user
+  delegate :first_name, :last_name, :full_name, to: :user
 
   attr_accessor :pin, :phone_number
 
