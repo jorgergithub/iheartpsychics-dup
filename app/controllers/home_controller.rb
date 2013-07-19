@@ -1,7 +1,7 @@
 class HomeController < AuthorizedController
   def show
     if current_user.client?
-      redirect_to clients_path
+      redirect_to client_path
       return
     end
   end
