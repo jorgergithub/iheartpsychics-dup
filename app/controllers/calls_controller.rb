@@ -36,6 +36,8 @@ class CallsController < ApplicationController
   end
 
   def pin
+    logger.info "Received pin: [#{params[:Digits]}] [#{@client.try(:valid_pin?, params[:Digits])}] [#{params[:Digits].length == 4}]"
+
     unless params[:Digits].present? and params[:Digits].length == 4
       render :pin_error
       return
@@ -58,12 +60,13 @@ class CallsController < ApplicationController
   end
 
   def call_finished
-    sid      = params[:DialCallSid]
-    status   = params[:DialCallStatus]
-    duration = params[:DialCallDuration]
+    sid        = params[:DialCallSid]
+    status     = params[:DialCallStatus]
+    duration   = params[:DialCallDuration]
+    psychic_id = params[:psychic_id]
 
     if status == "completed"
-      record_call(sid)
+      record_call(sid, psychic_id)
     elsif status == "busy"
       render text: Twilio::TwiML::Response.new do |r|
         r.Say "The psychic is not available"
@@ -101,9 +104,9 @@ class CallsController < ApplicationController
 
   private
 
-  def record_call(sid, process=false)
+  def record_call(sid, psychic_id)
     return unless @client
-    call = @client.calls.create(sid: sid)
+    call = @client.calls.create(sid: sid, psychic_id: psychic_id)
     call.process
   end
 

@@ -43,6 +43,11 @@ class Client < ActiveRecord::Base
     minutes * 60
   end
 
+  def psychics
+    unique_ids = [favorite_psychic_id, calls.pluck("DISTINCT psychic_id")].uniq
+    Psychic.where("id IN (?)", unique_ids)
+  end
+
   private
 
   def calc_encrypted_pin
@@ -53,6 +58,7 @@ class Client < ActiveRecord::Base
     return unless self.pin
 
     self.encrypted_pin = calc_encrypted_pin
+    puts "[setting] PIN = [#{self.pin}] ENC = [#{calc_encrypted_pin}]"
   end
 
   def add_phone_number

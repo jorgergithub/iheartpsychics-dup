@@ -4,5 +4,5 @@ xml.Response do
     voice: "woman"
   xml.Dial(@psychic.phone,
     callerId: @caller_id, record: "true", timeLimit: @client.seconds,
-    action: calls_url_for("call_finished", phone_number))
+    action: calls_url_for("call_finished", phone_number, @psychic))
 end
