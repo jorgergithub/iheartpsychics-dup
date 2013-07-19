@@ -51,7 +51,7 @@
             <tr>
               <td>
                 <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_client_phone_path(phone) %>
-                <%= link_to '<i class="icon-remove"></i>'.html_safe, phone, :confirm => "Are you sure?", :method => "delete" %>
+                <%= link_to '<i class="icon-remove"></i>'.html_safe, phone, data: {confirm: "Are you sure?" }, :method => "delete" %>
               </td>
               <td><%= phone.formatted_number %></td>
               <td><%= phone.desc %></td>
