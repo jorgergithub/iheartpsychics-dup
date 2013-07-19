@@ -7,7 +7,7 @@ class CallsController < ApplicationController
 
   def index
     logger.info "Index for: #{incoming_number}"
-    record_call
+    # record_call(params[:CallSid])
   end
 
   def user
@@ -27,7 +27,7 @@ class CallsController < ApplicationController
     @client_phone = ClientPhone.where(number: @phone_number).take
     if @client_phone
       @client = @client_phone.client
-      record_call
+      # record_call(params[:CallSid])
       logger.info "Got client: #{@client.inspect}"
     else
       logger.info "No client."
@@ -47,9 +47,40 @@ class CallsController < ApplicationController
       return
     end
 
+    unless @client.minutes and @client.minutes >= 1
+      render :no_balance
+      return
+    end
+
     logger.info "Pin valid - client: #{@client.inspect}"
     @psychic   = Psychic.first
     @caller_id = incoming_number || "+1-866-866-8288"
+  end
+
+  def call_finished
+    sid      = params[:DialCallSid]
+    status   = params[:DialCallStatus]
+    duration = params[:DialCallDuration]
+
+    if status == "completed"
+      record_call(sid)
+    elsif status == "busy"
+      render text: Twilio::TwiML::Response.new do |r|
+        r.Say "The psychic is not available"
+      end.text
+    elsif status == "no-answer"
+      render text: Twilio::TwiML::Response.new do |r|
+        r.Say "The psychic is not available"
+      end.text
+    elsif status == "failed"
+      render text: Twilio::TwiML::Response.new do |r|
+        r.Say "The psychic is not available"
+      end.text
+    elsif status == "canceled"
+      render text: Twilio::TwiML::Response.new do |r|
+        r.Say "The psychic is not available"
+      end.text
+    end
   end
 
   def notify
@@ -70,8 +101,10 @@ class CallsController < ApplicationController
 
   private
 
-  def record_call
-    @client.calls.create(sid: params[:CallSid]) if @client
+  def record_call(sid, process=false)
+    return unless @client
+    call = @client.calls.create(sid: sid)
+    call.process
   end
 
   def incoming_number
