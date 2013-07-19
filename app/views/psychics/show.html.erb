@@ -9,3 +9,38 @@
     <h3>Account info</h3>
   </div>
 </div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <h3>Call History</h3>
+
+    <% if @psychic.calls.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Date and time</th>
+            <th>From</th>
+            <th>Client</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @psychic.calls.processed.reverse.each do |call| %>
+            <tr>
+              <td><%= call.parsed_start_time %></td>
+              <td><%= call.formatted_number %></td>
+              <td><%= call.client.full_name %></td>
+              <td class="right">
+                <%= call.formatted_duration %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="blank-state">
+        No calls logged yet.
+      </div>
+    <% end %>
+  </div>
+</div>
