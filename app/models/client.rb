@@ -4,7 +4,8 @@ class Client < ActiveRecord::Base
   has_many :calls,  class_name: "ClientCall"
   has_many :phones, class_name: "ClientPhone"
 
-  after_save :set_encrypted_pin
+  before_save :set_encrypted_pin
+  after_create :set_encrypted_pin
   delegate :first_name, :last_name, to: :user
 
   attr_accessor :pin

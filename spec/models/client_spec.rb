@@ -4,6 +4,14 @@ describe Client do
   let(:user)   { User.create(email: "felipe.coury@gmail.com", password: "pass123")}
   let(:client) { Client.create(user: user, pin: "12345", minutes: 60) }
 
+  describe "#pin" do
+    it "saves the encrypted pin" do
+      client.reload
+      expect(client.encrypted_pin).not_to be_nil
+      expect(client.encrypted_pin).not_to be_empty
+    end
+  end
+
   describe "#valid_pin?" do
     it "is true when PIN matches" do
       expect(client.valid_pin?("12345")).to be_true
