@@ -13,6 +13,14 @@ describe User do
     end
   end
 
+  describe "creating a psychic" do
+    let(:user) { User.create(email: "felipe.coury@gmail.com", password: "teste123", phone_number: "3054502983", create_as: "psychic") }
+
+    it "creates the psychic" do
+      expect(user.psychic).to_not be_nil
+    end
+  end
+
   describe "#full_name" do
     let(:user) { User.new(first_name: "Felipe", last_name: "Coury") }
     it "joins first and last names" do

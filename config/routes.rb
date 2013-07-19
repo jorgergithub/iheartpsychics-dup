@@ -21,5 +21,7 @@ IHeartPsychics::Application.routes.draw do
     end
   end
 
+  resource :psychic
+
   root to: 'home#show'
 end

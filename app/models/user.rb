@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
   def create_client_or_psychic
     if create_as == 'client'
       self.client = Client.create(phone_number: phone_number)
+    elsif create_as == 'psychic'
+      self.psychic = Psychic.create
     end
   end
 end
