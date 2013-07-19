@@ -12,15 +12,29 @@
       <table class="table">
         <thead>
           <tr>
+            <th></th>
             <th>Psychic</th>
             <th>Extension</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <% @psychics.each do |psychic| %>
             <tr>
+              <td>
+                <% if @client.favorite?(psychic) %>
+                  <%= link_to '<i class="icon-remove"></i>'.html_safe, remove_favorite_client_path(psychic_id: psychic.id) %>
+                <% else %>
+                  <%= link_to '<i class="icon-ok"></i>'.html_safe, make_favorite_client_path(psychic_id: psychic.id) %>
+                <% end %>
+              </td>
               <td><%= psychic.full_name %></td>
               <td><%= psychic.extension %></td>
+              <td>
+                <% if @client.favorite?(psychic) %>
+                  <span class="label label-success">Favorite</span>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

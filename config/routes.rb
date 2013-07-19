@@ -15,11 +15,12 @@ IHeartPsychics::Application.routes.draw do
   resource :client do
     resources :client_phones, shallow: true
     member do
-      get   'reset_pin(:.format)'     , action: :reset_pin, as: :reset_pin
-      patch 'reset_pin(:.format)'     , action: :reset_pin
-      get   'add_minutes(:.format)'   , action: :add_minutes, as: :add_minutes
-      patch 'add_minutes(:.format)'   , action: :add_minutes
-      get   'make_favorite(:.format)' , action: :make_favorite, as: :make_favorite
+      get   'reset_pin'       , action: :reset_pin, as: :reset_pin
+      patch 'reset_pin'       , action: :reset_pin
+      get   'add_minutes'     , action: :add_minutes, as: :add_minutes
+      patch 'add_minutes'     , action: :add_minutes
+      get   'make_favorite'   , action: :make_favorite, as: :make_favorite
+      get   'remove_favorite' , action: :remove_favorite, as: :remove_favorite
     end
   end
 

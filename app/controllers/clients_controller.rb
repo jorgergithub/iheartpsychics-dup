@@ -28,11 +28,22 @@ class ClientsController < AuthorizedController
   end
 
   def make_favorite
-    @client.favorite_psychic_id = params[:psychic_id]
+    psychic = Psychic.find(params[:psychic_id])
+    @client.favorite_psychics << psychic
     if @client.save
-      redirect_to client_path, notice: "New psychic marked as favorite."
+      redirect_to :back, notice: "#{psychic.full_name} marked as favorite."
     else
-      redirect_to client_path, error: "Could not mark as favorite."
+      redirect_to :back, error: "Could not mark as favorite."
+    end
+  end
+
+  def remove_favorite
+    psychic = Psychic.find(params[:psychic_id])
+    @client.favorite_psychics.delete(psychic)
+    if @client.save
+      redirect_to :back, notice: "#{psychic.full_name} removed from favorites."
+    else
+      redirect_to :back, error: "Could not remove as favorite."
     end
   end
 

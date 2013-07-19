@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130719105030) do
+ActiveRecord::Schema.define(version: 20130719153431) do
 
   create_table "client_calls", force: true do |t|
     t.integer  "client_id"
@@ -56,8 +56,14 @@ ActiveRecord::Schema.define(version: 20130719105030) do
     t.datetime "updated_at"
     t.string   "encrypted_pin"
     t.integer  "minutes"
-    t.integer  "favorite_psychic_id"
   end
+
+  create_table "clients_psychics", id: false, force: true do |t|
+    t.integer "client_id"
+    t.integer "psychic_id"
+  end
+
+  add_index "clients_psychics", ["client_id", "psychic_id"], name: "index_clients_psychics_on_client_id_and_psychic_id", using: :btree
 
   create_table "psychics", force: true do |t|
     t.integer  "user_id"

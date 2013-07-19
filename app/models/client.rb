@@ -4,7 +4,7 @@ class Client < ActiveRecord::Base
   has_many :calls,  class_name: "ClientCall"
   has_many :phones, class_name: "ClientPhone"
 
-  belongs_to :favorite_psychic, class_name: "Psychic"
+  has_and_belongs_to_many :favorite_psychics, class_name: "Psychic"
 
   before_save :set_encrypted_pin
   after_create :set_encrypted_pin
@@ -44,8 +44,12 @@ class Client < ActiveRecord::Base
   end
 
   def psychics
-    unique_ids = [favorite_psychic_id, calls.pluck("DISTINCT psychic_id")].flatten.uniq
+    unique_ids = [favorite_psychic_ids, calls.pluck("DISTINCT psychic_id")].flatten.uniq
     Psychic.where("id IN (?)", unique_ids)
+  end
+
+  def favorite?(psychic)
+    favorite_psychic_ids.include? psychic.id
   end
 
   private

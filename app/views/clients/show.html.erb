@@ -86,15 +86,19 @@
         <% @client.psychics.each do |psychic| %>
           <tr>
             <td>
-              <% unless psychic == @client.favorite_psychic %>
+              <% if @client.favorite?(psychic) %>
+                <%= link_to '<i class="icon-remove"></i>'.html_safe, remove_favorite_client_path(psychic_id: psychic.id) %>
+              <% else %>
                 <%= link_to '<i class="icon-ok"></i>'.html_safe, make_favorite_client_path(psychic_id: psychic.id) %>
               <% end %>
             </td>
             <td><%= psychic.full_name %></td>
             <td><%= psychic.extension %></td>
             <td>
-              <% if psychic == @client.favorite_psychic %>
+              <% if @client.favorite?(psychic) %>
                 <span class="label label-success">Favorite</span>
+              <% else %>
+                <span class="label label-info">Recently Contacted</span>
               <% end %>
             </td>
           </tr>

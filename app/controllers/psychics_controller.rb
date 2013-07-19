@@ -22,6 +22,7 @@ class PsychicsController < AuthorizedController
   end
 
   def search
+    @client = current_client
     @psychics = Psychic.joins(:user).order("users.first_name, users.last_name").where(
       "CONCAT(users.first_name, ' ', users.last_name) LIKE ?", "%#{params[:q]}%")
   end
