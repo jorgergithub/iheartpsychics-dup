@@ -12,14 +12,12 @@
     <div class="navbar-inner">
       <a class="brand" href="/">IHeartPsychics</a>
       <ul class="nav">
-        <li><%= link_to 'Profile', client_path %></li>
-        <li><%= link_to 'Company', '' %></li>
-        <li><%= link_to 'Messages', '' %></li>
+        <li><%= link_to 'Dashboard', dashboard_path %></li>
       </ul>
       <% if current_user %>
         <ul class="nav pull-right">
           <li>
-            <%= link_to current_user.full_name, client_path %>
+            <%= link_to current_user.full_name, dashboard_path %>
           </li>
           <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
         </ul>

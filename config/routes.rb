@@ -25,5 +25,7 @@ IHeartPsychics::Application.routes.draw do
 
   resource :psychic
 
+  get "/dashboard", to: "home#show", as: "dashboard"
+
   root to: 'home#show'
 end
