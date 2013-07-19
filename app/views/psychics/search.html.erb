@@ -1,0 +1,36 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h3>Psychics</h3>
+
+    <% if @psychics.any? %>
+      <% if params[:q].present? %>
+        <div class="search-summary">
+          <%= @psychics.size %> psychic(s) matched <b><%= params[:q] %></b>.
+        </div>
+      <% end %>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Psychic</th>
+            <th>Extension</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @psychics.each do |psychic| %>
+            <tr>
+              <td><%= psychic.full_name %></td>
+              <td><%= psychic.extension %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="blank-state">
+        No psychics matched <b><%= params[:q] %></b>.
+      </div>
+    <% end %>
+
+    <%= link_to "Back", dashboard_path, class: "btn" %>
+  </div>
+</div>

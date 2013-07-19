@@ -23,7 +23,11 @@ IHeartPsychics::Application.routes.draw do
     end
   end
 
-  resource :psychic
+  resource :psychic do
+    collection do
+      get 'search', action: :search, as: :search
+    end
+  end
 
   get "/dashboard", to: "home#show", as: "dashboard"
 

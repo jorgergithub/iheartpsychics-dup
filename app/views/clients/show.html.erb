@@ -71,20 +71,43 @@
 
 <div class="row-fluid">
   <div class="span12">
-    <h3>Psychics</h3>
+    <h3>My Psychics</h3>
 
-    <ul>
-      <% @client.psychics.each do |psychic| %>
-        <li>
-          <%= psychic.full_name %>
-          <% if psychic == @client.favorite_psychic %>
-            <span class="label label-success">Favorite</span>
-          <% else %>
-            [<%= link_to "make favorite", make_favorite_client_path(psychic_id: psychic.id) %>]
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Psychic</th>
+          <th>Extension</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @client.psychics.each do |psychic| %>
+          <tr>
+            <td>
+              <% unless psychic == @client.favorite_psychic %>
+                <%= link_to '<i class="icon-ok"></i>'.html_safe, make_favorite_client_path(psychic_id: psychic.id) %>
+              <% end %>
+            </td>
+            <td><%= psychic.full_name %></td>
+            <td><%= psychic.extension %></td>
+            <td>
+              <% if psychic == @client.favorite_psychic %>
+                <span class="label label-success">Favorite</span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= form_tag(search_psychic_path, method: "get") do %>
+      <div class="input-append">
+        <%= text_field_tag :q, "", placeholder: "Search psychics" %>
+        <%= submit_tag "Go!", class: "btn" %>
+      </div>
+    <% end %>
   </div>
 </div>
 
@@ -98,7 +121,6 @@
           <tr>
             <th>Date and time</th>
             <th>From</th>
-            <th>Status</th>
             <th>Psychic</th>
             <th>Duration</th>
           </tr>
@@ -108,7 +130,6 @@
             <tr>
               <td><%= call.parsed_start_time %></td>
               <td><%= call.formatted_number %></td>
-              <td><%= call.status.capitalize %></td>
               <td><%= call.psychic.full_name %></td>
               <td class="right">
                 <%= call.formatted_duration %>
