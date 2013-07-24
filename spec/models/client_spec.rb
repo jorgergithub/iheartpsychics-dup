@@ -237,4 +237,22 @@ describe Client do
       end
     end
   end
+
+  describe "#add_card_from_token" do
+    let(:stripe_client) { double(:stripe_client).as_null_object }
+
+    before {
+      client.stub(stripe_client: stripe_client)
+    }
+
+    it "updates the token" do
+      stripe_client.should_receive(:card=).with("tok_2FgDgRXOFFXjtW")
+      client.add_card_from_token("tok_2FgDgRXOFFXjtW")
+    end
+
+    it "saves the client" do
+      stripe_client.should_receive(:save)
+      client.add_card_from_token("tok_2FgDgRXOFFXjtW")
+    end
+  end
 end

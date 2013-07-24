@@ -69,11 +69,16 @@ class Client < ActiveRecord::Base
   end
 
   def charge(amount, description)
-    client = stripe_client(true)
+    client = stripe_client
     amount_str = amount * 100
     charge = Stripe::Charge.create(customer: client.id, amount: amount_str,
                                    currency: "usd", description: description)
     charge.id
+  end
+
+  def add_card_from_token(token)
+    stripe_client.card = token
+    stripe_client.save
   end
 
   private
