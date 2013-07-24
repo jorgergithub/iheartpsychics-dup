@@ -4,6 +4,7 @@ class Client < ActiveRecord::Base
   has_many :calls,  class_name: "ClientCall"
   has_many :phones, class_name: "ClientPhone", dependent: :destroy
   has_many :credits, dependent: :destroy
+  has_many :cards, dependent: :destroy
   has_many :orders
 
   has_and_belongs_to_many :favorite_psychics, class_name: "Psychic"
@@ -58,27 +59,44 @@ class Client < ActiveRecord::Base
     favorite_psychic_ids.include? psychic.id
   end
 
-  def stripe_client(create=true)
-    return Stripe::Customer.retrieve(stripe_client_id) if stripe_client_id
-    return nil unless create
+  def stripe_client(reload=false)
+    @stripe_client = nil if reload
 
-    desc = "#{id} - #{full_name} (#{username})"
-    Stripe::Customer.create(description: desc).tap do |sc|
-      update_attributes stripe_client_id: sc.id
+    if stripe_client_id
+      return @stripe_client ||= Stripe::Customer.retrieve(stripe_client_id)
+    end
+
+    @stripe_client ||= begin
+      desc = "#{id} - #{full_name} (#{username})"
+      Stripe::Customer.create(description: desc).tap do |sc|
+        update_attributes stripe_client_id: sc.id
+      end
     end
   end
 
   def charge(amount, description)
     client = stripe_client
     amount_str = amount * 100
-    charge = Stripe::Charge.create(customer: client.id, amount: amount_str,
-                                   currency: "usd", description: description)
-    charge.id
+    Stripe::Charge.create(customer: client.id, amount: amount_str,
+                          currency: "usd", description: description)
   end
 
   def add_card_from_token(token)
+    # stripe_client.cards.create(card: token)
     stripe_client.card = token
     stripe_client.save
+    save_cards
+  end
+
+  def save_cards
+    cards.destroy_all
+    stripe_client(true).cards.each do |card|
+      attributes = card.to_hash.dup
+      attributes[:stripe_id] = attributes.delete(:id)
+      attributes = attributes.slice(*Card.columns.map(&:name).map(&:to_sym))
+
+      cards.create(attributes)
+    end
   end
 
   private

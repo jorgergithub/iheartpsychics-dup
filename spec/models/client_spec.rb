@@ -145,13 +145,7 @@ describe Client do
     context "when stripe_client_id is nil" do
       let(:client) { FactoryGirl.create(:client) }
 
-      context "when passing create as false" do
-        it "is nil" do
-          expect(client.stripe_client(false)).to be_nil
-        end
-      end
-
-      context "when omitting create" do
+      context "when omitting reload" do
         before {
           stripe_client.stub(id: "abc123")
           Stripe::Customer.stub(:create => stripe_client)
@@ -177,9 +171,26 @@ describe Client do
     context "when stripe_client_id isn't nil" do
       let(:client) { FactoryGirl.create(:client, stripe_client_id: "abc123") }
 
+      before { Stripe::Customer.stub(retrieve: stripe_client) }
+
       it "returns the stripe client" do
-        Stripe::Customer.stub(:retrieve => stripe_client)
         expect(client.stripe_client).to eql(stripe_client)
+      end
+
+      context "when omitting reload" do
+        it "caches the stripe client instance" do
+          Stripe::Customer.should_receive(:retrieve).once
+          client.stripe_client
+          client.stripe_client
+        end
+      end
+
+      context "when reload is true" do
+        it "doesn't cache the stripe client instance" do
+          Stripe::Customer.should_receive(:retrieve).twice
+          client.stripe_client
+          client.stripe_client(true)
+        end
       end
     end
   end
@@ -218,8 +229,8 @@ describe Client do
         client.charge(100.02, "something")
       end
 
-      it "returns the charge id" do
-        expect(client.charge(100, "something")).to eql("charge_id")
+      it "returns the charge object" do
+        expect(client.charge(100, "something")).to eql(charge)
       end
     end
 
@@ -239,20 +250,96 @@ describe Client do
   end
 
   describe "#add_card_from_token" do
+    let(:card) { double(:card) }
     let(:stripe_client) { double(:stripe_client).as_null_object }
+    let(:stripe_cards) { double(:stripe_cards).as_null_object }
 
     before {
       client.stub(stripe_client: stripe_client)
+      client.stub(:save_cards)
+      stripe_client.stub(cards: stripe_cards)
     }
 
-    it "updates the token" do
+    it "updates the card" do
       stripe_client.should_receive(:card=).with("tok_2FgDgRXOFFXjtW")
       client.add_card_from_token("tok_2FgDgRXOFFXjtW")
     end
 
-    it "saves the client" do
+    it "saves the card" do
       stripe_client.should_receive(:save)
       client.add_card_from_token("tok_2FgDgRXOFFXjtW")
+    end
+
+    it "saves the customer cards" do
+      client.should_receive(:save_cards)
+      client.add_card_from_token("tok_2FgDgRXOFFXjtW")
+    end
+  end
+
+  describe "#save_cards" do
+    let(:stripe_card) { double(:stripe_card) }
+    let(:stripe_client) { double(:stripe_client, cards: [stripe_card]) }
+
+    let(:card) { client.reload.cards.take }
+
+    before {
+      stripe_card.stub(id: "cc_2G2L06vvQS1BKY")
+      stripe_card.stub(to_hash: {
+        id: "cc_2G2L06vvQS1BKY",
+        object: "card",
+        last4: "4242",
+        type: "Visa",
+        exp_month: 7,
+        exp_year: 2014,
+        fingerprint: "3DdmECgaaL5RtYzn",
+        customer: "cus_2Fzi6yfxE0y7bB",
+        country: "US",
+        address_city: nil,
+        cvc_check: "pass"})
+
+      client.cards.create
+      client.stub(stripe_client: stripe_client)
+    }
+
+    it "reloads the client" do
+      client.should_receive(:stripe_client).with(true)
+      client.save_cards
+    end
+
+    context "after saving the card" do
+      before { client.save_cards }
+
+      it "creates a new card" do
+        expect(client.cards.size).to eql(1)
+      end
+
+      it "assigns stripe_id" do
+        expect(card.stripe_id).to eql("cc_2G2L06vvQS1BKY")
+      end
+
+      it "assigns last4" do
+        expect(card.last4).to eql("4242")
+      end
+
+      it "assigns type" do
+        expect(card.type).to eql("Visa")
+      end
+
+      it "assigns exp_month" do
+        expect(card.exp_month).to eql(7)
+      end
+
+      it "assigns exp_year" do
+        expect(card.exp_year).to eql(2014)
+      end
+
+      it "assigns country" do
+        expect(card.country).to eql("US")
+      end
+
+      it "assigns address_city" do
+        expect(card.address_city).to be_nil
+      end
     end
   end
 end

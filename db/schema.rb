@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130724170914) do
+ActiveRecord::Schema.define(version: 20130724175216) do
+
+  create_table "cards", force: true do |t|
+    t.integer  "client_id"
+    t.string   "last4"
+    t.string   "type"
+    t.integer  "exp_month"
+    t.integer  "exp_year"
+    t.string   "country"
+    t.string   "address_city"
+    t.string   "stripe_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "client_calls", force: true do |t|
     t.integer  "client_id"
