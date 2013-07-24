@@ -2,8 +2,9 @@ xml.instruct!
 xml.Response do
   xml.Gather do
     xml.Say <<-EOS.strip_heredoc, voice: "woman"
-      I'm sorry, the extension you entered is invalid.
-      Please enter the four digit extension of your psychic followed by the pound sign.
+      We're sorry, you have entered an invalid extension.
+      Please re-enter the extension of the psychic you wish to contact and
+      press pound.
     EOS
   end
 end

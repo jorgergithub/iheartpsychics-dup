@@ -7,14 +7,13 @@ class CallsController < ApplicationController
 
   def index
     logger.info "Index for: #{incoming_number}"
-    # record_call(params[:CallSid])
   end
 
   def user
     logger.info "Index for: #{incoming_number} -- #{params[:Digits]}"
 
     if params[:Digits] == "0"
-      render :new_user
+      render :csr
       return
     end
 
@@ -49,11 +48,6 @@ class CallsController < ApplicationController
       return
     end
 
-    unless @client.minutes and @client.minutes >= 1
-      render :no_balance
-      return
-    end
-
     logger.info "Pin valid - client: #{@client.inspect}"
   end
 
@@ -68,7 +62,44 @@ class CallsController < ApplicationController
       return
     end
 
+    unless @client.minutes and @client.minutes >= 1
+      render :no_balance
+      return
+    end
+
     @caller_id = incoming_number || "+1-866-866-8288"
+  end
+
+  def do_transfer
+    @psychic = Psychic.where(extension: params[:psychic_id]).take
+
+    unless params[:Digits].present?
+      render :wrong_do_transfer_option
+      return
+    end
+
+    if params[:Digits] == "2"
+      render :pin
+      return
+    elsif params[:Digits] != "1"
+      render :wrong_do_transfer_option
+      return
+    end
+  end
+
+  def topup
+    if params[:Digits] == "1"
+      render :minutes
+      return
+    elsif params[:Digits] == "2"
+      render :csr
+      return
+    elsif params[:Digits] == "3"
+      render :disconnect
+      return
+    else
+
+    end
   end
 
   def call_finished
