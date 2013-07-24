@@ -24,6 +24,12 @@ FactoryGirl.define do
     association :user
   end
 
+  factory :package do
+    name "Minutes Package"
+    minutes 10
+    price "9.99"
+  end
+
   factory :client_call do
     sid "CAc1ffa7a744d25480e5ee009dfd7b2fc4"
     association :client
@@ -49,5 +55,11 @@ FactoryGirl.define do
     factory :processed_call do
       processed true
     end
+  end
+
+  factory :order do
+    association :client
+    total "9.99"
+    status nil
   end
 end

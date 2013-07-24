@@ -4,6 +4,7 @@ class Client < ActiveRecord::Base
   has_many :calls,  class_name: "ClientCall"
   has_many :phones, class_name: "ClientPhone", dependent: :destroy
   has_many :credits, dependent: :destroy
+  has_many :orders
 
   has_and_belongs_to_many :favorite_psychics, class_name: "Psychic"
 
