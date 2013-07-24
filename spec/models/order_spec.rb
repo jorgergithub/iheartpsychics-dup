@@ -21,40 +21,43 @@ describe Order do
     before {
       order.add_package_item(package)
       client.stub(stripe_client: stripe_client)
-      client.stub(charge: charge)
+      client.stub(:charge)
     }
 
-    it "pays a given stripe token" do
-      client.should_receive(:charge).with(9.99, "Order ##{order.id}")
-      order.pay
+    context "when not paid" do
+      it "charges the order client" do
+        client.should_receive(:charge).with(9.99, "Order ##{order.id}", order_id: order.id)
+        order.pay
+      end
+
+      it "changes the order status to paid" do
+        order.pay
+        expect(order.status).to eql("paid")
+      end
     end
 
-    context "when successful" do
-      let(:transaction) { order.transactions.take }
-
-      before { order.pay }
-
-      it "creates one transaction" do
-        expect(order.transactions.size).to eql(1)
+    context "when the order is paid" do
+      it "raises an error" do
+        order.status = "paid"
+        expect { order.pay }.to raise_error
       end
+    end
+  end
 
-      it "sets operation" do
-        expect(transaction.operation).to eql("charge")
-      end
+  describe "#paid?" do
+    it "is true when status is paid" do
+      order.status = "paid"
+      expect(order).to be_paid
+    end
 
-      it "sets success" do
-        expect(transaction).to be_success
-      end
-
-      it "sets the charge id" do
-        expect(transaction.transaction_id).to eql("charge_id")
-      end
+    it "is false when status isn't paid" do
+      expect(order).not_to be_paid
     end
   end
 
   describe "#add_package_item" do
     let(:package) { FactoryGirl.create(:package) }
-    let(:item)    { order.items.take }
+    let(:item)    { order.reload.items.take }
 
     before {
       order.add_package_item package

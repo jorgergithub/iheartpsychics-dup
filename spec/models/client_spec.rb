@@ -198,6 +198,7 @@ describe Client do
   describe "#charge" do
     let(:stripe_client) { double(:stripe_client, id: "abc123") }
     let(:charge) { double(:charge, id: "charge_id") }
+    let(:transaction) { client.transactions.take }
 
     before {
       client.stub(stripe_client: stripe_client)
@@ -231,6 +232,26 @@ describe Client do
 
       it "returns the charge object" do
         expect(client.charge(100, "something")).to eql(charge)
+      end
+
+      describe "transaction" do
+        before { client.charge(100, "something") }
+
+        it "creates one transaction" do
+          expect(client.transactions.size).to eql(1)
+        end
+
+        it "sets operation" do
+          expect(transaction.operation).to eql("charge")
+        end
+
+        it "sets success" do
+          expect(transaction).to be_success
+        end
+
+        it "sets the charge id" do
+          expect(transaction.transaction_id).to eql("charge_id")
+        end
       end
     end
 

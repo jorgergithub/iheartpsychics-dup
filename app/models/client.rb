@@ -6,6 +6,7 @@ class Client < ActiveRecord::Base
   has_many :credits, dependent: :destroy
   has_many :cards, dependent: :destroy
   has_many :orders
+  has_many :transactions
 
   has_and_belongs_to_many :favorite_psychics, class_name: "Psychic"
 
@@ -74,11 +75,13 @@ class Client < ActiveRecord::Base
     end
   end
 
-  def charge(amount, description)
+  def charge(amount, description, extras={})
+    transaction = transactions.create(extras.merge(operation: "charge"))
     client = stripe_client
     amount_int = (amount * 100).to_i
-    Stripe::Charge.create(customer: client.id, amount: amount_int,
-                          currency: "usd", description: description)
+    result = Stripe::Charge.create(customer: client.id, amount: amount_int,
+                                   currency: "usd", description: description)
+    transaction.update_attributes success: true, transaction_id: result.id
   end
 
   def add_card_from_token(token)
