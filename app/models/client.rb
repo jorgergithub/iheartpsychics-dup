@@ -76,8 +76,8 @@ class Client < ActiveRecord::Base
 
   def charge(amount, description)
     client = stripe_client
-    amount_str = amount * 100
-    Stripe::Charge.create(customer: client.id, amount: amount_str,
+    amount_int = (amount * 100).to_i
+    Stripe::Charge.create(customer: client.id, amount: amount_int,
                           currency: "usd", description: description)
   end
 
