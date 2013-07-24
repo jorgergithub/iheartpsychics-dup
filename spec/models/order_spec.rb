@@ -7,11 +7,12 @@ describe Order do
   describe "#pay" do
     let(:stripe_client) { double(:stripe_client).as_null_object }
     let(:client) { order.client }
+    let(:charge) { double(:charge, id: "charge_id") }
 
     before {
       order.add_package_item(package)
-      client.stub(:stripe_client => stripe_client)
-      client.stub(:charge => "charge_id")
+      client.stub(stripe_client: stripe_client)
+      client.stub(charge: charge)
     }
 
     it "pays a given stripe token" do

@@ -10,7 +10,7 @@ class Order < ActiveRecord::Base
 
   def pay
     transaction = transactions.create(operation: "charge")
-    charge_id = client.charge(total, "Order ##{id}")
-    transaction.update_attributes success: true, transaction_id: charge_id
+    charge = client.charge(total, "Order ##{id}")
+    transaction.update_attributes success: true, transaction_id: charge.id
   end
 end
