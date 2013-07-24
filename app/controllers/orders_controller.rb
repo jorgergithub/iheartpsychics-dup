@@ -16,6 +16,10 @@ class OrdersController < AuthorizedController
     else
       render action: "new"
     end
+  rescue Stripe::CardError
+    logger.info "CardError: #{$!.message}"
+    flash[:error] = $!.message
+    redirect_to :new_order
   end
 
   private
