@@ -51,6 +51,23 @@ describe Order do
       end
     end
 
+    context "with a stripe token" do
+      before {
+        client.stub(:add_card_from_token)
+        order.stripe_token = "token1234"
+      }
+
+      it "creates a new card for the client" do
+        client.should_receive(:add_card_from_token).with("token1234")
+        order.pay
+      end
+
+      it "clears the skype token" do
+        order.pay
+        expect(order.stripe_token).to be_nil
+      end
+    end
+
     context "when the order is paid" do
       it "raises an error" do
         order.status = "paid"
@@ -75,7 +92,8 @@ describe Order do
     let(:item)    { order.reload.items.take }
 
     before {
-      order.add_package_item package
+      order.package_id = package.id
+      order.save
     }
 
     it "creates a new OrderItem" do
