@@ -2,6 +2,7 @@ class ClientsController < AuthorizedController
   before_filter :find_client
 
   def show
+    redirect_to :new_order unless @client.minutes?
   end
 
   def add_minutes
@@ -13,6 +14,7 @@ class ClientsController < AuthorizedController
       end
     else
       @client.minutes = nil
+      @order = @client.orders.new
     end
   end
 

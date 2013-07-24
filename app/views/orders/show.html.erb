@@ -1,0 +1,76 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h3><%= @order.to_desc %></h3>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span6">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>Placed</td>
+          <td><%= @order.created_at %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <h3>Items</h3>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Qty</th>
+          <th>Unit Price</th>
+          <th>Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.items.each do |i| %>
+          <tr>
+            <td><%= i.description %></td>
+            <td><%= i.qty %></td>
+            <td class="right"><%= number_to_currency i.unit_price %></td>
+            <td class="right"><%= number_to_currency i.total_price %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td class="right" colspan=3><b>Total</b></td>
+          <td class="right"><b><%= number_to_currency @order.total %></b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <h3>Transactions</h3>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Id</th>
+          <th>Operation</th>
+          <td>Success</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.transactions.each do |t| %>
+          <tr>
+            <td><%= t.created_at %></td>
+            <td><%= t.id %></td>
+            <td><%= t.operation %></td>
+            <td><%= t.success %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

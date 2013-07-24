@@ -11,6 +11,13 @@ describe Order do
       order.save
       expect(order.total).to eql(40.0)
     end
+
+    it "adds a package item if package_id is set" do
+      order.package_id = package.id
+      order.save
+
+      expect(order.items.size).to eql(1)
+    end
   end
 
   describe "#pay" do
@@ -19,7 +26,10 @@ describe Order do
     let(:charge) { double(:charge, id: "charge_id") }
 
     before {
-      order.add_package_item(package)
+      order.package_id = package.id
+      order.save
+
+      client.update_attributes(minutes: 0)
       client.stub(stripe_client: stripe_client)
       client.stub(:charge)
     }
@@ -33,6 +43,11 @@ describe Order do
       it "changes the order status to paid" do
         order.pay
         expect(order.status).to eql("paid")
+      end
+
+      it "adds minutes to the client" do
+        order.pay
+        expect(client.reload.minutes).to eql(package.minutes)
       end
     end
 

@@ -1,0 +1,73 @@
+<%= form_for(@order, :html => { :class => 'form form-horizontal' }) do |f| %>
+  <fieldset>
+    <legend>Package</legend>
+
+    <div class="control-group">
+      <%= f.label :package_id, class: 'control-label' %>
+      <div class="controls">
+        <% Package.active.reverse.each do |pkg| %>
+          <label class="radio">
+            <%= f.radio_button :package_id, pkg.id %>
+            <%= pkg.name %>
+            for
+            <%= number_to_currency(pkg.price) %>
+          </label>
+        <% end %>
+      </div>
+    </div>
+
+    <legend>Payment</legend>
+
+    <% if @client.card %>
+      <div class="control-group">
+        <%= f.label :card, class: 'control-label' %>
+        <div class="controls">
+          <label class="radio">
+            <%= f.radio_button :card_id, @client.card.id %>
+            <b><%= @client.card.type %></b>
+            ending in
+            <b><%= @client.card.last4 %></b>
+          </label>
+
+          <label class="radio">
+            <%= f.radio_button :card_id, nil %>
+            New card:
+
+            <div class="control-group">
+              <%= f.label :card_number, class: 'control-label' %>
+              <div class="controls">
+                <%= f.text_field :card_number, maxlength: 16, data: { stripe: "number" } %>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <%= f.label :expiration, class: 'control-label' %>
+              <div class="controls">
+                <%= f.collection_select :card_exp_month,
+                  Rails.configuration.credit_card[:months], :value, :name, {},
+                    { class: 'input-medium', data: { stripe: "exp-month" } } %>
+                <%= f.collection_select :card_exp_year,
+                  Rails.configuration.credit_card[:years], :value, :name, {},
+                    { class: 'input-small', data: { stripe: "exp-year" } } %>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <%= f.label :card_cvc, 'CVC', class: 'control-label' %>
+              <div class="controls">
+                <%= f.text_field :card_cvc, class: 'input-mini', maxlength: 3,
+                  data: { stripe: "cvc" } %>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+    <% end %>
+  </fieldset>
+
+  <div>
+    <%= f.button "Go", class: 'btn' %>
+    <%= link_to "Cancel", dashboard_path, class: 'btn' %>
+  </div>
+
+<% end %>

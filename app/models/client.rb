@@ -40,8 +40,10 @@ class Client < ActiveRecord::Base
     self.save
   end
 
-  def add_minutes(m)
-    credits.create(minutes: m, description: "Added minutes")
+  def add_minutes(m, target=nil)
+    desc = "Added minutes"
+    desc = "#{desc} - #{target.to_desc}" if target
+    credits.create(minutes: m, description: desc, target: target)
     self.minutes ||= 0
     self.minutes += m.to_i
     self.save
@@ -100,6 +102,10 @@ class Client < ActiveRecord::Base
 
       cards.create(attributes)
     end
+  end
+
+  def card
+    cards.take
   end
 
   private

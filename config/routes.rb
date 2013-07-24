@@ -31,6 +31,8 @@ IHeartPsychics::Application.routes.draw do
     end
   end
 
+  resources :orders
+
   get "/dashboard", to: "home#show", as: "dashboard"
 
   root to: 'home#show'
