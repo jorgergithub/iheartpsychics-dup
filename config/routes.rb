@@ -8,6 +8,7 @@ IHeartPsychics::Application.routes.draw do
       post 'user(:.format)'           , action: :user
       post 'pin(:.format)'            , action: :pin
       post 'transfer(:.format)'       , action: :transfer
+      post 'topup(:.format)'          , action: :topup
       post 'call_finished(:.format)'  , action: :call_finished
     end
   end

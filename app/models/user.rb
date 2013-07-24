@@ -22,8 +22,9 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username
   validates_presence_of :username
 
-  has_one :psychic, dependent: :destroy
-  has_one :client , dependent: :destroy
+  has_one :psychic , dependent: :destroy
+  has_one :client  , dependent: :destroy
+  has_one :rep     , class_name: "CustomerServiceRepresentative", dependent: :destroy
 
   def client?
     client.present?
@@ -31,6 +32,10 @@ class User < ActiveRecord::Base
 
   def psychic?
     psychic.present?
+  end
+
+  def rep?
+    rep.present?
   end
 
   def full_name

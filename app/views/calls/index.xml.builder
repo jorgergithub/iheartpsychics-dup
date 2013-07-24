@@ -13,8 +13,9 @@ xml.Response do
       xml.Say <<-EOS.strip_heredoc, voice: "woman"
         Welcome to I Heart Psychics.
         We don't recognize the number you are calling from.
-        Please enter your ten digit account or
-        press zero to be connected with a customer service representative.
+        Please enter your ten digit account and pound or
+        press zero and pound to be connected with a
+        customer service representative.
       EOS
     end
   end

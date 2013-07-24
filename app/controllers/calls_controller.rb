@@ -13,6 +13,7 @@ class CallsController < ApplicationController
     logger.info "Index for: #{incoming_number} -- #{params[:Digits]}"
 
     if params[:Digits] == "0"
+      @csr = CustomerServiceRepresentative.next_available
       render :csr
       return
     end
@@ -48,6 +49,11 @@ class CallsController < ApplicationController
       return
     end
 
+    unless @client.minutes and @client.minutes >= 1
+      render :no_balance
+      return
+    end
+
     logger.info "Pin valid - client: #{@client.inspect}"
   end
 
@@ -59,11 +65,6 @@ class CallsController < ApplicationController
 
     unless @psychic = Psychic.where(extension: params[:Digits]).take
       render :transfer_error
-      return
-    end
-
-    unless @client.minutes and @client.minutes >= 1
-      render :no_balance
       return
     end
 
@@ -92,6 +93,7 @@ class CallsController < ApplicationController
       render :minutes
       return
     elsif params[:Digits] == "2"
+      @csr = CustomerServiceRepresentative.next_available
       render :csr
       return
     elsif params[:Digits] == "3"

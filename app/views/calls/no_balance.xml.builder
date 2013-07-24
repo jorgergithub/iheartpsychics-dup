@@ -7,7 +7,6 @@ xml.Response do
       Please press 1 to purchase more minutes.
       Press 2 to speak to a customer service representative.
       Press 3 to disconnect.
-      Thank you.
     EOS
   end
 end
