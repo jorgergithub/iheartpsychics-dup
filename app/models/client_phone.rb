@@ -4,6 +4,8 @@ class ClientPhone < ActiveRecord::Base
   belongs_to :client
   before_save :strip_number_formatting
 
+  validates_uniqueness_of :number
+
   def formatted_number
     PhoneFormatter.format(number)
   end
