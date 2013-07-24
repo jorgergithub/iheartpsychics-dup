@@ -145,36 +145,30 @@ describe Client do
     context "when stripe_client_id is nil" do
       let(:client) { FactoryGirl.create(:client) }
 
-      context "when not passing create option" do
-        it "is nil" do
-          expect(client.stripe_client).to be_nil
-        end
-      end
-
       context "when passing create as false" do
         it "is nil" do
           expect(client.stripe_client(false)).to be_nil
         end
       end
 
-      context "when passing create as true" do
+      context "when omitting create" do
         before {
           stripe_client.stub(id: "abc123")
           Stripe::Customer.stub(:create => stripe_client)
         }
 
         it "creates a new customer" do
-          expect(client.stripe_client(true)).to eql(stripe_client)
+          expect(client.stripe_client).to eql(stripe_client)
         end
 
         it "creates the new customer with a description" do
           desc = { description: "#{client.id} - #{client.full_name} (#{client.username})" }
           Stripe::Customer.should_receive(:create).with(hash_including(desc))
-          client.stripe_client(true)
+          client.stripe_client
         end
 
         it "saves the new client id" do
-          client.stripe_client(true)
+          client.stripe_client
           expect(client.stripe_client_id).to eql("abc123")
         end
       end

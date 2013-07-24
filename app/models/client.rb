@@ -58,7 +58,7 @@ class Client < ActiveRecord::Base
     favorite_psychic_ids.include? psychic.id
   end
 
-  def stripe_client(create=false)
+  def stripe_client(create=true)
     return Stripe::Customer.retrieve(stripe_client_id) if stripe_client_id
     return nil unless create
 
