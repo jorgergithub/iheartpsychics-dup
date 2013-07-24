@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130724144132) do
+ActiveRecord::Schema.define(version: 20130724170914) do
 
   create_table "client_calls", force: true do |t|
     t.integer  "client_id"
@@ -120,6 +120,15 @@ ActiveRecord::Schema.define(version: 20130724144132) do
   end
 
   add_index "psychics", ["extension"], name: "index_psychics_on_extension", unique: true, using: :btree
+
+  create_table "transactions", force: true do |t|
+    t.integer  "order_id"
+    t.string   "operation"
+    t.string   "transaction_id"
+    t.boolean  "success"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

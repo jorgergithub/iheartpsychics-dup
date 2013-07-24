@@ -62,4 +62,13 @@ FactoryGirl.define do
     total "9.99"
     status nil
   end
+
+  factory :order_item do
+    association :order
+    association :package
+    description "MyString"
+    qty 1
+    unit_price "9.99"
+    total_price "9.99"
+  end
 end

@@ -1,8 +1,48 @@
 require 'spec_helper'
 
 describe Order do
+  let(:package) { FactoryGirl.create(:package) }
+  let(:order) { FactoryGirl.create(:order) }
+
+  describe "#pay" do
+    let(:stripe_client) { double(:stripe_client).as_null_object }
+    let(:client) { order.client }
+
+    before {
+      order.add_package_item(package)
+      client.stub(:stripe_client => stripe_client)
+      client.stub(:charge => "charge_id")
+    }
+
+    it "pays a given stripe token" do
+      client.should_receive(:charge).with(9.99, "Order ##{order.id}")
+      order.pay
+    end
+
+    context "when successful" do
+      let(:transaction) { order.transactions.take }
+
+      before { order.pay }
+
+      it "creates one transaction" do
+        expect(order.transactions.size).to eql(1)
+      end
+
+      it "sets operation" do
+        expect(transaction.operation).to eql("charge")
+      end
+
+      it "sets success" do
+        expect(transaction).to be_success
+      end
+
+      it "sets the charge id" do
+        expect(transaction.transaction_id).to eql("charge_id")
+      end
+    end
+  end
+
   describe "#add_package_item" do
-    let(:order)   { FactoryGirl.create(:order)   }
     let(:package) { FactoryGirl.create(:package) }
     let(:item)    { order.items.take }
 
