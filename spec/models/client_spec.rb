@@ -17,13 +17,12 @@ describe Client do
 
   describe "deleting a client" do
     context "with a phone" do
-      let!(:client) {
-        Client.create(user: user, pin: "1234", phone_number: "7641233322")
-      }
+      let!(:user) { FactoryGirl.create(:user, phone_number: "7641233322", create_as: "client") }
+      let!(:client) { user.client }
       let!(:phone) { client.phones.first }
 
       it "deletes the phone" do
-        client.destroy
+        user.destroy
         expect { ClientPhone.find(phone.id) }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
@@ -137,6 +136,57 @@ describe Client do
       expect(Client.new(minutes: 1).seconds).to eql(60)
       expect(Client.new(minutes: 2).seconds).to eql(120)
       expect(Client.new(minutes: 25).seconds).to eql(1500)
+    end
+  end
+
+  describe "#stripe_client" do
+    let(:stripe_client) { double("stripe_client").as_null_object }
+
+    context "when stripe_client_id is nil" do
+      let(:client) { FactoryGirl.create(:client) }
+
+      context "when not passing create option" do
+        it "is nil" do
+          expect(client.stripe_client).to be_nil
+        end
+      end
+
+      context "when passing create as false" do
+        it "is nil" do
+          expect(client.stripe_client(false)).to be_nil
+        end
+      end
+
+      context "when passing create as true" do
+        before {
+          stripe_client.stub(id: "abc123")
+          Stripe::Customer.stub(:create => stripe_client)
+        }
+
+        it "creates a new customer" do
+          expect(client.stripe_client(true)).to eql(stripe_client)
+        end
+
+        it "creates the new customer with a description" do
+          desc = { description: "#{client.id} - #{client.full_name} (#{client.username})" }
+          Stripe::Customer.should_receive(:create).with(hash_including(desc))
+          client.stripe_client(true)
+        end
+
+        it "saves the new client id" do
+          client.stripe_client(true)
+          expect(client.stripe_client_id).to eql("abc123")
+        end
+      end
+    end
+
+    context "when stripe_client_id isn't nil" do
+      let(:client) { FactoryGirl.create(:client, stripe_client_id: "abc123") }
+
+      it "returns the stripe client" do
+        Stripe::Customer.stub(:retrieve => stripe_client)
+        expect(client.stripe_client).to eql(stripe_client)
+      end
     end
   end
 end

@@ -58,6 +58,16 @@ class Client < ActiveRecord::Base
     favorite_psychic_ids.include? psychic.id
   end
 
+  def stripe_client(create=false)
+    return Stripe::Customer.retrieve(stripe_client_id) if stripe_client_id
+    return nil unless create
+
+    desc = "#{id} - #{full_name} (#{username})"
+    Stripe::Customer.create(description: desc).tap do |sc|
+      update_attributes stripe_client_id: sc.id
+    end
+  end
+
   private
 
   def calc_encrypted_pin
