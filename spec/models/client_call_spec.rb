@@ -7,6 +7,8 @@ describe ClientCall do
     let!(:call)           { FactoryGirl.create(:client_call, client: client) }
 
     before do
+      Rails.configuration.twilio = {account_sid: "account", auth_token: "token"}
+
       VCR.use_cassette("twilio-call") do
         ClientCall.process_calls
       end
