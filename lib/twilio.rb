@@ -1,5 +1,9 @@
 class TwilioHelper
   def self.client
-    @client ||= Twilio::REST::Client.new(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+    @client ||= begin
+      account_sid = Rails.configuration.twilio[:account_sid]
+      auth_token  = Rails.configuration.twilio[:auth_token]
+      Twilio::REST::Client.new(account_sid, auth_token)
+    end
   end
 end

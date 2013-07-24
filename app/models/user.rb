@@ -8,9 +8,16 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   after_create :create_client_or_psychic
+
   attr_accessor :create_as
   attr_accessor :phone_number
   attr_accessor :login
+
+  attr_accessor :package_id
+  attr_accessor :card_number
+  attr_accessor :card_exp_month
+  attr_accessor :card_exp_year
+  attr_accessor :card_cvc
 
   validates_uniqueness_of :username
   validates_presence_of :username

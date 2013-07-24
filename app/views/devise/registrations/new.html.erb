@@ -7,8 +7,10 @@
   <%= f.hidden_field :create_as, value: create_as %>
 
   <%= render create_as, f: f %>
-
-  <div><%= f.submit "Sign up" %></div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+<script type="text/javascript">
+  Stripe.setPublishableKey("<%= Rails.configuration.stripe[:publishable_key] %>")
+</script>

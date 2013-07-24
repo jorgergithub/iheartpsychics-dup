@@ -1,0 +1,7 @@
+# Stripe
+export SECRET_KEY=stripe_secret_key_here
+export PUBLISHABLE_KEY=stripe_publishable_key_here
+
+# Twilio
+export TWILIO_ACCOUNT_SID=twilio_account_sid_here
+export TWILIO_AUTH_TOKEN=twilio_auth_token_here

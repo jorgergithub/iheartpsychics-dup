@@ -9,13 +9,14 @@ gem 'jquery-rails'  , '~> 3.0.4'
 gem 'turbolinks'    , '~> 1.3.0'
 gem 'jbuilder'      , '~> 1.2'
 
-gem 'devise'        ,  '~> 3.0.0'
-gem 'twilio-ruby'   ,  '~> 3.10.0'
 gem 'bootstrap-sass', '~> 2.3.2.0'
+gem 'devise'        ,  '~> 3.0.0'
+gem 'stripe'        , :git => 'https://github.com/stripe/stripe-ruby'
+gem 'twilio-ruby'   ,  '~> 3.10.0'
 
 group :development, :test do
-  gem 'rspec-rails'          , '~> 2.0'
   gem 'factory_girl_rails'   , '~> 4.2.1'
+  gem 'rspec-rails'          , '~> 2.0'
 end
 
 group :test do

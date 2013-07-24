@@ -1,2 +1,4 @@
-TWILIO_ACCOUNT_SID = 'AC4d5e48e4d4647262b5c4314e36e3d26e'
-TWILIO_AUTH_TOKEN  = '8d34324065c4231eab24377c2d6d8b37'
+Rails.configuration.twilio = {
+  :account_sid  => ENV['TWILIO_ACCOUNT_SID'],
+  :auth_token   => ENV['TWILIO_AUTH_TOKEN']
+}
