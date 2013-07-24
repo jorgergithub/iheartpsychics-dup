@@ -189,4 +189,58 @@ describe Client do
       end
     end
   end
+
+  describe "#charge" do
+    let(:stripe_client) { double(:stripe_client, id: "abc123") }
+    let(:charge) { double(:charge, id: "charge_id") }
+
+    before {
+      client.stub(stripe_client: stripe_client)
+      Stripe::Charge.stub(:create => charge)
+    }
+
+    context "when charge succeeds" do
+      it "charges the stripe client id" do
+        info = { customer: "abc123" }
+        Stripe::Charge.should_receive(:create).with(hash_including(info))
+        client.charge(100, "something")
+      end
+
+      it "charges the given amount" do
+        info = { amount: 10002 }
+        Stripe::Charge.should_receive(:create).with(hash_including(info))
+        client.charge(100.02, "something")
+      end
+
+      it "charges with the given description" do
+        info = { description: "something" }
+        Stripe::Charge.should_receive(:create).with(hash_including(info))
+        client.charge(100.02, "something")
+      end
+
+      it "charges in USD" do
+        info = { currency: "usd" }
+        Stripe::Charge.should_receive(:create).with(hash_including(info))
+        client.charge(100.02, "something")
+      end
+
+      it "returns the charge id" do
+        expect(client.charge(100, "something")).to eql("charge_id")
+      end
+    end
+
+    context "when there are charging errors" do
+      before {
+        error = "(Status 402) Cannot charge a customer that has no active card"
+        exception = Stripe::CardError.new(error, "param", "code")
+        Stripe::Charge.stub(:create).and_raise(exception)
+      }
+
+      it "raises the error" do
+        expect {
+          client.charge(100, "something")
+        }.to raise_error(Stripe::CardError)
+      end
+    end
+  end
 end

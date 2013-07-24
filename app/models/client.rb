@@ -68,6 +68,14 @@ class Client < ActiveRecord::Base
     end
   end
 
+  def charge(amount, description)
+    client = stripe_client(true)
+    amount_str = amount * 100
+    charge = Stripe::Charge.create(customer: client.id, amount: amount_str,
+                                   currency: "usd", description: description)
+    charge.id
+  end
+
   private
 
   def calc_encrypted_pin
