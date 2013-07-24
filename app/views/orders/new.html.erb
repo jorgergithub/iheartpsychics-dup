@@ -1,5 +1,7 @@
 <%= form_for(@order, :html => { :class => 'form form-horizontal' }) do |f| %>
   <fieldset>
+    <span class="payment-errors"></span>
+
     <legend>Package</legend>
 
     <div class="control-group">
@@ -18,16 +20,17 @@
 
     <legend>Payment</legend>
 
-    <% if @client.card %>
       <div class="control-group">
         <%= f.label :card, class: 'control-label' %>
         <div class="controls">
-          <label class="radio">
-            <%= f.radio_button :card_id, @client.card.id %>
-            <b><%= @client.card.type %></b>
-            ending in
-            <b><%= @client.card.last4 %></b>
-          </label>
+          <% if @client.card %>
+            <label class="radio">
+              <%= f.radio_button :card_id, @client.card.id %>
+              <b><%= @client.card.type %></b>
+              ending in
+              <b><%= @client.card.last4 %></b>
+            </label>
+          <% end %>
 
           <label class="radio">
             <%= f.radio_button :card_id, nil %>
@@ -62,12 +65,16 @@
           </label>
         </div>
       </div>
-    <% end %>
   </fieldset>
 
   <div>
     <%= f.button "Go", class: 'btn' %>
-    <%= link_to "Cancel", dashboard_path, class: 'btn' %>
+    <%= link_to "Cancel", dashboard_path, class: 'cancel btn' %>
   </div>
 
 <% end %>
+
+<%= javascript_include_tag "https://js.stripe.com/v2/" %>
+<script type="text/javascript">
+  Stripe.setPublishableKey("<%= Rails.configuration.stripe[:publishable_key] %>")
+</script>
