@@ -3,6 +3,10 @@ class ClientsController < AuthorizedController
 
   def show
     redirect_to :new_order unless @client.minutes?
+    unless @client.pin?
+      @pin = @client.set_random_pin
+      ClientMailer.pin_email(@client, @pin).deliver
+    end
   end
 
   def add_minutes

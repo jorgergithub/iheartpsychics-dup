@@ -12,12 +12,11 @@ class Client < ActiveRecord::Base
 
   has_and_belongs_to_many :favorite_psychics, class_name: "Psychic"
 
-  before_create :set_random_pin
   before_save :set_encrypted_pin
   after_create :update_encrypted_pin
   after_create :add_phone_number
 
-  delegate :username, :first_name, :last_name, :full_name, to: :user
+  delegate :username, :first_name, :last_name, :full_name, :email, to: :user
 
   attr_accessor :pin, :phone_number
 
@@ -111,6 +110,17 @@ class Client < ActiveRecord::Base
     cards.take
   end
 
+  def set_random_pin
+    RandomUtils.digits_s(4).tap do |pin|
+      self.pin = pin
+      self.save
+    end
+  end
+
+  def pin?
+    self.encrypted_pin.present?
+  end
+
   private
 
   def calc_encrypted_pin
@@ -132,9 +142,5 @@ class Client < ActiveRecord::Base
   def add_phone_number
     return unless self.phone_number
     self.phones.create(number: self.phone_number, desc: "Main")
-  end
-
-  def set_random_pin
-    self.pin = RandomUtils.digits_s(4)
   end
 end

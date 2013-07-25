@@ -1,8 +1,26 @@
+<!--
 <div class="row-fluid">
   <div class="span12">
     Welcome back, <%= @client.first_name %>
   </div>
 </div>
+-->
+
+<% if @pin %>
+  <div class="row-fluid">
+    <div class="span8 offset2">
+      <div class="well pin-container">
+        <p>
+          Welcome <b><%= @client.first_name %></b>!
+          Please take note of your account PIN
+        </p>
+        <div class="pin">
+          <%= @pin %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
 
 <div class="row-fluid">
   <div class="span12">

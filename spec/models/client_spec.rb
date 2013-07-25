@@ -15,14 +15,6 @@ describe Client do
     end
   end
 
-  describe "creating a client" do
-    let!(:client) { Client.create(user: user) }
-
-    it "creates a random PIN number" do
-      expect(client.reload.encrypted_pin).to_not be_nil
-    end
-  end
-
   describe "deleting a client" do
     context "with a phone" do
       let!(:user) { FactoryGirl.create(:user, phone_number: "7641233322", create_as: "client") }
@@ -48,6 +40,38 @@ describe Client do
       client.pin = "1232"
       client.save
       expect(client.valid_pin?("1232")).to be_true
+    end
+  end
+
+  describe "#set_random_pin" do
+    let!(:client) { Client.create(user: user) }
+
+    before { RandomUtils.stub(digits_s: "1234") }
+
+    it "creates a random PIN number" do
+      expect(client.set_random_pin).to eql("1234")
+    end
+
+    it "sets the pin" do
+      client.set_random_pin
+      expect(client.encrypted_pin).to_not be_nil
+    end
+  end
+
+  describe "#pin?" do
+    let(:client) { Client.create(user: user) }
+
+    context "when no pin is set" do
+      it "is false" do
+        expect(client).to_not be_pin
+      end
+    end
+
+    context "when pin is set" do
+      before { client.set_random_pin }
+      it "is true" do
+        expect(client).to be_pin
+      end
     end
   end
 
