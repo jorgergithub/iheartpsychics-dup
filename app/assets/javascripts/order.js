@@ -5,7 +5,7 @@ var stripeResponseHandler = function(status, response) {
     // Show the errors on the form
     $form.find('.payment-errors').text(response.error.message);
     $form.find('button').prop('disabled', false);
-    $form.find('.cancel').prop('disabled', false);
+    $('.cancel').show();
   }
   else {
     // token contains id, last4, and card type
@@ -22,9 +22,37 @@ jQuery(function($) {
     $('#new_order').submit(function(e) {
       var $form = $(this);
 
+      $('#card-number-validation-error').text("");
+      $('#card-cvc-validation-error').text("");
+
+      if ($('#order_card_id').is(':checked')) {
+        var card_number = $('#order_card_number').val();
+        var card_exp_month = $('#order_card_exp_month').val();
+        var card_exp_year = $('#order_card_exp_year').val();
+        var card_cvc = $('#order_card_cvc').val();
+
+        if (!card_number) {
+          $('#card-number-validation-error').text("please enter credit card number");
+          $('#order_card_number').focus();
+          return false;
+        }
+
+        if (!Stripe.validateCardNumber(card_number)) {
+          $('#card-number-validation-error').text("invalid credit card number");
+          $('#order_card_number').focus();
+          return false;
+        }
+
+        if ((!card_cvc)||(card_cvc.length < 3)) {
+          $('#card-cvc-validation-error').text("please enter 3-digit CVC");
+          $('#order_card_cvc').focus();
+          return false;
+        }
+      }
+
       // Disable the submit button to prevent repeated clicks
       $form.find('button').prop('disabled', true);
-      $form.find('.cancel').prop('disabled', true);
+      $('.cancel').hide();
 
       Stripe.createToken($form, stripeResponseHandler);
 

@@ -2,7 +2,11 @@ class ClientsController < AuthorizedController
   before_filter :find_client
 
   def show
-    redirect_to :new_order unless @client.minutes?
+    unless @client.minutes?
+      redirect_to :new_order
+      return
+    end
+
     unless @client.pin?
       @pin = @client.set_random_pin
       ClientMailer.pin_email(@client, @pin).deliver

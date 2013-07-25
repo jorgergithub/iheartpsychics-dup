@@ -43,7 +43,9 @@
             <div class="control-group">
               <%= f.label :card_number, class: 'control-label' %>
               <div class="controls">
-                <%= f.text_field :card_number, maxlength: 16, data: { stripe: "number" } %>
+                <%= f.text_field :card_number, maxlength: 16,
+                  data: { stripe: "number", mask: "9999 9999 9999 9999" } %>
+                <span id="card-number-validation-error" class="validation-error"></span>
               </div>
             </div>
 
@@ -63,7 +65,8 @@
               <%= f.label :card_cvc, 'CVC', class: 'control-label' %>
               <div class="controls">
                 <%= f.text_field :card_cvc, class: 'input-mini', maxlength: 3,
-                  data: { stripe: "cvc" } %>
+                  data: { stripe: "cvc", mask: "999" } %>
+                <span id="card-cvc-validation-error" class="validation-error"></span>
               </div>
             </div>
           </label>
