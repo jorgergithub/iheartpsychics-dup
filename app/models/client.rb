@@ -1,3 +1,5 @@
+require "random_utils"
+
 class Client < ActiveRecord::Base
   belongs_to :user
 
@@ -10,8 +12,9 @@ class Client < ActiveRecord::Base
 
   has_and_belongs_to_many :favorite_psychics, class_name: "Psychic"
 
+  before_create :set_random_pin
   before_save :set_encrypted_pin
-  after_create :set_encrypted_pin
+  after_create :update_encrypted_pin
   after_create :add_phone_number
 
   delegate :username, :first_name, :last_name, :full_name, to: :user
@@ -120,8 +123,18 @@ class Client < ActiveRecord::Base
     self.encrypted_pin = calc_encrypted_pin
   end
 
+  def update_encrypted_pin
+    return unless self.pin
+
+    self.update_attributes encrypted_pin: calc_encrypted_pin
+  end
+
   def add_phone_number
     return unless self.phone_number
     self.phones.create(number: self.phone_number, desc: "Main")
+  end
+
+  def set_random_pin
+    self.pin = RandomUtils.digits_s(4)
   end
 end

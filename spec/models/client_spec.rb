@@ -15,6 +15,14 @@ describe Client do
     end
   end
 
+  describe "creating a client" do
+    let!(:client) { Client.create(user: user) }
+
+    it "creates a random PIN number" do
+      expect(client.reload.encrypted_pin).to_not be_nil
+    end
+  end
+
   describe "deleting a client" do
     context "with a phone" do
       let!(:user) { FactoryGirl.create(:user, phone_number: "7641233322", create_as: "client") }
