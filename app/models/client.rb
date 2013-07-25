@@ -86,6 +86,7 @@ class Client < ActiveRecord::Base
     result = Stripe::Charge.create(customer: client.id, amount: amount_int,
                                    currency: "usd", description: description)
     transaction.update_attributes success: true, transaction_id: result.id
+    result
   end
 
   def add_card_from_token(token)
