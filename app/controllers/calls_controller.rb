@@ -126,12 +126,24 @@ class CallsController < ApplicationController
       return
     end
 
-    if @client.cards.size < 1
-      render :no_credit_cards
-      return
+    @package = packages[choice-1]
+  end
+
+  def confirm_minutes
+    card_id = @client.cards.first.try(:id)
+    order = @client.orders.new(package_id: params[:package_id], card_id: card_id)
+    if order.save
+      order.pay
+    else
+      # todo
+      raise "order didn't save"
     end
 
-
+    render :pin
+  rescue Stripe::CardError
+    logger.info "CardError: #{$!.message}"
+    # todo
+    raise $!
   end
 
   def call_finished

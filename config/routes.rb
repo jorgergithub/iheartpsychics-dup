@@ -17,6 +17,8 @@ IHeartPsychics::Application.routes.draw do
       get  'topup(:.format)'          , action: :topup
       post 'buy_minutes(.:format)'    , action: :buy_minutes
       get  'buy_minutes(.:format)'    , action: :buy_minutes
+      post 'confirm_minutes(:.format)'  , action: :confirm_minutes
+      get  'confirm_minutes(:.format)'  , action: :confirm_minutes
       post 'call_finished(:.format)'  , action: :call_finished
       get  'call_finished(:.format)'  , action: :call_finished
     end
