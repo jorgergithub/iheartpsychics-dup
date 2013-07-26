@@ -1,6 +1,12 @@
 IHeartPsychics::Application.routes.draw do
   devise_for :users
 
+  namespace :admin do
+    resource :admin
+    resource :dashboard
+    resources :packages
+  end
+
   resources :calls do
     collection do
       post 'notify(:.format)'         , action: :notify

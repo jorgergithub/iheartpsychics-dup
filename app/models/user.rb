@@ -26,6 +26,8 @@ class User < ActiveRecord::Base
   has_one :client  , dependent: :destroy
   has_one :rep     , class_name: "CustomerServiceRepresentative", dependent: :destroy
 
+  has_one :admin   , dependent: :destroy
+
   def client?
     client.present?
   end
@@ -36,6 +38,10 @@ class User < ActiveRecord::Base
 
   def rep?
     rep.present?
+  end
+
+  def admin?
+    admin.present?
   end
 
   def full_name
@@ -70,6 +76,8 @@ class User < ActiveRecord::Base
       self.build_psychic
     elsif create_as == 'csr'
       self.build_rep
+    elsif create_as == 'admin'
+      self.build_admin
     end
   end
 end

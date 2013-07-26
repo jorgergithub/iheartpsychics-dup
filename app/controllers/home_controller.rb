@@ -9,6 +9,9 @@ class HomeController < AuthorizedController
     elsif current_user.rep?
       redirect_to customer_service_representative_path
       return
+    elsif current_user.admin?
+      redirect_to admin_dashboard_path
+      return
     end
   end
 end

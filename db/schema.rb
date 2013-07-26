@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130726172147) do
+ActiveRecord::Schema.define(version: 20130726191121) do
+
+  create_table "admins", force: true do |t|
+    t.integer "user_id"
+  end
 
   create_table "cards", force: true do |t|
     t.integer  "client_id"
@@ -123,6 +127,7 @@ ActiveRecord::Schema.define(version: 20130726172147) do
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "phone"
   end
 
   create_table "psychics", force: true do |t|

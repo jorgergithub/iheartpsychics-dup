@@ -15,4 +15,9 @@ class AuthorizedController < ApplicationController
     return unless current_user and current_user.rep?
     current_user.rep
   end
+
+  def current_admin
+    return unless current_user and current_user.admin?
+    current_user.admin
+  end
 end
