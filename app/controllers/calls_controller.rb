@@ -90,18 +90,48 @@ class CallsController < ApplicationController
 
   def topup
     if params[:Digits] == "1"
+      @packages = Package.phone_offers
       render :minutes
       return
     elsif params[:Digits] == "2"
-      @csr = CustomerServiceRepresentative.next_available
       render :csr
       return
     elsif params[:Digits] == "3"
       render :disconnect
       return
     else
-
+      render :bad_choice, locals: { redirect_to: "topup" }
+      return
     end
+  end
+
+  def buy_minutes
+    choice = params[:Digits].to_i
+    packages = Package.phone_offers
+    csr_choice = packages.size + 1
+    disconnect = csr_choice + 1
+
+    if choice == csr_choice
+      render :csr
+      return
+    end
+
+    if choice == disconnect
+      render :disconnect
+      return
+    end
+
+    unless choice > 0 and choice <= packages.size
+      render :bad_choice, locals: { redirect_to: "topup?Digits=1" }
+      return
+    end
+
+    if @client.cards.size < 1
+      render :no_credit_cards
+      return
+    end
+
+
   end
 
   def call_finished
@@ -167,5 +197,6 @@ class CallsController < ApplicationController
     logger.info "Client phone: #{@client_phone.inspect}"
     @client = @client_phone.client if @client_phone
     logger.info "Client: #{@client.inspect}"
+    @csr = CustomerServiceRepresentative.next_available
   end
 end
