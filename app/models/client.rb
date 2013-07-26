@@ -85,7 +85,9 @@ class Client < ActiveRecord::Base
     amount_int = (amount * 100).to_i
     result = Stripe::Charge.create(customer: client.id, amount: amount_int,
                                    currency: "usd", description: description)
-    transaction.update_attributes success: true, transaction_id: result.id
+    card = cards.first.to_s
+    transaction.update_attributes success: true, transaction_id: result.id,
+                                  amount: amount, card: card
     result
   end
 
