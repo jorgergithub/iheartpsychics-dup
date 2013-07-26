@@ -60,6 +60,7 @@ class ClientsController < AuthorizedController
   protected
 
   def find_client
+    redirect_to :root unless current_user.client?
     @client = current_client
   end
 end
