@@ -68,6 +68,8 @@ class User < ActiveRecord::Base
       self.build_client(phone_number: phone_number)
     elsif create_as == 'psychic'
       self.build_psychic
+    elsif create_as == 'csr'
+      self.build_rep
     end
   end
 end

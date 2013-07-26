@@ -6,6 +6,9 @@ class HomeController < AuthorizedController
     elsif current_user.psychic?
       redirect_to psychic_path
       return
+    elsif current_user.rep?
+      redirect_to customer_service_representative_path
+      return
     end
   end
 end

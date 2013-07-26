@@ -10,4 +10,9 @@ class AuthorizedController < ApplicationController
     return unless current_user and current_user.psychic?
     current_user.psychic
   end
+
+  def current_csr
+    return unless current_user and current_user.rep?
+    current_user.rep
+  end
 end
