@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  after_create :create_client_or_psychic
+  before_create :build_client_or_psychic
 
   attr_accessor :create_as
   attr_accessor :phone_number
@@ -63,11 +63,11 @@ class User < ActiveRecord::Base
 
   protected
 
-  def create_client_or_psychic
+  def build_client_or_psychic
     if create_as == 'client'
-      self.client = Client.create(phone_number: phone_number)
+      self.build_client(phone_number: phone_number)
     elsif create_as == 'psychic'
-      self.psychic = Psychic.create
+      self.build_psychic
     end
   end
 end
