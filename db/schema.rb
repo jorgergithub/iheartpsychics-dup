@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 20130726191121) do
     t.string   "name"
     t.integer  "minutes"
     t.decimal  "price",      precision: 8, scale: 2
-    t.boolean  "active"
+    t.boolean  "active",                             default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "phone"

@@ -10,6 +10,7 @@
             <th>Name</th>
             <th>Minutes</th>
             <th>Price</th>
+            <th>Active?</th>
             <th>Phone offer?</th>
           </tr>
         </thead>
@@ -23,6 +24,11 @@
               <td><%= link_to pkg.name, edit_admin_package_path(pkg) %></td>
               <td><%= pkg.minutes %></td>
               <td><%= number_to_currency pkg.price %></td>
+              <td>
+                <% if pkg.active? %>
+                  <i class="icon-ok"></i>
+                <% end %>
+              </td>
               <td>
                 <% if pkg.phone? %>
                   <i class="icon-ok"></i>

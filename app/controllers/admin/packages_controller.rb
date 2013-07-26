@@ -36,6 +36,6 @@ class Admin::PackagesController < AuthorizedController
   end
 
   def package_params
-    params.require(:package).permit(:name, :minutes, :price, :phone)
+    params.require(:package).permit(:name, :minutes, :price, :active, :phone)
   end
 end
