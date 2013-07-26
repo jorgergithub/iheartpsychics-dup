@@ -1,0 +1,41 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h3>Clients</h3>
+
+    <% if @clients.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Minutes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @clients.each do |client| %>
+            <tr>
+              <td>
+                <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_admin_client_path(client) %>
+                <%= link_to '<i class="icon-remove"></i>'.html_safe, [:admin, client], data: {confirm: "Are you sure?" }, :method => "delete" %>
+              </td>
+              <td><%= link_to client.username, edit_admin_client_path(client) %></td>
+              <td><%= client.first_name %></td>
+              <td><%= client.last_name %></td>
+              <td><%= client.email %></td>
+              <td><%= client.minutes %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="blank-state">
+        No clients added yet.
+        <%= link_to "Add one now.", new_admin_client_path %>
+      </div>
+    <% end %>
+    <%= link_to "Add new client", new_admin_client_path, class: "btn btn-small" %>
+  </div>
+</div>

@@ -4,6 +4,7 @@ IHeartPsychics::Application.routes.draw do
   namespace :admin do
     resource :admin
     resource :dashboard
+    resources :clients
     resources :packages
   end
 
