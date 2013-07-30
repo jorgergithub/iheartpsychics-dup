@@ -6,6 +6,8 @@ IHeartPsychics::Application.routes.draw do
     resource :dashboard
     resources :clients
     resources :packages
+
+    get "/debug", to: "debug#index"
   end
 
   resources :calls do
