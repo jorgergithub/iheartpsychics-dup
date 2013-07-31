@@ -72,8 +72,6 @@ class CallsController < ApplicationController
   end
 
   def do_transfer
-    @psychic = Psychic.where(extension: params[:psychic_id]).take
-
     unless params[:Digits].present?
       render :wrong_do_transfer_option
       return
@@ -210,5 +208,6 @@ class CallsController < ApplicationController
     @client = @client_phone.client if @client_phone
     logger.info "Client: #{@client.inspect}"
     @csr = CustomerServiceRepresentative.next_available
+    @psychic = Psychic.find(params[:psychic_id]) if params[:psychic_id]
   end
 end

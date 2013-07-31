@@ -20,8 +20,8 @@ IHeartPsychics::Application.routes.draw do
       get  'pin(:.format)'            , action: :pin
       post 'transfer(:.format)'       , action: :transfer
       get  'transfer(:.format)'       , action: :transfer
-      post 'to_transfer(:.format)'    , action: :to_transfer
-      get  'to_transfer(:.format)'    , action: :to_transfer
+      post 'do_transfer(:.format)'    , action: :do_transfer
+      get  'do_transfer(:.format)'    , action: :do_transfer
       post 'topup(:.format)'          , action: :topup
       get  'topup(:.format)'          , action: :topup
       post 'buy_minutes(.:format)'    , action: :buy_minutes
