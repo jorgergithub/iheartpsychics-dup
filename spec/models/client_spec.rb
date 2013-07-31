@@ -11,7 +11,11 @@ describe Client do
 
     it "saves the phone number" do
       client.reload
-      client.phones.first.number.should == "+17641233322"
+      expect(client.phones.first.number).to eql("+17641233322")
+    end
+
+    it "saves the pin number" do
+      expect(client.reload.pin).to eql("1234")
     end
   end
 
@@ -29,10 +33,10 @@ describe Client do
   end
 
   describe "#pin" do
-    it "saves the encrypted pin" do
+    it "saves the pin" do
       client.reload
-      expect(client.encrypted_pin).not_to be_nil
-      expect(client.encrypted_pin).not_to be_empty
+      expect(client.pin).not_to be_nil
+      expect(client.pin).not_to be_empty
     end
 
     it "allows resetting the pin" do
@@ -44,17 +48,12 @@ describe Client do
   end
 
   describe "#set_random_pin" do
-    let!(:client) { Client.create(user: user) }
+    let(:client) { Client.create(user: user) }
 
     before { RandomUtils.stub(digits_s: "1234") }
 
     it "creates a random PIN number" do
-      expect(client.set_random_pin).to eql("1234")
-    end
-
-    it "sets the pin" do
-      client.set_random_pin
-      expect(client.encrypted_pin).to_not be_nil
+      expect(client.pin).to eql("1234")
     end
   end
 
@@ -63,12 +62,12 @@ describe Client do
 
     context "when no pin is set" do
       it "is false" do
+        client.pin = nil
         expect(client).to_not be_pin
       end
     end
 
     context "when pin is set" do
-      before { client.set_random_pin }
       it "is true" do
         expect(client).to be_pin
       end

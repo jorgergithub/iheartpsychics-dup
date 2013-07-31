@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130726192803) do
+ActiveRecord::Schema.define(version: 20130731131656) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -71,9 +71,9 @@ ActiveRecord::Schema.define(version: 20130726192803) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "encrypted_pin"
     t.integer  "minutes"
     t.string   "stripe_client_id"
+    t.string   "pin"
   end
 
   create_table "clients_psychics", id: false, force: true do |t|

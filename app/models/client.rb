@@ -12,17 +12,15 @@ class Client < ActiveRecord::Base
 
   has_and_belongs_to_many :favorite_psychics, class_name: "Psychic"
 
-  before_save :set_encrypted_pin
-  after_create :update_encrypted_pin
   after_create :add_phone_number
+  before_save  :set_random_pin
 
   delegate :username, :first_name, :last_name, :full_name, :email, to: :user
 
-  attr_accessor :pin, :phone_number
+  attr_accessor :phone_number
 
   def valid_pin?(pin)
-    self.pin = pin
-    self.encrypted_pin == calc_encrypted_pin
+    self.pin == pin
   end
 
   def minutes?
@@ -30,7 +28,7 @@ class Client < ActiveRecord::Base
   end
 
   def pin?
-    encrypted_pin.present?
+    pin.present?
   end
 
   def discount_minutes(m, call)
@@ -114,33 +112,15 @@ class Client < ActiveRecord::Base
   end
 
   def set_random_pin
-    RandomUtils.digits_s(4).tap do |pin|
-      self.pin = pin
+    return if self.pin
+
+    RandomUtils.digits_s(4).tap do |p|
+      self.pin = p
       self.save
     end
   end
 
-  def pin?
-    self.encrypted_pin.present?
-  end
-
   private
-
-  def calc_encrypted_pin
-    Digest::SHA1.hexdigest("#{self.id}|#{self.pin}")
-  end
-
-  def set_encrypted_pin
-    return unless self.pin
-
-    self.encrypted_pin = calc_encrypted_pin
-  end
-
-  def update_encrypted_pin
-    return unless self.pin
-
-    self.update_attributes encrypted_pin: calc_encrypted_pin
-  end
 
   def add_phone_number
     return unless self.phone_number
