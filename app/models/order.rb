@@ -34,6 +34,12 @@ class Order < ActiveRecord::Base
     client.charge(total, "Order ##{id}", order_id: id)
     client.add_minutes(item.package.minutes, self) if item and item.package
     paid!
+
+    send_email
+  end
+
+  def send_email
+    OrderMailer.confirmation_email(self).deliver
   end
 
   def paid!

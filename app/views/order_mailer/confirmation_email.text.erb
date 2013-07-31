@@ -1,0 +1,13 @@
+<%= @client.first_name %>,
+
+This is a receipt for <%= @order.to_desc %> placed on <%= @order.created_at %>
+
+<% @order.items.each do |i| %>
+  <%= i.qty %> x <%= i.description %> = <%= number_to_currency i.total_price %>
+<% end %>
+
+Total: <%= number_to_currency @order.total %>
+
+--
+I Heart Psychic
+http://iheartpsychic.com

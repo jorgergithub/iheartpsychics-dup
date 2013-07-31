@@ -1,0 +1,40 @@
+<p>
+  <%= @client.first_name %>,
+</p>
+
+<p>
+  This is a receipt for <%= @order.to_desc %> placed on <%= @order.created_at %>
+</p>
+
+<p>
+  <table>
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Qty</th>
+        <th>Unit Price</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.items.each do |i| %>
+        <tr>
+          <td><%= i.description %></td>
+          <td><%= i.qty %></td>
+          <td style="text-align: right;"><%= number_to_currency i.unit_price %></td>
+          <td style="text-align: right;"><%= number_to_currency i.total_price %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td style="text-align: right;" colspan=3><b>Total</b></td>
+        <td style="text-align: right;"><b><%= number_to_currency @order.total %></b></td>
+      </tr>
+    </tbody>
+  </table>
+</p>
+
+<p>
+  -- <br>
+  I Heart Psychic
+  http://iheartpsychic.com
+</p>
