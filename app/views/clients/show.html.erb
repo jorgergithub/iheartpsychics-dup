@@ -6,22 +6,6 @@
 </div>
 -->
 
-<% if @pin %>
-  <div class="row-fluid">
-    <div class="span8 offset2">
-      <div class="well pin-container">
-        <p>
-          Welcome <b><%= @client.first_name %></b>!
-          Please take note of your account PIN
-        </p>
-        <div class="pin">
-          <%= @pin %>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
-
 <div class="row-fluid">
   <div class="span12">
     <h3>Account info</h3>
@@ -32,17 +16,21 @@
   <div class="span6">
     <table class="table">
       <tbody>
-          <tr>
-            <td>Minutes</td>
-            <% if @client.minutes? %>
-              <td><%= @client.minutes %></td>
-            <% else %>
-              <td>
-                You have no minutes.
-                <%= link_to "Add minutes now.", new_order_path %>
-              </td>
-            <% end %>
-          </tr>
+        <tr>
+          <td>Your PIN</td>
+          <td><%= @client.pin %></td>
+        </tr>
+        <tr>
+          <td>Minutes</td>
+          <% if @client.minutes? %>
+            <td><%= @client.minutes %></td>
+          <% else %>
+            <td>
+              You have no minutes.
+              <%= link_to "Add minutes now.", new_order_path %>
+            </td>
+          <% end %>
+        </tr>
       </tbody>
     </table>
 
