@@ -22,8 +22,14 @@ jQuery(function($) {
     $('#new_order').submit(function(e) {
       var $form = $(this);
 
+      $('#package-validation-error').text("");
       $('#card-number-validation-error').text("");
       $('#card-cvc-validation-error').text("");
+
+      if ($('[name="order[package_id]"]:checked').length < 1) {
+        $('#package-validation-error').text("please select a package");
+        return false;
+      }
 
       if ($('#order_card_id').is(':checked')) {
         var card_number = $('#order_card_number').val();

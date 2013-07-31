@@ -17,6 +17,9 @@
             <%= pkg.name %>
             for
             <%= number_to_currency(pkg.price) %>
+            <% if pkg = Package.active.reverse.first %>
+              <span id="package-validation-error" class="validation-error"></span>
+            <% end %>
           </label>
         <% end %>
       </div>
