@@ -10,6 +10,8 @@ class Psychic < ActiveRecord::Base
   before_create :assign_extension
   validates_uniqueness_of :extension
 
+  mount_uploader :resume, ResumeUploader
+
   private
 
   def assign_extension

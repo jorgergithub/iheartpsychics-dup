@@ -10,9 +10,35 @@ class PsychicApplication < ActiveRecord::Base
       :has_experience, :experience, :gift, :explain_gift, :age_discovered,
       :reading_style, :why_work, :friends_describe,
       :strongest_weakest_attributes, :how_to_deal_challenging_client,
-      :specialties, :professional_goals, :how_did_you_hear
+      :tools, :specialties, :professional_goals, :how_did_you_hear
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def approve!
+    ActiveRecord::Base.transaction do
+      user = User.new(create_as: "psychic")
+      %w[first_name last_name username password email].each do |f|
+        user.send("#{f}=", send(f))
+      end
+      user.skip_confirmation!
+      user.save!
+
+      psychic = user.psychic
+      fields = %w[address city state zip_code landline_number cellular_number ssn
+                  date_of_birth emergency_contact emergency_contact_number
+                  us_citizen resume has_experience experience gift explain_gift
+                  age_discovered  reading_style why_work friends_describe
+                  strongest_weakest_attributes how_to_deal_challenging_client
+                  specialties professional_goals how_did_you_hear other]
+      fields.each do |f|
+        psychic.send("#{f}=", send(f))
+      end
+      psychic.save!
+
+      self.approved_at = Time.now
+      self.save!
+    end
   end
 end
