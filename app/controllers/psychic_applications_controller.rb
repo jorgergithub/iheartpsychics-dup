@@ -1,8 +1,13 @@
 class PsychicApplicationsController < ApplicationController
   layout "login"
 
+  before_filter :find_psychic_application
+
   def new
     @psychic_application = PsychicApplication.new
+  end
+
+  def show
   end
 
   def create
@@ -20,9 +25,13 @@ class PsychicApplicationsController < ApplicationController
 
   protected
 
+  def find_psychic_application
+    PsychicApplication.find(params[:id]) if params[:id]
+  end
+
   def application_params
     params.require(:psychic_application).permit(:first_name, :last_name,
-      :username, :password,:address, :city, :state,
+      :email, :username, :password,:address, :city, :state,
       :zip_code, :landline_number, :cellular_number, :ssn, :date_of_birth,
       :emergency_contact, :emergency_contact_number, :us_citizen, :resume,
       :has_experience, :experience, :gift, :explain_gift, :age_discovered,

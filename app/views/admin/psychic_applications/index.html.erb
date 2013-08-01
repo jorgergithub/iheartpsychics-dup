@@ -1,0 +1,36 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h3>Psychic Applications</h3>
+
+    <% if @psychic_applications.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Landline #</th>
+            <th>Cell #</th>
+            <th>City</th>
+            <th>State</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @psychic_applications.each do |app| %>
+            <tr>
+              <td><%= link_to app.full_name, admin_psychic_application_path(app) %></td>
+              <td><%= app.email %></td>
+              <td><%= app.landline_number %></td>
+              <td><%= app.cellular_number %></td>
+              <td><%= app.city %></td>
+              <td><%= app.state %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="blank-state">
+        No applications are pending.
+      </div>
+    <% end %>
+  </div>
+</div>

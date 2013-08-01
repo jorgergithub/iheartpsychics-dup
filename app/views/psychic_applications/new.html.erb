@@ -47,8 +47,8 @@
     <%= add_file_field f, @psychic_application, :resume %>
     <%= add_yesno_field f, :has_experience, "Do you have any experience working professionally as a Psychic?" %>
     <%= add_text_area f, :experience, "Please list your Psychic experience below", size: "120x10", class: "input-xxlarge" %>
-    <%= add_text_area f, :experience, "What type of gift do you use to provide readings?", size: "120x10", class: "input-xxlarge" %>
-    <%= add_text_area f, :experience, "Explain your gift.", size: "120x10", class: "input-xxlarge" %>
+    <%= add_text_area f, :gift, "What type of gift do you use to provide readings?", size: "120x10", class: "input-xxlarge" %>
+    <%= add_text_area f, :explain_gift, "Explain your gift.", size: "120x10", class: "input-xxlarge" %>
     <%= add_select f, :psychic_application, :age_discovered, (1..100).map { |n| [n, n]}, "How old were you when you discovered your ability?" %>
     <%= add_text_area f, :reading_style, "What is your reading style?", size: "120x10", class: "input-xxlarge" %>
     <%= add_text_area f, :why_work, "Why do you want to work for IHP?", size: "120x10", class: "input-xxlarge" %>
