@@ -3,6 +3,10 @@ class Admin::PsychicsController < AuthorizedController
 
   def index
     @psychics = Psychic.includes(:user).order("users.first_name, users.last_name")
+    if query = params[:q]
+      @psychics = @psychics.where(
+        "CONCAT(users.first_name, ' ', users.last_name) LIKE ?", "%#{query}%")
+    end
   end
 
   def edit
