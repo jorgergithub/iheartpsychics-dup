@@ -1,0 +1,41 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h3>Psychics</h3>
+
+    <% if @psychics.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Extension</th>
+            <th>City</th>
+            <th>State</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @psychics.each do |p| %>
+            <tr>
+              <td>
+                <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_admin_psychic_path(p) %>
+                <%= link_to '<i class="icon-remove"></i>'.html_safe, [:admin, p], data: {confirm: "Are you sure?" }, :method => "delete" %>
+              </td>
+              <td><%= link_to p.full_name, edit_admin_psychic_path(p) %></td>
+              <td><%= p.email %></td>
+              <td><%= p.extension %></td>
+              <td><%= p.city %></td>
+              <td><%= p.state %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="blank-state">
+        No psychics added yet.
+        <%= link_to "Add one now.", new_admin_psychic_path %>
+      </div>
+    <% end %>
+    <%= link_to "Add new psychic", new_admin_psychic_path, class: "btn btn-small" %>
+  </div>
+</div>
