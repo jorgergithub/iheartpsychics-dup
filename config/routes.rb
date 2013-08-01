@@ -4,7 +4,9 @@ IHeartPsychics::Application.routes.draw do
   namespace :admin do
     resource :admin
     resource :dashboard
+
     resources :clients
+    resources :manager_directors
     resources :packages
 
     get "/debug", to: "debug#index"

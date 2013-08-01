@@ -1,0 +1,33 @@
+<div class="row-fluid">
+  <div class="span6">
+    <h3>Manager Directors</h3>
+
+    <% if @manager_directors.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @manager_directors.each do |md| %>
+            <tr>
+              <td>
+                <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_admin_manager_director_path(md) %>
+                <%= link_to '<i class="icon-remove"></i>'.html_safe, [:admin, md], data: {confirm: "Are you sure?" }, :method => "delete" %>
+              </td>
+              <td><%= link_to md.full_name, edit_admin_manager_director_path(md) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="blank-state">
+        No manage directors added yet.
+        <%= link_to "Add one now.", new_admin_manager_director_path %>
+      </div>
+    <% end %>
+    <%= link_to "Add new manager director", new_admin_manager_director_path, class: "btn btn-small" %>
+  </div>
+</div>

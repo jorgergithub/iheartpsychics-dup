@@ -11,6 +11,14 @@ describe User do
     it "creats a client with a phone number" do
       user.client.phones.first.number.should == "+13054502983"
     end
+
+    it "creates the user with client role" do
+      expect(user.role).to eql("client")
+    end
+
+    it "returns true to client?" do
+      expect(user).to be_client
+    end
   end
 
   describe "creating a psychic" do
@@ -18,6 +26,14 @@ describe User do
 
     it "creates the psychic" do
       expect(user.psychic).to_not be_nil
+    end
+
+    it "creates the user with psychic role" do
+      expect(user.role).to eql("psychic")
+    end
+
+    it "returns true to psychic?" do
+      expect(user).to be_psychic
     end
   end
 

@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  before_create :build_client_or_psychic
+  before_create :build_relation
 
   attr_accessor :create_as
   attr_accessor :phone_number
@@ -28,12 +28,14 @@ class User < ActiveRecord::Base
 
   has_one :admin   , dependent: :destroy
 
+  scope :manager_directors, -> { where("role = ?", "manager_director")}
+
   def client?
-    client.present?
+    role == "client"
   end
 
   def psychic?
-    psychic.present?
+    role == "psychic"
   end
 
   def rep?
@@ -42,6 +44,10 @@ class User < ActiveRecord::Base
 
   def admin?
     admin.present?
+  end
+
+  def manager_director?
+    role == "manager_director"
   end
 
   def full_name
@@ -69,7 +75,7 @@ class User < ActiveRecord::Base
 
   protected
 
-  def build_client_or_psychic
+  def build_relation
     if create_as == 'client'
       self.build_client(phone_number: phone_number)
     elsif create_as == 'psychic'
@@ -79,5 +85,6 @@ class User < ActiveRecord::Base
     elsif create_as == 'admin'
       self.build_admin
     end
+    self.role = create_as
   end
 end
