@@ -18,3 +18,4 @@
 .powenv
 
 config/database.yml
+public/uploads

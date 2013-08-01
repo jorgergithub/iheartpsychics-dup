@@ -54,7 +54,11 @@ IHeartPsychics::Application.routes.draw do
   resource :customer_service_representative
 
   resources :orders
-  resources :psychic_applications
+  resources :psychic_applications do
+    collection do
+      get 'confirmation', action: :confirmation, as: :confirmation
+    end
+  end
 
   get "/dashboard", to: "home#show", as: "dashboard"
 
