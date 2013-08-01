@@ -54,6 +54,7 @@ IHeartPsychics::Application.routes.draw do
   resource :customer_service_representative
 
   resources :orders
+  resources :psychic_applications
 
   get "/dashboard", to: "home#show", as: "dashboard"
 

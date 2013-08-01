@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130731131656) do
+ActiveRecord::Schema.define(version: 20130801013216) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -130,12 +130,76 @@ ActiveRecord::Schema.define(version: 20130731131656) do
     t.boolean  "phone"
   end
 
+  create_table "psychic_applications", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "username"
+    t.string   "password"
+    t.string   "email"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
+    t.string   "landline_number"
+    t.string   "cellular_number"
+    t.string   "ssn"
+    t.string   "date_of_birth"
+    t.string   "emergency_contact"
+    t.string   "emergency_contact_number"
+    t.boolean  "us_citizen"
+    t.boolean  "has_experience"
+    t.text     "experience"
+    t.string   "gift"
+    t.text     "explain_gift"
+    t.integer  "age_discovered"
+    t.text     "reading_style"
+    t.text     "why_work"
+    t.text     "friends_describe"
+    t.text     "strongest_weakest_attributes"
+    t.text     "how_to_deal_challenging_client"
+    t.text     "specialties"
+    t.text     "tools"
+    t.text     "professional_goals"
+    t.string   "how_did_you_hear"
+    t.text     "other"
+    t.datetime "approved_at"
+    t.integer  "psychic_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "psychics", force: true do |t|
     t.integer  "user_id"
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "extension"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
+    t.string   "landline_number"
+    t.string   "cellular_number"
+    t.string   "ssn"
+    t.string   "date_of_birth"
+    t.string   "emergency_contact"
+    t.string   "emergency_contact_number"
+    t.boolean  "us_citizen"
+    t.boolean  "has_experience"
+    t.text     "experience"
+    t.string   "gift"
+    t.text     "explain_gift"
+    t.integer  "age_discovered"
+    t.text     "reading_style"
+    t.text     "why_work"
+    t.text     "friends_describe"
+    t.text     "strongest_weakest_attributes"
+    t.text     "how_to_deal_challenging_client"
+    t.text     "tools"
+    t.text     "specialties"
+    t.text     "professional_goals"
+    t.string   "how_did_you_hear"
+    t.text     "other"
   end
 
   add_index "psychics", ["extension"], name: "index_psychics_on_extension", unique: true, using: :btree
