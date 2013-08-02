@@ -1,5 +1,6 @@
 class CustomerServiceRepresentative < ActiveRecord::Base
   belongs_to :user
+  delegate :username, :first_name, :last_name, :full_name, :email, to: :user
 
   scope :available, -> { where("available") }
 

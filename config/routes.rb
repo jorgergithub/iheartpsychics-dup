@@ -6,10 +6,11 @@ IHeartPsychics::Application.routes.draw do
     resource :dashboard
 
     resources :clients
+    resources :customer_service_representatives
     resources :manager_directors
     resources :packages
-    resources :psychics
     resources :psychic_applications
+    resources :psychics
 
     get "/debug", to: "debug#index"
   end
