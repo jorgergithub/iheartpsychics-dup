@@ -7,15 +7,15 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 admin = User.create(first_name: 'Website', last_name: 'Admin',
-                    username: 'admin', email: 'admin@iheartpsychics.com',
+                    username: 'admin', email: 'admin@iheartpsychics.co',
                     password: 'ipass123', create_as: 'admin', confirmed_at: Time.now)
 
 psy1 = User.create(first_name: 'Unfortunate', last_name: 'Teller',
-                   username: 'ufteller', email: 'ufteller@iheartpsychics.com',
+                   username: 'ufteller', email: 'ufteller@iheartpsychics.co',
                    password: 'ipass123', create_as: 'psychic', confirmed_at: Time.now)
 
 psy2 = User.create(first_name: 'Carlos', last_name: 'Taborda',
-                   username: 'ctaborda', email: 'ctaborda@iheartpsychics.com',
+                   username: 'ctaborda', email: 'ctaborda@iheartpsychics.co',
                    password: 'ipass123', create_as: 'psychic', confirmed_at: Time.now)
 
 psy2.psychic.update_attributes phone: "+13054502995"

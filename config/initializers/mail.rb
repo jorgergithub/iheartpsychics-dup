@@ -2,7 +2,7 @@ unless Rails.env.development?
   ActionMailer::Base.smtp_settings = {
     :user_name => 'iheartpsychics',
     :password => 'iheart123',
-    :domain => 'iheartpsychics.com',
+    :domain => 'iheartpsychics.co',
     :address => 'smtp.sendgrid.net',
     :port => 587,
     :authentication => :plain,
