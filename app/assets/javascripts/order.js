@@ -17,7 +17,7 @@ var stripeResponseHandler = function(status, response) {
   }
 };
 
-jQuery(function($) {
+$(document).ready(function() {
   if ($('#new_order').length) {
     $('#new_order').submit(function(e) {
       var $form = $(this);

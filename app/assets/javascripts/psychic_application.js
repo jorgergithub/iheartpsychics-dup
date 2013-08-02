@@ -1,4 +1,4 @@
-jQuery(function($) {
+$(document).ready(function() {
   if (!$('body.psychic_applications').length) {
     return;
   }
