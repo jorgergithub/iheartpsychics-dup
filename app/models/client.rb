@@ -120,6 +120,12 @@ class Client < ActiveRecord::Base
     end
   end
 
+  def reset_pin(pin)
+    self.pin = pin
+    self.save
+    ClientMailer.reset_pin_email(self).deliver
+  end
+
   private
 
   def add_phone_number

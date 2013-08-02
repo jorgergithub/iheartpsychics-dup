@@ -1,0 +1,13 @@
+Hi <%= @client.first_name %>,
+
+Your PIN has just been reset to <%= @client.pin %>.
+
+You will need to enter this PIN number every time you
+call a psychic.
+
+You can always <%= link_to "reset your PIN online", reset_pin_client_url %>
+
+Best,
+
+I Heart Psychics<br/>
+<%= link_to "http://iheartpsychics.co", "http://iheartpsychics.co" %>
