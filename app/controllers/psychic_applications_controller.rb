@@ -28,6 +28,6 @@ class PsychicApplicationsController < ApplicationController
       :has_experience, :experience, :gift, :explain_gift, :age_discovered,
       :reading_style, :why_work, :friends_describe,
       :strongest_weakest_attributes, :how_to_deal_challenging_client,
-      :specialties, :professional_goals, :how_did_you_hear, :other)
+      :specialties, :tools, :professional_goals, :how_did_you_hear, :other)
   end
 end
