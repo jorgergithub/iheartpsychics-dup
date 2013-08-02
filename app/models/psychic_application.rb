@@ -12,6 +12,8 @@ class PsychicApplication < ActiveRecord::Base
       :strongest_weakest_attributes, :how_to_deal_challenging_client,
       :tools, :specialties, :professional_goals, :how_did_you_hear
 
+  after_create :send_confirmation_email
+
   def full_name
     "#{first_name} #{last_name}"
   end
@@ -51,5 +53,11 @@ class PsychicApplication < ActiveRecord::Base
 
       PsychicMailer.approved_email(psychic).deliver
     end
+  end
+
+  protected
+
+  def send_confirmation_email
+    PsychicMailer.confirmation_email(self).deliver
   end
 end
