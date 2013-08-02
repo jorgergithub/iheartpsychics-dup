@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130801225309) do
+ActiveRecord::Schema.define(version: 20130802005324) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 20130801225309) do
     t.string   "landline_number"
     t.string   "cellular_number"
     t.string   "ssn"
-    t.string   "date_of_birth"
+    t.date     "date_of_birth"
     t.string   "emergency_contact"
     t.string   "emergency_contact_number"
     t.boolean  "us_citizen"
@@ -182,7 +182,7 @@ ActiveRecord::Schema.define(version: 20130801225309) do
     t.string   "landline_number"
     t.string   "cellular_number"
     t.string   "ssn"
-    t.string   "date_of_birth"
+    t.date     "date_of_birth"
     t.string   "emergency_contact"
     t.string   "emergency_contact_number"
     t.boolean  "us_citizen"

@@ -23,7 +23,19 @@
   <%= add_text_field f, :landline_number %>
   <%= add_text_field f, :cellular_number %>
   <%= add_text_field f, :ssn, "SS#", data: {mask: "999-99-9999"} %>
-  <%= add_text_field f, :date_of_birth %>
+
+  <div class="control-group">
+    <%= f.label :date_of_birth, nil, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.date_select :date_of_birth,
+            :start_year => Time.now.year,
+            :end_year => 1900,
+            :use_short_month => true,
+            :order => [:month, :day, :year],
+            :with_css_classes => true %>
+    </div>
+  </div>
+
   <%= add_text_field f, :emergency_contact %>
   <%= add_text_field f, :emergency_contact_number, "Emergency number" %>
 
