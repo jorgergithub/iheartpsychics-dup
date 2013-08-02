@@ -1,7 +1,7 @@
 class PsychicApplication < ActiveRecord::Base
   mount_uploader :resume, ResumeUploader
 
-  scope :pending, -> { where("approved_at IS NULL") }
+  scope :pending, -> { where("approved_at IS NULL AND declined_at IS NULL") }
 
   validates_presence_of :first_name, :last_name, :username, :password,
       :email, :address, :city, :state,
@@ -14,6 +14,15 @@ class PsychicApplication < ActiveRecord::Base
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def decline!
+    ActiveRecord::Base.transaction do
+      self.declined_at = Time.now
+      self.save!
+
+      PsychicMailer.declined_email(self).deliver
+    end
   end
 
   def approve!
@@ -39,6 +48,8 @@ class PsychicApplication < ActiveRecord::Base
 
       self.approved_at = Time.now
       self.save!
+
+      PsychicMailer.approved_email(psychic).deliver
     end
   end
 end

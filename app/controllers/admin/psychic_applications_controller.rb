@@ -13,6 +13,10 @@ class Admin::PsychicApplicationsController < AuthorizedController
       @psychic_application.approve!
       redirect_to admin_psychic_applications_path,
         notice: "Psychic approved successfully."
+    elsif params[:commit] == "Decline"
+      @psychic_application.decline!
+      redirect_to admin_psychic_applications_path,
+        notice: "Psychic declined successfully."
     end
   end
 

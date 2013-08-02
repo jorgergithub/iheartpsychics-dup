@@ -1,5 +1,5 @@
 class ClientMailer < ActionMailer::Base
-  default from: "noreply@iheartpsychics.com"
+  default from: "noreply@iheartpsychics.co"
 
   def pin_email(client, pin)
     @client = client
