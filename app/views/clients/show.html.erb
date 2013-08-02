@@ -178,15 +178,19 @@
           </tr>
         </thead>
         <tbody>
-          <% @client.credits.by_date.reverse.each do |call| %>
+          <% @client.credits.by_date.reverse.each do |credit| %>
             <tr>
-              <td><%= call.created_at %></td>
-              <td><%= call.minutes %></td>
+              <td><%= credit.created_at %></td>
+              <td><%= credit.minutes %></td>
               <td>
-                <% if call.target %>
-                  <%= link_to call.description, call.target %>
+                <% if credit.target %>
+                  <% if credit.target.is_a?(ClientCall) %>
+                    <%= credit.description %>
+                  <% else %>
+                    <%= link_to credit.description, credit.target %>
+                  <% end %>
                 <% else %>
-                  <%= call.description %>
+                  <%= credit.description %>
                 <% end %>
               </td>
             </tr>
