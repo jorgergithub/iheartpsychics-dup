@@ -2,7 +2,7 @@ class Admin::PsychicApplicationsController < AuthorizedController
   before_filter :find_psychic_application
 
   def index
-    @psychic_applications = PsychicApplication.pending
+    @psychic_applications = PsychicApplication.pending.order("created_at")
   end
 
   def show

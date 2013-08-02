@@ -12,6 +12,7 @@
             <th>Cell #</th>
             <th>City</th>
             <th>State</th>
+            <th>Submitted</th>
           </tr>
         </thead>
         <tbody>
@@ -23,6 +24,7 @@
               <td><%= app.cellular_number %></td>
               <td><%= app.city %></td>
               <td><%= app.state %></td>
+              <td><%=l app.created_at, format: :short %></td>
             </tr>
           <% end %>
         </tbody>
