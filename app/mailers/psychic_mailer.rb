@@ -1,18 +1,18 @@
 class PsychicMailer < ActionMailer::Base
-  default from: "noreply@iheartpsychic.co"
+  default from: "noreply@iheartpsychics.co"
 
   def confirmation_email(psychic)
     @psychic = psychic
-    mail(to: psychic.email, subject: "Application to I Heart Psychic was received")
+    mail(to: psychic.email, subject: "Application to I Heart Psychics was received")
   end
 
   def approved_email(psychic)
     @psychic = psychic
-    mail(to: psychic.email, subject: "Your application to I Heart Psychic was approved")
+    mail(to: psychic.email, subject: "Your application to I Heart Psychics was approved")
   end
 
   def declined_email(psychic)
     @psychic = psychic
-    mail(to: psychic.email, subject: "Your application to I Heart Psychic was declined")
+    mail(to: psychic.email, subject: "Your application to I Heart Psychics was declined")
   end
 end
