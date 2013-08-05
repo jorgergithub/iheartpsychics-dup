@@ -5,7 +5,7 @@ class PsychicApplication < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name, :username, :password,
       :email, :address, :city, :state,
-      :zip_code, :landline_number, :cellular_number, :ssn, :date_of_birth,
+      :zip_code, :phone, :cellular_number, :ssn, :date_of_birth,
       :emergency_contact, :emergency_contact_number, :us_citizen, :resume,
       :has_experience, :experience, :gift, :explain_gift, :age_discovered,
       :reading_style, :why_work, :friends_describe,
@@ -37,7 +37,7 @@ class PsychicApplication < ActiveRecord::Base
       user.save!
 
       psychic = user.psychic
-      fields = %w[address city state zip_code landline_number cellular_number ssn
+      fields = %w[address city state zip_code phone cellular_number ssn
                   date_of_birth emergency_contact emergency_contact_number
                   us_citizen resume has_experience experience gift explain_gift
                   age_discovered  reading_style why_work friends_describe

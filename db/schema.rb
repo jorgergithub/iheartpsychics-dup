@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130802012439) do
+ActiveRecord::Schema.define(version: 20130805222121) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -140,7 +140,6 @@ ActiveRecord::Schema.define(version: 20130802012439) do
     t.string   "city"
     t.string   "state"
     t.string   "zip_code"
-    t.string   "landline_number"
     t.string   "cellular_number"
     t.string   "ssn"
     t.date     "date_of_birth"
@@ -168,6 +167,7 @@ ActiveRecord::Schema.define(version: 20130802012439) do
     t.datetime "updated_at"
     t.string   "resume"
     t.datetime "declined_at"
+    t.string   "phone"
   end
 
   create_table "psychics", force: true do |t|
@@ -180,7 +180,6 @@ ActiveRecord::Schema.define(version: 20130802012439) do
     t.string   "city"
     t.string   "state"
     t.string   "zip_code"
-    t.string   "landline_number"
     t.string   "cellular_number"
     t.string   "ssn"
     t.date     "date_of_birth"
