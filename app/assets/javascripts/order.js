@@ -60,6 +60,11 @@ $(document).ready(function() {
       $form.find('button').prop('disabled', true);
       $('.cancel').hide();
 
+      // If user is using an existing card
+      if (!$('#order_card_id').is(':checked')) {
+        return true;
+      }
+
       Stripe.createToken($form, stripeResponseHandler);
 
       // Prevent the form from submitting with the default action
