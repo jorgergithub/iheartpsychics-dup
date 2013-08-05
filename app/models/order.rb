@@ -26,16 +26,18 @@ class Order < ActiveRecord::Base
   def pay
     raise OrderError, "order already paid" if paid?
 
-    if stripe_token
-      client.add_card_from_token(stripe_token)
-      self.stripe_token = nil
+    transaction do
+      if stripe_token
+        client.add_card_from_token(stripe_token)
+        self.stripe_token = nil
+      end
+
+      client.charge(total, "Order ##{id}", order_id: id)
+      client.add_minutes(item.package.minutes, self) if item and item.package
+      paid!
+
+      send_email
     end
-
-    client.charge(total, "Order ##{id}", order_id: id)
-    client.add_minutes(item.package.minutes, self) if item and item.package
-    paid!
-
-    send_email
   end
 
   def send_email
