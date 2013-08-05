@@ -51,7 +51,7 @@ class PsychicApplication < ActiveRecord::Base
       self.approved_at = Time.now
       self.save!
 
-      PsychicMailer.approved_email(psychic).deliver
+      PsychicMailer.approved_email(psychic, self).deliver
     end
   end
 
