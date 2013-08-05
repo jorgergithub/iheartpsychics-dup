@@ -11,7 +11,7 @@ gem 'jbuilder'      , '~> 1.2'
 
 gem 'bootstrap-sass'    , '~> 2.3.2.0'
 gem 'carrierwave'       , '~> 0.9.0'
-gem 'devise'            , '~> 3.0.0'
+gem 'devise'            , '~> 3.0.1'
 gem 'stripe'            , :git => 'https://github.com/stripe/stripe-ruby'
 gem 'twilio-ruby'       , '~> 3.10.0'
 gem 'unicorn'           , '~> 4.6.3'
