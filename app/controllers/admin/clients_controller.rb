@@ -13,8 +13,8 @@ class Admin::ClientsController < AuthorizedController
   end
 
   def create
-    @client = Client.new(client_params)
-    if @client.save
+    @user = Client.new(user_params)
+    if @user.save
       redirect_to admin_clients_path, notice: "New client was successfully created."
     else
       render action: "show"
@@ -22,7 +22,7 @@ class Admin::ClientsController < AuthorizedController
   end
 
   def update
-    if @client.update_attributes(client_params) and @user.update_attributes(user_params)
+    if @user.update_attributes(user_params)
       redirect_to admin_clients_path, notice: "Client was successfully updated."
     else
       render action: "show"
@@ -36,11 +36,8 @@ class Admin::ClientsController < AuthorizedController
     @user = @client.user if @client
   end
 
-  def client_params
-    params.require(:client).permit(:minutes)
-  end
-
   def user_params
-    params.require(:client).permit(:first_name, :last_name, :username, :email)
+    params.require(:user).permit(:first_name, :last_name, :username, :email,
+      client_attributes: [:minutes])
   end
 end
