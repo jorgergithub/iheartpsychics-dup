@@ -4,8 +4,10 @@ class Admin::PsychicsController < AuthorizedController
   def index
     @psychics = Psychic.includes(:user).order("users.first_name, users.last_name")
     if query = params[:q]
-      @psychics = @psychics.where(
-        "CONCAT(users.first_name, ' ', users.last_name) LIKE ?", "%#{query}%")
+      @psychics = @psychics.where(<<-EOQ, query: "%#{query}%")
+        CONCAT(users.first_name, ' ', users.last_name) LIKE :query OR
+        users.username LIKE :query
+      EOQ
     end
   end
 
@@ -32,7 +34,7 @@ class Admin::PsychicsController < AuthorizedController
   def user_params
     params.require(:user).permit(
       :first_name, :last_name, :username, :email, :password,
-      psychic_attributes: [ :extension, :address, :city, :state,
+      psychic_attributes: [ :extension, :address, :city, :state, :featured,
       :zip_code, :phone, :cellular_number, :ssn, :date_of_birth,
       :emergency_contact, :emergency_contact_number, :us_citizen, :resume,
       :has_experience, :experience, :gift, :explain_gift, :age_discovered,

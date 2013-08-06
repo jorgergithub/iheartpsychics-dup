@@ -29,6 +29,17 @@ module FormHelper
     end
   end
 
+  def add_checkbox(form, field_name, label=nil, options={})
+    content_tag(:div, class: "control-group") do
+      content_tag(:div, class: "controls") do
+        content_tag(:label, class: "checkbox") do
+          result = form.check_box field_name
+          result << (label || field_name.to_s.humanize)
+        end
+      end
+    end
+  end
+
   def add_yesno_field(form, field_name, label=nil, options={})
     add_field(form, field_name, label, options) do
       result = content_tag(:label, class: "radio") do

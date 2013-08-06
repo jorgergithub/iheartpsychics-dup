@@ -20,6 +20,8 @@
     <% end %>
 
     <%= pf.fields_for :psychic do |f| %>
+      <%= add_checkbox f, :featured %>
+
       <legend>Address and Contact Information</legend>
 
       <%= add_text_field f, :address, "Street Address", class: "input-xxlarge" %>

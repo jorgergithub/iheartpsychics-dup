@@ -17,11 +17,14 @@
         <thead>
           <tr>
             <th></th>
+            <th>Username</th>
             <th>Name</th>
             <th>Email</th>
             <th>Extension</th>
             <th>City</th>
             <th>State</th>
+            <th>Created</th>
+            <th>Featured?</th>
           </tr>
         </thead>
         <tbody>
@@ -31,11 +34,18 @@
                 <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_admin_psychic_path(p) %>
                 <%= link_to '<i class="icon-remove"></i>'.html_safe, [:admin, p], data: {confirm: "Are you sure?" }, :method => "delete" %>
               </td>
-              <td><%= link_to p.full_name, edit_admin_psychic_path(p) %></td>
+              <td><%= link_to p.username, edit_admin_psychic_path(p) %></td>
+              <td><%= p.full_name %></td>
               <td><%= p.email %></td>
               <td><%= p.extension %></td>
               <td><%= p.city %></td>
               <td><%= p.state %></td>
+              <td><%=l p.created_at, format: :short %></td>
+              <td>
+                <% if p.featured? %>
+                  <i class="icon-ok"></i>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>
