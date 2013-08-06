@@ -13,37 +13,31 @@ class Admin::PsychicsController < AuthorizedController
   end
 
   def update
-    ActiveRecord::Base.transaction do
-      @user = @psychic.user
-      if @user.update_attributes(user_params)
-        if @psychic.update_attributes(psychic_params)
-          redirect_to admin_psychics_path, notice: "Psychic was successfully updated."
-        else
-          render action: "edit"
-        end
-      else
-        render action: "edit"
-      end
+    if @user.update_attributes(user_params)
+      redirect_to admin_psychics_path, notice: "Psychic was successfully updated."
+    else
+      render action: "edit"
     end
   end
 
   protected
 
   def find_psychic
-    @psychic = Psychic.find(params[:id]) if params[:id]
+    return unless params[:id]
+
+    @psychic = Psychic.find(params[:id])
+    @user = @psychic.user
   end
 
   def user_params
-    params.require(:psychic).permit(:first_name, :last_name, :username, :email)
-  end
-
-  def psychic_params
-    params.require(:psychic).permit(:extension, :address, :city, :state,
+    params.require(:user).permit(
+      :first_name, :last_name, :username, :email, :password,
+      psychic_attributes: [ :extension, :address, :city, :state,
       :zip_code, :phone, :cellular_number, :ssn, :date_of_birth,
       :emergency_contact, :emergency_contact_number, :us_citizen, :resume,
       :has_experience, :experience, :gift, :explain_gift, :age_discovered,
       :reading_style, :why_work, :friends_describe,
       :strongest_weakest_attributes, :how_to_deal_challenging_client,
-      :specialties, :professional_goals, :how_did_you_hear, :other)
+      :specialties, :tools, :professional_goals, :how_did_you_hear, :other])
   end
 end

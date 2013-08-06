@@ -44,13 +44,13 @@ module FormHelper
 
   def add_select(form, object, field_name, values, label=nil, options={})
     add_field(form, field_name, label, options) do
-      select(object, field_name, values, include_blank: true)
+      form.select(field_name, values, include_blank: true)
     end
   end
 
   def add_state_select(form, object, field_name, label=nil, options={})
     add_field(form, field_name, label, options) do
-      select(object, field_name, us_states, include_blank: true)
+      form.select(field_name, us_states, include_blank: true)
     end
   end
 

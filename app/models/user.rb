@@ -28,6 +28,11 @@ class User < ActiveRecord::Base
 
   has_one :admin   , dependent: :destroy
 
+  accepts_nested_attributes_for :psychic
+  accepts_nested_attributes_for :client
+  accepts_nested_attributes_for :rep
+  accepts_nested_attributes_for :admin
+
   scope :manager_directors, -> { where("role = ?", "manager_director")}
 
   def client?
