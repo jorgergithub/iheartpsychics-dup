@@ -57,4 +57,27 @@ describe ClientCall do
       expect { call.send_statistics }.to change { Sidekiq::Extensions::DelayedMailer.jobs.size }.by(2)
     end
   end
+
+  describe "#duration_str" do
+    context "when minutes > 1" do
+      let(:call) { ClientCall.new(duration: 2) }
+      it "returns 'minutes'" do
+        expect(call.duration_str).to eql("2 minutes")
+      end
+    end
+
+    context "when minutes = 1" do
+      let(:call) { ClientCall.new(duration: 1) }
+      it "returns 'minute'" do
+        expect(call.duration_str).to eql("1 minute")
+      end
+    end
+
+    context "when minutes = 0" do
+      let(:call) { ClientCall.new(duration: 0) }
+      it "returns 'no minutes'" do
+        expect(call.duration_str).to eql("no minutes")
+      end
+    end
+  end
 end

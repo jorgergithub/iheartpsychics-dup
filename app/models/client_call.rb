@@ -90,6 +90,10 @@ class ClientCall < ActiveRecord::Base
     end
   end
 
+  def duration_str
+    "#{duration == 0 ? "no" : duration} #{duration == 1 ? "minute" : "minutes"}"
+  end
+
   private
 
   def calculate_duration
