@@ -68,12 +68,19 @@ class ClientCall < ActiveRecord::Base
 
     attributes.each { |a| self.send("#{a}=", twilio_call.send(a)) }
 
-    self.duration = CallDurationRounder.new(twilio_call.duration).round
-    self.client.discount_minutes(duration, self)
+    transaction do
+      self.duration = CallDurationRounder.new(twilio_call.duration).round
+      self.client.discount_minutes(duration, self)
 
-    self.original_duration = twilio_call.duration
-    self.processed = true
-    self.save
+      self.original_duration = twilio_call.duration
+      self.processed = true
+      self.save
+      self.send_statistics
+    end
+  end
+
+  def send_statistics
+    ClientCallMailer.delay.client_call_statistics(self)
   end
 
   def self.process_calls

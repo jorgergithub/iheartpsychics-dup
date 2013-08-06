@@ -1,23 +1,25 @@
 require 'spec_helper'
 
 describe ClientCall do
+  let!(:client)         { FactoryGirl.create(:client) }
+  let!(:call)           { FactoryGirl.create(:client_call, client: client) }
+
   describe ".process_calls" do
-    let!(:client)         { FactoryGirl.create(:client) }
     let!(:processed_call) { FactoryGirl.create(:processed_call, client: client) }
-    let!(:call)           { FactoryGirl.create(:client_call, client: client) }
 
     before do
       Rails.configuration.twilio = {account_sid: "account", auth_token: "token"}
 
+      call.stub(:send_statistics)
+      ClientCall.stub(unprocessed: [call])
+
       VCR.use_cassette("twilio-call") do
         ClientCall.process_calls
       end
-
-      call.reload
     end
 
     it "processes unprocessed calls" do
-      expect(call).to be_processed
+      expect(ClientCall.find(call.id)).to be_processed
     end
 
     it "rounds duration" do
@@ -43,6 +45,16 @@ describe ClientCall do
     it "discount duration from client minutes" do
       client.reload
       expect(client.minutes).to eql(58)
+    end
+
+    it "calls send_statistics" do
+      expect(call).to have_received(:send_statistics)
+    end
+  end
+
+  describe "#send_statistics" do
+    it "sends call statistics to the client" do
+      expect { call.send_statistics }.to change { Sidekiq::Extensions::DelayedMailer.jobs.size }.by(2)
     end
   end
 end
