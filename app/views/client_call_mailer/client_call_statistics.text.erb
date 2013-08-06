@@ -1,6 +1,6 @@
 Dear <%= @client.first_name %>,
 
-You just finished a <%= @call.duration_str %> minutes talk with <%= @psychic.full_name %>.
+You just finished a <%= @call.duration_str %> talk with <%= @psychic.full_name %>.
 
 <% if @client.minutes > 0 -%>
 You have a remaining balance of <%= @client.minutes_str %> in your account.
