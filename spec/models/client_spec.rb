@@ -394,4 +394,27 @@ describe Client do
       end
     end
   end
+
+  describe "#minutes_str" do
+    context "when minutes > 1" do
+      let(:client) { Client.new(minutes: 2) }
+      it "returns 'minutes'" do
+        expect(client.minutes_str).to eql("2 minutes")
+      end
+    end
+
+    context "when minutes = 1" do
+      let(:client) { Client.new(minutes: 1) }
+      it "returns 'minute'" do
+        expect(client.minutes_str).to eql("1 minute")
+      end
+    end
+
+    context "when minutes = 0" do
+      let(:client) { Client.new(minutes: 0) }
+      it "returns 'no minutes'" do
+        expect(client.minutes_str).to eql("no minutes")
+      end
+    end
+  end
 end

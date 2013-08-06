@@ -126,6 +126,10 @@ class Client < ActiveRecord::Base
     ClientMailer.delay.reset_pin_email(self)
   end
 
+  def minutes_str
+    "#{minutes == 0 ? "no" : minutes} #{minutes == 1 ? "minute" : "minutes"}"
+  end
+
   private
 
   def add_phone_number

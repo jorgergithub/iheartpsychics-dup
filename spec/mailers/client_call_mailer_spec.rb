@@ -32,6 +32,14 @@ describe ClientCallMailer do
       end
     end
 
+    context "when client 1 minute left" do
+      before { client.minutes = 1 }
+      it "tells how much minutes are left in singular" do
+        body = "You have a remaining balance of 1 minute in your account."
+        expect(email.body.encoded).to include(body)
+      end
+    end
+
     context "when client has no minutes left" do
       before { client.minutes = 0 }
       it "informs the client that he's out of minutes" do

@@ -7,7 +7,7 @@ Dear <%= @client.first_name %>,
 
 <% if @client.minutes > 0 %>
   <p>
-    You have a remaining balance of <%= @client.minutes %> minutes in your account.
+    You have a remaining balance of <%= @client.minutes_str %> in your account.
   </p>
 <% else %>
   <p>
