@@ -15,6 +15,9 @@ class HomeController < AuthorizedController
     elsif current_user.manager_director?
       redirect_to admin_psychic_applications_path
       return
+    elsif current_user.website_admin?
+      redirect_to admin_dashboard_path
+      return
     end
   end
 end

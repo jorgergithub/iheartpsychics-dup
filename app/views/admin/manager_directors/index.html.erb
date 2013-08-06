@@ -1,5 +1,5 @@
 <div class="row-fluid">
-  <div class="span6">
+  <div class="span8">
     <h3>Manager Directors</h3>
 
     <% if @manager_directors.any? %>
@@ -7,17 +7,23 @@
         <thead>
           <tr>
             <th></th>
+            <th>Username</th>
             <th>Name</th>
+            <th>Email</th>
+            <th>Created</th>
           </tr>
         </thead>
         <tbody>
           <% @manager_directors.each do |md| %>
             <tr>
               <td>
-                <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_admin_manager_director_path(md) %>
+                <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_admin_website_admin_path(md) %>
                 <%= link_to '<i class="icon-remove"></i>'.html_safe, [:admin, md], data: {confirm: "Are you sure?" }, :method => "delete" %>
               </td>
-              <td><%= link_to md.full_name, edit_admin_manager_director_path(md) %></td>
+              <td><%= link_to md.username, edit_admin_website_admin_path(md) %></td>
+              <td><%= md.full_name %></td>
+              <td><%= md.email %></td>
+              <td><%=l md.created_at, format: :short %></td>
             </tr>
           <% end %>
         </tbody>

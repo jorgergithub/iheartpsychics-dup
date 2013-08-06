@@ -33,7 +33,8 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :rep
   accepts_nested_attributes_for :admin
 
-  scope :manager_directors, -> { where("role = ?", "manager_director")}
+  scope :manager_directors, -> { where("role = ?", "manager_director") }
+  scope :website_admins,    -> { where("role = ?", "website_admin") }
 
   def client?
     role == "client"
@@ -53,6 +54,10 @@ class User < ActiveRecord::Base
 
   def manager_director?
     role == "manager_director"
+  end
+
+  def website_admin?
+    role == "website_admin"
   end
 
   def full_name
