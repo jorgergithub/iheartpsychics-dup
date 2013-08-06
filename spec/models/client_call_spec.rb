@@ -53,7 +53,7 @@ describe ClientCall do
   end
 
   describe "#send_statistics" do
-    it "sends call statistics to the client" do
+    it "sends call statistics to the client and to the psychic" do
       expect { call.send_statistics }.to change { Sidekiq::Extensions::DelayedMailer.jobs.size }.by(2)
     end
   end
