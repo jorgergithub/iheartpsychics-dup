@@ -19,6 +19,9 @@ gem 'jquery-turbolinks' , '~> 1.0.0'
 
 group :development, :test do
   gem 'factory_girl_rails'   , '~> 4.2.1'
+  gem 'growl'                , '~> 1.0.3'
+  gem 'guard'                , '~> 1.8.2'
+  gem 'guard-rspec'          , '~> 3.0.2'
   gem 'rspec-rails'          , '~> 2.0'
 end
 
