@@ -43,7 +43,7 @@ FactoryGirl.define do
     status "completed"
     start_time "Wed, 17 Jul 2013 23:50:32 +0000"
     end_time "Wed, 17 Jul 2013 23:51:57 +0000"
-    duration "85"
+    original_duration "85"
     price "-0.02000"
     price_unit "USD"
     direction "inbound"

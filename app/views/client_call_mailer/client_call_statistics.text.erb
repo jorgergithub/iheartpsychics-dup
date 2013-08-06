@@ -1,0 +1,15 @@
+Dear <%= @client.first_name %>,
+
+You just finished a <%= @call.duration %> minutes talk with <%= @psychic.full_name %>.
+
+<% if @client.minutes > 0 -%>
+You have a remaining balance of <%= @client.minutes %> minutes in your account.
+<% else -%>
+Your account is out of minutes. To add more minutes, please visit <%= add_minutes_client_url %>.
+<% end -%>
+
+Best,
+
+--
+I Heart Psychics
+http://iheartpsychics.com
