@@ -9,7 +9,7 @@ class ClientsController < AuthorizedController
 
     unless @client.pin?
       @pin = @client.set_random_pin
-      ClientMailer.pin_email(@client, @pin).deliver
+      ClientMailer.delay.pin_email(@client, @pin)
     end
   end
 

@@ -27,6 +27,13 @@ Things you may want to cover:
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
 
+== Install Redis (Ubuntu 13.04)
+
+    sudo apt-get -y install software-properties-common
+    sudo add-apt-repository ppa:chris-lea/redis-server
+    sudo apt-get update
+    sudo apt-get -y install redis-server
+
 === Psychic fields
 
 address city state zip_code landline_number cellular_number ssn date_of_birth emergency_contact emergency_contact_number us_citizen:boolean has_experience:boolean experience:text gift explain_gift:text age_discovered:integer reading_style:text why_work:text friends_describe:text strongest_weakest_attributes:text how_to_deal_challenging_client:text specialties:text professional_goals:text how_did_you_hear other:text

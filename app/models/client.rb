@@ -123,7 +123,7 @@ class Client < ActiveRecord::Base
   def reset_pin(pin)
     self.pin = pin
     self.save
-    ClientMailer.reset_pin_email(self).deliver
+    ClientMailer.delay.reset_pin_email(self)
   end
 
   private

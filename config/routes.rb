@@ -1,5 +1,11 @@
+require 'sidekiq/web'
+
 IHeartPsychics::Application.routes.draw do
   devise_for :users
+
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   namespace :admin do
     resource :admin

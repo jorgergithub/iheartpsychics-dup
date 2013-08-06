@@ -23,7 +23,7 @@ class PsychicApplication < ActiveRecord::Base
       self.declined_at = Time.now
       self.save!
 
-      PsychicMailer.declined_email(self).deliver
+      PsychicMailer.delay.declined_email(self)
     end
   end
 
@@ -51,7 +51,7 @@ class PsychicApplication < ActiveRecord::Base
       self.approved_at = Time.now
       self.save!
 
-      PsychicMailer.approved_email(psychic, self).deliver
+      PsychicMailer.delay.approved_email(psychic, self)
     end
   end
 

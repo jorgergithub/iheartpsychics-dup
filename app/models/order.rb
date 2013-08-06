@@ -41,7 +41,7 @@ class Order < ActiveRecord::Base
   end
 
   def send_email
-    OrderMailer.confirmation_email(self).deliver
+    OrderMailer.delay.confirmation_email(self)
   end
 
   def paid!
