@@ -9,4 +9,13 @@ class ClientCallMailer < ActionMailer::Base
     title = "Your I Heart Psychics call with #{@psychic.full_name}"
     mail(to: @client.email, subject: title)
   end
+
+  def psychic_call_statistics(call)
+    @call = call
+    @client = call.client
+    @psychic = call.psychic
+
+    title = "Your I Heart Psychics call with #{@client.full_name}"
+    mail(to: @psychic.email, subject: title)
+  end
 end
