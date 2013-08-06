@@ -25,6 +25,14 @@ describe ClientCallMailer do
       expect(email.body.encoded).to include(body)
     end
 
+    context "when call lasts 1 minute" do
+      before { client_call.stub(duration: 1) }
+      it "tells minutes in singular" do
+        body = "You just finished a 1 minute talk"
+        expect(email.body.encoded).to include(body)
+      end
+    end
+
     context "when client has minutes left" do
       it "tells how much minutes are left in client's balance" do
         body = "You have a remaining balance of 10 minutes in your account."
