@@ -13,12 +13,12 @@ class Admin::SurveysController < AuthorizedController
   end
 
   def create
-    if params[:commit] == "Add a new question"
-      @survey = Survey.new
-      @survey.questions.build
-      render :new
+    @survey = Survey.new(survey_params)
+    if @survey.save
+      redirect_to edit_admin_survey_path(@survey), notice: "Survey was successfully created."
+    else
+      render action: "edit"
     end
-
   end
 
   def update
@@ -28,6 +28,12 @@ class Admin::SurveysController < AuthorizedController
     else
       render action: "edit"
     end
+  end
+
+  def destroy
+    @survey.destroy
+
+    redirect_to admin_surveys_path, notice: 'Survey was successfully deleted.'
   end
 
   protected
