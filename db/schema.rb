@@ -11,26 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130806203657) do
+ActiveRecord::Schema.define(version: 20130807000411) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
   end
 
-  create_table "cards", force: true do |t|
-    t.integer  "client_id"
-    t.string   "last4"
-    t.string   "type"
-    t.integer  "exp_month"
-    t.integer  "exp_year"
-    t.string   "country"
-    t.string   "address_city"
-    t.string   "stripe_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "client_calls", force: true do |t|
+  create_table "calls", force: true do |t|
     t.integer  "client_id"
     t.string   "sid"
     t.datetime "created_at"
@@ -55,6 +42,19 @@ ActiveRecord::Schema.define(version: 20130806203657) do
     t.string   "uri"
     t.integer  "duration"
     t.integer  "psychic_id"
+  end
+
+  create_table "cards", force: true do |t|
+    t.integer  "client_id"
+    t.string   "last4"
+    t.string   "type"
+    t.integer  "exp_month"
+    t.integer  "exp_year"
+    t.string   "country"
+    t.string   "address_city"
+    t.string   "stripe_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "client_phones", force: true do |t|

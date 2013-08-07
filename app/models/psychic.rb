@@ -5,7 +5,7 @@ class Psychic < ActiveRecord::Base
   delegate :username, :first_name, :last_name, :full_name, :email, to: :user
 
   has_and_belongs_to_many :favorited_by_clients, class_name: "Client"
-  has_many :calls, class_name: "ClientCall"
+  has_many :calls
 
   before_create :assign_extension
   validates_uniqueness_of :extension

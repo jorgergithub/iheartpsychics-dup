@@ -3,7 +3,7 @@ require "random_utils"
 class Client < ActiveRecord::Base
   belongs_to :user
 
-  has_many :calls,  class_name: "ClientCall"
+  has_many :calls
   has_many :phones, class_name: "ClientPhone", dependent: :destroy
   has_many :credits, dependent: :destroy
   has_many :cards, dependent: :destroy

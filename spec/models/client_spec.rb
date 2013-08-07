@@ -118,7 +118,7 @@ describe Client do
   end
 
   describe "#discount_minutes" do
-    let(:call)   { FactoryGirl.create(:client_call) }
+    let(:call)   { FactoryGirl.create(:call) }
     let(:credit) { client.credits.first }
 
     context "with an user with no minutes" do

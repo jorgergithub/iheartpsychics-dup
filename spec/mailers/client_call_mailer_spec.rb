@@ -3,8 +3,8 @@ require "spec_helper"
 describe ClientCallMailer do
   let!(:client)      { FactoryGirl.create(:client, minutes: 10) }
   let!(:psychic)     { FactoryGirl.create(:psychic) }
-  let!(:client_call) { FactoryGirl.create(:client_call, client: client,
-                                                        psychic: psychic) }
+  let!(:client_call) { FactoryGirl.create(:call, client: client,
+                                                 psychic: psychic) }
 
   let(:host) { ActionMailer::Base.default_url_options[:host] }
 

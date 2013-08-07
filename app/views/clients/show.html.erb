@@ -184,7 +184,7 @@
               <td><%= credit.minutes %></td>
               <td>
                 <% if credit.target %>
-                  <% if credit.target.is_a?(ClientCall) %>
+                  <% if credit.target.is_a?(Call) %>
                     <%= credit.description %>
                   <% else %>
                     <%= link_to credit.description, credit.target %>

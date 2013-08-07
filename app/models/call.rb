@@ -2,7 +2,7 @@ require "twilio"
 require "call_duration_rounder"
 require "phone_formatter"
 
-class ClientCall < ActiveRecord::Base
+class Call < ActiveRecord::Base
   belongs_to :client
   belongs_to :psychic
   has_many :credits, as: :target

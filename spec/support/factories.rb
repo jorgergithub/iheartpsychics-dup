@@ -30,7 +30,7 @@ FactoryGirl.define do
     price "9.99"
   end
 
-  factory :client_call do
+  factory :call do
     sid "CAc1ffa7a744d25480e5ee009dfd7b2fc4"
     association :client
     association :psychic

@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe ClientCall do
+describe Call do
   let!(:client)         { FactoryGirl.create(:client) }
-  let!(:call)           { FactoryGirl.create(:client_call, client: client) }
+  let!(:call)           { FactoryGirl.create(:call, client: client) }
 
   describe ".process_calls" do
     let!(:processed_call) { FactoryGirl.create(:processed_call, client: client) }
@@ -11,15 +11,15 @@ describe ClientCall do
       Rails.configuration.twilio = {account_sid: "account", auth_token: "token"}
 
       call.stub(:send_statistics)
-      ClientCall.stub(unprocessed: [call])
+      Call.stub(unprocessed: [call])
 
       VCR.use_cassette("twilio-call") do
-        ClientCall.process_calls
+        Call.process_calls
       end
     end
 
     it "processes unprocessed calls" do
-      expect(ClientCall.find(call.id)).to be_processed
+      expect(Call.find(call.id)).to be_processed
     end
 
     it "rounds duration" do
@@ -60,21 +60,21 @@ describe ClientCall do
 
   describe "#duration_str" do
     context "when minutes > 1" do
-      let(:call) { ClientCall.new(duration: 2) }
+      let(:call) { Call.new(duration: 2) }
       it "returns 'minutes'" do
         expect(call.duration_str).to eql("2 minutes")
       end
     end
 
     context "when minutes = 1" do
-      let(:call) { ClientCall.new(duration: 1) }
+      let(:call) { Call.new(duration: 1) }
       it "returns 'minute'" do
         expect(call.duration_str).to eql("1 minute")
       end
     end
 
     context "when minutes = 0" do
-      let(:call) { ClientCall.new(duration: 0) }
+      let(:call) { Call.new(duration: 0) }
       it "returns 'no minutes'" do
         expect(call.duration_str).to eql("no minutes")
       end
