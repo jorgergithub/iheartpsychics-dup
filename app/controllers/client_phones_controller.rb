@@ -28,7 +28,7 @@ class ClientPhonesController < AuthorizedController
   def destroy
     @phone.destroy
 
-    redirect_to client_path, notice: 'Game was successfully deleted.'
+    redirect_to client_path, notice: 'Phone was successfully deleted.'
   end
 
   protected
