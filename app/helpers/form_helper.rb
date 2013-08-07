@@ -53,19 +53,19 @@ module FormHelper
     end
   end
 
-  def add_select(form, object, field_name, values, label=nil, options={})
+  def add_select(form, field_name, values, label=nil, options={})
     add_field(form, field_name, label, options) do
       form.select(field_name, values, include_blank: true)
     end
   end
 
-  def add_state_select(form, object, field_name, label=nil, options={})
+  def add_state_select(form, field_name, label=nil, options={})
     add_field(form, field_name, label, options) do
       form.select(field_name, us_states, include_blank: true)
     end
   end
 
-  def add_file_field(form, object, field_name, label=nil, options={})
+  def add_file_field(form, field_name, label=nil, options={})
     add_field(form, field_name, label, options) do
       r = ""
       if object.resume?

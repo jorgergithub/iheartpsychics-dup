@@ -18,6 +18,7 @@ IHeartPsychics::Application.routes.draw do
     resources :psychic_applications
     resources :psychics
     resources :website_admins
+    resources :surveys
 
     get "/debug", to: "debug#index"
   end

@@ -11,10 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130807000411) do
+ActiveRecord::Schema.define(version: 20130807001754) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
+  end
+
+  create_table "answers", force: true do |t|
+    t.integer  "call_survey_id"
+    t.integer  "question_id"
+    t.integer  "option_id"
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "call_surveys", force: true do |t|
+    t.integer  "call_id"
+    t.integer  "survey_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "calls", force: true do |t|
@@ -99,6 +115,13 @@ ActiveRecord::Schema.define(version: 20130807000411) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "available"
+  end
+
+  create_table "options", force: true do |t|
+    t.integer  "question_id"
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "order_items", force: true do |t|
@@ -206,6 +229,21 @@ ActiveRecord::Schema.define(version: 20130807000411) do
   end
 
   add_index "psychics", ["extension"], name: "index_psychics_on_extension", unique: true, using: :btree
+
+  create_table "questions", force: true do |t|
+    t.integer  "survey_id"
+    t.string   "type"
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "surveys", force: true do |t|
+    t.string   "name"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "transactions", force: true do |t|
     t.integer  "order_id"
