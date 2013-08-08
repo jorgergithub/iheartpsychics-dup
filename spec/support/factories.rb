@@ -71,4 +71,44 @@ FactoryGirl.define do
     unit_price "9.99"
     total_price "9.99"
   end
+
+  factory :survey do
+    name "Client Survey"
+    active true
+
+    after(:create) do |survey, ev|
+      FactoryGirl.create(:text_question, survey_id: survey.id)
+      FactoryGirl.create(:yes_no_question, survey_id: survey.id)
+      FactoryGirl.create(:options_question, survey_id: survey.id)
+    end
+  end
+
+  factory :text_question, class: "TextQuestion" do
+    text "Describe how was your life so far"
+  end
+
+  factory :yes_no_question, class: "YesNoQuestion" do
+    text "Do you like it?"
+  end
+
+  factory :options_question, class: "OptionsQuestion" do
+    text "How often do you?"
+
+    after(:create) do |q, ev|
+      FactoryGirl.create(:option, question_id: q.id, text: "Very Often")
+      FactoryGirl.create(:option, question_id: q.id, text: "Often")
+      FactoryGirl.create(:option, question_id: q.id, text: "Not that often")
+      FactoryGirl.create(:option, question_id: q.id, text: "Rarely")
+      FactoryGirl.create(:option, question_id: q.id, text: "Never")
+    end
+  end
+
+  factory :option do
+    text "Option text"
+  end
+
+  factory :call_survey do
+    association :call
+    association :survey
+  end
 end

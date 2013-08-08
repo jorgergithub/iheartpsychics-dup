@@ -6,7 +6,7 @@ class Call < ActiveRecord::Base
   belongs_to :client
   belongs_to :psychic
   has_many :credits, as: :target
-  has_one :call_survey
+  has_one :call_survey, dependent: :destroy
   has_one :survey, through: :call_survey
 
   before_save :calculate_duration

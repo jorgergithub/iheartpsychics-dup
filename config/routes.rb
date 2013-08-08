@@ -73,6 +73,12 @@ IHeartPsychics::Application.routes.draw do
     end
   end
 
+  resources :surveys do
+    member do
+      post 'answer' , action: :answer, as: :answer
+    end
+  end
+
   get "/dashboard", to: "home#show", as: "dashboard"
 
   root to: 'home#show'
