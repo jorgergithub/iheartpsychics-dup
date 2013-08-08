@@ -100,6 +100,14 @@ class Call < ActiveRecord::Base
     psychic.full_name
   end
 
+  def date
+    created_at.strftime("%B %e, %Y")
+  end
+
+  def time
+    created_at.strftime("%I:%M %p")
+  end
+
   private
 
   def calculate_duration

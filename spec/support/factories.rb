@@ -51,6 +51,7 @@ FactoryGirl.define do
     caller_name nil
     uri "/2010-04-01/Accounts/AC4d5e48e4d4647262b5c4314e36e3d26e/Calls/CAc1ffa7a744d25480e5ee009dfd7b2fc4.json"
     processed nil
+    created_at "2013-08-08 13:55"
 
     factory :processed_call do
       processed true

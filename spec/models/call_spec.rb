@@ -80,4 +80,16 @@ describe Call do
       end
     end
   end
+
+  describe "#date" do
+    it "returns the formatted date of the call" do
+      expect(call.date).to eql("August  8, 2013")
+    end
+  end
+
+  describe "#time" do
+    it "returns the formatted" do
+      expect(call.time).to eql("01:55 PM")
+    end
+  end
 end

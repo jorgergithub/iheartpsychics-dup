@@ -1,15 +1,20 @@
 Dear <%= @client.first_name %>,
 
-You just finished a <%= @call.duration_str %> talk with <%= @psychic.full_name %>.
+Thank you for your recent call and for giving us the opportunity to serve you better.
 
-<% if @client.minutes > 0 -%>
-You have a remaining balance of <%= @client.minutes_str %> in your account.
-<% else -%>
-Your account is out of minutes. To add more minutes, please visit <%= add_minutes_client_url %>.
-<% end -%>
+Below is your call summary for your latest call with I Heart Psychics:
 
-Best,
+Date:               <%= @call.date %>
+Time:               <%= @call.time %>
+Psychic:            <%= @psychic.full_name %>
+Call Duration:      <%= @call.duration_str %>
+Available Minutes:  <%= @client.minutes %>
 
---
-I Heart Psychics
-http://iheartpsychics.com
+Please help us by taking a few minutes to tell us about your recent experience with I Heart Psychics.  We appreciate your business and want to ensure that we are constantly improving our service to meet your needs.
+
+Your unique survey is here: <%= survey_url(@call) %>
+
+In return for your time and efforts, we will give you an account reward of 100 hearts for each completed and returned survey.
+
+Sincerely,
+The I Heart Psychics Team
