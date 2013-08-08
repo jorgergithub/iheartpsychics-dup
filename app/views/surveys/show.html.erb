@@ -1,5 +1,37 @@
-<%= form_for(@call_survey, :url => answer_survey_path(@call)) do |f| %>
-  <%= render @call_survey.answers, f: f %>
+<div class="row-fluid">
+  <div class="span12">
+    <h3>Survey for your call with <%= @call.psychic_name %></h3>
 
-  <%= f.submit "Send", class: 'btn' %>
-<% end %>
+    <%= form_for(@call_survey, :url => answer_survey_path(@call)) do |f| %>
+      <%= render @call_survey.answers, f: f %>
+
+      <p>
+        The section below is your opportunity to provide feedback specifically for your recent call with <%= @call.psychic_name %>.  Your review will be publicly displayed on our website and helps others learn about your call experience specifically with <%= @call.psychic_name %>.  We ask that your review be honest, genuine, and professional.  Please <a href="#">click here</a> for our review guidelines.
+      </p>
+
+      <%= fields_for @review do |rev| %>
+        <div class="question">
+          Please rate your overall experience with <%= @call.psychic_name %>
+          <div class="options">
+            <% 5.downto(1) do |i| %>
+              <label class="radio">
+                <%= rev.radio_button :rating, i %>
+                <% i.times do %><i class="icon-heart"></i><% end %>
+                <%= Review::Ratings[i] %>
+              </label>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="question">
+          Your review of <%= @call.psychic_name %>
+          <div class="answer">
+            <%= rev.text_area :text, rows: 7, class: "input-xxlarge" %>
+          </div>
+        </div>
+      <% end %>
+
+      <%= f.submit "Send", class: 'btn' %>
+    <% end %>
+  </div>
+</div>

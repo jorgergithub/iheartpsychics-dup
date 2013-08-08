@@ -9,6 +9,7 @@ class Client < ActiveRecord::Base
   has_many :cards, dependent: :destroy
   has_many :orders
   has_many :transactions
+  has_many :reviews
 
   has_and_belongs_to_many :favorite_psychics, class_name: "Psychic"
 

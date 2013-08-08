@@ -6,6 +6,7 @@ class Psychic < ActiveRecord::Base
 
   has_and_belongs_to_many :favorited_by_clients, class_name: "Client"
   has_many :calls
+  has_many :reviews
 
   before_create :assign_extension
   validates_uniqueness_of :extension

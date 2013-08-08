@@ -96,6 +96,10 @@ class Call < ActiveRecord::Base
     "#{duration == 0 ? "no" : duration} #{duration == 1 ? "minute" : "minutes"}"
   end
 
+  def psychic_name
+    psychic.full_name
+  end
+
   private
 
   def calculate_duration
