@@ -21,49 +21,44 @@ describe ClientCallMailer do
     end
 
     it "sends out the duration of the call" do
-      body = "You just finished a 2 minutes talk with #{psychic.full_name}."
-      expect(email.body.encoded).to include(body)
+      body = /Call Duration:(.*)2 minutes/
+      expect(email.body.encoded).to match(body)
     end
 
     context "when call lasts 1 minute" do
       before { client_call.stub(duration: 1) }
       it "tells minutes in singular" do
-        body = "You just finished a 1 minute talk"
-        expect(email.body.encoded).to include(body)
+        body = /Call Duration:(.*)1 minute/
+        expect(email.body.encoded).to match(body)
       end
     end
 
     context "when client has minutes left" do
       it "tells how much minutes are left in client's balance" do
-        body = "You have a remaining balance of 10 minutes in your account."
-        expect(email.body.encoded).to include(body)
-      end
-    end
-
-    context "when client 1 minute left" do
-      before { client.minutes = 1 }
-      it "tells how much minutes are left in singular" do
-        body = "You have a remaining balance of 1 minute in your account."
-        expect(email.body.encoded).to include(body)
+        body = /Available Minutes:(.*)10/
+        expect(email.body.encoded).to match(body)
       end
     end
 
     context "when client has no minutes left" do
-      before { client.minutes = 0 }
-      it "informs the client that he's out of minutes" do
-        body = "Your account is out of minutes."
-        expect(email.body.encoded).to include(body)
-      end
+      pending "check if we need a link to add more minutes here"
+      # more here - https://basecamp.com/1799407/projects/2777704-iheart-psychics/messages/14347692-link-to-add-minutes
 
-      it "shows link to add more minutes" do
-        body = "To add more minutes, please visit #{add_minutes_client_url}"
-        expect(email.body.encoded).to include(body)
-      end
+      # before { client.minutes = 0 }
+      # it "informs the client that he's out of minutes" do
+      #   body = "Your account is out of minutes."
+      #   expect(email.body.encoded).to include(body)
+      # end
 
-      it "adds a click here link in HTML" do
-        body = "Please <a href=\"#{add_minutes_client_url}\">click here</a>"
-        expect(email.body.encoded).to include(body)
-      end
+      # it "shows link to add more minutes" do
+      #   body = "To add more minutes, please visit #{add_minutes_client_url}"
+      #   expect(email.body.encoded).to include(body)
+      # end
+
+      # it "adds a click here link in HTML" do
+      #   body = "Please <a href=\"#{add_minutes_client_url}\">click here</a>"
+      #   expect(email.body.encoded).to include(body)
+      # end
     end
   end
 
