@@ -65,7 +65,7 @@ module FormHelper
     end
   end
 
-  def add_file_field(form, field_name, label=nil, options={})
+  def add_file_field(form, object, field_name, label=nil, options={})
     add_field(form, field_name, label, options) do
       r = ""
       if object.resume?
