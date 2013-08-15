@@ -1,3 +1,5 @@
+require 'ostruct'
+
 module FormHelper
   def add_field(form, field_name, label=nil, options={})
     content_tag(:div, class: "control-group") do
@@ -77,6 +79,23 @@ module FormHelper
       r << form.hidden_field("#{field_name}_cache")
       r.html_safe
     end.html_safe
+  end
+
+  def signs
+    [
+      OpenStruct.new(name: 'Aries', figure: 'The Ram', start: 'March 21st', end: 'April 20th'),
+      OpenStruct.new(name: 'Taurus', figure: 'The Bull', start: 'April 21st', end: 'May 21st'),
+      OpenStruct.new(name: 'Gemini', figure: 'The Twins', start: 'May 22nd', end: 'June 21st'),
+      OpenStruct.new(name: 'Cancer', figure: 'The Crab', start: 'June 22nd', end: 'July 22nd'),
+      OpenStruct.new(name: 'Leo', figure: 'The Lion', start: 'July 23rd', end: 'August 23rd'),
+      OpenStruct.new(name: 'Virgo', figure: 'The Virgin', start: 'August 24th', end: 'September 23rd'),
+      OpenStruct.new(name: 'Libra', figure: 'The Scales', start: 'September 24th', end: 'October 23rd'),
+      OpenStruct.new(name: 'Scorpio', figure: 'The Scorpion', start: 'October 24', end: 'November 22nd'),
+      OpenStruct.new(name: 'Sagittarius', figure: 'The Archer', start: 'November 23rd', end: 'December 21st'),
+      OpenStruct.new(name: 'Capricorn', figure: 'The Goat', start: 'December 22nd', end: 'January 20th'),
+      OpenStruct.new(name: 'Aquarius', figure: 'The Water Bearer', start: 'January 21st', end: 'February 19th'),
+      OpenStruct.new(name: 'Pisces', figure: 'The Fish', start: 'February 20th', end: 'March 20th')
+    ]
   end
 
   def us_states

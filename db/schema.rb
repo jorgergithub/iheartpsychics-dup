@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130815172324) do
+ActiveRecord::Schema.define(version: 20130815180122) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -121,6 +121,27 @@ ActiveRecord::Schema.define(version: 20130815172324) do
     t.text     "question"
     t.text     "answer"
     t.integer  "order"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "horoscopes", force: true do |t|
+    t.date     "date"
+    t.text     "aries"
+    t.text     "taurus"
+    t.text     "gemini"
+    t.text     "cancer"
+    t.text     "leo"
+    t.text     "virgo"
+    t.text     "libra"
+    t.text     "scorpio"
+    t.text     "sagittarius"
+    t.text     "capricorn"
+    t.text     "aquarius"
+    t.text     "pisces"
+    t.text     "lovescope"
+    t.string   "friendship_compatibility"
+    t.string   "love_compatibility"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
