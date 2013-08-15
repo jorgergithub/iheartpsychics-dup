@@ -1,0 +1,20 @@
+<%= form_for([:admin, object], :html => { :class => 'form form-horizontal' }) do |f| %>
+  <%= render 'errors', object: @faq %>
+
+  <div class="control-group">
+    <%= f.label :question, "Question", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :question, autofocus: true, class: 'input-xxlarge' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :answer, "Answer", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :answer, class: 'input-xxlarge', rows: 10 %>
+    </div>
+  </div>
+
+  <%= f.submit "Save", class: "btn" %>
+  <%= link_to "Cancel", admin_faqs_path, class: "btn" %>
+<% end %>
