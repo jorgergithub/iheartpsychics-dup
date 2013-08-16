@@ -13,6 +13,7 @@ gem 'bootstrap-sass'    , '~> 2.3.2.0'
 gem 'carrierwave'       , '~> 0.9.0'
 gem 'devise'            , '~> 3.0.1'
 gem 'jquery-turbolinks' , '~> 1.0.0'
+gem 'maildown'          , '~> 1.0.1'
 gem 'sidekiq'           , '~> 2.13.0'
 gem 'sinatra'           , '>= 1.3.0', :require => nil
 gem 'slim'              , '>= 1.1.0'
