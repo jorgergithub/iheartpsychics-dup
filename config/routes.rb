@@ -20,6 +20,7 @@ IHeartPsychics::Application.routes.draw do
     resources :website_admins
     resources :surveys
     resources :call_surveys
+    resources :reviews
     resources :faqs
     resources :horoscopes
 
