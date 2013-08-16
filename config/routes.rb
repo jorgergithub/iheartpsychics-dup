@@ -23,6 +23,7 @@ IHeartPsychics::Application.routes.draw do
     resources :reviews
     resources :faqs
     resources :horoscopes
+    resources :calls
 
     get "/debug", to: "debug#index"
   end

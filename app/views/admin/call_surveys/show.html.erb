@@ -37,12 +37,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @call_survey.answers.each do |answer| %>
-          <tr>
-            <td><%= answer.question.text %></td>
-            <td><%= answer.answer %></td>
-          </tr>
-        <% end %>
+        <%= render @call_survey.answers %>
       </tbody>
     </table>
   </div>

@@ -3,6 +3,40 @@
     <h3>Edit client</h3>
   </div>
   <div class="span12">
-    <%= render "form", object: @user %>
+    <ul class="nav nav-tabs" id="tabs">
+      <li class="active" data-toggle="tab"><%= link_to "Client", "#form" %></li>
+      <li data-toggle="tab"><%= link_to "Survey Responses (#{@client.call_surveys.count})", "#responses" %></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="form">
+        <%= render "form", object: @user %>
+      </div>
+
+      <div class="tab-pane" id="responses">
+        <% if @client.call_surveys.any? %>
+          <% @client.call_surveys.each do |cs| %>
+            <table class="table table-bordered table-hover">
+              <tr style="background: #eee;">
+                <td colspan=2>
+                  <div class="pull-right">
+                    <%= format_datetime cs.created_at %>
+                  </div>
+                  Survey for
+                  <b><%= link_to "call ##{cs.call.id}", edit_admin_call_path(cs.client) %></b>
+                  with
+                  <b><%= link_to cs.psychic.full_name, edit_admin_psychic_path(cs.psychic) %></b>
+                </td>
+              </tr>
+              <%= render cs.answers %>
+            </table>
+          <% end %>
+        <% else %>
+          <div class="blank-state">
+            No survey responses for this client.
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
