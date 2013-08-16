@@ -20,6 +20,7 @@ class SurveysController < AuthorizedController
     @review = current_client.reviews.build(review_params.merge(psychic: @call.psychic))
     ActiveRecord::Base.transaction do
       if @call_survey.save and @review.save
+        CallSurveyMailer.notify_manager_director(ManagerDirector.first, @call_survey, @review).deliver
         redirect_to client_path, notice: "Your survey results were saved successfully."
       else
       end
