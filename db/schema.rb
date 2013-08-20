@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130820014152) do
+ActiveRecord::Schema.define(version: 20130820120126) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -280,6 +280,33 @@ ActiveRecord::Schema.define(version: 20130820014152) do
     t.text     "other"
     t.string   "resume"
     t.boolean  "featured"
+    t.boolean  "ability_clairvoyance"
+    t.boolean  "ability_clairaudient"
+    t.boolean  "ability_clairsentient"
+    t.boolean  "ability_empathy"
+    t.boolean  "ability_medium"
+    t.boolean  "ability_channeler"
+    t.boolean  "ability_dream_analysis"
+    t.boolean  "tools_tarot"
+    t.boolean  "tools_oracle_cards"
+    t.boolean  "tools_runes"
+    t.boolean  "tools_crystals"
+    t.boolean  "tools_pendulum"
+    t.boolean  "tools_numerology"
+    t.boolean  "tools_astrology"
+    t.boolean  "specialties_love_and_relationships"
+    t.boolean  "specialties_career_and_work"
+    t.boolean  "specialties_money_and_finance"
+    t.boolean  "specialties_lost_objects"
+    t.boolean  "specialties_dream_interpretation"
+    t.boolean  "specialties_pet_and_animals"
+    t.boolean  "specialties_past_lives"
+    t.boolean  "specialties_deceased"
+    t.boolean  "style_compassionate"
+    t.boolean  "style_inspirational"
+    t.boolean  "style_straightforward"
+    t.text     "about"
+    t.decimal  "price",                              precision: 8, scale: 2
   end
 
   add_index "psychics", ["extension"], name: "index_psychics_on_extension", unique: true, using: :btree

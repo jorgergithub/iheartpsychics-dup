@@ -10,6 +10,9 @@ class PsychicsController < AuthorizedController
     @resource_name = "user"
   end
 
+  def edit
+  end
+
   def show
   end
 
@@ -34,6 +37,15 @@ class PsychicsController < AuthorizedController
   end
 
   def psychic_params
-    params.require(:psychic).permit(:phone)
+    params.require(:psychic).permit(:phone, :ability_clairvoyance, :ability_clairaudient,
+      :ability_clairsentient, :ability_empathy, :ability_medium,
+      :ability_channeler, :ability_dream_analysis, :tools_tarot,
+      :tools_oracle_cards, :tools_runes, :tools_crystals, :tools_pendulum,
+      :tools_numerology, :tools_astrology, :specialties_love_and_relationships,
+      :specialties_career_and_work, :specialties_money_and_finance,
+      :specialties_lost_objects, :specialties_dream_interpretation,
+      :specialties_pet_and_animals, :specialties_past_lives,
+      :specialties_deceased, :style_compassionate, :style_inspirational,
+      :style_straightforward, :about, :price)
   end
 end

@@ -18,6 +18,8 @@
         <%= render "manager_director_menu" %>
       <% elsif current_user.website_admin? %>
         <%= render "website_admin_menu" %>
+      <% elsif current_user.psychic? %>
+        <%= render "psychic_menu" %>
       <% else %>
         <ul class="nav">
           <li><%= link_to 'Dashboard', dashboard_path %></li>
