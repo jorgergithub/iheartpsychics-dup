@@ -22,12 +22,9 @@ class Admin::HoroscopesController < AuthorizedController
   end
 
   def update
-    Rails.logger.info "update 1"
     if @horoscope.update_attributes(horoscope_params)
-      Rails.logger.info "update 2"
       redirect_to edit_admin_horoscope_path(@horoscope.date), notice: "Horoscope was successfully updated."
     else
-      Rails.logger.info "update 3"
       render action: "edit"
     end
   end

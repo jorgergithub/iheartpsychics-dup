@@ -19,6 +19,11 @@ module FormHelper
     end
   end
 
+  def add_date_field(form, field_name, label=nil, options={})
+    options.merge! input: { class: "datepicker" }
+    add_text_field(form, field_name, label, options)
+  end
+
   def add_text_area(form, field_name, label=nil, options={})
     add_field(form, field_name, label, options) do
       form.text_area(field_name, options).html_safe

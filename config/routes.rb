@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 IHeartPsychics::Application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   devise_for :users
 
   authenticate :user, lambda { |u| u.admin? } do

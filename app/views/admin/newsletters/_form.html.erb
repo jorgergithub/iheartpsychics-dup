@@ -1,8 +1,12 @@
 <%= form_for([:admin, object], :html => { :class => 'form form-horizontal' }) do |f| %>
   <%= render 'errors', object: object %>
 
+  <%= add_date_field f, :deliver_by %>
   <%= add_text_field f, :title, "Title", input: {class: "input-xxlarge"} %>
-  <%= add_text_area f, :body, "Body", class: "input-xxlarge" %>
+
+  <div class="control-group">
+    <%= f.text_area :body, class: "ckeditor", ckeditor: { height: '500px' }  %>
+  </div>
 
   <%= f.submit "Save", class: "btn" %>
   <%= link_to "Cancel", admin_newsletters_path, class: "btn", rows: 10 %>

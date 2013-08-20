@@ -65,3 +65,7 @@ What are some of your professional goals?  Text Box
 How did you hear about this opportunity?  (Search Engine, Social Network Sites, TV, Radio, Referral, Other) Drop Down Box
 
 (Other) Text Field
+
+=== Font awesome
+
+  <%= stylesheet_link_tag    "http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" %>
