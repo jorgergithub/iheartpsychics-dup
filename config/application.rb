@@ -16,6 +16,9 @@ module IHeartPsychics
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
     config.eager_load_paths  += %W(#{config.root}/app/models/ckeditor)
     config.assets.enabled = true
+    config.assets.precompile += Ckeditor.assets
+    config.assets.precompile += %w(ckeditor/*)
+
     # config.eager_load_paths += ["#{Rails.root}/lib}"]
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
