@@ -20,6 +20,8 @@
         <%= render "website_admin_menu" %>
       <% elsif current_user.psychic? %>
         <%= render "psychic_menu" %>
+      <% elsif current_user.client? %>
+        <%= render "client_menu" %>
       <% else %>
         <ul class="nav">
           <li><%= link_to 'Dashboard', dashboard_path %></li>

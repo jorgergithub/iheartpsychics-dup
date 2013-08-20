@@ -13,6 +13,28 @@ class ClientsController < AuthorizedController
     end
   end
 
+  def edit
+  end
+
+  def update
+    tmp_params = user_params
+
+    if tmp_params[:password].empty?
+      Rails.logger.info "deleting"
+      tmp_params.delete('password')
+      tmp_params.delete('password_confirmation')
+      Rails.logger.info "deleted: #{tmp_params.inspect}"
+    end
+
+    Rails.logger.info tmp_params.inspect
+
+    if @client.user.update_attributes(tmp_params)
+      redirect_to dashboard_path, notice: "Client was successfully updated."
+    else
+      render action: "edit"
+    end
+  end
+
   def add_minutes
     if params[:client]
       if @client.add_minutes(params[:client][:minutes])
@@ -58,6 +80,11 @@ class ClientsController < AuthorizedController
   end
 
   protected
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :username, :email,
+      :password, :password_confirmation)
+  end
 
   def find_client
     redirect_to :root unless current_user.client?
