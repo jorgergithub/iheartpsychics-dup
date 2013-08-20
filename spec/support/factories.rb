@@ -112,4 +112,12 @@ FactoryGirl.define do
     association :call
     association :survey
   end
+
+  factory :newsletter do
+    title "Weekly I Heart Psychics newletter"
+    body "<p><span style=\"font-size:22px\"><strong>Newsletter</strong></span></p>"
+    deliver_by "2013-08-18"
+    created_at "2013-08-16 17:20:16"
+    updated_at "2013-08-20 01:29:56"
+  end
 end

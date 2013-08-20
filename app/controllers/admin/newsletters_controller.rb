@@ -17,6 +17,21 @@ class Admin::NewslettersController < AuthorizedController
     end
   end
 
+  def create
+    @newsletter = Newsletter.new(newsletter_params)
+    if @newsletter.save
+      redirect_to admin_newsletters_path, notice: "Newsletter was successfully created."
+    else
+      render action: "edit"
+    end
+  end
+
+  def destroy
+    @newsletter.destroy
+
+    redirect_to admin_newsletters_path, notice: 'Newsletter was successfully deleted.'
+  end
+
   protected
 
   def newsletter_params

@@ -10,6 +10,7 @@
             <th>Deliver by</th>
             <th>Title</th>
             <th>Created</th>
+            <th>Delivered?</th>
           </tr>
         </thead>
         <tbody>
@@ -22,6 +23,11 @@
               <td><%=l newsletter.deliver_by, format: :short %></td>
               <td><%= link_to newsletter.title, edit_admin_newsletter_path(newsletter) %></td>
               <td><%=l newsletter.created_at, format: :short %></td>
+              <td>
+                <% if newsletter.delivered? %>
+                  <i class="icon-ok"></i>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>
