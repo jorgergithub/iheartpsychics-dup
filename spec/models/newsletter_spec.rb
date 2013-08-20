@@ -20,20 +20,37 @@ describe Newsletter do
   describe "#deliver" do
     let(:client1) { FactoryGirl.create(:client) }
     let(:client2) { FactoryGirl.create(:client) }
+    let(:mailer)  { double(:mailer).as_null_object }
 
     before {
       Client.stub(all: [client1, client2])
-      NewsletterMailer.stub(:send_newsletter)
+      NewsletterMailer.stub(send_newsletter: mailer)
       newsletter.deliver
     }
 
     it "sends an email to each client" do
       NewsletterMailer.should have_received(:send_newsletter).with(newsletter, client1)
       NewsletterMailer.should have_received(:send_newsletter).with(newsletter, client2)
+      mailer.should have_received(:deliver).twice
     end
 
     it "sets delivered to true" do
       expect(newsletter.reload).to be_delivered
+    end
+  end
+
+  describe "#delivered?" do
+    context "when delivered_at is not null" do
+      before { newsletter.delivered_at = Time.now }
+      it "is true" do
+        expect(newsletter).to be_delivered
+      end
+    end
+
+    context "when delivered_at is null" do
+      it "is false" do
+        expect(newsletter).to_not be_delivered
+      end
     end
   end
 end

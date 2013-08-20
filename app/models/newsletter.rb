@@ -9,8 +9,12 @@ class Newsletter < ActiveRecord::Base
 
   def deliver
     Client.all.each do |client|
-      NewsletterMailer.send_newsletter(self, client)
+      NewsletterMailer.send_newsletter(self, client).deliver
     end
-    update_attributes delivered: true
+    update_attributes delivered_at: Time.now
+  end
+
+  def delivered?
+    delivered_at.present?
   end
 end

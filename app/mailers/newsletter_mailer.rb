@@ -5,8 +5,8 @@ class NewsletterMailer < ActionMailer::Base
     @newsletter = newsletter
     @client = client
 
-    body = ERB.new(newsletter.body).result(binding)
+    @body = ERB.new(newsletter.body).result(binding)
 
-    format.html { render :inline => body }
+    mail(to: @client.email, subject: @newsletter.title)
   end
 end

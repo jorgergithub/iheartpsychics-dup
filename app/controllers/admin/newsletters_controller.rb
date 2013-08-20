@@ -28,8 +28,17 @@ class Admin::NewslettersController < AuthorizedController
 
   def destroy
     @newsletter.destroy
-
     redirect_to admin_newsletters_path, notice: 'Newsletter was successfully deleted.'
+  end
+
+  def deliver
+    @newsletter.deliver
+    redirect_to edit_admin_newsletter_path(@newsletter), notice: 'Newsletter was successfully delivered.'
+  end
+
+  def reset
+    @newsletter.update_attributes delivered_at: nil
+    redirect_to edit_admin_newsletter_path(@newsletter), notice: 'Newsletter delivery was successfully reset.'
   end
 
   protected

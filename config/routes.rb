@@ -25,7 +25,12 @@ IHeartPsychics::Application.routes.draw do
     resources :faqs
     resources :horoscopes
     resources :calls
-    resources :newsletters
+    resources :newsletters do
+      member do
+        get 'deliver', action: :deliver, as: :deliver
+        get 'reset'  , action: :reset  , as: :reset
+      end
+    end
 
     get "/debug", to: "debug#index"
   end
