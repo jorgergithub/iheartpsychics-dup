@@ -92,4 +92,20 @@ describe Call do
       expect(call.time).to eql("01:55 PM")
     end
   end
+
+  describe "#survey_completed?" do
+    let(:call) { create(:call) }
+    context "when call survey doesn't have answers" do
+      it "is false" do
+        expect(call).not_to be_survey_completed
+      end
+    end
+
+    context "when call survey has answers" do
+      before { call.build_call_survey }
+      it "is true" do
+        expect(call).to be_survey_completed
+      end
+    end
+  end
 end

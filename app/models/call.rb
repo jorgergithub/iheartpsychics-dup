@@ -108,6 +108,10 @@ class Call < ActiveRecord::Base
     created_at.strftime("%I:%M %p")
   end
 
+  def survey_completed?
+    call_survey.present?
+  end
+
   private
 
   def calculate_duration

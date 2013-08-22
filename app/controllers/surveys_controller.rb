@@ -1,6 +1,12 @@
 class SurveysController < AuthorizedController
   def show
     @call = Call.find(params[:id])
+
+    if @call.survey_completed?
+      flash[:error] = "You already completed this survey."
+      redirect_to client_path and return
+    end
+
     @survey = Survey.active
     @call_survey = @call.build_call_survey(survey: @survey)
     @call_survey.build_answers
@@ -10,6 +16,13 @@ class SurveysController < AuthorizedController
   def answer
     @call = Call.find(params[:id])
     @survey = Survey.active
+
+    if @call.survey_completed?
+      flash[:error] = "You already completed this survey."
+      redirect_to client_path
+      return
+    end
+
     @call_survey = @call.build_call_survey(survey: @survey)
 
     survey_params[:answers].each_pair do |id, answer|
