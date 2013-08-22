@@ -14,17 +14,7 @@
       </div>
 
       <div class="tab-pane" id="responses">
-        <% @survey.call_surveys.each do |cs| %>
-          <table class="table table-bordered table-hover">
-            <tr style="background: #eee;">
-              <td colspan=2>
-                <b><%= link_to cs.client.full_name, edit_admin_client_path(cs.client) %></b>
-                <%= format_date cs.created_at %>
-              </td>
-            </tr>
-            <%= render cs.answers %>
-          </table>
-        <% end %>
+        <%= render "admin/surveys", target: @survey %>
       </div>
     </div>
   </div>
