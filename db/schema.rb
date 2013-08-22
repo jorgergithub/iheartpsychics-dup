@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130820173055) do
+ActiveRecord::Schema.define(version: 20130822234741) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -156,10 +156,12 @@ ActiveRecord::Schema.define(version: 20130820173055) do
     t.text     "aquarius"
     t.text     "pisces"
     t.text     "lovescope"
-    t.string   "friendship_compatibility"
-    t.string   "love_compatibility"
+    t.string   "friendship_compatibility_from"
+    t.string   "love_compatibility_from"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "friendship_compatibility_to"
+    t.string   "love_compatibility_to"
   end
 
   create_table "newsletters", force: true do |t|

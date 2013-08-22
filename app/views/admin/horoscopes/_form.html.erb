@@ -23,16 +23,18 @@
   <% end %>
 
   <div class="control-group">
-    <%= f.label :friendship_compatibility, "Friendship Compatibility", :class => 'control-label' %>
+    <%= f.label :friendship_compatibility_from, "Friendship Compatibility", :class => 'control-label' %>
     <div class="controls">
-      <%= f.collection_select :friendship_compatibility, signs, :name, :name, class: 'input-xxlarge' %>
+      <%= f.collection_select :friendship_compatibility_from, signs, :name, :name, class: 'input-xxlarge' %>
+      <%= f.collection_select :friendship_compatibility_to, signs, :name, :name, class: 'input-xxlarge' %>
     </div>
   </div>
 
   <div class="control-group">
-    <%= f.label :love_compatibility, "Love Compatibility", :class => 'control-label' %>
+    <%= f.label :love_compatibility_from, "Love Compatibility", :class => 'control-label' %>
     <div class="controls">
-      <%= f.collection_select :love_compatibility, signs, :name, :name, class: 'input-xxlarge' %>
+      <%= f.collection_select :love_compatibility_from, signs, :name, :name, class: 'input-xxlarge' %>
+      <%= f.collection_select :love_compatibility_to, signs, :name, :name, class: 'input-xxlarge' %>
     </div>
   </div>
 
