@@ -15,7 +15,7 @@ class Admin::FaqsController < AuthorizedController
   def create
     @faq = Faq.new(faq_params)
     if @faq.save
-      redirect_to edit_admin_faq_path(@faq), notice: "FAQ was successfully created."
+      redirect_to admin_faqs_path, notice: "FAQ was successfully created."
     else
       render action: "edit"
     end
