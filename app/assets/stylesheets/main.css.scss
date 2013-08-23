@@ -22,8 +22,16 @@
   display: none;
 }
 
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
+.form-horizontal {
+  .field_with_errors {
+    float: left;
+    width: 160px;
+    padding: 0;
+    text-align: right;
+    color: #f00;
+
+    .control-label {
+      font-weight: bold;
+    }
+  }
 }

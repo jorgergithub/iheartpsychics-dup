@@ -2,7 +2,7 @@ require 'sidekiq/web'
 
 IHeartPsychics::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
 
   authenticate :user, lambda { |u| u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
