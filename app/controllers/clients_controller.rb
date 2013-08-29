@@ -20,13 +20,9 @@ class ClientsController < AuthorizedController
     tmp_params = user_params
 
     if tmp_params[:password].empty?
-      Rails.logger.info "deleting"
       tmp_params.delete('password')
       tmp_params.delete('password_confirmation')
-      Rails.logger.info "deleted: #{tmp_params.inspect}"
     end
-
-    Rails.logger.info tmp_params.inspect
 
     if @client.user.update_attributes(tmp_params)
       redirect_to dashboard_path, notice: "Client was successfully updated."
@@ -83,7 +79,7 @@ class ClientsController < AuthorizedController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :username, :email,
-      :password, :password_confirmation)
+      :password, :password_confirmation, client_attributes: [:receive_newsletters])
   end
 
   def find_client

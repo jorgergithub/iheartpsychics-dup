@@ -16,6 +16,7 @@ class Client < ActiveRecord::Base
 
   after_create :add_phone_number
   before_save  :set_random_pin
+  before_save  :set_unsubscribe_key
 
   delegate :username, :first_name, :last_name, :full_name, :email, to: :user
 
@@ -133,6 +134,10 @@ class Client < ActiveRecord::Base
   end
 
   private
+
+  def set_unsubscribe_key
+    self.unsubscribe_key = RandomUtils.alpha_s(20)
+  end
 
   def add_phone_number
     return unless self.phone_number

@@ -25,6 +25,10 @@
     </div>
   </div>
 
+  <%= f.fields_for :client do |cf| %>
+    <%= add_checkbox cf, :receive_newsletters %>
+  <% end %>
+
   <legend>Password</legend>
 
   <p>Leave password blank unless you want to change your current password.</p>

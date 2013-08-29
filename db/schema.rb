@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130823174523) do
+ActiveRecord::Schema.define(version: 20130829223045) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(version: 20130823174523) do
     t.integer  "minutes"
     t.string   "stripe_client_id"
     t.string   "pin"
+    t.boolean  "receive_newsletters", default: true
+    t.string   "unsubscribe_key"
   end
 
   create_table "clients_psychics", id: false, force: true do |t|
