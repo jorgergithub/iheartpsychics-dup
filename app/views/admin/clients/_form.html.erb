@@ -28,6 +28,10 @@
         <%= cf.text_field :minutes %>
       </div>
     </div>
+
+    <%= f.fields_for :client do |cf| %>
+      <%= add_checkbox cf, :receive_newsletters %>
+    <% end %>
   <% end %>
 
   <%= f.submit "Save", class: "btn" %>

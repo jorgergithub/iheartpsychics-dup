@@ -38,6 +38,6 @@ class Admin::ClientsController < AuthorizedController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :username, :email,
-      client_attributes: [:minutes])
+      client_attributes: [:minutes, :receive_newsletters])
   end
 end
