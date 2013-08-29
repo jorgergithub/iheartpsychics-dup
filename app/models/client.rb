@@ -20,6 +20,8 @@ class Client < ActiveRecord::Base
 
   delegate :username, :first_name, :last_name, :full_name, :email, to: :user
 
+  scope :subscribed, -> { where('receive_newsletters') }
+
   attr_accessor :phone_number
 
   def valid_pin?(pin)

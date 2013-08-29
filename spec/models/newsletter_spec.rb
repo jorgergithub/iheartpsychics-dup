@@ -18,20 +18,19 @@ describe Newsletter do
   end
 
   describe "#deliver" do
-    let(:client1) { FactoryGirl.create(:client) }
-    let(:client2) { FactoryGirl.create(:client) }
+    let!(:client1) { create(:client, receive_newsletters: true) }
+    let!(:client2) { create(:client, receive_newsletters: false) }
     let(:mailer)  { double(:mailer).as_null_object }
 
     before {
-      Client.stub(all: [client1, client2])
       NewsletterMailer.stub(send_newsletter: mailer)
       newsletter.deliver
     }
 
-    it "sends an email to each client" do
+    it "sends only to subscribed clients" do
       NewsletterMailer.should have_received(:send_newsletter).with(newsletter, client1)
-      NewsletterMailer.should have_received(:send_newsletter).with(newsletter, client2)
-      mailer.should have_received(:deliver).twice
+      NewsletterMailer.should_not have_received(:send_newsletter).with(newsletter, client2)
+      mailer.should have_received(:deliver).once
     end
 
     it "sets delivered to true" do
