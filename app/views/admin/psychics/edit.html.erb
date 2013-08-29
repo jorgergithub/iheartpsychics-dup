@@ -14,19 +14,7 @@
       </div>
 
       <div class="tab-pane" id="reviews">
-        <% @psychic.reviews.each do |review| %>
-          <div class="review">
-            <div class="pull-right">
-              <% review.rating.times do %><i class="icon-heart"></i><% end %>
-            </div>
-            <b><%= link_to review.client.full_name, edit_admin_client_path(review.client) %></b>
-            in
-            <%= format_date review.created_at %>
-            <div class="well">
-              <%= review.text %>
-            </div>
-          </div>
-        <% end %>
+        <%= render "admin/reviews", target: @psychic %>
       </div>
     </div>
   </div>
