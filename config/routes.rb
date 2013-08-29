@@ -92,6 +92,7 @@ IHeartPsychics::Application.routes.draw do
   end
 
   get "/dashboard", to: "home#show", as: "dashboard"
+  get "/unsubscribe/:id", to: "unsubscribe#unsubscribe", as: "unsubscribe"
 
   root to: 'home#show'
 end

@@ -418,6 +418,14 @@ describe Client do
     end
   end
 
+  describe "#unsubscribe_from_newsletters" do
+    let(:client) { create(:client, receive_newsletters: true) }
+    before { client.unsubscribe_from_newsletters }
+    it "sets receive_newsletters to false" do
+      expect(client).to_not be_receive_newsletters
+    end
+  end
+
   describe "setting unsubscribe key" do
     let(:client) { create(:client) }
     it "sets when creating" do

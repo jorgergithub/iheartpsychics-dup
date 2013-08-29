@@ -133,6 +133,10 @@ class Client < ActiveRecord::Base
     "#{minutes == 0 ? "no" : minutes} #{minutes == 1 ? "minute" : "minutes"}"
   end
 
+  def unsubscribe_from_newsletters
+    update_attributes receive_newsletters: false
+  end
+
   private
 
   def set_unsubscribe_key
