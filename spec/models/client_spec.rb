@@ -417,4 +417,18 @@ describe Client do
       end
     end
   end
+
+  describe "setting unsubscribe key" do
+    let(:client) { create(:client) }
+    it "sets when creating" do
+      expect(client.unsubscribe_key).to_not be_nil
+    end
+
+    it "doesn't reset when saving" do
+      key = client.unsubscribe_key
+      client.receive_newsletters = false
+      client.save
+      expect(client.unsubscribe_key).to eql(key)
+    end
+  end
 end

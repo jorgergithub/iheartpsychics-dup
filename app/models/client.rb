@@ -136,6 +136,7 @@ class Client < ActiveRecord::Base
   private
 
   def set_unsubscribe_key
+    return if self.unsubscribe_key
     self.unsubscribe_key = RandomUtils.alpha_s(20)
   end
 
