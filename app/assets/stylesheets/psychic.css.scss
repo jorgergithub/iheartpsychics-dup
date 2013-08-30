@@ -18,10 +18,20 @@ body.psychics {
       }
     }
 
+    .name .details {
+      color: #777;
+
+      &:hover {
+        color: #000;
+        text-decoration: none;
+      }
+    }
+
     .rating {
       height: 15px;
 
-      .white { color: #fff; }
+      .star-filled { color: #000; }
+      .star-empty  { color: #fff; }
     }
 
     .about {
@@ -34,6 +44,23 @@ body.psychics {
     }
 
     .actions {
+      .reviews {
+        color: #888;
+        text-decoration: none;
+
+        &:hover {
+          color: #000;
+          text-decoration: none;
+
+          &:after {
+            content: "reviews";
+            display: inline-block;
+            text-decoration: none;
+            margin-left: 5px;
+          }
+        }
+      }
+
       .favorite {
         color: #888;
         text-decoration: none;
@@ -65,6 +92,47 @@ body.psychics {
             text-decoration: none;
             margin-left: 5px;
           }
+        }
+      }
+    }
+  }
+
+  #psychic-details {
+    h3 span {
+      font-weight: normal;
+    }
+
+    .star-filled { color: #000; }
+    .star-empty  { color: #000; }
+
+    .about {
+      margin-top: 40px;
+
+      .title {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .body {
+        color: #888;
+      }
+    }
+
+    .reviews-title {
+      margin-top: 40px;
+    }
+
+    .reviews {
+      .review {
+        .author {
+          color: #777;
+          font-weight: bold;
+        }
+
+        .text {
+          margin-top: 10px;
+          line-height: 1.5em;
+          color: #777;
         }
       }
     }

@@ -17,6 +17,18 @@ class Psychic < ActiveRecord::Base
     reviews.average(:rating)
   end
 
+  def specialties
+    %w(specialties_love_and_relationships specialties_career_and_work
+       specialties_money_and_finance specialties_lost_objects
+       specialties_dream_interpretation specialties_pet_and_animals
+       specialties_past_lives specialties_deceased).inject([]) do |arr, sp|
+
+      arr << sp.gsub("specialties_", "").gsub("_", " ") if send(sp)
+      arr
+
+    end.join(", ")
+  end
+
   private
 
   def assign_extension

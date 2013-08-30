@@ -19,20 +19,14 @@
               </div>
 
               <div class="name">
-                <%= psychic.first_name %><br>
-                <%= psychic.last_name %>
+                <a href="<%= admin_psychic_path(psychic) %>" class="details">
+                  <%= psychic.first_name %><br>
+                  <%= psychic.last_name %>
+                </a>
               </div>
 
               <div class="rating">
-                <% if psychic.rating %>
-                  <% psychic.rating.to_i.times do %>
-                    <i class="icon-star"></i>
-                  <% end %>
-                  <% psychic.rating.to_i.upto(4) do %>
-                    <i class="icon-star white"></i>
-                  <% end %>
-                  (<%= psychic.reviews.count %>)
-                <% end %>
+                <% if psychic.rating %><%= rating_for psychic %><% end %>
               </div>
 
               <div class="about">
@@ -40,6 +34,9 @@
               </div>
 
               <div class="actions">
+                <%= link_to '<i class="icon-comment reviews"></i>'.html_safe,
+                  admin_psychic_path(psychic) %>
+
                 <% if @client.favorite?(psychic) %>
                   <%= link_to '<i class="icon-heart favorited"></i>'.html_safe, remove_favorite_client_path(psychic_id: psychic.id) %>
                 <% else %>
