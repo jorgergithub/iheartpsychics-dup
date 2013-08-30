@@ -13,6 +13,10 @@ class Psychic < ActiveRecord::Base
 
   mount_uploader :resume, ResumeUploader
 
+  def rating
+    reviews.average(:rating)
+  end
+
   private
 
   def assign_extension
