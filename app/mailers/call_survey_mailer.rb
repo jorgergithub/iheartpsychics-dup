@@ -1,7 +1,7 @@
 class CallSurveyMailer < ActionMailer::Base
   default from: "noreply@iheartpsychics.co"
 
-  def notify_manager_director(user, call_survey, review)
+  def notify(user, call_survey, review)
     @user = user
     @call_survey = call_survey
     @review = review
