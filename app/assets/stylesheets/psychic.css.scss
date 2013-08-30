@@ -1,0 +1,72 @@
+body.psychics {
+  .psychics {
+    margin-bottom: 20px;
+  }
+
+  .psychic {
+    border-radius: 5px;
+    padding: 15px;
+    height: 360px;
+    background-color: #f1f2f2;
+
+    .name, .extension {
+      font-size: 18px;
+      color: #777;
+
+      b {
+        color: #000;
+      }
+    }
+
+    .rating {
+      height: 15px;
+
+      .white { color: #fff; }
+    }
+
+    .about {
+      color: #888;
+      font-size: 11px;
+      line-height: 1.2em;
+      margin-top: 10px;
+      height: 250px;
+      overflow: auto;
+    }
+
+    .actions {
+      .favorite {
+        color: #888;
+        text-decoration: none;
+
+        &:hover {
+          color: #111;
+          text-decoration: none;
+
+          &:after {
+            content: "favorite";
+            display: inline-block;
+            text-decoration: none;
+            margin-left: 5px;
+          }
+        }
+      }
+
+      .favorited {
+        color: #f00;
+        text-decoration: none;
+
+        &:hover {
+          color: #111;
+          text-decoration: none;
+
+          &:after {
+            content: "unfavorite";
+            display: inline-block;
+            text-decoration: none;
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+  }
+}

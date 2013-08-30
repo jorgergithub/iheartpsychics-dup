@@ -55,7 +55,7 @@
         <tbody>
           <% @client.phones.each do |phone| %>
             <tr>
-              <td>
+              <td class="admin-actions">
                 <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_client_phone_path(phone) %>
                 <%= link_to '<i class="icon-remove"></i>'.html_safe, phone, data: {confirm: "Are you sure?" }, :method => "delete" %>
               </td>
@@ -93,11 +93,11 @@
         <tbody>
           <% @client.psychics.each do |psychic| %>
             <tr>
-              <td>
+              <td class="admin-actions">
                 <% if @client.favorite?(psychic) %>
-                  <%= link_to '<i class="icon-remove"></i>'.html_safe, remove_favorite_client_path(psychic_id: psychic.id) %>
+                  <%= link_to '<i class="icon-heart favorited"></i>'.html_safe, remove_favorite_client_path(psychic_id: psychic.id) %>
                 <% else %>
-                  <%= link_to '<i class="icon-ok"></i>'.html_safe, make_favorite_client_path(psychic_id: psychic.id) %>
+                  <%= link_to '<i class="icon-heart-empty favorite"></i>'.html_safe, make_favorite_client_path(psychic_id: psychic.id) %>
                 <% end %>
               </td>
               <td><%= psychic.full_name %></td>
