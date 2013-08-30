@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day, :at => '1:30 am' do
-  runner "Newsletter.deliver_all"
+every '* * * * *' do
+  runner "Newsletter.deliver"
 end
