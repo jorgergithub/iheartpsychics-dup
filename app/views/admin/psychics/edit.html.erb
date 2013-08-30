@@ -5,12 +5,17 @@
   <div class="span12">
     <ul class="nav nav-tabs" id="tabs">
       <li class="active" data-toggle="tab"><%= link_to "Psychic", "#form" %></li>
+      <li data-toggle="tab"><%= link_to "Employment", "#employment" %></li>
       <li data-toggle="tab"><%= link_to "Reviews (#{@psychic.reviews.count})", "#reviews" %></li>
     </ul>
 
     <div class="tab-content">
       <div class="tab-pane active" id="form">
         <%= render "form", object: @psychic %>
+      </div>
+
+      <div class="tab-pane active" id="employment">
+        <%= render "employment", object: @psychic %>
       </div>
 
       <div class="tab-pane" id="reviews">

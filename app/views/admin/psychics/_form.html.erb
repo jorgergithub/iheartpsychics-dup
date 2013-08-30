@@ -22,46 +22,11 @@
     <%= pf.fields_for :psychic do |f| %>
       <%= add_checkbox f, :featured %>
 
-      <legend>Address and Contact Information</legend>
+      <legend>Profile Information</legend>
 
-      <%= add_text_field f, :address, "Street Address", class: "input-xxlarge" %>
-      <%= add_text_field f, :city %>
-      <%= add_state_select f, :state %>
-      <%= add_text_field f, :zip_code %>
-      <%= add_text_field f, :phone, "Landline Number" %>
-      <%= add_text_field f, :cellular_number %>
-      <%= add_text_field f, :ssn, "SS#", data: {mask: "999-99-9999"} %>
-      <%= add_text_field f, :date_of_birth %>
-      <%= add_text_field f, :emergency_contact %>
-      <%= add_text_field f, :emergency_contact_number, "Emergency number" %>
+      <%= render "psychics/form", object: f.object %>
+    <% end %>
+  </fieldset>
 
-      <legend>Resume</legend>
-
-      <%= add_file_field f, @psychic, :resume %>
-
-      <legend>Questions</legend>
-
-      <%= add_yesno_field f, :us_citizen, "US citizen?" %>
-
-      <%= add_yesno_field f, :has_experience, "Do you have any experience working professionally as a Psychic?" %>
-      <%= add_text_area f, :experience, "Please list your Psychic experience below", size: "120x10", class: "input-xxlarge" %>
-      <%= add_text_area f, :gift, "What type of gift do you use to provide readings?", size: "120x10", class: "input-xxlarge" %>
-      <%= add_text_area f, :explain_gift, "Explain your gift.", size: "120x10", class: "input-xxlarge" %>
-      <%= add_select f, :age_discovered, (1..100).map { |n| [n, n]}, "How old were you when you discovered your ability?" %>
-      <%= add_text_area f, :reading_style, "What is your reading style?", size: "120x10", class: "input-xxlarge" %>
-      <%= add_text_area f, :why_work, "Why do you want to work for IHP?", size: "120x10", class: "input-xxlarge" %>
-      <%= add_text_area f, :friends_describe, "How would your friends and coworkers describe you?", size: "120x10", class: "input-xxlarge" %>
-      <%= add_text_area f, :strongest_weakest_attributes, "What are your strongest and weakest attributes?", size: "120x10", class: "input-xxlarge" %>
-      <%= add_text_area f, :how_to_deal_challenging_client, "How would you deal with a client who is challenging?", size: "120x10", class: "input-xxlarge" %>
-      <%= add_text_area f, :specialties, "What are your specialties?", size: "120x10", class: "input-xxlarge" %>
-      <%= add_text_area f, :tools, "What tools do you use?", size: "120x10", class: "input-xxlarge" %>
-      <%= add_text_area f, :professional_goals, "What are some of your professional goals?", size: "120x10", class: "input-xxlarge" %>
-      <%= add_select f, :how_did_you_hear, ["Search Engine", "Social Network Sites", "TV", "Radio", "Referral", "Other"].map { |o| [o, o] }, "How did you hear about this opportunity?" %>
-      <div id="other" class="hidden">
-        <%= add_text_field f, :other, "Other", size: "120x10", class: "input-xxlarge" %>
-      </div>
-    </fieldset>
-
-    <%= f.submit "Save", class: "btn btn-primary" %>
-  <% end %>
+  <%= pf.submit "Save", class: "btn btn-primary" %>
 <% end %>
