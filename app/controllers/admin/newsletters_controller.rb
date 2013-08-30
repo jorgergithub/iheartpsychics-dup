@@ -44,7 +44,7 @@ class Admin::NewslettersController < AuthorizedController
   protected
 
   def newsletter_params
-    params.require(:newsletter).permit(:title, :body, :deliver_by)
+    params.require(:newsletter).permit(:title, :body, :deliver_by_str)
   end
 
   def find_newsletter

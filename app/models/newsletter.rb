@@ -20,4 +20,13 @@ class Newsletter < ActiveRecord::Base
   def delivered?
     delivered_at.present?
   end
+
+  def deliver_by_str
+    return "" unless deliver_by
+    deliver_by.strftime("%m/%d/%Y %I:%M %p")
+  end
+
+  def deliver_by_str=(s)
+    self.deliver_by = DateTime.strptime(s, "%m/%d/%Y %I:%M %p")
+  end
 end
