@@ -15,7 +15,7 @@
         <tbody>
           <% @surveys.each do |survey| %>
             <tr>
-              <td>
+              <td class="admin-actions">
                 <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_admin_survey_path(survey) %>
                 <%= link_to '<i class="icon-remove"></i>'.html_safe, [:admin, survey], data: {confirm: "Are you sure?" }, :method => "delete" %>
               </td>

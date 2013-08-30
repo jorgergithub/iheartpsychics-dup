@@ -2,6 +2,7 @@
   <table class="table table-hover">
     <thead>
       <tr>
+        <th></th>
         <th>ID</th>
         <th>Call</th>
         <th>Client</th>
@@ -12,6 +13,9 @@
     <tbody>
       <% target.call_surveys.each do |cs| %>
         <tr>
+          <td class="admin-actions">
+            <a href="#details_<%= cs.id %>" role="button" data-toggle="modal"><i class="icon-plus-sign"></i></a>
+          </td>
           <td>
             <a href="#details_<%= cs.id %>" role="button" data-toggle="modal"><%= cs.id %></a>
           </td>

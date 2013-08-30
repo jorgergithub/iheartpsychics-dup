@@ -17,7 +17,7 @@
         <tbody>
           <% @clients.each do |client| %>
             <tr>
-              <td>
+              <td class="admin-actions">
                 <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_admin_client_path(client) %>
                 <%= link_to '<i class="icon-remove"></i>'.html_safe, [:admin, client], data: {confirm: "Are you sure?" }, :method => "delete" %>
               </td>
