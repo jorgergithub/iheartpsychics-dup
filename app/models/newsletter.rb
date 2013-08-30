@@ -12,7 +12,7 @@ class Newsletter < ActiveRecord::Base
 
   def deliver
     Client.subscribed.each do |client|
-      NewsletterMailer.send_newsletter(self, client).deliver
+      NewsletterMailer.delay.send_newsletter(self, client)
     end
     update_attributes delivered_at: Time.now
   end
