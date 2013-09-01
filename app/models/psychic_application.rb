@@ -6,11 +6,14 @@ class PsychicApplication < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :username, :password,
       :email, :address, :city, :state,
       :zip_code, :phone, :cellular_number, :ssn, :date_of_birth,
-      :emergency_contact, :emergency_contact_number, :us_citizen, :resume,
-      :has_experience, :experience, :gift, :explain_gift, :age_discovered,
+      :emergency_contact, :emergency_contact_number, :resume,
+      :experience, :gift, :explain_gift, :age_discovered,
       :reading_style, :why_work, :friends_describe,
       :strongest_weakest_attributes, :how_to_deal_challenging_client,
       :tools, :specialties, :professional_goals, :how_did_you_hear
+
+  validates_inclusion_of :us_citizen, in: [true, false], message: "can't be blank"
+  validates_inclusion_of :has_experience, in: [true, false], message: "can't be blank"
 
   after_create :send_confirmation_email
 
