@@ -30,5 +30,5 @@ build:
             from: alerts@wercker.com
             to: felipe.coury@gmail.com
             username: $SMTP_USER
-            password: $SMTP_PASS
+            password: $SMTP_PASSWORD
             host: smtp.sendgrid.net
