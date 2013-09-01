@@ -108,4 +108,19 @@ describe Call do
       end
     end
   end
+
+  describe "#psychic_name" do
+    context "when the psychic exists" do
+      it "is the psychic full name" do
+        expect(call.psychic_name).to eql(call.psychic.full_name)
+      end
+    end
+
+    context "when the psychic doesn't exist" do
+      before { call.psychic.destroy }
+      it "is empty" do
+        expect(call.reload.psychic_name).to be_empty
+      end
+    end
+  end
 end

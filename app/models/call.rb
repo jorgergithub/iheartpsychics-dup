@@ -42,6 +42,10 @@ class Call < ActiveRecord::Base
     @twilio_call ||= twilio_account.calls.get(sid)
   end
 
+  def psychic_name
+    psychic.try(:full_name) || ""
+  end
+
   def process
     # Property          Description
     # sid               A 34 character string that uniquely identifies this resource.
@@ -96,10 +100,6 @@ class Call < ActiveRecord::Base
     "#{duration == 0 ? "no" : duration} #{duration == 1 ? "minute" : "minutes"}"
   end
 
-  def psychic_name
-    psychic.full_name
-  end
-
   def date
     created_at.strftime("%B %e, %Y")
   end
@@ -110,6 +110,10 @@ class Call < ActiveRecord::Base
 
   def survey_completed?
     call_survey.present?
+  end
+
+  def psychic_name
+    psychic.try(:full_name) || ""
   end
 
   private
