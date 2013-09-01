@@ -19,3 +19,16 @@ build:
         - script:
             name: rspec
             code: bundle exec rspec
+
+    after-steps:
+        - hipchat-notify:
+            token: $HIPCHAT_TOKEN
+            room-id: 116948
+            from-name: wercker
+
+        - mies/email-notify:
+            from: alerts@wercker.com
+            to: felipe.coury@gmail.com
+            username: $SMTP_USER
+            password: $SMTP_PASS
+            host: smtp.sendgrid.net
