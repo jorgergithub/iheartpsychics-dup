@@ -9,18 +9,32 @@ describe Newsletter do
     let(:mailer)  { double(:mailer).as_null_object }
 
     before {
-      NewsletterMailer.stub(send_newsletter: mailer)
+      newsletter.stub(:send_email)
       newsletter.deliver
     }
 
     it "sends only to subscribed clients" do
-      NewsletterMailer.should have_received(:send_newsletter).with(newsletter, client1)
-      NewsletterMailer.should_not have_received(:send_newsletter).with(newsletter, client2)
-      mailer.should have_received(:deliver).once
+      newsletter.should have_received(:send_email).with(client1)
+      newsletter.should_not have_received(:send_email).with(client2)
     end
 
     it "sets delivered to true" do
       expect(newsletter.reload).to be_delivered
+    end
+  end
+
+  describe "#send_email" do
+    let(:delay) { double(:delay) }
+    let(:client) { double(:client) }
+
+    before {
+      NewsletterMailer.stub(delay: delay)
+      delay.stub(:send_newsletter)
+    }
+
+    it "sends the email to the client" do
+      newsletter.send_email(client)
+      delay.should have_received(:send_newsletter).with(newsletter, client)
     end
   end
 
