@@ -8,9 +8,12 @@ class Psychic < ActiveRecord::Base
 
   has_and_belongs_to_many :favorited_by_clients, class_name: "Client"
 
-  delegate :username, :first_name, :last_name, :full_name, :email, to: :user
+  delegate :username, :first_name, :last_name, :full_name, :email,
+           to: :user, allow_nil: true
 
   validates :extension, :uniqueness => true
+  validates :phone, :presence => true
+  validates :phone, :as_phone_number => true
 
   localize :phone, :cellular_number, :emergency_contact_number, :using => PhoneParser
 
