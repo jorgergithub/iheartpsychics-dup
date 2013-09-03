@@ -22,7 +22,7 @@
 
     <%= add_text_field f, :username %>
     <%= add_text_field f, :email %>
-    <%= add_text_field f, :phone %>
+    <%= add_text_field f, :phone, "", data: { mask: t('masks.phone') } %>
     <% if params[:action] == "new" %>
       <%= add_password_field f, :password %>
     <% end %>
