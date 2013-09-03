@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/carlosantoniodasilva/i18n_alchemy
+  revision: d20213234dab7b41a41140f53db2c61d1efcb954
+  specs:
+    i18n_alchemy (0.1.0)
+      activesupport (>= 3.2.0, < 4.1)
+      i18n (~> 0.6)
+
+GIT
   remote: https://github.com/gistia/ckeditor
   revision: 95c05eb23b81298dfb204da72ce04a8141118ce5
   specs:
@@ -279,6 +287,7 @@ DEPENDENCIES
   growl (~> 1.0.3)
   guard (~> 1.8.2)
   guard-rspec (~> 3.0.2)
+  i18n_alchemy!
   jbuilder (~> 1.2)
   jquery-rails (~> 3.0.4)
   jquery-turbolinks (~> 1.0.0)

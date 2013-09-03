@@ -27,6 +27,7 @@ gem 'stripe'            , :git => 'https://github.com/stripe/stripe-ruby'
 gem 'twilio-ruby'       , '~> 3.10.0'
 gem 'unicorn'           , '~> 4.6.3'
 gem 'whenever'          , '~> 0.8.4'
+gem 'i18n_alchemy'      , :git => 'https://github.com/carlosantoniodasilva/i18n_alchemy'
 
 group :development, :test do
   gem 'factory_girl_rails'   , '~> 4.2.1'
