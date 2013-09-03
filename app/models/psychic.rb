@@ -12,7 +12,7 @@ class Psychic < ActiveRecord::Base
 
   validates :extension, :uniqueness => true
 
-  localize :phone, :using => PhoneParser
+  localize :phone, :cellular_number, :emergency_contact_number, :using => PhoneParser
 
   mount_uploader :resume, ResumeUploader
 
