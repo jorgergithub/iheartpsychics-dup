@@ -11,7 +11,7 @@
               <div class="input-append">
                 <%= f.text_field :phone, class: "input-small",
                   style: "width: 120px", autofocus: !@csr.phone.present?,
-                  data: { mask: "999-999-9999" } %>
+                  data: { mask: t('masks.phone') } %>
                 <%= f.submit "Save", class: "btn" %>
               </div>
             </td>

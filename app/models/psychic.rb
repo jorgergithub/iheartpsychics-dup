@@ -1,5 +1,3 @@
-require "random_utils"
-
 class Psychic < ActiveRecord::Base
   include I18n::Alchemy
 
