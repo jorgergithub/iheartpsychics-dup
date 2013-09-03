@@ -1,17 +1,24 @@
 require "random_utils"
 
 class Psychic < ActiveRecord::Base
-  belongs_to :user
-  delegate :username, :first_name, :last_name, :full_name, :email, to: :user
+  include I18n::Alchemy
 
-  has_and_belongs_to_many :favorited_by_clients, class_name: "Client"
+  belongs_to :user
+
   has_many :calls
   has_many :reviews
 
-  before_create :assign_extension
-  validates_uniqueness_of :extension
+  has_and_belongs_to_many :favorited_by_clients, class_name: "Client"
+
+  delegate :username, :first_name, :last_name, :full_name, :email, to: :user
+
+  validates :extension, :uniqueness => true
+
+  localize :phone, :using => PhoneParser
 
   mount_uploader :resume, ResumeUploader
+
+  before_create :assign_extension
 
   def rating
     reviews.average(:rating)

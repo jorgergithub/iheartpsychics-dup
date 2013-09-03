@@ -17,7 +17,7 @@ class PsychicsController < AuthorizedController
   end
 
   def update
-    if @psychic.update_attributes(psychic_params)
+    if @psychic.localized.update_attributes(psychic_params)
       redirect_to dashboard_path, notice: "Psychic was successfully updated."
     else
       render action: "show"
@@ -33,7 +33,7 @@ class PsychicsController < AuthorizedController
   protected
 
   def find_psychic
-    @psychic = current_psychic
+    @psychic = current_psychic.localized
   end
 
   def psychic_params
