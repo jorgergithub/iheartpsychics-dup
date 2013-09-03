@@ -1,10 +1,11 @@
-box: wercker/ruby
+box: wercker/ubuntu12.04-ruby2.0.0
 services:
   - wercker/mysql
 build:
     steps:
         - bundle-install
         - rails-database-yml
+
         - script:
             name: echo ruby information
             code: |
@@ -13,8 +14,8 @@ build:
                 echo -p "gem list: $(gem list)"
 
         - script:
-            name: Set up db
-            code: bundle exec rake db:schema:load RAILS_ENV=test
+            name: set up database
+            code: bundle exec rake db:test:prepare RAILS_ENV=test
 
         - script:
             name: rspec
@@ -23,7 +24,7 @@ build:
     after-steps:
         - hipchat-notify:
             token: $HIPCHAT_TOKEN
-            room-id: 116948
+            room-id: $HIPCHAT_ROOM_ID
             from-name: wercker
 
         - mies/email-notify:
