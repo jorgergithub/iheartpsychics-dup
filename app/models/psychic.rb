@@ -11,11 +11,11 @@ class Psychic < ActiveRecord::Base
   delegate :username, :first_name, :last_name, :full_name, :email,
            to: :user, allow_nil: true
 
-  validates :extension, :uniqueness => true
-  validates :phone, :presence => true
-  validates :phone, :as_phone_number => true
+  validates :extension, uniqueness: true
+  validates :phone, presence: true
+  validates :phone, as_phone_number: true
 
-  localize :phone, :cellular_number, :emergency_contact_number, :using => PhoneParser
+  localize :phone, :cellular_number, :emergency_contact_number, using: PhoneParser
 
   mount_uploader :resume, ResumeUploader
 
