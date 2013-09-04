@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require vendor/module/module
 //= require turbolinks
 //= require bootstrap
 //= require ckeditor/init
