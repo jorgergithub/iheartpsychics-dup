@@ -20,9 +20,9 @@
   <%= add_text_field f, :city %>
   <%= add_state_select f, :state %>
   <%= add_text_field f, :zip_code %>
-  <%= add_text_field f, :phone, "Landline Number" %>
-  <%= add_text_field f, :cellular_number %>
-  <%= add_text_field f, :ssn, "SS#", data: {mask: "999-99-9999"} %>
+  <%= add_text_field f, :phone, "Landline Number", data: { mask: t('masks.phone') } %>
+  <%= add_text_field f, :cellular_number, "", data: { mask: t('masks.phone') } %>
+  <%= add_text_field f, :ssn, "SS#", data: { mask: t('masks.ssn') } %>
 
   <div class="control-group">
     <%= f.label :date_of_birth, nil, :class => 'control-label' %>
@@ -37,7 +37,7 @@
   </div>
 
   <%= add_text_field f, :emergency_contact %>
-  <%= add_text_field f, :emergency_contact_number, "Emergency number" %>
+  <%= add_text_field f, :emergency_contact_number, "Emergency number", data: { mask: t('masks.phone') } %>
 
   <legend>Resume</legend>
 
