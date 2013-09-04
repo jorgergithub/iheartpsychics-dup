@@ -9,19 +9,22 @@ class ClientPhonesController < AuthorizedController
   end
 
   def create
-    @phone = current_client.phones.new(phone_params)
+    @phone = current_client.phones.build.tap do |object|
+      object.localized.assign_attributes(phone_params)
+    end
+
     if @phone.save
       redirect_to client_path, notice: "New phone was successfully created."
     else
-      render action: "show"
+      render action: "new"
     end
   end
 
   def update
-    if @phone.update_attributes(phone_params)
+    if @phone.localized.update_attributes(phone_params)
       redirect_to client_path, notice: "Phone was successfully updated."
     else
-      render action: "show"
+      render action: "edit"
     end
   end
 
@@ -35,7 +38,7 @@ class ClientPhonesController < AuthorizedController
 
   def find_phone
     @client = current_client
-    @phone = @client.phones.find(params[:id]) if params[:id]
+    @phone = @client.phones.find(params[:id]).localized if params[:id]
   end
 
   def phone_params
