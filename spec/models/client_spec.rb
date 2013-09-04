@@ -1,17 +1,35 @@
 require "spec_helper"
 
 describe Client do
+  it { should belong_to :user }
+
+  it { should have_many(:call_surveys).through(:calls) }
+  it { should have_many(:calls) }
+  it { should have_many(:cards).dependent(:destroy) }
+  it { should have_many(:credits).dependent(:destroy) }
+  it { should have_many(:orders) }
+  it { should have_many(:phones).dependent(:destroy) }
+  it { should have_many(:reviews) }
+  it { should have_many(:transactions) }
+
+  it { should have_and_belong_to_many(:favorite_psychics) }
+
+  it { should delegate(:email).to(:user).allowing_nil(true) }
+  it { should delegate(:first_name).to(:user).allowing_nil(true) }
+  it { should delegate(:full_name).to(:user).allowing_nil(true) }
+  it { should delegate(:last_name).to(:user).allowing_nil(true) }
+  it { should delegate(:username).to(:user).allowing_nil(true) }
+
   let(:user)   { User.create(email: "felipe.coury@gmail.com", password: "pass123")}
   let(:client) { Client.create(user: user, pin: "1234", minutes: 60) }
 
   describe "creating a client with a phone number" do
-    let!(:client) {
-      Client.create(user: user, pin: "1234", phone_number: "7641233322")
-    }
+    let!(:client) do
+      Client.create(user: user, pin: "1234", phone_number: "+17641233322")
+    end
 
     it "saves the phone number" do
-      client.reload
-      expect(client.phones.first.number).to eql("+17641233322")
+      expect(client.reload.phones.first.number).to eql("+17641233322")
     end
 
     it "saves the pin number" do

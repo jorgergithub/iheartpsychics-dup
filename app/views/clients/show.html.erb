@@ -53,13 +53,13 @@
           </tr>
         </thead>
         <tbody>
-          <% @client.phones.each do |phone| %>
+          <% localized(@client.phones).each do |phone| %>
             <tr>
               <td class="admin-actions">
                 <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_client_phone_path(phone) %>
                 <%= link_to '<i class="icon-remove"></i>'.html_safe, phone, data: {confirm: "Are you sure?" }, :method => "delete" %>
               </td>
-              <td><%= phone.formatted_number %></td>
+              <td><%= phone.number %></td>
               <td><%= phone.desc %></td>
             </tr>
           <% end %>

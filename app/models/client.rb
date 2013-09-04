@@ -14,11 +14,12 @@ class Client < ActiveRecord::Base
 
   has_and_belongs_to_many :favorite_psychics, class_name: "Psychic"
 
+  delegate :username, :first_name, :last_name, :full_name, :email,
+           to: :user, allow_nil: true
+
   after_create :add_phone_number
   before_save  :set_random_pin
   before_save  :set_unsubscribe_key
-
-  delegate :username, :first_name, :last_name, :full_name, :email, to: :user
 
   scope :subscribed, -> { where('receive_newsletters') }
 
@@ -148,6 +149,11 @@ class Client < ActiveRecord::Base
 
   def add_phone_number
     return unless self.phone_number
-    self.phones.create(number: self.phone_number, desc: "Main")
+
+    phone = self.phones.build.tap do |object|
+      object.localized.assign_attributes(number: self.phone_number, desc: "Main")
+    end
+
+    phone.save
   end
 end
