@@ -31,6 +31,7 @@ gem 'i18n_alchemy'      , :git => 'https://github.com/carlosantoniodasilva/i18n_
 
 group :development, :test do
   gem 'factory_girl_rails'   , '~> 4.2.1'
+  gem 'foreigner'
   gem 'growl'                , '~> 1.0.3'
   gem 'guard'                , '~> 1.8.2'
   gem 'guard-rspec'          , '~> 3.0.2'

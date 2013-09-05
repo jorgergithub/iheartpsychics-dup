@@ -92,6 +92,8 @@ GEM
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     ffi (1.9.0)
+    foreigner (1.4.2)
+      activerecord (>= 3.0.0)
     formatador (0.2.4)
     growl (1.0.3)
     guard (1.8.2)
@@ -297,6 +299,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise (~> 3.0.1)
   factory_girl_rails (~> 4.2.1)
+  foreigner
   growl (~> 1.0.3)
   guard (~> 1.8.2)
   guard-rspec (~> 3.0.2)
