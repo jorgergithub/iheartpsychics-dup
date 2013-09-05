@@ -34,6 +34,7 @@ group :development, :test do
   gem 'growl'                , '~> 1.0.3'
   gem 'guard'                , '~> 1.8.2'
   gem 'guard-rspec'          , '~> 3.0.2'
+  gem 'pry-meta'
   gem 'rspec-rails'          , '~> 2.0'
 end
 
