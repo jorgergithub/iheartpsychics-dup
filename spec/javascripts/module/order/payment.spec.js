@@ -200,4 +200,36 @@ describe("IHP.Pages.Orders.Payment", function() {
       });
     });
   });
+
+  describe("stripeResponseHandler", function() {
+    describe("when success", function() {
+      beforeEach(function() {
+        spyOn(form, "submit");
+
+        var success = { id: "TOKEN", error: false };
+        payment.stripeResponseHandler(200, success);
+      });
+
+      it("appends the token to the form", function() {
+        expect(form.find("[name='order[stripe_token]']").val()).toEqual("TOKEN");
+      });
+
+      it("submits the form", function() {
+        expect(form.submit).toHaveBeenCalled();
+      });
+    });
+
+    describe("when failure", function() {
+      beforeEach(function() {
+        spyOn(payment, "setPaymentError");
+
+        var failure = { error: { message: "ERROR" } };
+        payment.stripeResponseHandler(200, failure);
+      });
+
+      it("sets the payment error", function() {
+        expect(payment.setPaymentError).toHaveBeenCalledWith("ERROR");
+      });
+    });
+  });
 });

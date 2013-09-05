@@ -74,7 +74,7 @@ Module("IHP.Pages.Orders.Payment", function(Payment) {
     else {
       var tokenId = response.id;
       var token = $("<input type='hidden' name='order[stripe_token]'>").val(tokenId);
-      this.form.append(token)
+      this.form.append(token);
       this.form.submit();
     }
   };
