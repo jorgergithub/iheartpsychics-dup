@@ -5,7 +5,7 @@ class CustomerServiceRepresentativesController < AuthorizedController
   end
 
   def update
-    if @csr.update_attributes(csr_params)
+    if @csr.localized.update_attributes(csr_params)
       redirect_to dashboard_path, notice: "CSR was successfully updated."
     else
       render action: "show"
@@ -15,7 +15,7 @@ class CustomerServiceRepresentativesController < AuthorizedController
   protected
 
   def find_csr
-    @csr = current_csr
+    @csr = current_csr.localized
   end
 
   def csr_params

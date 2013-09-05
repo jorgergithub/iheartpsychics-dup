@@ -2,7 +2,8 @@ class Admin::CustomerServiceRepresentativesController < AuthorizedController
   before_filter :find_csr
 
   def index
-    @csrs = CustomerServiceRepresentative.includes(:user).order("users.first_name, users.last_name")
+    @csrs = CustomerServiceRepresentative.includes(:user)
+      .order("users.first_name, users.last_name")
   end
 
   def new
@@ -17,7 +18,10 @@ class Admin::CustomerServiceRepresentativesController < AuthorizedController
   def create
     ActiveRecord::Base.transaction do
       @user = User.new(user_params.merge({ create_as: "csr" }))
+      @user.localized.update_attributes(user_params)
+
       @csr = @user.build_rep(csr_params)
+      @csr.localized.update_attributes(csr_params)
       @csr.user = @user
 
       @user.skip_confirmation!
@@ -36,7 +40,7 @@ class Admin::CustomerServiceRepresentativesController < AuthorizedController
     ActiveRecord::Base.transaction do
       @user = @csr.user
       if @user.update_attributes(user_params)
-        if @csr.update_attributes(csr_params)
+        if @csr.localized.update_attributes(csr_params)
           redirect_to admin_customer_service_representatives_path,
             notice: "CSR was successfully updated."
         else
@@ -53,7 +57,7 @@ class Admin::CustomerServiceRepresentativesController < AuthorizedController
   protected
 
   def find_csr
-    @csr = CustomerServiceRepresentative.find(params[:id]) if params[:id]
+    @csr = CustomerServiceRepresentative.find(params[:id]).localized if params[:id]
   end
 
   def user_params

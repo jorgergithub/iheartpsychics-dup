@@ -22,6 +22,7 @@ FactoryGirl.define do
 
   factory :psychic do
     association :user
+    phone "+15186335473"
   end
 
   factory :package do

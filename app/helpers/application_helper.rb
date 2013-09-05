@@ -24,4 +24,12 @@ module ApplicationHelper
   def format_datetime(date)
     date.strftime("%b %d, %Y %I:%M%P")
   end
+
+  def localized(collection)
+    if block_given?
+      collection.each { |item| yield(item.localized) }
+    else
+      collection.map { |item| item.localized }
+    end
+  end
 end

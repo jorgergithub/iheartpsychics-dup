@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
+
 gem 'rails'         , '4.0.0'
 gem 'mysql2'        , '~> 0.3.12'
 gem 'sass-rails'    , '~> 4.0.0'
@@ -25,6 +27,7 @@ gem 'stripe'            , :git => 'https://github.com/stripe/stripe-ruby'
 gem 'twilio-ruby'       , '~> 3.10.0'
 gem 'unicorn'           , '~> 4.6.3'
 gem 'whenever'          , '~> 0.8.4'
+gem 'i18n_alchemy'      , :git => 'https://github.com/carlosantoniodasilva/i18n_alchemy'
 
 group :development, :test do
   gem 'factory_girl_rails'   , '~> 4.2.1'
@@ -35,6 +38,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'shoulda-matchers'
   gem 'vcr'                  , '~> 2.5.0'
   gem 'webmock'              , '~> 1.11.0'
 end

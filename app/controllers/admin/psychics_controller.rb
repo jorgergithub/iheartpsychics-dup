@@ -15,7 +15,7 @@ class Admin::PsychicsController < AuthorizedController
   end
 
   def update
-    if @user.update_attributes(user_params)
+    if @user.localized.update_attributes(user_params)
       redirect_to admin_psychics_path, notice: "Psychic was successfully updated."
     else
       render action: "edit"
@@ -27,7 +27,7 @@ class Admin::PsychicsController < AuthorizedController
   def find_psychic
     return unless params[:id]
 
-    @psychic = Psychic.find(params[:id])
+    @psychic = Psychic.find(params[:id]).localized
     @user = @psychic.user
   end
 

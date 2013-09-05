@@ -6,7 +6,10 @@ class PsychicApplicationsController < ApplicationController
   end
 
   def create
-    @psychic_application = PsychicApplication.new(application_params)
+    @psychic_application = PsychicApplication.new.tap do |object|
+      object.localized.assign_attributes(application_params)
+    end
+
     if @psychic_application.save
       redirect_to confirmation_psychic_applications_path,
         notice: "Your application has been submitted."

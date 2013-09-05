@@ -23,6 +23,6 @@ class Admin::PsychicApplicationsController < AuthorizedController
   protected
 
   def find_psychic_application
-    @psychic_application = PsychicApplication.find(params[:id]) if params[:id]
+    @psychic_application = PsychicApplication.find(params[:id]).localized if params[:id]
   end
 end

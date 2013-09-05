@@ -1,21 +1,26 @@
 class PsychicApplication < ActiveRecord::Base
+  include I18n::Alchemy
+
+  validates :first_name, :last_name, :username, :password, :email, :address,
+            :city, :state, :zip_code, :phone, :cellular_number, :ssn,
+            :date_of_birth, :emergency_contact, :emergency_contact_number,
+            :resume, :experience, :gift, :explain_gift, :age_discovered,
+            :reading_style, :why_work, :friends_describe,
+            :strongest_weakest_attributes, :how_to_deal_challenging_client,
+            :tools, :specialties, :professional_goals, :how_did_you_hear,
+            :presence => true
+  validates :us_citizen, inclusion: { in: [true, false], message: "can't be blank" }
+  validates :has_experience, inclusion: { in: [true, false], message: "can't be blank" }
+  validates :phone, :cellular_number, :emergency_contact_number, as_phone_number: true
+
+  localize :phone, :cellular_number, :emergency_contact_number, :using => PhoneParser
+  localize :date_of_birth, :using => KeepDateParser
+
   mount_uploader :resume, ResumeUploader
 
-  scope :pending, -> { where("approved_at IS NULL AND declined_at IS NULL") }
-
-  validates_presence_of :first_name, :last_name, :username, :password,
-      :email, :address, :city, :state,
-      :zip_code, :phone, :cellular_number, :ssn, :date_of_birth,
-      :emergency_contact, :emergency_contact_number, :resume,
-      :experience, :gift, :explain_gift, :age_discovered,
-      :reading_style, :why_work, :friends_describe,
-      :strongest_weakest_attributes, :how_to_deal_challenging_client,
-      :tools, :specialties, :professional_goals, :how_did_you_hear
-
-  validates_inclusion_of :us_citizen, in: [true, false], message: "can't be blank"
-  validates_inclusion_of :has_experience, in: [true, false], message: "can't be blank"
-
   after_create :send_confirmation_email
+
+  scope :pending, -> { where("approved_at IS NULL AND declined_at IS NULL") }
 
   def full_name
     "#{first_name} #{last_name}"
