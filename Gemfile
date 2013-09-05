@@ -36,7 +36,7 @@ group :development, :test do
   gem 'guard'                , '~> 1.8.2'
   gem 'guard-rspec'          , '~> 3.0.2'
   gem 'pry-meta'
-  gem 'jasmine'              , '~> 1.3.2'
+  gem 'jasmine'              , git: 'git@github.com:gistia/jasmine-gem.git'
   gem 'rspec-rails'          , '~> 2.0'
 end
 

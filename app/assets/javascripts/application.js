@@ -10,13 +10,30 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+// Libs ===================================================
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require vendor/module/module
 //= require turbolinks
 //= require bootstrap
+//= require bootstrap-datepicker
+//= require bootstrap-datetimepicker
 //= require ckeditor/init
 //= require ckeditor/config
-//= require bootstrap-datetimepicker
-//= require_tree .
+//
+// Vendor Libs ============================================
+//= require vendor/module/module
+//= require vendor/emitter/emitter
+//
+// App Modules ============================================
+//= require modules/order/package
+//= require modules/order/payment
+//= require modules/order/orders_new
+//
+// App Code ===============================================
+//= require boot
+//= require datepicker
+//= require horoscopes
+//= require psychic_application
+//= require survey
+//= require tabs
