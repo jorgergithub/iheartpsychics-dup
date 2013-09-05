@@ -22,7 +22,7 @@ IHeartPsychics::Application.routes.draw do
     resources :surveys
     resources :call_surveys
     resources :reviews
-    resources :faqs
+    resources :categories
     resources :horoscopes
     resources :calls
     resources :newsletters do
