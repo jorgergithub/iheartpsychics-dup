@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130830004116) do
+ActiveRecord::Schema.define(version: 20130904191847) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -69,6 +69,12 @@ ActiveRecord::Schema.define(version: 20130830004116) do
     t.string   "country"
     t.string   "address_city"
     t.string   "stripe_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -141,7 +147,10 @@ ActiveRecord::Schema.define(version: 20130830004116) do
     t.integer  "order"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "category_id"
   end
+
+  add_index "faqs", ["category_id"], name: "index_faqs_on_category_id", using: :btree
 
   create_table "horoscopes", force: true do |t|
     t.date     "date"
@@ -380,5 +389,7 @@ ActiveRecord::Schema.define(version: 20130830004116) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+
+  add_foreign_key "faqs", "categories", :name => "faqs_category_id_fk"
 
 end

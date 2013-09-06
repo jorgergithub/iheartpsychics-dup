@@ -1,3 +1,5 @@
 class Faq < ActiveRecord::Base
-  validates_presence_of :question, :answer
+  belongs_to :category
+
+  validates :question, :answer, presence: true
 end

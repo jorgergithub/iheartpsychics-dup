@@ -1,5 +1,11 @@
-<%= form_for([:admin, object], :html => { :class => 'form form-horizontal' }) do |f| %>
-  <%= render 'errors', object: @faq %>
+<div class="fields">
+  <hr>
+
+  <div class="pull-right">
+    <%= f.hidden_field :_destroy%>
+    <%= link_to_remove_fields('<i class="icon-remove"></i> Remove this FAQ'.html_safe, f,
+      :title => "This FAQ will be removed") %>
+  </div>
 
   <div class="control-group">
     <%= f.label :question, "Question", :class => 'control-label' %>
@@ -14,7 +20,4 @@
       <%= f.text_area :answer, class: 'input-xxlarge', rows: 10 %>
     </div>
   </div>
-
-  <%= f.submit "Save", class: "btn" %>
-  <%= link_to "Cancel", admin_faqs_path, class: "btn" %>
-<% end %>
+</div>

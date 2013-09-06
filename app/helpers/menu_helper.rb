@@ -9,8 +9,9 @@ module MenuHelper
     end
   end
 
-  def admin_link(label, path)
-    link label, path, send("admin_#{label.downcase}_path").split("/").last
+  def admin_link(label, path, options = {})
+    resource = options.fetch(:resource, label.downcase)
+    link label, path, send("admin_#{resource.to_s}_path").split("/").last
   end
 
   def dashboard_link
