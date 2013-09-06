@@ -43,6 +43,7 @@
               </div>
               Review from
               <b><%= link_to review.client.full_name, edit_admin_client_path(review.client) %></b>
+              <span><% review.rating.times do %><i class="icon-heart"></i><% end %></span>
             </td>
           </tr>
           <tr>
