@@ -25,7 +25,7 @@ class ClientsController < AuthorizedController
     end
 
     if @client.user.update_attributes(tmp_params)
-      redirect_to dashboard_path, notice: "Client was successfully updated."
+      redirect_to edit_client_path, notice: "Client was successfully updated."
     else
       render action: "edit"
     end
