@@ -18,6 +18,7 @@
 //= require bootstrap
 //= require bootstrap-datepicker
 //= require bootstrap-datetimepicker
+//= require bootstrap-inputmask
 //= require ckeditor/init
 //= require ckeditor/config
 //
