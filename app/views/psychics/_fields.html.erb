@@ -49,4 +49,4 @@
 
   <%= add_text_area f, :about, nil, size: "120x10", class: "input-xxlarge" %>
 
-  <%= add_select f, :price, psychic_prices, "Price (Per Minute)" %>
+  <%= add_select f, :price, psychic_prices, "Price (Per Minute)", :selected => f.object.price %>

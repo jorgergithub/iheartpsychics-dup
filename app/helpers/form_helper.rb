@@ -61,8 +61,10 @@ module FormHelper
   end
 
   def add_select(form, field_name, values, label=nil, options={})
+    options.merge!(include_blank: true)
+
     add_field(form, field_name, label, options) do
-      form.select(field_name, values, include_blank: true)
+      form.select(field_name, values, options)
     end
   end
 
