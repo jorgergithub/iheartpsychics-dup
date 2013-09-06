@@ -4,6 +4,9 @@ Module("IHP.Pages.OrdersNew", function(OrdersNew) {
   OrdersNew.fn.initialize = function(el) {
     Emitter.extend(this);
 
+    // element
+    this.el = $(el);
+
     // order form
     this.form = $(el).find("form");
 
@@ -20,6 +23,8 @@ Module("IHP.Pages.OrdersNew", function(OrdersNew) {
 
   OrdersNew.fn.addEventListeners = function() {
     this.form.on("submit", this.whenFormSubmitted.bind(this));
+    this.payment.on("paymentStarted", this.disableButtons, this);
+    this.payment.on("paymentError", this.enableButtons, this);
   };
 
   OrdersNew.fn.whenFormSubmitted = function() {
@@ -35,17 +40,4 @@ Module("IHP.Pages.OrdersNew", function(OrdersNew) {
     this.submit.prop("disabled", false);
     this.cancel.show();
   };
-
-  OrdersNew.fn.process = function() {
-    if (!this.validate()) {
-      return false;
-    }
-
-    this.disableButtons();
-    this.payment.process();
-  }
-
-  OrdersNew.fn.run = function() {
-    this.form.submit(this.process.bind(this));
-  }
 });

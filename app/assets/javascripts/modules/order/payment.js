@@ -2,6 +2,8 @@ Module("IHP.Pages.Orders.Payment", function(Payment) {
   "use strict";
 
   Payment.fn.initialize = function(el) {
+    Emitter.extend(this);
+
     this.form = el;
     this.el = el.find(".payment");
 
@@ -68,10 +70,12 @@ Module("IHP.Pages.Orders.Payment", function(Payment) {
 
   Payment.fn.stripeResponseHandler = function(status, response) {
     if (response.error) {
+      this.emit("paymentError");
       this.setPaymentError(response.error.message);
       // this.mediator.emit("enable-buttons");
     }
     else {
+      this.emit("paymentSuccess");
       var tokenId = response.id;
       var token = $("<input type='hidden' name='order[stripe_token]'>").val(tokenId);
       this.form.append(token);
@@ -84,6 +88,7 @@ Module("IHP.Pages.Orders.Payment", function(Payment) {
       return true;
     }
 
+    this.emit("paymentStarted");
     Stripe.createToken(this.form, this.stripeResponseHandler.bind(this));
   }
 });

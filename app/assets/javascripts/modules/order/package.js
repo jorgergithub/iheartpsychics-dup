@@ -3,7 +3,16 @@ Module("IHP.Pages.Orders.Package", function(Package) {
 
   Package.fn.initialize = function(el) {
     this.el = el.find(".package");
+    this.radios = this.el.find("[name='order[package_id]']");
     this.error = this.el.find('#package-validation-error');
+
+    this.addEventListeners();
+  };
+
+  Package.fn.addEventListeners = function() {
+    this.radios.on("change", function() {
+      this.clearError();
+    }.bind(this));
   };
 
   Package.fn.clearError = function() {
