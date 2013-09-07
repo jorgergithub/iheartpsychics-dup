@@ -9,7 +9,11 @@ describe("IHP.Pages.OrdersNew", function() {
     cancel = $("<a class='cancel'>").appendTo(form);
 
     package = jasmine.createSpyObj("package", ["validate"]);
-    payment = jasmine.createSpyObj("payment", ["validate"]);
+    package.validate.and.callReturn(false);
+
+    payment = jasmine.createSpyObj("package", ["validate"]);
+    package.validate.and.callReturn(false);
+    Emitter.extend(payment);
 
     spyOn(IHP.Pages.Orders, "Package").and.callReturn(package);
     spyOn(IHP.Pages.Orders, "Payment").and.callReturn(payment);
@@ -35,6 +39,30 @@ describe("IHP.Pages.OrdersNew", function() {
 
       form.trigger(event);
       expect(payment.validate).toHaveBeenCalled();
+    });
+  });
+
+  describe("handling paymentStarted event", function() {
+    it("disable submit button", function() {
+      payment.emit("paymentStarted");
+      expect(submit.prop("disabled")).toBeTruthy();
+    });
+
+    it("hides cancel button", function() {
+      payment.emit("paymentStarted");
+      expect(cancel.is(":visible")).toBeFalsy();
+    });
+  });
+
+  describe("handling paymentError event", function() {
+    it("enables submit button", function() {
+      payment.emit("paymentError");
+      expect(submit.prop("disabled")).toBeFalsy();
+    });
+
+    it("shows cancel button", function() {
+      payment.emit("paymentError");
+      expect(cancel.is(":visible")).toBeTruthy();
     });
   });
 });
