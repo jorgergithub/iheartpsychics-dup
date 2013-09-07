@@ -1,15 +1,4 @@
 GIT
-  remote: git@github.com:gistia/jasmine-gem.git
-  revision: 423fe9fc1405c50f09551a9d4fd97adb3b64856d
-  specs:
-    jasmine (2.0.0.rc2)
-      jasmine-core (~> 2.0.0.alpha)
-      nokogiri
-      rack
-      rspec (>= 1.3.1)
-      selenium-webdriver (>= 0.1.3)
-
-GIT
   remote: https://github.com/carlosantoniodasilva/i18n_alchemy
   revision: d20213234dab7b41a41140f53db2c61d1efcb954
   specs:
@@ -24,6 +13,17 @@ GIT
     ckeditor (4.0.5)
       mime-types
       orm_adapter
+
+GIT
+  remote: https://github.com/gistia/jasmine-gem.git
+  revision: 423fe9fc1405c50f09551a9d4fd97adb3b64856d
+  specs:
+    jasmine (2.0.0.rc2)
+      jasmine-core (~> 2.0.0.alpha)
+      nokogiri
+      rack
+      rspec (>= 1.3.1)
+      selenium-webdriver (>= 0.1.3)
 
 GIT
   remote: https://github.com/stripe/stripe-ruby
