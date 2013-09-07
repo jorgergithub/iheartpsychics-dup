@@ -3,14 +3,9 @@ require "phone_formatter"
 class User < ActiveRecord::Base
   include I18n::Alchemy
 
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable
-
-  before_create :build_relation
 
   attr_accessor :create_as
   attr_accessor :phone_number
@@ -22,19 +17,21 @@ class User < ActiveRecord::Base
   attr_accessor :card_exp_year
   attr_accessor :card_cvc
 
-  validates_uniqueness_of :username
-  validates_presence_of :username
-
-  has_one :psychic , dependent: :destroy
-  has_one :client  , dependent: :destroy
-  has_one :rep     , class_name: "CustomerServiceRepresentative", dependent: :destroy
-
-  has_one :admin   , dependent: :destroy
+  has_one :admin, dependent: :destroy
+  has_one :client, dependent: :destroy
+  has_one :psychic, dependent: :destroy
+  has_one :rep, class_name: "CustomerServiceRepresentative", dependent: :destroy
 
   accepts_nested_attributes_for :psychic
   accepts_nested_attributes_for :client
   accepts_nested_attributes_for :rep
   accepts_nested_attributes_for :admin
+
+  validates :username, presence: true
+  validates :username, uniqueness: true
+  validate :uniqueness_of_phone_number
+
+  before_create :build_relation
 
   scope :manager_directors, -> { where("role = ?", "manager_director") }
   scope :website_admins,    -> { where("role = ?", "website_admin") }
@@ -118,6 +115,18 @@ class User < ActiveRecord::Base
   end
 
   protected
+
+  def uniqueness_of_phone_number
+    return unless phone_number
+
+    phones = Client.joins(:phones)
+    phones.where!(client_phones: { number: PhoneParser.parse(phone_number) })
+    phones.where!(id: id) if id?
+
+    if phones.any?
+      errors.add(:phone_number, :taken)
+    end
+  end
 
   def build_relation
     if create_as == 'client'
