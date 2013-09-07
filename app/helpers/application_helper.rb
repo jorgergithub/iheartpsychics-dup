@@ -32,4 +32,8 @@ module ApplicationHelper
       collection.map { |item| item.localized }
     end
   end
+
+  def current_page
+    "#{controller.controller_name}_#{controller.action_name}".camelize
+  end
 end

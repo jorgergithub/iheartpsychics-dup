@@ -6,27 +6,29 @@
   <fieldset>
     <span class="payment-errors"></span>
 
-    <legend>Package</legend>
+    <section class="package">
+      <legend>Package</legend>
 
-    <div class="control-group">
-      <%= f.label :package_id, class: 'control-label' %>
-      <div class="controls">
-        <% Package.active.reverse.each do |pkg| %>
-          <label class="radio">
-            <%= f.radio_button :package_id, pkg.id %>
-            <%= pkg.name %>
-            for
-            <%= number_to_currency(pkg.price) %>
-            <% if pkg = Package.active.reverse.first %>
-              <span id="package-validation-error" class="validation-error"></span>
-            <% end %>
-          </label>
-        <% end %>
+      <div class="control-group">
+        <%= f.label :package_id, class: 'control-label' %>
+        <div class="controls">
+          <% Package.active.reverse.each do |pkg| %>
+            <label class="radio">
+              <%= f.radio_button :package_id, pkg.id %>
+              <%= pkg.name %>
+              for
+              <%= number_to_currency(pkg.price) %>
+              <% if pkg = Package.active.reverse.first %>
+                <span id="package-validation-error" class="validation-error"></span>
+              <% end %>
+            </label>
+          <% end %>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <legend>Payment</legend>
-
+    <section class="payment">
+      <legend>Payment</legend>
       <div class="control-group">
         <%= f.label :card, class: 'control-label' %>
         <div class="controls">
@@ -75,10 +77,11 @@
           </label>
         </div>
       </div>
+    </section>
   </fieldset>
 
   <div>
-    <%= f.button "Go", class: 'btn' %>
+    <%= f.button "Go", class: 'btn go' %>
     <%= link_to "Cancel", dashboard_path, class: 'cancel btn' %>
   </div>
 
