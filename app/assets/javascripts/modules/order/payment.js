@@ -96,5 +96,5 @@ Module("IHP.Pages.Orders.Payment", function(Payment) {
     this.emit("paymentStarted");
     Stripe.createToken(this.form, this.stripeResponseHandler.bind(this));
     return false;
-  }
+  };
 });
