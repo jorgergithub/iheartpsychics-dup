@@ -13,6 +13,13 @@
         <% end %>
       </div>
 
+      <div class="price">
+        <% if @psychic.price.present? %>
+          <b>Price (Per Minute):</b>
+          <%= number_to_currency @psychic.price %>
+        <% end %>
+      </div>
+
       <div class="ratings">
         <% if @psychic.rating %>
           <%= rating_for @psychic, empty_icon: "icon-star-empty" %>

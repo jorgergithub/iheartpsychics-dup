@@ -1,4 +1,10 @@
 en:
+  number:
+      format:
+        separator: '.'
+        delimiter: ','
+        precision: 2
+
   masks:
     phone: "999-999-9999"
     ssn: "999-99-9999"
