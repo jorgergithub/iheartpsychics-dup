@@ -22,10 +22,10 @@ class Admin::ClientsController < AuthorizedController
   end
 
   def update
-    if @user.update_attributes(user_params)
+    if @user.localized.update_attributes(user_params)
       redirect_to admin_clients_path, notice: "Client was successfully updated."
     else
-      render action: "show"
+      render action: "edit"
     end
   end
 
@@ -36,8 +36,9 @@ class Admin::ClientsController < AuthorizedController
     @user = @client.user if @client
   end
 
-  def user_params
+ def user_params
     params.require(:user).permit(:first_name, :last_name, :username, :email,
-      client_attributes: [:id, :minutes, :receive_newsletters])
+      client_attributes: [:id, :minutes, :receive_newsletters,
+      phones_attributes: [:id, :number, :desc, :_destroy]])
   end
 end
