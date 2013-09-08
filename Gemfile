@@ -30,6 +30,7 @@ gem 'whenever'          , '~> 0.8.4'
 gem 'i18n_alchemy'      , :git => 'https://github.com/carlosantoniodasilva/i18n_alchemy'
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'factory_girl_rails'   , '~> 4.2.1'
   gem 'foreigner'
   gem 'growl'                , '~> 1.0.3'
