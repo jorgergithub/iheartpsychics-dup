@@ -26,6 +26,17 @@ FactoryGirl.define do
     price "4.50"
   end
 
+  factory :review do
+    association :client
+    association :psychic
+    rating 5
+    text "I'm in love"
+
+    factory :featured_review do
+      featured true
+    end
+  end
+
   factory :package do
     name "Credits Package"
     credits 10

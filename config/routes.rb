@@ -21,14 +21,21 @@ IHeartPsychics::Application.routes.draw do
     resources :website_admins
     resources :surveys
     resources :call_surveys
-    resources :reviews
     resources :categories
     resources :horoscopes
     resources :calls
+
     resources :newsletters do
       member do
         get 'deliver', action: :deliver, as: :deliver
         get 'reset'  , action: :reset  , as: :reset
+      end
+    end
+
+    resources :reviews, :shallow => true do
+      member do
+        get 'mark_as_featured', action: :mark_as_featured, as: :mark_as_featured
+        get 'unmark_as_featured', action: :unmark_as_featured, as: :unmark_as_featured
       end
     end
 
@@ -71,6 +78,13 @@ IHeartPsychics::Application.routes.draw do
   end
 
   resource :psychic do
+    resources :reviews, only: [], shallow: true do
+      member do
+        get 'mark_as_featured', action: :mark_as_featured, as: :mark_as_featured
+        get 'unmark_as_featured', action: :unmark_as_featured, as: :unmark_as_featured
+      end
+    end
+
     collection do
       get 'search', action: :search, as: :search
     end

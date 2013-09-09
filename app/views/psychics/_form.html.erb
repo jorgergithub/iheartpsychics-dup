@@ -1,8 +1,9 @@
 <%= form_for(object, :html => { :class => 'form form-horizontal' }) do |f| %>
   <%= render 'errors', object: object %>
 
+  <legend>Profile Information</legend>
   <%= render 'fields', f: f %>
 
-  <%= f.submit "Save", class: "btn" %>
+  <%= f.submit "Save", class: "btn btn-primary" %>
   <%= link_to "Cancel", dashboard_path, class: "btn", rows: 10 %>
 <% end %>

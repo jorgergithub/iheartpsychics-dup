@@ -341,6 +341,7 @@ ActiveRecord::Schema.define(version: 20130913010745) do
     t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "featured",   default: false
   end
 
   create_table "surveys", force: true do |t|

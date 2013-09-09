@@ -21,6 +21,10 @@ class Psychic < ActiveRecord::Base
 
   before_create :assign_extension
 
+  def featured_review
+    reviews.featured.first
+  end
+
   def rating
     reviews.average(:rating)
   end

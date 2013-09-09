@@ -58,5 +58,26 @@
         </div>
       </div>
     <% end %>
+
+    <% if @psychic.featured_review %>
+      <div class="row-fluid reviews">
+        <div class="featured-review span12">
+
+          <div class="text">
+            <p><span><%= @psychic.featured_review.text %></span></p>
+          </div>
+
+          <div class="author">
+            <%= @psychic.featured_review.client.full_name %>,
+            <%= @psychic.featured_review.created_at.strftime("%B %-d, %Y") %>
+          </div>
+
+          <div class="rating">
+            <% @psychic.featured_review.rating.times do %>
+              <i class="icon-heart"></i>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
   <% end %>
 </section>
