@@ -30,6 +30,7 @@
 //= require modules/order/package
 //= require modules/order/payment
 //= require modules/order/orders_new
+//= require modules/psychic_application/psychic_applications_new
 //
 // App Code ===============================================
 //= require boot
