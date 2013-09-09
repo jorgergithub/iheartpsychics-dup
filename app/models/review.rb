@@ -2,7 +2,12 @@ class Review < ActiveRecord::Base
   belongs_to :client
   belongs_to :psychic
 
+  delegate :full_name, to: :client, allow_nil: true, prefix: true
+  delegate :reviews, to: :psychic, allow_nil: true, prefix: true
+
   validates :client, :psychic, :rating, :text, presence: true
+
+  scope :featured, -> { where(featured: true) }
 
   Ratings = {
     5 => "I'm in love",
@@ -11,4 +16,16 @@ class Review < ActiveRecord::Base
     2 => "I've had better",
     1 => "I want to breakup"
   }
+
+  def mark_as_featured!
+    psychic_reviews.featured.each do |review|
+      review.unmark_as_featured!
+    end
+
+    update_attribute(:featured, true)
+  end
+
+  def unmark_as_featured!
+    update_attribute(:featured, false)
+  end
 end

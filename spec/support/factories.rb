@@ -25,6 +25,17 @@ FactoryGirl.define do
     phone "+15186335473"
   end
 
+  factory :review do
+    association :client
+    association :psychic
+    rating 5
+    text "I'm in love"
+
+    factory :featured_review do
+      featured true
+    end
+  end
+
   factory :package do
     name "Minutes Package"
     minutes 10

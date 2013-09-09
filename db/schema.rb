@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130904191847) do
+ActiveRecord::Schema.define(version: 20130908221743) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -339,6 +339,7 @@ ActiveRecord::Schema.define(version: 20130904191847) do
     t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "featured",   default: false
   end
 
   create_table "surveys", force: true do |t|

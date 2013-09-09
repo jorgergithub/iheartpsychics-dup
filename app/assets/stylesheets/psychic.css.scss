@@ -135,6 +135,52 @@ body.psychics {
           color: #777;
         }
       }
+
+      .featured-review {
+        .text {
+          z-index: 1;
+          background: #fff;
+          line-height: 2em;
+          color: #777;
+          padding: 30px 0 0 30px;
+
+          p {
+            font-size: 28px;
+            padding: 10px;
+            position: relative;
+
+            span {
+              position:relative
+            }
+
+            span:before {
+              content: "“ ";
+              font-size: 100px;
+              font-weight: bold;
+              line-height: 20px;
+              color: #e4e4e4;
+              position: absolute;
+              top: 20px;
+              left: -56px
+            }
+          }
+
+          p:after {
+            content: " ”";
+            font-size: 100px;
+            font-weight: bold;
+            line-height: 20px;
+            position: absolute;
+            bottom: -20px;
+            color: #e4e4e4
+          }
+        }
+
+        .author {
+          color: #777;
+          font-weight: bold;
+        }
+      }
     }
   }
 }

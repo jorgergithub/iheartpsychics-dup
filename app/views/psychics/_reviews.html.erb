@@ -1,4 +1,4 @@
-<% if target.reviews.any? %>
+<% if @psychic.reviews.any? %>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <% target.reviews.each do |review| %>
+      <% @psychic.reviews.each do |review| %>
         <tr>
           <td class="admin-actions">
             <a href="#details_<%= review.id %>" role="button" data-toggle="modal"><i class='icon-plus-sign'></i></a>
@@ -20,7 +20,7 @@
           <td>
             <a href="#details_<%= review.id %>" role="button" data-toggle="modal"><%= review.id %></a>
           </td>
-          <td><%= link_to review.client.full_name, edit_admin_client_path(review.client) %></td>
+          <td><b><%= review.client_full_name %></b></td>
           <td>
             <% review.rating.times do %>
               <i class="icon-heart"></i>
@@ -40,7 +40,7 @@
     </tbody>
   </table>
 
-  <% target.reviews.each do |review| %>
+  <% @psychic.reviews.each do |review| %>
     <div id="details_<%= review.id %>" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -54,7 +54,7 @@
                 <%= format_datetime review.created_at %>
               </div>
               Review from
-              <b><%= link_to review.client.full_name, edit_admin_client_path(review.client) %></b>
+              <b><%= review.client_full_name %></b>
               <span><% review.rating.times do %><i class="icon-heart"></i><% end %></span>
             </td>
           </tr>
@@ -67,9 +67,9 @@
       </div>
       <div class="modal-footer">
         <% if review.featured? %>
-          <%= link_to "Unmark as featured", unmark_as_featured_admin_review_path(review), class: "btn btn-danger" %>
+          <%= link_to "Unmark as featured", unmark_as_featured_review_path(review), class: "btn btn-danger" %>
         <% else %>
-          <%= link_to "Mark as featured", mark_as_featured_admin_review_path(review), class: "btn btn-primary" %>
+          <%= link_to "Mark as featured", mark_as_featured_review_path(review), class: "btn btn-primary" %>
         <% end %>
 
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -79,6 +79,6 @@
 
 <% else %>
   <div class="blank-state">
-    No reviews for this <%= target.class.name.humanize.downcase %>.
+    No reviews for this <%= @psychic.class.name.humanize.downcase %>.
   </div>
 <% end %>
