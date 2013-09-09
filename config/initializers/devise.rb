@@ -224,9 +224,11 @@ Devise.setup do |config|
   if Rails.env.production?
     config.omniauth :twitter, 'cEN9edeADFli0dGqWS6guw', 'tAv8MD5n8VCv9OqJTsWE5Ev4rFVxMCK0hUJu9Xa0'
     config.omniauth :facebook, '425432334243774', '8e2d6a7319a4c3d04d185c1882368288'
+    config.omniauth :google_oauth2, '137381306208-p4324u648dee3hffm2ne8tbj8fchptlp.apps.googleusercontent.com', 'BBh_N2hEFqiASIguVEuGIpJW', {access_type: 'online', approval_prompt: ''}
   else
     config.omniauth :twitter, 'U7XDUNZCpqZkWP9Mf35A', 'm0IQ79wewcrQi646SdYjMnVzRFaGp6y6yG7ucOhIao'
     config.omniauth :facebook, '163067167216984', 'c7f918317f2d304ebdad3fb7c3c6e14b'
+    config.omniauth :google_oauth2, '137381306208-p4324u648dee3hffm2ne8tbj8fchptlp.apps.googleusercontent.com', 'BBh_N2hEFqiASIguVEuGIpJW', {access_type: 'online', approval_prompt: ''}
   end
 
   # ==> Warden configuration

@@ -36,4 +36,12 @@ module ApplicationHelper
   def current_page
     "#{controller.controller_name}_#{controller.action_name}".camelize
   end
+
+  def provider_name(provider)
+    if provider == :google_oauth2
+      provider = :google
+    end
+
+    provider.to_s.titleize
+  end
 end

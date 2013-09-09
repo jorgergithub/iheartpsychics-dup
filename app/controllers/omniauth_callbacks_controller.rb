@@ -14,6 +14,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   alias_method :twitter, :all
   alias_method :facebook, :all
+  alias_method :google_oauth2, :all
 
   private
 
@@ -37,6 +38,18 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       provider: auth.provider,
       uid: auth.uid,
       username: auth.info.nickname
+    }
+  end
+
+  def google_oauth2_params(auth)
+    {
+      create_as: 'client',
+      email: auth.info.email,
+      first_name: auth.info.first_name,
+      last_name: auth.info.last_name,
+      provider: auth.provider,
+      uid: auth.uid,
+      username: auth.info.email.split('@').first
     }
   end
 end
