@@ -21,9 +21,10 @@ describe User do
     end
 
     it "validates uniqueness of phone number" do
-      create(:client, phone_number: "+17641233322")
+      create(:user, create_as: "client", phone_number: "764-123-3322")
 
-      subject.phone_number = "+17641233322"
+      subject.create_as = "client"
+      subject.phone_number = "764-123-3322"
       subject.valid?
 
       expect(subject.errors[:phone_number]).to include("has already been taken")
