@@ -4,6 +4,7 @@ class Admin::CustomerServiceRepresentativesController < AuthorizedController
   def index
     @csrs = CustomerServiceRepresentative.includes(:user)
       .order("users.first_name, users.last_name")
+      .page(params[:page]).per(params[:per])
   end
 
   def new

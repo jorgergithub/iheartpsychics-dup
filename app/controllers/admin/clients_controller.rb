@@ -2,7 +2,7 @@ class Admin::ClientsController < AuthorizedController
   before_filter :find_client
 
   def index
-    @clients = Client.all
+    @clients = Client.order(:id).page(params[:page]).per(params[:per])
   end
 
   def new

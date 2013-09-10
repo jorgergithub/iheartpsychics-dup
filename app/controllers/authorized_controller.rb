@@ -20,4 +20,8 @@ class AuthorizedController < ApplicationController
     return unless current_user and current_user.admin?
     current_user.admin
   end
+
+  def disable_pagination?
+    params[:page] == 'all'
+  end
 end

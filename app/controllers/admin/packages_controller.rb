@@ -2,7 +2,7 @@ class Admin::PackagesController < AuthorizedController
   before_filter :find_package
 
   def index
-    @packages = Package.all
+    @packages = Package.order(:id).page(params[:page]).per(params[:per])
   end
 
   def new

@@ -38,6 +38,9 @@
           <% end %>
         </tbody>
       </table>
+
+      <%= paginate @packages %>
+
     <% else %>
       <div class="blank-state">
         No packages added yet.

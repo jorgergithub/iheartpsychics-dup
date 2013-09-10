@@ -3,6 +3,7 @@ class Admin::PsychicApplicationsController < AuthorizedController
 
   def index
     @psychic_applications = PsychicApplication.pending.order("created_at")
+      .page(params[:page]).per(params[:per])
   end
 
   def show

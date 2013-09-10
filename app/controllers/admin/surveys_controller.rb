@@ -2,7 +2,7 @@ class Admin::SurveysController < AuthorizedController
   before_action :find_survey
 
   def index
-    @surveys = Survey.all
+    @surveys = Survey.order(:id).page(params[:page]).per(params[:per])
   end
 
   def new

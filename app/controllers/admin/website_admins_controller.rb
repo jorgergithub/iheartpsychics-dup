@@ -3,6 +3,8 @@ class Admin::WebsiteAdminsController < AuthorizedController
 
   def index
     @website_admins = WebsiteAdmin.website_admins
+      .order("users.first_name, users.last_name")
+      .page(params[:page]).per(params[:per])
   end
 
   def new
