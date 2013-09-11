@@ -2,7 +2,10 @@ class Admin::PsychicsController < AuthorizedController
   before_filter :find_psychic
 
   def index
-    @psychics = Psychic.includes(:user).order("users.first_name, users.last_name")
+    @psychics = Psychic.includes(:user)
+      .order("users.first_name, users.last_name")
+      .page(params[:page]).per(params[:per])
+
     if query = params[:q]
       @psychics = @psychics.where(<<-EOQ, query: "%#{query}%")
         CONCAT(users.first_name, ' ', users.last_name) LIKE :query OR

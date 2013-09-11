@@ -2,7 +2,7 @@ class Admin::NewslettersController < AuthorizedController
   before_action :find_newsletter
 
   def index
-    @newsletters = Newsletter.all
+    @newsletters = Newsletter.order(:id).page(params[:page]).per(params[:per])
   end
 
   def new

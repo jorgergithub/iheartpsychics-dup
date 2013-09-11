@@ -3,6 +3,8 @@ class Admin::ManagerDirectorsController < AuthorizedController
 
   def index
     @manager_directors = ManagerDirector.manager_directors
+      .order("users.first_name, users.last_name")
+      .page(params[:page]).per(params[:per])
   end
 
   def new

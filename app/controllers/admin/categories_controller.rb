@@ -2,7 +2,7 @@ class Admin::CategoriesController < AuthorizedController
   before_action :find_category
 
   def index
-    @categories = Category.all
+    @categories = Category.order(:name).page(params[:page]).per(params[:per])
   end
 
   def new

@@ -28,6 +28,9 @@
           <% end %>
         </tbody>
       </table>
+
+      <%= paginate @website_admins %>
+
     <% else %>
       <div class="blank-state">
         No website admins added yet.

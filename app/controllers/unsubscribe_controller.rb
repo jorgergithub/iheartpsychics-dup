@@ -6,5 +6,4 @@ class UnsubscribeController < ApplicationController
       @client.unsubscribe_from_newsletters
     end
   end
-
 end
