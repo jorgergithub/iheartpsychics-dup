@@ -1,6 +1,8 @@
 require "random_utils"
 
 class Client < ActiveRecord::Base
+  include I18n::Alchemy
+
   belongs_to :user
 
   has_many :calls
@@ -13,6 +15,10 @@ class Client < ActiveRecord::Base
   has_many :call_surveys, through: :calls
 
   has_and_belongs_to_many :favorite_psychics, class_name: "Psychic"
+
+  accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: lambda { |attributes|
+    attributes[:number].blank? || attributes[:desc].blank?
+  }
 
   delegate :username, :first_name, :last_name, :full_name, :email,
            to: :user, allow_nil: true
