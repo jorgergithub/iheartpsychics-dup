@@ -17,7 +17,7 @@ FactoryGirl.define do
 
   factory :client do
     association :user
-    minutes 60
+    credits 60
   end
 
   factory :psychic do
