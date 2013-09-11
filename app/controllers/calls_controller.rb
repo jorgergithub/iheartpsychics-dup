@@ -150,24 +150,15 @@ class CallsController < ApplicationController
     duration   = params[:DialCallDuration]
     psychic_id = params[:psychic_id]
 
-    if status == "completed"
+    case status
+    when "completed"
       record_call(sid, psychic_id)
-    elsif status == "busy"
-      render text: Twilio::TwiML::Response.new do |r|
-        r.Say "The psychic is not available"
-      end.text
-    elsif status == "no-answer"
-      render text: Twilio::TwiML::Response.new do |r|
-        r.Say "The psychic is not available"
-      end.text
-    elsif status == "failed"
-      render text: Twilio::TwiML::Response.new do |r|
-        r.Say "The psychic is not available"
-      end.text
-    elsif status == "canceled"
-      render text: Twilio::TwiML::Response.new do |r|
-        r.Say "The psychic is not available"
-      end.text
+    when "busy", "no-answer", "failed", "canceled"
+      response = Twilio::TwiML::Response.new do |r|
+        r.Say "The psychic is not available", :voice => 'woman'
+      end
+
+      render text: response.text
     end
   end
 
