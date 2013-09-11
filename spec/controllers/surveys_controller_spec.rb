@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe SurveysController do
-  let(:user) { create(:user, create_as: 'client') }
+  let(:user) { create(:user, create_as: "client", phone_number: "764-123-3322") }
   let(:client) { user.client }
   let(:call) { create(:call, client: client) }
 

@@ -29,7 +29,8 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true
   validates :username, uniqueness: true
-  validate :uniqueness_of_phone_number
+  validates :phone_number, presence: true, if: Proc.new { |u| u.create_as == 'client' }
+  validate :uniqueness_of_phone_number, if: Proc.new { |u| u.create_as == 'client' }
 
   before_create :build_relation
 
@@ -38,9 +39,7 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.username = auth.info.nickname
+      user.assign_attributes(auth)
     end
   end
 
@@ -52,6 +51,25 @@ class User < ActiveRecord::Base
       end
     else
       super
+    end
+  end
+
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      match = where(conditions).where(
+        ["lower(email) = :login OR lower(username) = :login",
+         { login: login.downcase }]).first
+
+      unless match
+        match = joins(client: :phones).where(conditions).where(
+          ["lower(client_phones.number) = :phone",
+           { phone: PhoneFormatter.parse(login) }]).first
+      end
+
+      find(match.id) if match
+    else
+      where(conditions).first
     end
   end
 
@@ -81,25 +99,6 @@ class User < ActiveRecord::Base
 
   def full_name
     "#{first_name} #{last_name}"
-  end
-
-  def self.find_first_by_auth_conditions(warden_conditions)
-    conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
-      match = where(conditions).where(
-        ["lower(email) = :login OR lower(username) = :login",
-         { login: login.downcase }]).first
-
-      unless match
-        match = joins(client: :phones).where(conditions).where(
-          ["lower(client_phones.number) = :phone",
-           { phone: PhoneFormatter.parse(login) }]).first
-      end
-
-      find(match.id) if match
-    else
-      where(conditions).first
-    end
   end
 
   def password_required?
