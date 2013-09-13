@@ -1,5 +1,5 @@
 <div class="row-fluid">
-  <div class="span6">
+  <div class="span12">
     <h3>Packages</h3>
 
     <% if @packages.any? %>
@@ -17,12 +17,12 @@
         <tbody>
           <% @packages.each do |pkg| %>
             <tr>
-              <td>
+              <td class="admin-actions">
                 <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_admin_package_path(pkg) %>
                 <%= link_to '<i class="icon-remove"></i>'.html_safe, [:admin, pkg], data: {confirm: "Are you sure?" }, :method => "delete" %>
               </td>
               <td><%= link_to pkg.name, edit_admin_package_path(pkg) %></td>
-              <td><%= pkg.credits %></td>
+              <td><%= number_to_currency pkg.credits %></td>
               <td><%= number_to_currency pkg.price %></td>
               <td>
                 <% if pkg.active? %>
