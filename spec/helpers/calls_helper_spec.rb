@@ -19,6 +19,11 @@ describe CallsHelper do
       expect(phrase).to eql("29 dollars 99 cents")
     end
 
+    it "converts dollars with multiples of 10 cents" do
+      phrase = helper.price_to_phrase(6.5)
+      expect(phrase).to eql("6 dollars 50 cents")
+    end
+
     it "says one dollar in singular" do
       phrase = helper.price_to_phrase(1.25)
       expect(phrase).to eql("1 dollar 25 cents")

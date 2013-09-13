@@ -12,7 +12,7 @@ module CallsHelper
       dollars = price.to_i
       cents = 0
     else
-      dollars, cents = *price.to_s.split(".")
+      dollars, cents = *number_with_precision(price).split(".")
       dollars = dollars.to_i
       cents = cents.to_i
     end
