@@ -21,7 +21,7 @@ describe Client do
   it { should delegate(:username).to(:user).allowing_nil(true) }
 
   let(:user)   { User.create(email: "felipe.coury@gmail.com", password: "pass123")}
-  let(:client) { Client.create(user: user, pin: "1234", minutes: 60) }
+  let(:client) { Client.create(user: user, pin: "1234", balance: 60) }
 
   describe "creating a client with a phone number" do
     let!(:client) do
@@ -102,89 +102,89 @@ describe Client do
     end
   end
 
-  describe "#add_minutes" do
-    context "with an user with no minutes" do
+  describe "#add_credits" do
+    context "with an user with no credits" do
       before do
-        client.update_attributes(minutes: nil)
-        client.add_minutes(10)
+        client.update_attributes(balance: nil)
+        client.add_credits(10)
       end
 
-      it "removes minutes" do
-        expect(client.minutes).to eql(10)
+      it "removes credits" do
+        expect(client.balance).to eql(10)
       end
     end
 
-    context "with an user with minutes" do
-      before { client.add_minutes(10) }
+    context "with an user with credits" do
+      before { client.add_credits(10) }
 
-      it "removes minutes" do
-        expect(client.minutes).to eql(70)
+      it "removes credits" do
+        expect(client.balance).to eql(70)
       end
 
-      it "saves the minutes" do
+      it "saves the credits" do
         client.reload
-        expect(client.minutes).to eql(70)
+        expect(client.balance).to eql(70)
       end
     end
 
     context "with a string as parameter" do
       it "works" do
-        client.add_minutes("10")
-        expect(client.minutes).to eql(70)
+        client.add_credits("10")
+        expect(client.balance).to eql(70)
       end
     end
   end
 
-  describe "#discount_minutes" do
+  describe "#discount_credits" do
     let(:call)   { FactoryGirl.create(:call) }
     let(:credit) { client.credits.first }
 
-    context "with an user with no minutes" do
+    context "with an user with no credits" do
       before do
-        client.update_attributes(minutes: nil)
-        client.discount_minutes(10, call)
+        client.update_attributes(balance: nil)
+        client.discount_credits(10, call)
       end
 
-      it "removes minutes" do
-        expect(client.minutes).to eql(-10)
+      it "removes credits" do
+        expect(client.balance).to eql(-10)
       end
 
       it "records the credit summary" do
         expect(credit.description).to eql("Call with John Doe")
-        expect(credit.minutes).to eql(-10)
+        expect(credit.credits).to eql(-10)
       end
     end
 
-    context "with an user with minutes" do
-      before { client.discount_minutes(10, call) }
+    context "with an user with credits" do
+      before { client.discount_credits(10, call) }
 
-      it "removes minutes" do
-        expect(client.minutes).to eql(50)
+      it "removes credits" do
+        expect(client.balance).to eql(50)
       end
 
-      it "saves the minutes" do
+      it "saves the credits" do
         client.reload
-        expect(client.minutes).to eql(50)
+        expect(client.balance).to eql(50)
       end
     end
 
     context "with a string as parameter" do
       it "works" do
-        client.discount_minutes("10", call)
-        expect(client.minutes).to eql(50)
+        client.discount_credits("10", call)
+        expect(client.balance).to eql(50)
       end
     end
 
-    context "with an user with zero minutes" do
+    context "with an user with zero credits" do
       pending
     end
   end
 
   describe "#seconds" do
-    it "is the number of minutes, but in seconds" do
-      expect(Client.new(minutes: 1).seconds).to eql(60)
-      expect(Client.new(minutes: 2).seconds).to eql(120)
-      expect(Client.new(minutes: 25).seconds).to eql(1500)
+    it "is the number credits in seconds" do
+      expect(Client.new(balance: 1).seconds).to eql(60)
+      expect(Client.new(balance: 2).seconds).to eql(120)
+      expect(Client.new(balance: 25).seconds).to eql(1500)
     end
   end
 
@@ -413,25 +413,25 @@ describe Client do
     end
   end
 
-  describe "#minutes_str" do
-    context "when minutes > 1" do
-      let(:client) { Client.new(minutes: 2) }
-      it "returns 'minutes'" do
-        expect(client.minutes_str).to eql("2 minutes")
+  describe "#balance_str" do
+    context "when credits > 1" do
+      let(:client) { Client.new(balance: 2) }
+      it "returns 'credits'" do
+        expect(client.balance_str).to eql("2 credits")
       end
     end
 
-    context "when minutes = 1" do
-      let(:client) { Client.new(minutes: 1) }
-      it "returns 'minute'" do
-        expect(client.minutes_str).to eql("1 minute")
+    context "when credits = 1" do
+      let(:client) { Client.new(balance: 1) }
+      it "returns 'credit'" do
+        expect(client.balance_str).to eql("1 credit")
       end
     end
 
-    context "when minutes = 0" do
-      let(:client) { Client.new(minutes: 0) }
-      it "returns 'no minutes'" do
-        expect(client.minutes_str).to eql("no minutes")
+    context "when credits = 0" do
+      let(:client) { Client.new(balance: 0) }
+      it "returns 'no credits'" do
+        expect(client.balance_str).to eql("no credit")
       end
     end
   end

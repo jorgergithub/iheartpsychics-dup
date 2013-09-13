@@ -29,7 +29,7 @@ describe Order do
       order.package_id = package.id
       order.save
 
-      client.update_attributes(minutes: 0)
+      client.update_attributes(balance: 0)
       client.stub(stripe_client: stripe_client)
       client.stub(:charge)
     }
@@ -45,9 +45,9 @@ describe Order do
         expect(order.status).to eql("paid")
       end
 
-      it "adds minutes to the client" do
+      it "adds credits to the client" do
         order.pay
-        expect(client.reload.minutes).to eql(package.minutes)
+        expect(client.reload.balance).to eql(package.credits)
       end
     end
 

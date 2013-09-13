@@ -21,13 +21,13 @@
           <td><%= @client.pin %></td>
         </tr>
         <tr>
-          <td>Minutes</td>
-          <% if @client.minutes? %>
-            <td><%= @client.minutes %></td>
+          <td>Credits</td>
+          <% if @client.balance? %>
+            <td><%= @client.credits %></td>
           <% else %>
             <td>
-              You have no minutes.
-              <%= link_to "Add minutes now.", new_order_path %>
+              Your account is out of balance.
+              <%= link_to "Add credits now.", new_order_path %>
             </td>
           <% end %>
         </tr>
@@ -35,7 +35,7 @@
     </table>
 
     <%= link_to "#{@client.pin? ? "Reset" : "Set"} my PIN", reset_pin_client_path, class: "btn btn-small #{@client.pin? ? "" : "btn-danger"}" %>
-    <%= link_to "Add minutes", new_order_path, class: "btn btn-small" %>
+    <%= link_to "Add credits", new_order_path, class: "btn btn-small" %>
   </div>
 </div>
 
@@ -175,7 +175,7 @@
         <thead>
           <tr>
             <th>Date and time</th>
-            <th>Minutes</th>
+            <th>Credits</th>
             <th>Description</th>
           </tr>
         </thead>
@@ -183,7 +183,7 @@
           <% @client.credits.by_date.reverse.each do |credit| %>
             <tr>
               <td><%= credit.created_at %></td>
-              <td><%= credit.minutes %></td>
+              <td><%= credit.credits %></td>
               <td>
                 <% if credit.target %>
                   <% if credit.target.is_a?(Call) %>

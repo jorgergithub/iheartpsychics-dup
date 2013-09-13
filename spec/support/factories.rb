@@ -17,7 +17,7 @@ FactoryGirl.define do
 
   factory :client do
     association :user
-    credits 60
+    balance 60
   end
 
   factory :psychic do
@@ -26,8 +26,8 @@ FactoryGirl.define do
   end
 
   factory :package do
-    name "Minutes Package"
-    minutes 10
+    name "Credits Package"
+    credits 10
     price "9.99"
   end
 

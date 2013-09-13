@@ -49,10 +49,10 @@ IHeartPsychics::Application.routes.draw do
       get  'do_transfer(:.format)'    , action: :do_transfer
       post 'topup(:.format)'          , action: :topup
       get  'topup(:.format)'          , action: :topup
-      post 'buy_minutes(.:format)'    , action: :buy_minutes
-      get  'buy_minutes(.:format)'    , action: :buy_minutes
-      post 'confirm_minutes(:.format)'  , action: :confirm_minutes
-      get  'confirm_minutes(:.format)'  , action: :confirm_minutes
+      post 'buy_credits(.:format)'    , action: :buy_credits
+      get  'buy_credits(.:format)'    , action: :buy_credits
+      post 'confirm_credits(:.format)'  , action: :confirm_credits
+      get  'confirm_credits(:.format)'  , action: :confirm_credits
       post 'call_finished(:.format)'  , action: :call_finished
       get  'call_finished(:.format)'  , action: :call_finished
     end
@@ -63,8 +63,8 @@ IHeartPsychics::Application.routes.draw do
     member do
       get   'reset_pin'       , action: :reset_pin, as: :reset_pin
       patch 'reset_pin'       , action: :reset_pin
-      get   'add_minutes'     , action: :add_minutes, as: :add_minutes
-      patch 'add_minutes'     , action: :add_minutes
+      get   'add_credits'     , action: :add_credits, as: :add_credits
+      patch 'add_credits'     , action: :add_credits
       get   'make_favorite'   , action: :make_favorite, as: :make_favorite
       get   'remove_favorite' , action: :remove_favorite, as: :remove_favorite
     end

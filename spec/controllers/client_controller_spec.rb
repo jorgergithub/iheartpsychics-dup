@@ -5,13 +5,13 @@ describe ClientsController do
   let(:client) { user.client }
 
   before {
-    client.update_attributes(minutes: 50)
+    client.update_attributes(balance: 50)
     user.confirm!
     sign_in user
   }
 
   describe "GET show" do
-    context "when user has minutes" do
+    context "when user has credits" do
       before {
         get :show
       }
@@ -21,9 +21,9 @@ describe ClientsController do
       end
     end
 
-    context "when user is out of minutes" do
+    context "when user is out of credits" do
       before {
-        client.update_attributes(minutes: 0)
+        client.update_attributes(balance: 0)
         get :show
       }
 
