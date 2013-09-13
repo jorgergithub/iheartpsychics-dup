@@ -19,7 +19,7 @@ class Admin::PsychicsController < AuthorizedController
 
   def update
     if @user.localized.update_attributes(user_params)
-      redirect_to admin_psychics_path, notice: "Psychic was successfully updated."
+      redirect_to edit_admin_psychic_path(@user.psychic), notice: "Psychic was successfully updated."
     else
       render action: "edit"
     end

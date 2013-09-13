@@ -20,6 +20,8 @@
     <% end %>
 
     <%= pf.fields_for :psychic do |f| %>
+      <%= add_text_field f, :phone, nil, input: { data: { mask: t('masks.phone') } } %>
+
       <%= add_checkbox f, :featured %>
 
       <legend>Profile Information</legend>
