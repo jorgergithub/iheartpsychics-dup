@@ -427,4 +427,13 @@ describe Client do
       expect(client.unsubscribe_key).to eql(key)
     end
   end
+
+  describe "#minutes_with" do
+    let(:psychic) { create(:psychic, price: 6.50) }
+    let(:client)  { create(:client, balance: 81.25)}
+
+    it "calculates number of minutes you can talk with a psychic" do
+      expect(client.minutes_with(psychic)).to eql(12)
+    end
+  end
 end

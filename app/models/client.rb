@@ -142,6 +142,10 @@ class Client < ActiveRecord::Base
     update_attributes receive_newsletters: false
   end
 
+  def minutes_with(psychic)
+    (balance / psychic.price).floor
+  end
+
   private
 
   def set_unsubscribe_key
