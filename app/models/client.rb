@@ -37,12 +37,12 @@ class Client < ActiveRecord::Base
     pin.present?
   end
 
-  def discount_credits(m, call)
-    m = m.to_i
-    credits.create(credits: -m,
+  def discount_credits(call)
+    credits.create(
+      credits: -call.cost,
       description: "Call with #{call.psychic.full_name}", target: call)
     self.balance ||= 0
-    self.balance -= m
+    self.balance -= call.cost
     self.save
   end
 
@@ -51,7 +51,7 @@ class Client < ActiveRecord::Base
     desc = "#{desc} - #{target.to_desc}" if target
     credits.create(credits: m, description: desc, target: target)
     self.balance ||= 0
-    self.balance += m.to_i
+    self.balance += m.to_f
     self.save
   end
 
@@ -130,10 +130,6 @@ class Client < ActiveRecord::Base
     self.pin = pin
     self.save
     ClientMailer.delay.reset_pin_email(self)
-  end
-
-  def balance_str
-    "#{balance == 0 ? "no" : balance} #{balance <= 1 ? "credit" : "credits"}"
   end
 
   def unsubscribe_from_newsletters

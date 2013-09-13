@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130913001634) do
+ActiveRecord::Schema.define(version: 20130913010745) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 20130913001634) do
     t.string   "uri"
     t.integer  "duration"
     t.integer  "psychic_id"
+    t.decimal  "cost",              precision: 8, scale: 2
+    t.decimal  "cost_per_minute",   precision: 8, scale: 2
   end
 
   create_table "cards", force: true do |t|
@@ -109,10 +111,10 @@ ActiveRecord::Schema.define(version: 20130913001634) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "balance"
+    t.decimal  "balance",             precision: 8, scale: 2
     t.string   "stripe_client_id"
     t.string   "pin"
-    t.boolean  "receive_newsletters", default: true
+    t.boolean  "receive_newsletters",                         default: true
     t.string   "unsubscribe_key"
   end
 
@@ -125,7 +127,7 @@ ActiveRecord::Schema.define(version: 20130913001634) do
 
   create_table "credits", force: true do |t|
     t.integer  "client_id"
-    t.integer  "credits"
+    t.decimal  "credits",     precision: 8, scale: 2
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -212,7 +214,7 @@ ActiveRecord::Schema.define(version: 20130913001634) do
 
   create_table "packages", force: true do |t|
     t.string   "name"
-    t.integer  "credits"
+    t.decimal  "credits",    precision: 8, scale: 2
     t.decimal  "price",      precision: 8, scale: 2
     t.boolean  "active",                             default: true
     t.datetime "created_at"

@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 describe Call do
-  let!(:client)         { FactoryGirl.create(:client) }
-  let!(:call)           { FactoryGirl.create(:call, client: client) }
+  let!(:psychic) { FactoryGirl.create(:psychic, price: 4.50) }
+  let!(:client)  { FactoryGirl.create(:client) }
+  let!(:call)    { FactoryGirl.create(:call, client: client, psychic: psychic) }
 
   describe ".process_calls" do
     let!(:processed_call) { FactoryGirl.create(:processed_call, client: client) }
@@ -26,6 +27,14 @@ describe Call do
       expect(call.duration).to eql(2)
     end
 
+    it "calculates the cost based on the psychic price" do
+      expect(call.cost).to eql(9)
+    end
+
+    it "saves the cost per minute" do
+      expect(call.cost_per_minute).to eql(4.50)
+    end
+
     it "save fields correctly" do
       expect(call.date_created).to eql("Wed, 17 Jul 2013 23:50:32 +0000")
       expect(call.date_updated).to eql("Wed, 17 Jul 2013 23:51:57 +0000")
@@ -44,7 +53,7 @@ describe Call do
 
     it "discount duration from client credits" do
       client.reload
-      expect(client.balance).to eql(58)
+      expect(client.balance).to eql(51)
     end
 
     it "calls send_statistics" do
