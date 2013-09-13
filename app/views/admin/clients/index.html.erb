@@ -10,7 +10,7 @@
             <th>Username</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Minutes</th>
+            <th>Balance</th>
             <th>Created</th>
           </tr>
         </thead>
@@ -24,7 +24,7 @@
               <td><%= link_to client.username, edit_admin_client_path(client) %></td>
               <td><%= client.full_name %></td>
               <td><%= client.email %></td>
-              <td><%= client.minutes %></td>
+              <td><%= client.balance %></td>
               <td><%=l client.created_at, format: :short %></td>
             </tr>
           <% end %>

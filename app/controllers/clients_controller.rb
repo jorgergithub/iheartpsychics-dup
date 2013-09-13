@@ -2,7 +2,7 @@ class ClientsController < AuthorizedController
   before_filter :find_client
 
   def show
-    unless @client.minutes?
+    unless @client.balance?
       redirect_to :new_order
       return
     end
@@ -36,15 +36,15 @@ class ClientsController < AuthorizedController
     end
   end
 
-  def add_minutes
+  def add_credits
     if params[:client]
-      if @client.add_minutes(params[:client][:minutes])
-        redirect_to client_path, notice: "Minutes added to your account."
+      if @client.add_credits(params[:client][:balance])
+        redirect_to client_path, notice: "Credits added to your balance."
       else
-        render action: "add_minutes"
+        render action: "add_credits"
       end
     else
-      @client.minutes = nil
+      @client.balance = nil
       @order = @client.orders.new
     end
   end

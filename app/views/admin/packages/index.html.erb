@@ -8,7 +8,7 @@
           <tr>
             <th></th>
             <th>Name</th>
-            <th>Minutes</th>
+            <th>Credits</th>
             <th>Price</th>
             <th>Active?</th>
             <th>Phone offer?</th>
@@ -22,7 +22,7 @@
                 <%= link_to '<i class="icon-remove"></i>'.html_safe, [:admin, pkg], data: {confirm: "Are you sure?" }, :method => "delete" %>
               </td>
               <td><%= link_to pkg.name, edit_admin_package_path(pkg) %></td>
-              <td><%= pkg.minutes %></td>
+              <td><%= pkg.credits %></td>
               <td><%= number_to_currency pkg.price %></td>
               <td>
                 <% if pkg.active? %>

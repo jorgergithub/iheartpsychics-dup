@@ -33,7 +33,7 @@ class Order < ActiveRecord::Base
       end
 
       client.charge(total, "Order ##{id}", order_id: id)
-      client.add_minutes(item.package.minutes, self) if item and item.package
+      client.add_credits(item.package.credits, self) if item and item.package
       paid!
 
       send_email

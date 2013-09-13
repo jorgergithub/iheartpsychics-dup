@@ -42,9 +42,9 @@ describe Call do
       expect(call.direction).to eql("inbound")
     end
 
-    it "discount duration from client minutes" do
+    it "discount duration from client credits" do
       client.reload
-      expect(client.minutes).to eql(58)
+      expect(client.balance).to eql(58)
     end
 
     it "calls send_statistics" do

@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe ClientCallMailer do
-  let!(:client)      { FactoryGirl.create(:client, minutes: 10) }
+  let!(:client)      { FactoryGirl.create(:client, balance: 10) }
   let!(:psychic)     { FactoryGirl.create(:psychic) }
   let!(:client_call) { FactoryGirl.create(:call, client: client,
                                                  psychic: psychic) }
@@ -33,15 +33,15 @@ describe ClientCallMailer do
       end
     end
 
-    context "when client has minutes left" do
-      it "tells how much minutes are left in client's balance" do
-        body = /Available Minutes:(.*)10/
+    context "when client has credits left" do
+      it "tells how much credits are left in client's balance" do
+        body = /Current Balance:(.*)10/
         expect(email.body.encoded).to match(body)
       end
     end
 
-    context "when client has no minutes left" do
-      pending "check if we need a link to add more minutes here"
+    context "when client has no credits left" do
+      pending "check if we need a link to add more credits here"
       # more here - https://basecamp.com/1799407/projects/2777704-iheart-psychics/messages/14347692-link-to-add-minutes
 
       # before { client.minutes = 0 }

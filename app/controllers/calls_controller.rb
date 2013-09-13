@@ -49,7 +49,7 @@ class CallsController < ApplicationController
       return
     end
 
-    unless @client.minutes and @client.minutes >= 1
+    unless @client.balance and @client.balance >= 1
       render :no_balance
       return
     end
@@ -89,7 +89,7 @@ class CallsController < ApplicationController
   def topup
     if params[:Digits] == "1"
       @packages = Package.phone_offers
-      render :minutes
+      render :credits
       return
     elsif params[:Digits] == "2"
       render :csr
@@ -103,7 +103,7 @@ class CallsController < ApplicationController
     end
   end
 
-  def buy_minutes
+  def buy_credits
     choice = params[:Digits].to_i
     packages = Package.phone_offers
     csr_choice = packages.size + 1
@@ -127,7 +127,7 @@ class CallsController < ApplicationController
     @package = packages[choice-1]
   end
 
-  def confirm_minutes
+  def confirm_credits
     card_id = @client.cards.first.try(:id)
     order = @client.orders.new(package_id: params[:package_id], card_id: card_id)
     if order.save

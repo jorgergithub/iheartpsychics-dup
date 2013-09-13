@@ -15,12 +15,12 @@ Dear <%= @client.first_name %>,
   <tr><td><b>Time:</b></td><td><%= @call.time %></td></tr>
   <tr><td><b>Psychic:</b></td><td><%= @psychic.full_name %></td></tr>
   <tr><td><b>Call Duration:</b></td><td><%= @call.duration_str %></td></tr>
-  <tr><td><b>Available Minutes:</b></td><td><%= @client.minutes %></td></tr>
+  <tr><td><b>Current Balance:</b></td><td><%= @client.balance %></td></tr>
   </tr>
 </table>
 
 <p>
-  Please help us by taking a few minutes to tell us about your
+  Please help us by taking a few credits to tell us about your
   recent experience with I Heart Psychics.  We appreciate your
   business and want to ensure that we are constantly improving
   our service to meet your needs.

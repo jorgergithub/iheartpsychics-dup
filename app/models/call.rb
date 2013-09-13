@@ -76,7 +76,7 @@ class Call < ActiveRecord::Base
 
     transaction do
       self.duration = CallDurationRounder.new(twilio_call.duration).round
-      self.client.discount_minutes(duration, self)
+      self.client.discount_credits(duration, self)
 
       self.original_duration = twilio_call.duration
       self.processed = true

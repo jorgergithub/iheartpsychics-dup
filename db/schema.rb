@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130910182503) do
+ActiveRecord::Schema.define(version: 20130913001634) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 20130910182503) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "credits"
+    t.integer  "balance"
     t.string   "stripe_client_id"
     t.string   "pin"
     t.boolean  "receive_newsletters", default: true
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20130910182503) do
 
   create_table "credits", force: true do |t|
     t.integer  "client_id"
-    t.integer  "minutes"
+    t.integer  "credits"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -212,7 +212,7 @@ ActiveRecord::Schema.define(version: 20130910182503) do
 
   create_table "packages", force: true do |t|
     t.string   "name"
-    t.integer  "minutes"
+    t.integer  "credits"
     t.decimal  "price",      precision: 8, scale: 2
     t.boolean  "active",                             default: true
     t.datetime "created_at"

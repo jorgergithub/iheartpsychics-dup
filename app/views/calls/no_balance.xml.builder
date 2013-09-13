@@ -3,11 +3,11 @@ xml.Response do
   xml.Gather(action: calls_url_for("topup", phone_number), numDigits: 1) do
     xml.Say <<-EOS.strip_heredoc, voice: "woman"
       Thank you for validating your account #{@client.first_name}.
-      Your account is out of minutes.
+      Your account is out of credits.
     EOS
     if @client.cards.try(:any?)
       xml.Say <<-EOS.strip_heredoc, voice: "woman"
-        Please press 1 to purchase more minutes.
+        Please press 1 to purchase more credits.
       EOS
     end
     xml.Say <<-EOS.strip_heredoc, voice: "woman"

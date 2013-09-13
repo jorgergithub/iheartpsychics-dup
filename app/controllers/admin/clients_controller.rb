@@ -6,7 +6,8 @@ class Admin::ClientsController < AuthorizedController
   end
 
   def new
-    @client = Client.new
+    @user = User.new
+    @client = @user.build_client(user: @user)
   end
 
   def edit
@@ -38,7 +39,7 @@ class Admin::ClientsController < AuthorizedController
 
  def user_params
     params.require(:user).permit(:first_name, :last_name, :username, :email,
-      client_attributes: [:id, :minutes, :receive_newsletters,
+      client_attributes: [:id, :balance, :receive_newsletters,
       phones_attributes: [:id, :number, :desc, :_destroy]])
   end
 end
