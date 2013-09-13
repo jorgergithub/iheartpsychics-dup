@@ -13,9 +13,9 @@
           <td><%= @client.pin %></td>
         </tr>
         <tr>
-          <td>Credits</td>
+          <td>Balance</td>
           <% if @client.balance? %>
-            <td><%= @client.credits %></td>
+            <td><%= number_to_currency @client.balance %></td>
           <% else %>
             <td>
               Your account is out of balance.
@@ -140,6 +140,7 @@
             <th>From</th>
             <th>Psychic</th>
             <th>Duration</th>
+            <th>Price</th>
           </tr>
         </thead>
         <tbody>
@@ -151,6 +152,9 @@
               <td><%= call.psychic_name %></td>
               <td class="right">
                 <%= call.formatted_duration %>
+              </td>
+              <td class="right">
+                <%= number_to_currency call.cost %>
               </td>
             </tr>
           <% end %>
@@ -184,7 +188,7 @@
           <% @credits.by_date.reverse.each do |credit| %>
             <tr>
               <td><%= credit.created_at %></td>
-              <td><%= credit.credits %></td>
+              <td><%= number_to_currency credit.credits %></td>
               <td>
                 <% if credit.target %>
                   <% if credit.target.is_a?(Call) %>

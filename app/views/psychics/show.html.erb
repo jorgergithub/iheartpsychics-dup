@@ -47,6 +47,7 @@
             <th>From</th>
             <th>Client</th>
             <th>Duration</th>
+            <th>Price</th>
           </tr>
         </thead>
         <tbody>
@@ -57,6 +58,9 @@
               <td><%= call.client.full_name %></td>
               <td class="right">
                 <%= call.formatted_duration %>
+              </td>
+              <td class="right">
+                <%= number_to_currency call.cost %>
               </td>
             </tr>
           <% end %>
