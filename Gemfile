@@ -40,6 +40,7 @@ group :development, :test do
   gem 'guard-rspec'          , '~> 3.0.2'
   gem 'pry-meta'
   gem 'jasmine'              , git: 'https://github.com/gistia/jasmine-gem.git'
+  gem 'quiet_assets'         , '~> 1.0.2'
   gem 'rspec-rails'          , '~> 2.0'
 end
 
