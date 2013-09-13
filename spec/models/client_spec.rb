@@ -106,24 +106,24 @@ describe Client do
     context "with an user with no credits" do
       before do
         client.update_attributes(balance: nil)
-        client.add_credits(10)
+        client.add_credits(3.41)
       end
 
       it "removes credits" do
-        expect(client.balance).to eql(10)
+        expect(client.balance).to eql(3.41)
       end
     end
 
     context "with an user with credits" do
-      before { client.add_credits(10) }
+      before { client.add_credits(12.29) }
 
       it "removes credits" do
-        expect(client.balance).to eql(70)
+        expect(client.balance.to_f).to eql(72.29)
       end
 
       it "saves the credits" do
         client.reload
-        expect(client.balance).to eql(70)
+        expect(client.balance.to_f).to eql(72.29)
       end
     end
 
@@ -136,42 +136,35 @@ describe Client do
   end
 
   describe "#discount_credits" do
-    let(:call)   { FactoryGirl.create(:call) }
+    let(:call)   { FactoryGirl.create(:call, cost: 4.55) }
     let(:credit) { client.credits.first }
 
     context "with an user with no credits" do
       before do
         client.update_attributes(balance: nil)
-        client.discount_credits(10, call)
+        client.discount_credits(call)
       end
 
       it "removes credits" do
-        expect(client.balance).to eql(-10)
+        expect(client.balance).to eql(-4.55)
       end
 
       it "records the credit summary" do
         expect(credit.description).to eql("Call with John Doe")
-        expect(credit.credits).to eql(-10)
+        expect(credit.credits).to eql(-4.55)
       end
     end
 
     context "with an user with credits" do
-      before { client.discount_credits(10, call) }
+      before { client.discount_credits(call) }
 
       it "removes credits" do
-        expect(client.balance).to eql(50)
+        expect(client.balance).to eql(55.45)
       end
 
       it "saves the credits" do
         client.reload
-        expect(client.balance).to eql(50)
-      end
-    end
-
-    context "with a string as parameter" do
-      it "works" do
-        client.discount_credits("10", call)
-        expect(client.balance).to eql(50)
+        expect(client.balance).to eql(55.45)
       end
     end
 
@@ -409,29 +402,6 @@ describe Client do
 
       it "assigns address_city" do
         expect(card.address_city).to be_nil
-      end
-    end
-  end
-
-  describe "#balance_str" do
-    context "when credits > 1" do
-      let(:client) { Client.new(balance: 2) }
-      it "returns 'credits'" do
-        expect(client.balance_str).to eql("2 credits")
-      end
-    end
-
-    context "when credits = 1" do
-      let(:client) { Client.new(balance: 1) }
-      it "returns 'credit'" do
-        expect(client.balance_str).to eql("1 credit")
-      end
-    end
-
-    context "when credits = 0" do
-      let(:client) { Client.new(balance: 0) }
-      it "returns 'no credits'" do
-        expect(client.balance_str).to eql("no credit")
       end
     end
   end

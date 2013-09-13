@@ -1,5 +1,6 @@
 require "twilio"
 require "call_duration_rounder"
+require "random_utils"
 require "phone_formatter"
 
 class Call < ActiveRecord::Base
@@ -76,7 +77,9 @@ class Call < ActiveRecord::Base
 
     transaction do
       self.duration = CallDurationRounder.new(twilio_call.duration).round
-      self.client.discount_credits(duration, self)
+      self.cost = self.duration * self.psychic.price
+      self.cost_per_minute = self.psychic.price
+      self.client.discount_credits(self)
 
       self.original_duration = twilio_call.duration
       self.processed = true
