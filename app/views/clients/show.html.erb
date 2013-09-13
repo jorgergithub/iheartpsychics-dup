@@ -82,6 +82,7 @@
             <th></th>
             <th>Psychic</th>
             <th>Extension</th>
+            <th>Price per Minute</th>
             <th></th>
           </tr>
         </thead>
@@ -97,6 +98,7 @@
               </td>
               <td><%= psychic.full_name %></td>
               <td><%= psychic.extension %></td>
+              <td><%= number_to_currency psychic.price %></td>
               <td>
                 <% if @client.favorite?(psychic) %>
                   <span class="label label-success">Favorite</span>
