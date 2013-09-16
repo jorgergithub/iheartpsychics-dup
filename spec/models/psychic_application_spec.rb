@@ -7,8 +7,6 @@ describe PsychicApplication do
     it { should validate_presence_of(:cellular_number) }
     it { should validate_presence_of(:city) }
     it { should validate_presence_of(:date_of_birth) }
-    it { should validate_presence_of(:emergency_contact) }
-    it { should validate_presence_of(:emergency_contact_number) }
     it { should validate_presence_of(:experience) }
     it { should validate_presence_of(:explain_gift) }
     it { should validate_presence_of(:first_name) }
@@ -32,7 +30,6 @@ describe PsychicApplication do
     it { should validate_presence_of(:zip_code) }
 
     it { should validate_as_phone_number(:cellular_number) }
-    it { should validate_as_phone_number(:emergency_contact_number) }
     it { should validate_as_phone_number(:phone) }
 
     it { should allow_value(true).for(:us_citizen) }
