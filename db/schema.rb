@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130913010745) do
+ActiveRecord::Schema.define(version: 20130916194111) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -60,6 +60,9 @@ ActiveRecord::Schema.define(version: 20130913010745) do
     t.integer  "psychic_id"
     t.decimal  "cost",              precision: 8, scale: 2
     t.decimal  "cost_per_minute",   precision: 8, scale: 2
+    t.integer  "invoice_id"
+    t.datetime "started_at"
+    t.datetime "ended_at"
   end
 
   create_table "cards", force: true do |t|
@@ -175,6 +178,20 @@ ActiveRecord::Schema.define(version: 20130913010745) do
     t.datetime "updated_at"
     t.string   "friendship_compatibility_to"
     t.string   "love_compatibility_to"
+  end
+
+  create_table "invoices", force: true do |t|
+    t.integer  "psychic_id"
+    t.integer  "total_minutes"
+    t.integer  "number_of_calls"
+    t.decimal  "avg_minutes",     precision: 8, scale: 2
+    t.decimal  "minutes_payout",  precision: 8, scale: 2
+    t.decimal  "bonus_payout",    precision: 8, scale: 2
+    t.integer  "tier_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "bonus_minutes"
+    t.decimal  "total",           precision: 8, scale: 2
   end
 
   create_table "newsletters", force: true do |t|
@@ -349,6 +366,15 @@ ActiveRecord::Schema.define(version: 20130913010745) do
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "tiers", force: true do |t|
+    t.string   "name"
+    t.integer  "from"
+    t.integer  "to"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.decimal  "percent",    precision: 8, scale: 2
   end
 
   create_table "transactions", force: true do |t|

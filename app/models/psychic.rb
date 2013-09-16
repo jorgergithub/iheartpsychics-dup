@@ -5,6 +5,7 @@ class Psychic < ActiveRecord::Base
 
   has_many :calls
   has_many :reviews
+  has_many :invoices
 
   has_and_belongs_to_many :favorited_by_clients, class_name: "Client"
 

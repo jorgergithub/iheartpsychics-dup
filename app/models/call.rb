@@ -6,6 +6,7 @@ require "phone_formatter"
 class Call < ActiveRecord::Base
   belongs_to :client
   belongs_to :psychic
+  belongs_to :invoice
   has_many :credits, as: :target
   has_one :call_survey, dependent: :destroy
   has_one :survey, through: :call_survey
@@ -14,6 +15,7 @@ class Call < ActiveRecord::Base
 
   scope :unprocessed, -> { where("processed IS NULL") }
   scope :processed, -> { where("processed IS NOT NULL") }
+  scope :period, -> (from, to) { where("started_at BETWEEN ? AND ?", from, to) }
 
   def formatted_duration
     return "-" unless duration
@@ -76,6 +78,9 @@ class Call < ActiveRecord::Base
     attributes.each { |a| self.send("#{a}=", twilio_call.send(a)) }
 
     transaction do
+      self.started_at = self.start_time
+      self.ended_at = self.end_time
+
       self.duration = CallDurationRounder.new(twilio_call.duration).round
       self.cost = self.duration * self.psychic.price
       self.cost_per_minute = self.psychic.price
@@ -116,6 +121,10 @@ class Call < ActiveRecord::Base
 
   def psychic_name
     psychic.try(:full_name) || ""
+  end
+
+  def bonus?
+    started_at.hour >= 0 && started_at.hour <= 8
   end
 
   private

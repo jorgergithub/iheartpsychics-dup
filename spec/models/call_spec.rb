@@ -35,6 +35,14 @@ describe Call do
       expect(call.cost_per_minute).to eql(4.50)
     end
 
+    it "saves started_at" do
+      expect(call.started_at.to_s).to eql("2013-07-17 23:50:32 UTC")
+    end
+
+    it "saves ended_at" do
+      expect(call.ended_at.to_s).to eql("2013-07-17 23:51:57 UTC")
+    end
+
     it "save fields correctly" do
       expect(call.date_created).to eql("Wed, 17 Jul 2013 23:50:32 +0000")
       expect(call.date_updated).to eql("Wed, 17 Jul 2013 23:51:57 +0000")
