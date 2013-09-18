@@ -21,13 +21,11 @@ class User < ActiveRecord::Base
   has_one :client, dependent: :destroy
   has_one :psychic, dependent: :destroy
   has_one :rep, class_name: "CustomerServiceRepresentative", dependent: :destroy
-  has_one :accountant, dependent: :destroy
 
   accepts_nested_attributes_for :psychic
   accepts_nested_attributes_for :client
   accepts_nested_attributes_for :rep
   accepts_nested_attributes_for :admin
-  accepts_nested_attributes_for :accountant
 
   validates :username, presence: true
   validates :username, uniqueness: true
