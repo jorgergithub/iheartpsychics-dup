@@ -1,4 +1,7 @@
 en:
+  date:
+    formats:
+      short: "%b %d"
   number:
       format:
         separator: '.'

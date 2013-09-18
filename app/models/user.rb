@@ -21,11 +21,13 @@ class User < ActiveRecord::Base
   has_one :client, dependent: :destroy
   has_one :psychic, dependent: :destroy
   has_one :rep, class_name: "CustomerServiceRepresentative", dependent: :destroy
+  has_one :accountant, dependent: :destroy
 
   accepts_nested_attributes_for :psychic
   accepts_nested_attributes_for :client
   accepts_nested_attributes_for :rep
   accepts_nested_attributes_for :admin
+  accepts_nested_attributes_for :accountant
 
   validates :username, presence: true
   validates :username, uniqueness: true
@@ -36,6 +38,7 @@ class User < ActiveRecord::Base
 
   scope :manager_directors, -> { where("role = ?", "manager_director") }
   scope :website_admins,    -> { where("role = ?", "website_admin") }
+  scope :accountants,       -> { where("role = ?", "accountant") }
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
@@ -95,6 +98,10 @@ class User < ActiveRecord::Base
 
   def website_admin?
     role == "website_admin"
+  end
+
+  def accountant?
+    role == "accountant"
   end
 
   def full_name

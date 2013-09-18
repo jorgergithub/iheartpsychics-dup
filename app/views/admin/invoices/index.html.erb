@@ -1,0 +1,40 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h3>Pending Invoices</h3>
+
+    <% if @invoices.any? %>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Psychic</th>
+            <th>Period</th>
+            <th>Created</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @invoices.each do |inv| %>
+            <tr>
+              <td><%= link_to inv.number, admin_invoice_path(inv) %></td>
+              <td><%= inv.psychic.full_name %></td>
+              <td>
+                <%=l inv.start_date, format: :short %> to
+                <%=l inv.end_date, format: :short %>
+              </td>
+              <td><%=l inv.created_at, format: :short %></td>
+              <td class="right"><%= number_to_currency inv.total %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= paginate @invoices %>
+
+    <% else %>
+      <div class="blank-state">
+        No invoices are pending payment.
+      </div>
+    <% end %>
+  </div>
+</div>

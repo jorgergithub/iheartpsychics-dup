@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130916194111) do
+ActiveRecord::Schema.define(version: 20130918012517) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -192,6 +192,9 @@ ActiveRecord::Schema.define(version: 20130916194111) do
     t.datetime "updated_at"
     t.integer  "bonus_minutes"
     t.decimal  "total",           precision: 8, scale: 2
+    t.datetime "paid_at"
+    t.date     "start_date"
+    t.date     "end_date"
   end
 
   create_table "newsletters", force: true do |t|

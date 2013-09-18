@@ -47,6 +47,14 @@ describe Invoice do
         expect(invoice.avg_minutes.to_f).to eql(380.0)
       end
 
+      it "sets the start date" do
+        expect(invoice.start_date.to_s).to eql("2013-01-01")
+      end
+
+      it "sets the end date" do
+        expect(invoice.end_date.to_s).to eql("2013-01-08")
+      end
+
       context "when there are calls placed between 12AM and 8AM" do
         let!(:call1) { create(:call, psychic: psychic, original_duration: "30000", started_at: "2013-01-01 10:00", cost: 4.50 * 500) } # 2250
         let!(:call2) { create(:call, psychic: psychic, original_duration: "27600", started_at: "2013-01-02 00:30", cost: 4.50 * 460) } # 2070
@@ -126,6 +134,23 @@ describe Invoice do
         it "sets the total with a sum of minutes and bonuses" do
           expect(invoice.total.to_f).to eql(664.3)
         end
+      end
+    end
+  end
+
+  describe "#number" do
+    let(:invoice) { build(:invoice) }
+
+    context "when id is present" do
+      before { invoice.id = 270 }
+      it "returns a zero padded invoice number" do
+        expect(invoice.number).to eql("00000270")
+      end
+    end
+
+    context "when id is nil" do
+      it "returns nil" do
+        expect(invoice.number).to be_nil
       end
     end
   end

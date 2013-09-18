@@ -13,6 +13,7 @@ IHeartPsychics::Application.routes.draw do
     resource :dashboard
 
     resources :clients
+    resources :accountants
     resources :customer_service_representatives
     resources :manager_directors
     resources :packages
@@ -24,6 +25,7 @@ IHeartPsychics::Application.routes.draw do
     resources :categories
     resources :horoscopes
     resources :calls
+    resources :invoices
 
     resources :newsletters do
       member do
@@ -91,6 +93,7 @@ IHeartPsychics::Application.routes.draw do
   end
 
   resource :customer_service_representative
+  resource :accountant
 
   resources :orders
   resources :psychic_applications do

@@ -133,4 +133,16 @@ FactoryGirl.define do
     created_at "2013-08-16 17:20:16"
     updated_at "2013-08-20 01:29:56"
   end
+
+  factory :invoice do
+    psychic
+    total_minutes 0
+    number_of_calls 1
+    avg_minutes 13.2
+    minutes_payout 154.0
+    bonus_payout 9.8
+    tier_id 1
+    bonus_minutes 140
+    total 163.8
+  end
 end
