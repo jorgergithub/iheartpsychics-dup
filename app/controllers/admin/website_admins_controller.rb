@@ -20,7 +20,7 @@ class Admin::WebsiteAdminsController < AuthorizedController
     @website_admin.skip_confirmation!
     if @website_admin.save
       redirect_to admin_website_admins_path,
-        notice: "New manager director was successfully created."
+        notice: "New website admin was successfully created."
     else
       render action: "edit"
     end
