@@ -1,0 +1,65 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h3>Invoice #<%= @invoice.number %></h3>
+  </div>
+
+  <div class="span12">
+    Pay Tier: <%= @invoice.tier.name %>
+  </div>
+
+  <div class="span12">
+    <table class="table invoice-table">
+      <thead>
+        <tr>
+          <th>Minutes</th>
+          <th>Calls</th>
+          <th>Avg. Mins</th>
+          <th>Appointments</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @invoice.total_minutes %></td>
+          <td><%= @invoice.number_of_calls %></td>
+          <td><%= @invoice.avg_minutes %></td>
+          <td><%= 0 %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="span12">
+  <table style="width: 100%">
+    <tr>
+      <td><b>Minutes</b></td>
+    </tr>
+    <tr>
+      <td>
+        Total minutes:
+        <%= @invoice.total_minutes %> @
+        <%= number_to_currency @invoice.price_per_minute %>/min
+      </td>
+      <td class="right">
+        <%= number_to_currency @invoice.minutes_payout %>
+      </td>
+    </tr>
+    <tr>
+      <td><b>Bonus</b></td>
+    </tr>
+    <tr>
+      <td>
+        Weekly Schedule Bonus Minutes:
+        <%= @invoice.bonus_minutes %>
+        x $0.07
+      </td>
+      <td class="right">
+        <%= number_to_currency @invoice.bonus_payout %>
+      </td>
+    </tr>
+    <tr>
+      <td>Total</td>
+      <td align="right"><%= number_to_currency @invoice.total %></td>
+    </tr>
+  </table>
+</div>

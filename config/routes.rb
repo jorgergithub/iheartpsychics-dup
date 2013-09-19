@@ -89,6 +89,8 @@ IHeartPsychics::Application.routes.draw do
       end
     end
 
+    resources :invoices
+
     collection do
       get 'search', action: :search, as: :search
     end

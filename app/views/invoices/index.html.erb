@@ -10,28 +10,20 @@
             <th>Psychic</th>
             <th>Period</th>
             <th>Created</th>
-            <th>Tier</th>
             <th>Total</th>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           <% @invoices.each do |invoice| %>
             <tr>
-              <td><%= link_to invoice.number, admin_invoice_path(invoice) %></td>
+              <td><%= link_to invoice.number, psychic_invoice_path(invoice) %></td>
               <td><%= invoice.psychic.full_name %></td>
               <td>
                 <%=l invoice.start_date, format: :short %> to
                 <%=l invoice.end_date, format: :short %>
               </td>
               <td><%=l invoice.created_at, format: :short %></td>
-              <td><%= invoice.tier.name %></td>
               <td class="right"><%= number_to_currency invoice.total %></td>
-              <td>
-                <% unless invoice.paid? %>
-                  <%= link_to '<i class="icon-money"></i> Pay Invoice'.html_safe, new_admin_invoice_payment_path(invoice) %>
-                <% end %>
-              </td>
             </tr>
           <% end %>
         </tbody>
