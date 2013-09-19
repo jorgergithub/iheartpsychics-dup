@@ -174,10 +174,27 @@ describe Client do
   end
 
   describe "#seconds" do
-    it "is the number credits in seconds" do
-      expect(Client.new(balance: 1).seconds).to eql(60)
-      expect(Client.new(balance: 2).seconds).to eql(120)
-      expect(Client.new(balance: 25).seconds).to eql(1500)
+    let(:psychic) { build(:psychic, price: 4.50) }
+
+    context "when client has a balance and psychic has a price" do
+      it "is the number credits in seconds" do
+        expect(Client.new(balance: 9).seconds(psychic)).to eql(120)
+        expect(Client.new(balance: 10).seconds(psychic)).to eql(133)
+        expect(Client.new(balance: 25).seconds(psychic)).to eql(333)
+      end
+    end
+
+    context "when psychic don't have a price" do
+      let(:psychic) { build(:psychic, price: nil) }
+      it "is zero" do
+        expect(Client.new(balance: 9).seconds(psychic)).to eql(0)
+      end
+    end
+
+    context "when balance is nil" do
+      it "is zero" do
+        expect(Client.new(balance: nil).seconds(psychic)).to eql(0)
+      end
     end
   end
 

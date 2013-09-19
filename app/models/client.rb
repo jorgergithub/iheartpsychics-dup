@@ -61,8 +61,9 @@ class Client < ActiveRecord::Base
     self.save
   end
 
-  def seconds
-    balance * 60
+  def seconds(psychic)
+    return 0 unless balance and psychic.price
+    ((balance.to_f / psychic.price.to_f) * 60).floor
   end
 
   def psychics
