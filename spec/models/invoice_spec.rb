@@ -154,4 +154,35 @@ describe Invoice do
       end
     end
   end
+
+  describe "#paid!" do
+    let(:invoice) { create(:invoice) }
+    let(:now) { Time.parse("2013-01-01 00:00") }
+
+    before {
+      Time.stub(now: now)
+      invoice.paid!
+    }
+
+    it "sets the invoice paid_at to current time" do
+      expect(invoice.paid_at).to eql(now)
+    end
+  end
+
+  describe "#paid?" do
+    let(:invoice) { build(:invoice) }
+
+    context "when paid_at is nil" do
+      it "is false" do
+        expect(invoice).not_to be_paid
+      end
+    end
+
+    context "when paid_at has a value" do
+      before { invoice.paid_at = Time.now }
+      it "is true" do
+        expect(invoice).to be_paid
+      end
+    end
+  end
 end

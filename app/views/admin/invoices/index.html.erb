@@ -11,19 +11,25 @@
             <th>Period</th>
             <th>Created</th>
             <th>Total</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <% @invoices.each do |inv| %>
+          <% @invoices.each do |invoice| %>
             <tr>
-              <td><%= link_to inv.number, admin_invoice_path(inv) %></td>
-              <td><%= inv.psychic.full_name %></td>
+              <td><%= link_to invoice.number, admin_invoice_path(invoice) %></td>
+              <td><%= invoice.psychic.full_name %></td>
               <td>
-                <%=l inv.start_date, format: :short %> to
-                <%=l inv.end_date, format: :short %>
+                <%=l invoice.start_date, format: :short %> to
+                <%=l invoice.end_date, format: :short %>
               </td>
-              <td><%=l inv.created_at, format: :short %></td>
-              <td class="right"><%= number_to_currency inv.total %></td>
+              <td><%=l invoice.created_at, format: :short %></td>
+              <td class="right"><%= number_to_currency invoice.total %></td>
+              <td>
+                <% unless invoice.paid? %>
+                  <%= link_to '<i class="icon-money"></i> Pay Invoice'.html_safe, new_admin_invoice_payment_path(invoice) %>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

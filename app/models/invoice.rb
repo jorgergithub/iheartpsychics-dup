@@ -4,6 +4,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :psychic
   belongs_to :tier
   has_many :calls
+  has_many :payments
 
   scope :pending, -> { where("paid_at IS NULL") }
 
@@ -45,5 +46,13 @@ class Invoice < ActiveRecord::Base
   def number
     return unless id
     id.to_s.rjust(8, "0")
+  end
+
+  def paid?
+    paid_at.present?
+  end
+
+  def paid!
+    update_attributes paid_at: Time.now
   end
 end

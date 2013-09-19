@@ -25,7 +25,9 @@ IHeartPsychics::Application.routes.draw do
     resources :categories
     resources :horoscopes
     resources :calls
-    resources :invoices
+    resources :invoices do
+      resources :payments
+    end
 
     resources :newsletters do
       member do
