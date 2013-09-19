@@ -4,6 +4,12 @@
   </div>
 
   <div class="span12">
+    Period:
+    <%=l @invoice.start_date, format: :short %> to
+    <%=l @invoice.end_date, format: :short %>
+  </div>
+
+  <div class="span12">
     Pay Tier: <%= @invoice.tier.name %>
   </div>
 
@@ -58,8 +64,8 @@
       </td>
     </tr>
     <tr>
-      <td>Total</td>
-      <td align="right"><%= number_to_currency @invoice.total %></td>
+      <td class="total">Total</td>
+      <td class="total" align="right"><%= number_to_currency @invoice.total %></td>
     </tr>
   </table>
 </div>

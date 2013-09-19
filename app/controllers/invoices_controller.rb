@@ -2,7 +2,7 @@ class InvoicesController < AuthorizedController
   before_action :find_invoice
 
   def index
-    @invoices = @psychic.invoices.pending.order("created_at")
+    @invoices = @psychic.invoices.order("created_at DESC")
       .page(params[:page]).per(params[:per])
   end
 
