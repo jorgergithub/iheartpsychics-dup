@@ -10,7 +10,7 @@ class Invoice < ActiveRecord::Base
 
   def self.create_for(from, to)
     Psychic.all.each do |psychic|
-      calls = psychic.calls.period(from, to)
+      calls = psychic.calls.unprocessed.period(from, to)
       next unless calls.count > 0
 
       invoice = psychic.invoices.build
@@ -36,6 +36,7 @@ class Invoice < ActiveRecord::Base
         self.bonus_minutes += call.duration
         self.bonus_payout += 0.07 * call.duration
       end
+      call.update_attributes processed: true
     end
 
     self.total = self.minutes_payout + self.bonus_payout
@@ -54,5 +55,9 @@ class Invoice < ActiveRecord::Base
 
   def paid!
     update_attributes paid_at: Time.now
+  end
+
+  def price_per_minute
+    (tier.percent * psychic.price) / 100
   end
 end
