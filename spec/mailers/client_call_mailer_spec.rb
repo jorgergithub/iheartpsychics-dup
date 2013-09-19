@@ -61,22 +61,4 @@ describe ClientCallMailer do
       # end
     end
   end
-
-  context "#psychic_call_statistics" do
-    let(:email) { ClientCallMailer.psychic_call_statistics(client_call) }
-
-    it "sends out the email to the client" do
-      expect(email.to).to include(psychic.email)
-    end
-
-    it "sends out an email with the right subject" do
-      subject = "Your I Heart Psychics call with #{client.full_name}"
-      expect(email.subject).to include(subject)
-    end
-
-    it "sends out the duration of the call" do
-      body = "You just finished a 2 minutes talk with #{client.full_name}."
-      expect(email.body.encoded).to include(body)
-    end
-  end
 end

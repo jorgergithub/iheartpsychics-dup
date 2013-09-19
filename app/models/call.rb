@@ -90,7 +90,6 @@ class Call < ActiveRecord::Base
 
   def send_statistics
     ClientCallMailer.delay.client_call_statistics(self)
-    ClientCallMailer.delay.psychic_call_statistics(self)
   end
 
   def self.process_calls
