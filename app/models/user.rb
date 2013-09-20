@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable
 
+  attr_accessor :generated_password
   attr_accessor :create_as
-  attr_accessor :phone_number
   attr_accessor :login
 
   attr_accessor :package_id
@@ -29,8 +29,6 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true
   validates :username, uniqueness: true
-  validates :phone_number, presence: true, if: Proc.new { |u| u.create_as == 'client' }
-  validate :uniqueness_of_phone_number, if: Proc.new { |u| u.create_as == 'client' }
 
   before_create :build_relation
 
@@ -120,21 +118,10 @@ class User < ActiveRecord::Base
 
   protected
 
-  def uniqueness_of_phone_number
-    return unless phone_number
-
-    phones = Client.joins(:phones)
-    phones.where!(client_phones: { number: PhoneParser.parse(phone_number) })
-    phones.where!(id: id) if id?
-
-    if phones.any?
-      errors.add(:phone_number, :taken)
-    end
-  end
-
   def build_relation
-    if create_as == 'client'
-      self.build_client(phone_number: phone_number)
+    if create_as == "client"
+      self.build_client
+      self.client.phones.build
     elsif create_as == 'psychic'
       self.build_psychic
     elsif create_as == 'csr'
@@ -142,6 +129,7 @@ class User < ActiveRecord::Base
     elsif create_as == 'admin'
       self.build_admin
     end
-    self.role = create_as
+
+    self.role = create_as unless self.role
   end
 end

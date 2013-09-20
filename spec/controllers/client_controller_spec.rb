@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe ClientsController do
-  let(:user) { create(:user, create_as: "client", phone_number: "764-123-3322") }
+  let(:user) { create(:user, create_as: "client") }
   let(:client) { user.client }
 
   before {

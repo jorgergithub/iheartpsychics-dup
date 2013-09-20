@@ -16,20 +16,17 @@ class Client < ActiveRecord::Base
 
   has_and_belongs_to_many :favorite_psychics, class_name: "Psychic"
 
-  accepts_nested_attributes_for :phones, allow_destroy: true, reject_if: lambda { |attributes|
-    attributes[:number].blank? || attributes[:desc].blank?
-  }
+  accepts_nested_attributes_for :phones, allow_destroy: true
+
+  validates :phones, :presence => true
 
   delegate :username, :first_name, :last_name, :full_name, :email,
            to: :user, allow_nil: true
 
-  after_create :add_phone_number
   before_save  :set_random_pin
   before_save  :set_unsubscribe_key
 
   scope :subscribed, -> { where('receive_newsletters') }
-
-  attr_accessor :phone_number
 
   def valid_pin?(pin)
     self.pin == pin
@@ -152,15 +149,5 @@ class Client < ActiveRecord::Base
   def set_unsubscribe_key
     return if self.unsubscribe_key
     self.unsubscribe_key = RandomUtils.alpha_s(20)
-  end
-
-  def add_phone_number
-    return unless self.phone_number
-
-    phone = self.phones.build.tap do |object|
-      object.localized.assign_attributes(number: self.phone_number, desc: "Main")
-    end
-
-    phone.save
   end
 end
