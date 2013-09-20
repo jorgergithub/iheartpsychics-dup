@@ -42,6 +42,7 @@ group :development, :test do
   gem 'jasmine'              , git: 'https://github.com/gistia/jasmine-gem.git'
   gem 'quiet_assets'         , '~> 1.0.2'
   gem 'rspec-rails'          , '~> 2.0'
+  gem 'timecop'              , '~> 0.6.3'
 end
 
 group :test do

@@ -2,6 +2,7 @@ en:
   date:
     formats:
       short: "%b %d"
+      normal: "%B %d"
   number:
       format:
         separator: '.'

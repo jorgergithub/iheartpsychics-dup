@@ -1,6 +1,47 @@
 require "spec_helper"
 
 describe Invoice do
+  describe ".generate" do
+    context "when today is Sunday" do
+      before { Timecop.freeze(Time.zone.parse("2013-09-22 23:59")) }
+      after { Timecop.return }
+
+      it "creates for last Sunday until Monday at midnight" do
+        start_date = Date.parse("2013-09-15").in_time_zone
+        end_date = Date.parse("2013-09-23").in_time_zone
+
+        Invoice.should_receive(:create_for).with(start_date, end_date)
+        Invoice.generate
+      end
+    end
+
+    context "when today is Monday" do
+      before { Timecop.freeze(Time.zone.parse("2013-09-23 00:02")) }
+      after { Timecop.return }
+
+      it "creates for 2 Sundays ago until last Monday at midnight" do
+        start_date = Date.parse("2013-09-15").in_time_zone
+        end_date = Date.parse("2013-09-23").in_time_zone
+
+        Invoice.should_receive(:create_for).with(start_date, end_date)
+        Invoice.generate
+      end
+    end
+
+    context "when today is Wednesday" do
+      before { Timecop.freeze(Time.zone.parse("2013-09-25 00:02")) }
+      after { Timecop.return }
+
+      it "creates for the previous Sunday until last Monday at midnight" do
+        start_date = Date.parse("2013-09-15").in_time_zone
+        end_date = Date.parse("2013-09-23").in_time_zone
+
+        Invoice.should_receive(:create_for).with(start_date, end_date)
+        Invoice.generate
+      end
+    end
+  end
+
   describe ".create_for" do
     let(:psychic) { create(:psychic) }
 

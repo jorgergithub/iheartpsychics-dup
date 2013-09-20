@@ -8,6 +8,22 @@ class Invoice < ActiveRecord::Base
 
   scope :pending, -> { where("paid_at IS NULL") }
 
+  def self.generate
+    today = Date.today.in_time_zone
+
+    last_sunday = if today.sunday?
+      Date.today.in_time_zone
+    else
+      now = Time.now.in_time_zone
+      now - now.wday.days
+    end
+
+    start_date = (last_sunday - 7.days).in_time_zone.at_midnight
+    end_date = last_sunday.at_midnight + 1.day
+
+    self.create_for(start_date, end_date)
+  end
+
   def self.create_for(from, to)
     Psychic.all.each do |psychic|
       calls = psychic.calls.unprocessed.period(from, to)

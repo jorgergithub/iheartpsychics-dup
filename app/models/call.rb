@@ -30,11 +30,11 @@ class Call < ActiveRecord::Base
   end
 
   def parsed_start_time
-    Time.parse(start_time)
+    Time.parse(start_time).in_time_zone
   end
 
   def parsed_end_time
-    Time.parse(end_time)
+    Time.parse(end_time).in_time_zone
   end
 
   def twilio_account

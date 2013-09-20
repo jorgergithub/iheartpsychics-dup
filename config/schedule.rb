@@ -22,3 +22,7 @@
 every '* * * * *' do
   runner "Newsletter.deliver"
 end
+
+every :sunday, at: '12pm' do
+  runner "Invoice.generate"
+end
