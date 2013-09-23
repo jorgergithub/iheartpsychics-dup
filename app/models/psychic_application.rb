@@ -3,7 +3,7 @@ class PsychicApplication < ActiveRecord::Base
 
   validates :first_name, :last_name, :username, :password, :email, :address,
             :city, :state, :zip_code, :phone, :cellular_number, :ssn,
-            :date_of_birth,  :resume, :experience, :gift, :explain_gift,
+            :date_of_birth,  :experience, :gift, :explain_gift,
             :age_discovered, :reading_style, :why_work, :friends_describe,
             :strongest_weakest_attributes, :how_to_deal_challenging_client,
             :tools, :specialties, :professional_goals, :how_did_you_hear,

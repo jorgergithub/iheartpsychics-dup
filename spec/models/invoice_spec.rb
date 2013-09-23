@@ -53,9 +53,10 @@ describe Invoice do
       Tier.create(from: 2000, to: 999999, name: "Diamond", percent: 21)
     end
 
-    context "when some calls are already processed" do
+    context "when some calls are already invoiced" do
+      let!(:other_invoice) { create(:invoice) }
       let!(:call1) { create(:call, psychic: psychic, original_duration: "30000", started_at: "2013-01-01 10:00", cost: 4.50 * 500) } # 2250
-      let!(:call2) { create(:call, psychic: psychic, original_duration: "27600", started_at: "2013-01-02 11:00", cost: 4.50 * 460, processed: true) } # 2070
+      let!(:call2) { create(:call, psychic: psychic, original_duration: "27600", started_at: "2013-01-02 11:00", cost: 4.50 * 460, invoice: other_invoice) } # 2070
 
       let(:invoice) { Invoice.last }
 
@@ -67,11 +68,11 @@ describe Invoice do
         expect(invoice.calls).to include(call1)
       end
 
-      it "marks the call as processed" do
-        expect(call1.reload).to be_processed
+      it "marks the call as invoiced" do
+        expect(call1.reload).to be_invoiced
       end
 
-      it "doesn't include the call that is already processed" do
+      it "doesn't include that call" do
         expect(invoice.calls).not_to include(call2)
       end
     end

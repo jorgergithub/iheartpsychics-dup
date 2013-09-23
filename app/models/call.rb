@@ -15,6 +15,7 @@ class Call < ActiveRecord::Base
 
   scope :unprocessed, -> { where("processed IS NULL") }
   scope :processed, -> { where("processed IS NOT NULL") }
+  scope :uninvoiced, -> { where("invoice_id IS NULL") }
   scope :period, -> (from, to) { where("started_at BETWEEN ? AND ?", from, to) }
 
   def formatted_duration
@@ -125,6 +126,10 @@ class Call < ActiveRecord::Base
 
   def bonus?
     started_at.hour >= 0 && started_at.hour <= 8
+  end
+
+  def invoiced?
+    invoice.present?
   end
 
   private

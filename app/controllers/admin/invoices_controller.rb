@@ -2,11 +2,12 @@ class Admin::InvoicesController < AuthorizedController
   before_filter :find_invoice
 
   def index
-    @invoices = Invoice.pending.order("created_at")
+    @invoices = Invoice.pending.order("id")
       .page(params[:page]).per(params[:per])
   end
 
   def show
+    render "invoices/show"
   end
 
   def update

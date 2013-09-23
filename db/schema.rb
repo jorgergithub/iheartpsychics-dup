@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130919123837) do
+ActiveRecord::Schema.define(version: 20130923230736) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -243,9 +243,11 @@ ActiveRecord::Schema.define(version: 20130919123837) do
   end
 
   create_table "payments", force: true do |t|
-    t.integer "invoice_id"
-    t.string  "transaction_id"
-    t.decimal "amount",         precision: 8, scale: 2
+    t.integer  "invoice_id"
+    t.string   "transaction_id"
+    t.decimal  "amount",         precision: 8, scale: 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "psychic_applications", force: true do |t|

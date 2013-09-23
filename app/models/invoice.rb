@@ -7,6 +7,7 @@ class Invoice < ActiveRecord::Base
   has_many :payments
 
   scope :pending, -> { where("paid_at IS NULL") }
+  scope :paid, -> { where("paid_at IS NOT NULL") }
 
   def self.generate
     today = Date.today.in_time_zone
@@ -26,7 +27,7 @@ class Invoice < ActiveRecord::Base
 
   def self.create_for(from, to)
     Psychic.all.each do |psychic|
-      calls = psychic.calls.unprocessed.period(from, to)
+      calls = psychic.calls.uninvoiced.period(from, to)
       next unless calls.count > 0
 
       invoice = psychic.invoices.build
@@ -52,7 +53,6 @@ class Invoice < ActiveRecord::Base
         self.bonus_minutes += call.duration
         self.bonus_payout += 0.07 * call.duration
       end
-      call.update_attributes processed: true
     end
 
     self.total = self.minutes_payout + self.bonus_payout
