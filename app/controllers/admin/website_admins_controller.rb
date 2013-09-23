@@ -26,6 +26,12 @@ class Admin::WebsiteAdminsController < AuthorizedController
     end
   end
 
+  def destroy
+    @website_admin.destroy
+    redirect_to admin_website_admins_path,
+      notice: 'Website Admin was successfully deleted.'
+  end
+
   protected
 
   def find_website_admin
