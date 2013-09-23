@@ -28,7 +28,7 @@ wadmin = User.create!(first_name: 'Website', last_name: 'Admin',
 
 mdirector = User.create!(first_name: 'Manager', last_name: 'Director',
                         username: 'mdir', email: 'mdir@iheartpsychics.co',
-                        password: 'ipass123', create_as: 'website_admin',
+                        password: 'ipass123', create_as: 'manager_director',
                         confirmed_at: Time.now)
 
 accountant = User.create!(first_name: 'Accountant', last_name: '',
