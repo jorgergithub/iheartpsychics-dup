@@ -42,10 +42,14 @@
   <legend>Resume</legend>
 
   <% if params[:controller] =~ /admin/ %>
-    <div class="resume">
-      <i class="icon-arrow-down"></i>
-      <%= link_to @psychic_application.resume.file.identifier, @psychic_application.resume.url, target: "_blank" %>
-    </div>
+    <% if @psychic_application.resume.present? %>
+      <div class="resume">
+        <i class="icon-arrow-down"></i>
+        <%= link_to @psychic_application.resume.file.try(:identifier), @psychic_application.resume.url, target: "_blank" %>
+      </div>
+    <% else %>
+      <i class="resume-not-uploaded">Not uploaded</i>
+    <% end %>
   <% else %>
     <%= add_file_field f, @psychic_application, :resume %>
   <% end %>
