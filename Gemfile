@@ -34,6 +34,7 @@ gem 'kaminari'
 group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_girl_rails'   , '~> 4.2.1'
+  gem 'faker'                , '~> 1.2.0'
   gem 'foreigner'
   gem 'growl'                , '~> 1.0.3'
   gem 'guard'                , '~> 1.8.2'
