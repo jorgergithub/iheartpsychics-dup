@@ -5,6 +5,9 @@ class Admin::ClientsController < AuthorizedController
     @clients = Client.order(:id).page(params[:page]).per(params[:per])
   end
 
+  def show
+  end
+
   def new
     @user = User.new
     @client = @user.build_client if @user

@@ -1,0 +1,40 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h3>Orders</h3>
+
+    <% if @orders.any? %>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th>Total</th>
+            <th>Paid?</th>
+            <th>Created at</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= order.client_full_name %></td>
+              <td><%= number_to_currency order.total %></td>
+              <td>
+                <% if order.paid? %>
+                  <i class="icon-ok"></i>
+                <% end %>
+              </td>
+              <td><%= l order.created_at, format: :short %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= paginate @orders %>
+
+    <% else %>
+      <div class="blank-state">
+        No orders added yet. <%= link_to "Add one now.", new_admin_order_path %>
+      </div>
+    <% end %>
+    <%= link_to "Add new order", new_admin_order_path, class: "btn btn-small" %>
+  </div>
+</div>

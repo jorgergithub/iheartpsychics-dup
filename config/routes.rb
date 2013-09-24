@@ -12,23 +12,19 @@ IHeartPsychics::Application.routes.draw do
   namespace :admin do
     resource :admin
     resource :dashboard
-
-    resources :clients
     resources :accountants
-    resources :customer_service_representatives
-    resources :manager_directors
-    resources :packages
-    resources :psychic_applications
-    resources :psychics
-    resources :website_admins
-    resources :surveys
     resources :call_surveys
-    resources :categories
-    resources :horoscopes
     resources :calls
+    resources :categories
+    resources :clients
+    resources :customer_service_representatives
+    resources :horoscopes
+
     resources :invoices do
       resources :payments
     end
+
+    resources :manager_directors
 
     resources :newsletters do
       member do
@@ -36,6 +32,11 @@ IHeartPsychics::Application.routes.draw do
         get 'reset'  , action: :reset  , as: :reset
       end
     end
+
+    resources :orders, :except => [:show, :edit, :update, :destroy]
+    resources :packages
+    resources :psychic_applications
+    resources :psychics
 
     resources :reviews, :shallow => true do
       member do
@@ -45,6 +46,8 @@ IHeartPsychics::Application.routes.draw do
     end
 
     resources :schedule_jobs, :only => [:index, :edit, :update]
+    resources :surveys
+    resources :website_admins
 
     get "/debug", to: "debug#index"
   end

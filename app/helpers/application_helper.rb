@@ -49,7 +49,11 @@ module ApplicationHelper
   end
 
   def current_page
-    "#{controller.controller_name}_#{controller.action_name}".camelize
+    if admin_controller?
+      "admin_#{controller.controller_name}_#{controller.action_name}".camelize
+    else
+      "#{controller.controller_name}_#{controller.action_name}".camelize
+    end
   end
 
   def provider_name(provider)
@@ -58,5 +62,11 @@ module ApplicationHelper
     end
 
     provider.to_s.titleize
+  end
+
+  private
+
+  def admin_controller?
+    controller.class.name.split("::").first == "Admin"
   end
 end

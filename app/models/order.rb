@@ -1,18 +1,18 @@
 class Order < ActiveRecord::Base
+  attr_accessor :package_id, :card_id, :card_number, :card_exp_month,
+                :card_exp_year, :card_cvc, :stripe_token
+
   belongs_to :client
+
   has_many :items, class_name: "OrderItem"
   has_many :transactions
 
-  attr_accessor :package_id
-  attr_accessor :card_id
-  attr_accessor :card_number
-  attr_accessor :card_exp_month
-  attr_accessor :card_exp_year
-  attr_accessor :card_cvc
-  attr_accessor :stripe_token
+  delegate :full_name, to: :client, allow_nil: true, :prefix => true
 
   before_save :handle_package_item
   before_save :calculate_total
+
+  scope :most_recent, -> { order(created_at: :desc) }
 
   def to_desc
     "Order ##{id}"
