@@ -6,20 +6,30 @@
       <table class="table table-hover">
         <thead>
           <tr>
+            <th>ID</th>
             <th>Client</th>
             <th>Total</th>
             <th>Paid?</th>
+             <th>Refunded?</th>
             <th>Created at</th>
           </tr>
         </thead>
         <tbody>
           <% @orders.each do |order| %>
             <tr>
+              <td><%= link_to order.id, admin_order_path(order) %></td>
               <td><%= order.client_full_name %></td>
               <td><%= number_to_currency order.total %></td>
               <td>
                 <% if order.paid? %>
                   <i class="icon-ok"></i>
+                <% end %>
+              </td>
+              <td>
+                <% if order.refunded? %>
+                  <i class="icon-ok"></i>
+                <% elsif order.paid? %>
+                  <%= link_to 'Refund it', admin_order_refunds_path(order), data: { confirm: "Are you sure?" }, :method => "post" %>
                 <% end %>
               </td>
               <td><%= l order.created_at, format: :short %></td>

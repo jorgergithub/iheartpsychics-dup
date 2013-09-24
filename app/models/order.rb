@@ -1,4 +1,6 @@
 class Order < ActiveRecord::Base
+  include I18n::Alchemy
+
   attr_accessor :package_id, :card_id, :card_number, :card_exp_month,
                 :card_exp_year, :card_cvc, :stripe_token
 
@@ -25,6 +27,7 @@ class Order < ActiveRecord::Base
 
   def pay
     raise OrderError, "order already paid" if paid?
+    raise OrderError, "order refunded" if refunded?
 
     transaction do
       if stripe_token
@@ -33,7 +36,7 @@ class Order < ActiveRecord::Base
       end
 
       client.charge(total, "Order ##{id}", order_id: id)
-      client.add_credits(item.package.credits, self) if item and item.package
+      client.add_credits(item.package_credits, self) if item and item.package
       paid!
 
       send_email
@@ -50,6 +53,10 @@ class Order < ActiveRecord::Base
 
   def paid?
     status == "paid"
+  end
+
+  def refunded?
+    status == "refunded"
   end
 
   def item

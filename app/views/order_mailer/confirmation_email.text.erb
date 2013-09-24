@@ -1,6 +1,10 @@
 <%= @client.first_name %>,
 
-This is a receipt for <%= @order.to_desc %> placed on <%= @order.created_at %>
+<% if @order.refunded? %>
+This is a receipt for <%= @order.to_desc %> placed on <%= @order.localized.created_at %>
+<% else %>
+This is a receipt for <%= @order.to_desc %> refund placed on <%= @order.localized.created_at %>
+<% end %>
 
 <% @order.items.each do |i| %>
   <%= i.qty %> x <%= i.description %> = <%= number_to_currency i.total_price %>

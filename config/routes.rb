@@ -33,7 +33,10 @@ IHeartPsychics::Application.routes.draw do
       end
     end
 
-    resources :orders, :except => [:show, :edit, :update, :destroy]
+    resources :orders, :except => [:edit, :update, :destroy] do
+      resource :refunds, :only => :create
+    end
+
     resources :packages
     resources :psychic_applications
     resources :psychics

@@ -4,6 +4,8 @@ class OrderItem < ActiveRecord::Base
 
   before_save :calculate_total_price
 
+  delegate :credits, to: :package, allow_nil: true, prefix: true
+
   private
 
   def calculate_total_price

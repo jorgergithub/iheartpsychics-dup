@@ -3,6 +3,10 @@ class Admin::OrdersController < AuthorizedController
     @orders = Order.most_recent.page(params[:page]).per(params[:per])
   end
 
+  def show
+    @order = Order.find(params[:id])
+  end
+
   def new
     @order = Order.new
   end
