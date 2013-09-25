@@ -9,7 +9,7 @@ class Payment < ActiveRecord::Base
   private
 
   def check_invoice
-    if amount == invoice.total
+    if invoice.payments.sum(:amount) >= invoice.total
       invoice.paid!
     end
   end

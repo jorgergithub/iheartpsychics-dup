@@ -1,7 +1,7 @@
 class Admin::PaymentsController < AuthorizedController
   def new
     @invoice = Invoice.find(params[:invoice_id])
-    @payment = @invoice.payments.new(amount: @invoice.total)
+    @payment = @invoice.payments.new(amount: @invoice.total - @invoice.payments.sum(:amount))
   end
 
   def show
