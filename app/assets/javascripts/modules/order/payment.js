@@ -14,6 +14,7 @@ Module("IHP.Pages.Orders.Payment", function(Payment) {
     this.cardCvc = this.el.find("#order_card_cvc");
 
     this.cardNumberValidationError = this.el.find("#card-number-validation-error");
+    this.expirationDateValidationError = this.el.find("#card-exp-date-validation-error");
     this.cardCvcValidationError = this.el.find("#card-cvc-validation-error");
     this.paymentError = this.form.find(".payment-errors");
 
@@ -36,6 +37,10 @@ Module("IHP.Pages.Orders.Payment", function(Payment) {
     // this.cardNumber.focus();
   };
 
+  Payment.fn.setExpirateDateValidationError = function(error){
+    this.expirationDateValidationError.text(error);
+  }
+
   Payment.fn.setCvcValidationError = function(error) {
     this.cardCvcValidationError.text(error);
     // this.cardCvc.focus();
@@ -47,6 +52,7 @@ Module("IHP.Pages.Orders.Payment", function(Payment) {
 
   Payment.fn.clearErrors = function() {
     this.setNumberValidationError("");
+    this.setExpirateDateValidationError("");
     this.setCvcValidationError("");
     this.setPaymentError("");
   }
@@ -68,6 +74,25 @@ Module("IHP.Pages.Orders.Payment", function(Payment) {
     // invalid card number
     if (!Stripe.validateCardNumber(this.cardNumber.val())) {
       this.setNumberValidationError("invalid credit card number");
+      return false;
+    }
+
+    // invalid exp month
+    if (this.newCard.is(":checked") && !this.cardExpMonth.val()) {
+      this.setExpirateDateValidationError("inform the expiration month");
+      return false;
+    }
+
+    // invalid exp year
+    if (this.newCard.is(":checked") && !this.cardExpYear.val()) {
+      this.setExpirateDateValidationError("inform the expiration year");
+      return false;
+    }
+
+    // invalid exp date (lower than current date)
+    if (this.newCard.is(":checked")
+      && !Stripe.validateExpiry(this.cardExpMonth.val(), this.cardExpYear.val())) {
+      this.setExpirateDateValidationError("your credit card has a expired date");
       return false;
     }
 

@@ -29,13 +29,13 @@
         <%= label_tag :expiration, nil, :class => 'control-label' %>
 
         <div class="controls">
-          <%= select_tag :card_exp_month, options_from_collection_for_select(
+          <%= select_tag :order_card_exp_month, options_from_collection_for_select(
             Rails.configuration.credit_card[:months], :value, :name), prompt: "Select a month", name: 'order[card_exp_month]', class: 'input-medium', data: { stripe: "exp-month" } %>
 
-          <%= select_tag :card_exp_year, options_from_collection_for_select(
+          <%= select_tag :order_card_exp_year, options_from_collection_for_select(
           Rails.configuration.credit_card[:years], :value, :name), prompt: "Select a year", name: 'order[card_exp_year]',class: 'input-small', data: { stripe: "exp-year" } %>
 
-          <span id="exp-date-validation-error" class="validation-error"></span>
+          <span id="card-exp-date-validation-error" class="validation-error"></span>
         </div>
       </div>
 

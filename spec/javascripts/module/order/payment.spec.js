@@ -1,7 +1,8 @@
 describe("IHP.Pages.Orders.Payment", function() {
   var form, container, payment;
   var newCard, cardNumber, cardExpMonth, cardExpMonth, cardCvc;
-  var cardNumberValidationError, cardCvcValidationError, paymentError;
+  var cardNumberValidationError, cardExpirationDateValidationError,
+      cardCvcValidationError, paymentError;
 
   beforeEach(function() {
     form = $("<form/>").appendTo(".output");
@@ -9,12 +10,14 @@ describe("IHP.Pages.Orders.Payment", function() {
 
     newCard = $("<input type='radio' id='order_card_id'/>").appendTo(container);
     cardNumber = $("<input id='order_card_number'/>").appendTo(container);
-    cardExpMonth = $("<input id='order_card_month'>").appendTo(container);
-    cardExpMonth = $("<input id='order_card_year'>").appendTo(container);
+    cardExpMonth = $("<input id='order_card_exp_month'>").appendTo(container);
+    cardExpYear = $("<input id='order_card_exp_year'>").appendTo(container);
     cardCvc = $("<input id='order_card_cvc'>").appendTo(container);
 
     cardNumberValidationError =
       $("<div id='card-number-validation-error'>").appendTo(container);
+    cardExpirationDateValidationError =
+      $("<div id='card-exp-date-validation-error'>").appendTo(container);
     cardCvcValidationError =
       $("<div id='card-cvc-validation-error'>").appendTo(container);
 
@@ -36,6 +39,13 @@ describe("IHP.Pages.Orders.Payment", function() {
     //   payment.setNumberValidationError("error");
     //   expect(cardNumber.is(":focus")).toBeTruthy();
     // });
+  });
+
+  describe("setExpirateDateValidationError", function() {
+    it("sets the expiration date validation error text", function() {
+      payment.setExpirateDateValidationError("error");
+      expect(cardExpirationDateValidationError.text()).toEqual("error")
+    });
   });
 
   describe("setCvcValidationError", function() {
@@ -60,6 +70,7 @@ describe("IHP.Pages.Orders.Payment", function() {
   describe("clearErrors", function() {
     beforeEach(function() {
       cardNumberValidationError.text("error");
+      cardExpirationDateValidationError.text("error");
       cardCvcValidationError.text("error");
       paymentError.text("error");
 
@@ -68,6 +79,10 @@ describe("IHP.Pages.Orders.Payment", function() {
 
     it("clears the number error", function() {
       expect(cardNumberValidationError.text()).toEqual("");
+    });
+
+    it("clears the expiration date error", function() {
+      expect(cardExpirationDateValidationError.text()).toEqual("");
     });
 
     it("clears the cvc error", function() {
@@ -103,6 +118,7 @@ describe("IHP.Pages.Orders.Payment", function() {
       beforeEach(function() {
         newCard.prop("checked", true);
         spyOn(payment, "setNumberValidationError");
+        spyOn(payment, "setExpirateDateValidationError");
         spyOn(payment, "setCvcValidationError");
       });
 
@@ -142,11 +158,72 @@ describe("IHP.Pages.Orders.Payment", function() {
         });
       });
 
+      describe("when exp month is missing", function() {
+        var result;
+
+        beforeEach(function() {
+          payment.cardNumber.val("4242424242424242");
+          payment.cardExpMonth.val("");
+          result = payment.validate();
+        });
+
+        it("sets exp month validation error", function() {
+          expect(payment.setExpirateDateValidationError).
+            toHaveBeenCalledWith("inform the expiration month");
+        });
+
+        it("returns false", function() {
+          expect(result).toBeFalsy();
+        });
+      });
+
+      describe("when exp year is missing", function() {
+        var result;
+
+        beforeEach(function() {
+          payment.cardNumber.val("4242424242424242");
+          payment.cardExpMonth.val("08");
+          payment.cardExpYear.val("");
+          result = payment.validate();
+        });
+
+        it("sets exp year validation error", function() {
+          expect(payment.setExpirateDateValidationError).
+            toHaveBeenCalledWith("inform the expiration year");
+        });
+
+        it("returns false", function() {
+          expect(result).toBeFalsy();
+        });
+      });
+
+      describe("when exp date is lower than current date", function() {
+        var result;
+
+        beforeEach(function() {
+          payment.cardNumber.val("4242424242424242");
+          payment.cardExpMonth.val("01");
+          payment.cardExpYear.val("2010");
+          result = payment.validate();
+        });
+
+        it("sets exp date validation error", function() {
+          expect(payment.setExpirateDateValidationError).
+            toHaveBeenCalledWith("your credit card has a expired date");
+        });
+
+        it("returns false", function() {
+          expect(result).toBeFalsy();
+        });
+      });
+
       describe("when missing CVC", function() {
         var result;
 
         beforeEach(function() {
           payment.cardNumber.val("4242424242424242");
+          payment.cardExpMonth.val("12");
+          payment.cardExpYear.val("2018");
           payment.cardCvc.val("");
           result = payment.validate();
         });
@@ -166,6 +243,8 @@ describe("IHP.Pages.Orders.Payment", function() {
 
         beforeEach(function() {
           payment.cardNumber.val("4242424242424242");
+          payment.cardExpMonth.val("12");
+          payment.cardExpYear.val("2018");
           payment.cardCvc.val("12");
           result = payment.validate();
         });
@@ -180,17 +259,23 @@ describe("IHP.Pages.Orders.Payment", function() {
         });
       });
 
-      describe("when card and CVC are valid", function() {
+      describe("when card, expiration date and CVC are valid", function() {
         var result;
 
         beforeEach(function() {
           payment.cardNumber.val("4242424242424242");
+          payment.cardExpMonth.val("12");
+          payment.cardExpYear.val("2018");
           payment.cardCvc.val("123");
           result = payment.validate();
         });
 
         it("doesn't set the number validation error", function() {
           expect(payment.setNumberValidationError).not.toHaveBeenCalled();
+        });
+
+        it("doesn't set the expiration date validation error", function() {
+          expect(payment.setExpirateDateValidationError).not.toHaveBeenCalled();
         });
 
         it("doesn't set the CVC validation error", function() {
