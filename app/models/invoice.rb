@@ -3,7 +3,7 @@ class Invoice < ActiveRecord::Base
 
   belongs_to :psychic
   belongs_to :tier
-  has_many :calls
+  has_many :calls, dependent: :nullify
   has_many :payments
 
   scope :pending, -> { where("paid_at IS NULL") }
