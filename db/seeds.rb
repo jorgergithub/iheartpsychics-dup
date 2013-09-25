@@ -9,8 +9,6 @@
 Package.create(name: "$32 for $30", credits: 32, price: 30, active: true, phone: true)
 Package.create(name: "$55 for $50", credits: 55, price: 50, active: true, phone: true)
 
-INSERT INTO `tiers` VALUES (1,'Bronze',0,999,'2013-09-16 18:46:03','2013-09-16 18:51:38','14.00'),(2,'Silver',1000,1199,'2013-09-16 18:46:24','2013-09-16 18:51:38','19.00'),(3,'Gold',1200,1599,'2013-09-16 18:46:31','2013-09-16 18:51:51','19.50'),(4,'Platinum',1600,1999,'2013-09-16 18:46:43','2013-09-16 18:51:38','20.00'),(5,'Diamond',2000,999999,'2013-09-16 18:47:01','2013-09-16 18:51:38','21.00');
-
 Tier.create(name: 'Bronze',   from: 0, to: 999, percent: 14)
 Tier.create(name: 'Silver',   from: 1000, to: 1199, percent: 19)
 Tier.create(name: 'Gold',     from: 1200, to: 1599, percent: 19.5)
@@ -166,11 +164,21 @@ Psychic.all.each { |p| p.update_attributes price: [4.5, 5.0, 5.5, 6.0, 6.5].samp
   end
 end
 
+psychic = User.find_by_username('tmegan').psychic
+psychic.reviews.create(client: Client.first(offset: rand(Client.count)), rating: 5, text: "Amazing experience")
+psychic.reviews.create(client: Client.first(offset: rand(Client.count)), rating: 4, text: "Super nice, recommended")
+
+300.times do
+  psychic = Psychic.first(offset: rand(Psychic.count))
+  psychic.reviews.create(client: Client.first(offset: rand(Client.count)),
+                         rating: 4, text: Faker::Lorem.words(10))
+end
+
 now = DateTime.now
 period_start = now - now.wday
 period_end = period_start - 7.days
 
-200.times do
+1000.times do
   psychic = Psychic.first(offset: rand(Psychic.count))
   client  = Client.first(offset: rand(Client.count))
   duration = Random.rand(240)
@@ -184,5 +192,6 @@ period_end = period_start - 7.days
               start_time: started_at.to_s, ended_at: ended_at.to_s,
               cost: duration * psychic.price,
               cost_per_minute: psychic.price,
+              from: client.phones.first.try(:number),
               processed: true)
 end
