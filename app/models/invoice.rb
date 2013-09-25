@@ -58,6 +58,11 @@ class Invoice < ActiveRecord::Base
     self.total = self.minutes_payout + self.bonus_payout
     self.avg_minutes = self.total_minutes.to_f / self.number_of_calls.to_f
     save
+    send_notification
+  end
+
+  def send_notification
+    InvoiceMailer.delay.notify(self.id)
   end
 
   def number
@@ -71,6 +76,7 @@ class Invoice < ActiveRecord::Base
 
   def paid!
     update_attributes paid_at: Time.now
+    InvoiceMailer.delay.notify_payment(self.id)
   end
 
   def price_per_minute

@@ -1,0 +1,10 @@
+Dear <%= @psychic.first_name %>,
+
+Invoice #<%= @invoice.number %> has been generated and can be accessed
+using the link below:
+
+[<%= psychic_invoice_url(@invoice) %>](<%= psychic_invoice_url(@invoice) %>)
+
+Best,
+
+The I Heart Psychics Team
