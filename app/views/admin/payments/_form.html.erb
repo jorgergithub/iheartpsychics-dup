@@ -5,6 +5,8 @@
   <%= add_text_field f, :amount, nil, input: { class: 'money' } %>
   <%= add_text_field f, :transaction_id, "Transaction ID" %>
 
-  <%= f.submit "Save", class: "btn" %>
-  <%= link_to "Cancel", client_path, class: "btn" %>
+  <div class="form-actions">
+    <%= f.submit "Save", class: "btn btn-primary" %>
+    <%= link_to "Cancel", client_path, class: "btn" %>
+  </div>
 <% end %>
