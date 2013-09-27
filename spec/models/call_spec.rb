@@ -36,11 +36,11 @@ describe Call do
     end
 
     it "saves started_at" do
-      expect(call.started_at.to_s).to eql("2013-07-17 23:50:32 UTC")
+      expect(call.started_at.to_s).to eql("2013-07-17 19:50:32 -0400")
     end
 
     it "saves ended_at" do
-      expect(call.ended_at.to_s).to eql("2013-07-17 23:51:57 UTC")
+      expect(call.ended_at.in_time_zone.to_s).to eql("2013-07-17 19:51:57 -0400")
     end
 
     it "save fields correctly" do
