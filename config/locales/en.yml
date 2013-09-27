@@ -3,6 +3,10 @@ en:
     formats:
       short: "%b %d"
       normal: "%B %d"
+      schedule: "%a, %b %d"
+  time:
+    formats:
+      schedule: "%H:%M %p"
   number:
       format:
         separator: '.'

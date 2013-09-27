@@ -8,6 +8,7 @@ class Psychic < ActiveRecord::Base
   has_many :calls
   has_many :reviews
   has_many :invoices
+  has_many :schedules
 
   has_and_belongs_to_many :favorited_by_clients, class_name: "Client"
 
@@ -46,6 +47,16 @@ class Psychic < ActiveRecord::Base
 
   def alias_name
     "#{pseudonym} #{last_name.first}"
+  end
+
+  def weekly_schedule
+    delta = 5 - Date.today.in_time_zone.to_date.wday
+    delta += 7 if delta < 0
+
+    first_date = Date.today.in_time_zone.to_date
+    last_date = first_date + delta.days
+
+    schedules.where('date >= ? AND date <= ?', first_date, last_date)
   end
 
   private

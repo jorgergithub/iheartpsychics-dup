@@ -37,6 +37,44 @@
 
 <div class="row-fluid">
   <div class="span12">
+    <h3>This Week Schedule</h3>
+
+    <%= form_for @psychic do |f| %>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Start</th>
+          <th>End</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @psychic.weekly_schedule.group_by(&:date).each_pair do |date, schedules| %>
+          <tr>
+            <td rowspan="<%= schedules.size %>">
+              <%=l date, format: :schedule %>
+            </td>
+            <% schedules.each_with_index do |schedule, i| %>
+              <% if i > 0 %>
+                <tr>
+                  <td><%=l schedule.start_time, format: :schedule %></td>
+                  <td><%=l schedule.end_time, format: :schedule %></td>
+                </tr>
+              <% else %>
+                <td><%=l schedule.start_time, format: :schedule %></td>
+                <td><%=l schedule.end_time, format: :schedule %></td>
+              <% end %>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% end %>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
     <h3>Call History</h3>
 
     <% if @psychic.calls.any? %>
@@ -73,3 +111,14 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $('.datetimepicker').datetimepicker({
+      language: 'en',
+      pickDate: false,
+      pick12HourFormat: true,
+      pickSeconds: false
+    });
+  });
+</script>
