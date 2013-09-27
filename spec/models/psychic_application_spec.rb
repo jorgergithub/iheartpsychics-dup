@@ -19,7 +19,6 @@ describe PsychicApplication do
     it { should validate_presence_of(:phone) }
     it { should validate_presence_of(:professional_goals) }
     it { should validate_presence_of(:reading_style) }
-    it { should validate_presence_of(:resume) }
     it { should validate_presence_of(:specialties) }
     it { should validate_presence_of(:ssn) }
     it { should validate_presence_of(:state) }
