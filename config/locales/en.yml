@@ -6,7 +6,7 @@ en:
       schedule: "%a, %b %d"
   time:
     formats:
-      schedule: "%H:%M %p"
+      schedule: "%I:%M %p"
   number:
       format:
         separator: '.'

@@ -21,6 +21,37 @@ describe Psychic do
     end
   end
 
+  describe "#next_week_schedules" do
+    let(:psychic) { create(:psychic) }
+    subject { psychic.next_week_schedules }
+
+    before { Timecop.freeze(Time.zone.parse("2013-09-28 00:00")) }
+    after { Timecop.return }
+
+    before do
+      today = Date.today.in_time_zone
+
+      -10.upto(20) do |i|
+        date = today + i.days
+        start_time = (today + i.days).change(hour: 10)
+        end_time = (today + i.days).change(hour: 18)
+        create(:schedule, psychic: psychic, date: date, start_time: start_time, end_time: end_time)
+      end
+    end
+
+    it "returns 7 days" do
+      expect(subject.count).to eql(7)
+    end
+
+    it "returns Saturday as first entry" do
+      expect(subject.first.date.wday).to eql(6)
+    end
+
+    it "returns Friday as last entry" do
+      expect(subject.last.date.wday).to eql(5)
+    end
+  end
+
   describe "#weekly_schedule" do
     let(:psychic) { create(:psychic) }
     subject { psychic.weekly_schedule }

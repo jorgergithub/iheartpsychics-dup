@@ -391,6 +391,9 @@ ActiveRecord::Schema.define(version: 20131007215659) do
     t.datetime "updated_at"
   end
 
+  add_index "schedules", ["date"], name: "index_schedules_on_date", using: :btree
+  add_index "schedules", ["psychic_id", "date"], name: "index_schedules_on_psychic_id_and_date", using: :btree
+
   create_table "surveys", force: true do |t|
     t.string   "name"
     t.boolean  "active"

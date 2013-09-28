@@ -18,7 +18,9 @@ class PsychicsController < AuthorizedController
 
   def update
     if @psychic.localized.update_attributes(psychic_params)
-      redirect_to dashboard_path, notice: "Psychic was successfully updated."
+      path = params[:redirect_to] || dashboard_path
+      message = params[:redirect_message] || "Psychic was successfully updated."
+      redirect_to path, notice: message
     else
       render action: "show"
     end
@@ -46,6 +48,7 @@ class PsychicsController < AuthorizedController
       :specialties_lost_objects, :specialties_dream_interpretation,
       :specialties_pet_and_animals, :specialties_past_lives,
       :specialties_deceased, :style_compassionate, :style_inspirational,
-      :style_straightforward, :about, :price, :pseudonym)
+      :style_straightforward, :about, :price, :pseudonym,
+      schedules_attributes: [:id, :date, :start_time_string, :end_time_string] )
   end
 end

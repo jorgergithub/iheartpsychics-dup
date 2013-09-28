@@ -1,0 +1,68 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h3>Next Week Schedule</h3>
+
+    <%= form_for @psychic do |f| %>
+      <%= hidden_field_tag :redirect_to, psychic_schedules_path %>
+      <%= hidden_field_tag :redirect_message, "Schedule was successfully updated." %>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Start</th>
+            <th>End</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @schedules.each_pair do |date, schedules| %>
+            <tr>
+              <td rowspan="<%= schedules.size %>">
+                <%=l date.in_time_zone.to_date, format: :schedule %>
+              </td>
+              <% schedules.each_with_index do |schedule, i| %>
+                <%= f.fields_for :schedules, schedule do |sf| %>
+                  <% if i > 0 %><tr><% end %>
+                    <td>
+                      <%= sf.hidden_field :date %>
+                      <div class="input-append datetimepicker">
+                        <%= sf.text_field :start_time_string, data: { format: "HH:mm PP" } %>
+                        <span class="add-on">
+                          <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="input-append datetimepicker">
+                        <%= sf.text_field :end_time_string, data: { format: "HH:mm PP" } %>
+                        <span class="add-on">
+                          <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                        </span>
+                      </div>
+                    </td>
+                  <% if i > 0 %></tr><% end %>
+                <% end %>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="form-actions">
+        <%= f.submit "Save", class: "btn btn-primary" %>
+        <%= link_to "Cancel", psychic_path, class: "btn" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<script>
+  $(document).ready(function() {
+    $('.datetimepicker').datetimepicker({
+      language: 'en',
+      pickDate: false,
+      pick12HourFormat: true,
+      pickSeconds: false
+    });
+  });
+</script>
