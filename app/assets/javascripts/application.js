@@ -11,6 +11,7 @@
 // about supported directives.
 //
 // Libs ===================================================
+//= require vendor/modernizr/modernizr
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
