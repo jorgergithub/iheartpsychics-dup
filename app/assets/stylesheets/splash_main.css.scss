@@ -1,5 +1,12 @@
+$countdown-margin: 120px;
+$digit-width: 180px * 0.75;
+$digit-height: 157px;
+$digit-spacing: 20px;
+$digit-font-size: 130px * 0.75;
+$pair-spacing: 70px * 0.75;
+
 header {
-  margin-bottom: 170px;
+  margin-bottom: $countdown-margin;
 }
 
 .container {
@@ -9,26 +16,27 @@ header {
 }
 
 .countdown {
-  width: 1280px;
+  width: (6 * $digit-width) + (3 * $digit-spacing) + (2 * $pair-spacing);
   margin: 0 auto;
 
   .pair {
     .digit {
+      width: $digit-width;
+      height: $digit-height;
+      margin-right: $digit-spacing;
+
       background: url(image-path("digit-background.png"));
       padding: 15px 0;
-      width: 180px;
-      height: 210px;
       border-radius: 5px;
       float: left;
-      margin-right: 20px;
-      font-size: 130px;
+      font-size: $digit-font-size;
       font-family: "Roboto-Thin";
       text-align: center;
       color: #8590a1;
     }
 
     .middle {
-      margin-right: 70px;
+      margin-right: $pair-spacing;
     }
 
     .last {
@@ -45,10 +53,10 @@ header {
     .caption {
       margin-top: 40px;
       float: left;
-      width: 380px;
-      margin-right: 70px;
+      width: ($digit-width * 2) + $digit-spacing;
+      margin-right: $pair-spacing;
       text-align: center;
-      margin-bottom: 170px;
+      margin-bottom: $countdown-margin;
     }
 
     .last {
