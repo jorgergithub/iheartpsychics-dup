@@ -25,6 +25,18 @@ $subscribe-input-margin: 50px * 0.75;
 $subscribe-input-font-size: 24px * 0.75;
 $subscribe-input-border-radius: (2 * $subscribe-input-font-size) * 0.75;
 
+@mixin regular-font($size) {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: $size;
+}
+
+@mixin thin-font($size) {
+  font-family: "Roboto";
+  font-weight: 100;
+  font-size: $size;
+}
+
 header {
   margin-bottom: $countdown-margin;
 }
@@ -41,6 +53,8 @@ header {
 
   .pair {
     .digit {
+      @include thin-font($digit-font-size);
+
       width: $digit-width;
       height: $digit-height;
       margin-right: $digit-spacing;
@@ -49,8 +63,6 @@ header {
       padding: 15px 0;
       border-radius: 5px;
       float: left;
-      font-size: $digit-font-size;
-      font-family: "Roboto-Thin";
       text-align: center;
       color: #8590a1;
     }
@@ -66,8 +78,7 @@ header {
 
   .captions {
     clear: left;
-    font-family: "Roboto";
-    font-size: 40px;
+    @include regular-font(40px);
     color: #8590a1;
 
     .caption {
@@ -86,22 +97,21 @@ header {
 }
 
 .main {
+  @include thin-font($main-text-font-size);
+
   clear: left;
   border-top: 2px #e1e7eb solid;
   padding-top: $main-header-spacing;
-  font-family: "Roboto-Thin";
   margin-bottom: $main-header-spacing;
 
   h1 {
-    font-size: $main-header-font-size;
-    font-weight: normal;
+    @include thin-font($main-header-font-size);
     color: #af00a5;
     margin-bottom: $main-header-spacing;
     text-align: center;
   }
 
   p {
-    font-size: $main-text-font-size;
     color: #8590a1;
 
     a {
@@ -117,8 +127,7 @@ header {
   height: $button-area-height;
 
   a {
-    font-family: "Roboto-Thin";
-    font-size: $button-font-size;
+    @include thin-font($button-font-size);
     text-align: center;
     text-decoration: none;
     display: block;
@@ -137,11 +146,11 @@ header {
 }
 
 .subscribe {
+  @include thin-font($subscribe-font-size);
+
   width: 100%;
   height: $subscribe-height;
   padding: $subscribe-padding 0 0 0;
-  font-size: $subscribe-font-size;
-  font-family: "Roboto-Thin";
   background-color: #92278f;
   color: #fff;
   text-align: center;
@@ -161,11 +170,11 @@ header {
 }
 
 footer {
+  @include thin-font(18px);
+
   width: 100%;
   padding-top: 25px;
   height: 50px;
-  font-family: "Roboto-Thin";
-  font-size: 18px;
   color: #fff;
   background: #232d3b;
 }
