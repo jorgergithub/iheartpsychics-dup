@@ -1,4 +1,10 @@
 class HomeController < AuthorizedController
+  before_filter :authenticate_user!, except: [:index]
+  layout :select_layout
+
+  def index
+  end
+
   def show
     if current_user.client?
       redirect_to client_path
@@ -21,6 +27,16 @@ class HomeController < AuthorizedController
     elsif current_user.accountant?
       redirect_to admin_invoices_path
       return
+    end
+  end
+
+  protected
+
+  def select_layout
+    if action_name == "index"
+      return "splash"
+    else
+      return "application"
     end
   end
 end

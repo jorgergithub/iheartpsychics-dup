@@ -9,19 +9,8 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require main
- *= require application
- *= require base
- *= require bootstrap-datetimepicker
- *= require client
- *= require csr
- *= require datepicker
- *= require horoscopes
- *= require invoices
- *= require omniauth_callbacks
- *= require orders
- *= require psychic
- *= require psychic_application
- *= require signup
- *= require surveys
+ *= require lib/reset
+ *= require lib/text
+ *= require lib/960
+ *= require splash_main
  */
