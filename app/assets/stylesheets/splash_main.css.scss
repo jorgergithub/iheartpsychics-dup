@@ -1,9 +1,29 @@
-$countdown-margin: 120px;
+$countdown-margin: 80px;
+
 $digit-width: 180px * 0.75;
 $digit-height: 157px;
 $digit-spacing: 20px;
 $digit-font-size: 130px * 0.75;
 $pair-spacing: 70px * 0.75;
+
+$main-header-spacing: 100px * 0.50;
+$main-header-font-size: 35px;
+$main-text-font-size: 20px;
+
+$button-width: 270px * 0.75;
+$button-height: 20px * 0.75;
+$button-font-size: 24px * 0.75;
+$button-spacing: 70px * 0.75;
+$button-area-height: ($button-height * 0.75) + 120px;
+
+$subscribe-height: 220px * 0.75;
+$subscribe-padding: ($subscribe-height * 0.35) * 0.75;
+$subscribe-font-size: 30px * 0.75;
+$subscribe-input-width: 500px * 0.75;
+$subscribe-input-padding: 20px * 0.75;
+$subscribe-input-margin: 50px * 0.75;
+$subscribe-input-font-size: 24px * 0.75;
+$subscribe-input-border-radius: (2 * $subscribe-input-font-size) * 0.75;
 
 header {
   margin-bottom: $countdown-margin;
@@ -68,20 +88,20 @@ header {
 .main {
   clear: left;
   border-top: 2px #e1e7eb solid;
-  padding-top: 100px;
+  padding-top: $main-header-spacing;
   font-family: "Roboto-Thin";
-  margin-bottom: 100px;
+  margin-bottom: $main-header-spacing;
 
   h1 {
-    font-size: 35px;
+    font-size: $main-header-font-size;
     font-weight: normal;
     color: #af00a5;
-    margin-bottom: 80px;
+    margin-bottom: $main-header-spacing;
     text-align: center;
   }
 
   p {
-    font-size: 20px;
+    font-size: $main-text-font-size;
     color: #8590a1;
 
     a {
@@ -93,12 +113,12 @@ header {
 
 .actions {
   margin: 0 auto;
-  width: 610px;
-  height: 170px;
+  width: (2 * $button-width) + $button-spacing;
+  height: $button-area-height;
 
   a {
     font-family: "Roboto-Thin";
-    font-size: 24px;
+    font-size: $button-font-size;
     text-align: center;
     text-decoration: none;
     display: block;
@@ -106,10 +126,9 @@ header {
     background: #7fd14d;
     border-radius: 48px;
     color: #fff;
-    padding: 20px 0;
-    height: 30px;
-    width: 270px;
-    margin-right: 70px;
+    padding: ((($button-height / 2) - ($button-font-size / 2)) + 10px) 0;
+    width: $button-width;
+    margin-right: $button-spacing;
   }
 
   a.last {
@@ -119,11 +138,11 @@ header {
 
 .subscribe {
   width: 100%;
-  height: 220px;
-  background-color: #92278f;
-  padding: 80px 0 0 0;
+  height: $subscribe-height;
+  padding: $subscribe-padding 0 0 0;
+  font-size: $subscribe-font-size;
   font-family: "Roboto-Thin";
-  font-size: 30px;
+  background-color: #92278f;
   color: #fff;
   text-align: center;
 
@@ -133,12 +152,11 @@ header {
 
   input {
     border: 0;
-    padding: 20px;
-    width: 500px;
-    margin-top: 50px;
-    border-radius: 48px;
-    font-size: 24px;
-    font-weight: normal;
+    width: $subscribe-input-width;
+    padding: $subscribe-input-padding;
+    margin-top: $subscribe-input-margin;
+    border-radius: $subscribe-input-border-radius;
+    font-size: $subscribe-input-font-size;
   }
 }
 
