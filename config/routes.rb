@@ -44,6 +44,8 @@ IHeartPsychics::Application.routes.draw do
       end
     end
 
+    resources :schedule_jobs, :only => [:index, :edit, :update]
+
     get "/debug", to: "debug#index"
   end
 

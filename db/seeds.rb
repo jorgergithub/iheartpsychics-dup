@@ -6,6 +6,12 @@
 #   cities = City.create!([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create!(name: 'Emanuel', city: cities.first)
 
+ScheduleJob.create!(description: 'Client Weekly Usage Report',
+                    week_day: 'monday',
+                    at: '1AM',
+                    model: 'ClientWeeklyUsageReport',
+                    action: 'deliver')
+
 Package.create(name: "$32 for $30", credits: 32, price: 30, active: true, phone: true)
 Package.create(name: "$55 for $50", credits: 55, price: 50, active: true, phone: true)
 

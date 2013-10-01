@@ -1,0 +1,53 @@
+<p>
+  Dear <%= @client.first_name %>,
+</p>
+
+<p>
+  Below is your I Heart Psychics weekly usage summary
+</p>
+
+<% if @calls.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>From</th>
+        <th>Duration</th>
+        <th>Cost</th>
+        <th>Psychic</th>
+        <th>Started at</th>
+        <th>Ended at</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @calls.each do |call| %>
+        <tr>
+          <td><%= call.formatted_number %></td>
+          <td><%= call.formatted_duration %></td>
+          <td><%= number_to_currency call.cost %></td>
+          <td><%= call.psychic_full_name %></td>
+          <td><%=l call.started_at, format: :short %></td>
+          <td><%=l call.ended_at, format: :short %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <p>
+    Last week you used <%= @duration %> and was charged for <%= number_to_currency @cost %>.
+  </p>
+<% else %>
+  <p>
+    You didn't made calls last week.
+  </p>
+<% end %>
+
+<p>
+  Your current balance is <%= number_to_currency @client.balance %>.
+</p>
+
+<p>
+  Sincerely,<br>
+  The I Heart Psychics Team<br>
+  http://iheartpsychics.co
+</p>
