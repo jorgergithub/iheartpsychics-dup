@@ -109,7 +109,7 @@ GEM
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     ffi (1.9.0)
-    foreigner (1.4.2)
+    foreigner (1.5.0)
       activerecord (>= 3.0.0)
     formatador (0.2.4)
     growl (1.0.3)
@@ -338,7 +338,7 @@ DEPENDENCIES
   dotenv-rails
   factory_girl_rails (~> 4.2.1)
   faker (~> 1.2.0)
-  foreigner
+  foreigner (~> 1.5.0)
   growl (~> 1.0.3)
   guard (~> 1.8.2)
   guard-rspec (~> 3.0.2)
@@ -347,7 +347,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails (~> 3.0.4)
   jquery-turbolinks (~> 1.0.0)
-  kaminari
+  kaminari (~> 0.14.1)
   maildown (~> 1.0.1)
   mini_magick (~> 3.6.0)
   mysql2 (~> 0.3.12)
