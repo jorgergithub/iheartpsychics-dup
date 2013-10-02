@@ -38,4 +38,5 @@
 //= require horoscopes
 //= require psychic_application
 //= require survey
+//= require splash
 //= require tabs

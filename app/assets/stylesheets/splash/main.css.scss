@@ -1,46 +1,6 @@
-$countdown-margin: 80px;
+@import "splash/mixins";
 
-$digit-width: 180px * 0.75;
-$digit-height: 157px;
-$digit-spacing: 20px;
-$digit-font-size: 130px * 0.75;
-$pair-spacing: 70px * 0.75;
-
-$main-header-spacing: 100px * 0.50;
-$main-header-font-size: 35px;
-$main-text-font-size: 20px;
-
-$button-width: 270px * 0.75;
-$button-height: 20px * 0.75;
-$button-font-size: 24px * 0.75;
-$button-spacing: 70px * 0.75;
-$button-area-height: ($button-height * 0.75) + 120px;
-
-$subscribe-height: 220px * 0.75;
-$subscribe-padding: ($subscribe-height * 0.35) * 0.75;
-$subscribe-font-size: 30px * 0.75;
-$subscribe-input-width: 500px * 0.75;
-$subscribe-input-padding: 20px * 0.75;
-$subscribe-input-margin: 50px * 0.75;
-$subscribe-input-font-size: 24px * 0.75;
-$subscribe-input-border-radius: (2 * $subscribe-input-font-size) * 0.75;
-
-$footer-padding: 15px;
-$footer-font-size: 16px;
-
-@mixin regular-font($size) {
-  font-family: "Roboto";
-  font-weight: 400;
-  font-size: $size;
-}
-
-@mixin thin-font($size) {
-  font-family: "Roboto";
-  font-weight: 100;
-  font-size: $size;
-}
-
-header {
+body.home header {
   margin-bottom: $countdown-margin;
 }
 
@@ -57,6 +17,7 @@ header {
   .pair {
     .digit {
       @include thin-font($digit-font-size);
+      float: left;
 
       width: $digit-width;
       height: $digit-height;
@@ -65,7 +26,6 @@ header {
       background: url(image-path("digit-background.png"));
       padding: 15px 0;
       border-radius: 5px;
-      float: left;
       text-align: center;
       color: #8590a1;
     }
@@ -131,16 +91,10 @@ header {
 
   a {
     @include thin-font($button-font-size);
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    float: left;
-    background: #7fd14d;
-    border-radius: 48px;
-    color: #fff;
-    padding: ((($button-height / 2) - ($button-font-size / 2)) + 10px) 0;
-    width: $button-width;
+    @include button;
+
     margin-right: $button-spacing;
+    float: left;
   }
 
   a.last {
@@ -198,4 +152,50 @@ footer {
   padding: $footer-padding 0;
   color: #fff;
   background: #232d3b;
+}
+
+.overlay {
+  position:fixed;
+  display:none;
+
+  /* color with alpha channel */
+  background-color: rgba(0, 0, 0, 0.7); /* 0.7 = 70% opacity */
+
+  /* stretch to screen edges */
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#faq-modal {
+  display: none;
+  width: 600px;
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  margin-left: -300px;
+  background: #fff;
+  border: 1px #aaa solid;
+  padding: 20px;
+  box-shadow: 5px 5px 0.5em #333;
+  border-radius: 15px;
+
+  .question {
+    @include regular-font(15px);
+  }
+
+  .answer {
+    @include thin-font(15px);
+  }
+
+  .modal-actions {
+    width: 600px;
+
+    a {
+      @include thin-font($button-font-size);
+      @include button;
+      margin: 0 auto;
+    }
+  }
 }

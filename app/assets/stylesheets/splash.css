@@ -12,5 +12,6 @@
  *= require lib/reset
  *= require lib/text
  *= require lib/960
- *= require splash_main
+ *= require splash/main
+ *= require splash/form
  */
