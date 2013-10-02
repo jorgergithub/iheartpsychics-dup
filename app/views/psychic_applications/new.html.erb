@@ -1,4 +1,4 @@
-<%= form_for @psychic_application, html: {class: 'form'} do |f| %>
+<%= form_for @psychic_application, html: {class: 'form container_12'} do |f| %>
 
   <% if @psychic_application.errors.any? %>
     <div id="error_explanation">
@@ -14,6 +14,6 @@
 
   <%= render "form", f: f %>
 
-  <%= f.submit "Send", class: "btn" %>
+  <%= link_to "Submit Application", "#", class: "submit" %>
 
 <% end %>

@@ -1,5 +1,5 @@
 class PsychicApplicationsController < ApplicationController
-  layout "login"
+  layout :resolve_layout
 
   def new
     @psychic_application = PsychicApplication.new
@@ -32,5 +32,9 @@ class PsychicApplicationsController < ApplicationController
       :reading_style, :why_work, :friends_describe,
       :strongest_weakest_attributes, :how_to_deal_challenging_client,
       :specialties, :tools, :professional_goals, :how_did_you_hear, :other)
+  end
+
+  def resolve_layout
+    params[:layout] || "splash"
   end
 end

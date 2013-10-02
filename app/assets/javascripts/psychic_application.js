@@ -18,4 +18,8 @@ $(document).ready(function() {
 
   $('#psychic_application_how_did_you_hear').change(changeHowDidYouHear);
   changeHowDidYouHear();
+
+  $('.submit').click(function(e) {
+    $('form').submit();
+  });
 });
