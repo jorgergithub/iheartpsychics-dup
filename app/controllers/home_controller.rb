@@ -1,8 +1,18 @@
+require 'time_ext'
+
 class HomeController < AuthorizedController
   before_filter :authenticate_user!, except: [:index]
   layout :select_layout
 
   def index
+    finish = Time.zone.parse("2013-12-01 00:00:00")
+    diff = Time.diff(finish, Time.zone.now)
+
+    @diff = {
+      :month => ("%02d" % diff[:month]).split(""),
+      :day => ("%02d" % diff[:day]).split(""),
+      :hour => ("%02d" % diff[:hour]).split("")
+    }
   end
 
   def show

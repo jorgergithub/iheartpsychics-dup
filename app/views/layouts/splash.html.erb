@@ -18,16 +18,16 @@
 
   <section class="countdown">
     <div class="pair">
-      <div class="digit">0</div>
-      <div class="middle digit">2</div>
+      <div class="digit"><%= @diff[:month][0] %></div>
+      <div class="middle digit"><%= @diff[:month][1] %></div>
     </div>
     <div class="pair">
-      <div class="digit">1</div>
-      <div class="middle digit">7</div>
+      <div class="digit"><%= @diff[:day][0] %></div>
+      <div class="middle digit"><%= @diff[:day][1] %></div>
     </div>
     <div class="pair">
-      <div class="digit">2</div>
-      <div class="last digit">1</div>
+      <div class="digit"><%= @diff[:hour][0] %></div>
+      <div class="last digit"><%= @diff[:hour][1] %></div>
     </div>
 
     <div class="captions">
