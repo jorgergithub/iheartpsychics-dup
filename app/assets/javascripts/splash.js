@@ -15,7 +15,15 @@ $(document).ready(function() {
     e.preventDefault();
     e.stopPropagation();
 
+    $("#confirmation-modal").fadeOut();
     $("#faq-modal").fadeOut();
     $('.overlay').fadeOut();
   })
+
+  $("#subscribe").click(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    $("form").submit();
+  });
 });

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131002184209) do
+ActiveRecord::Schema.define(version: 20131002223759) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -382,6 +382,12 @@ ActiveRecord::Schema.define(version: 20131002184209) do
 
   add_index "schedules", ["date"], name: "index_schedules_on_date", using: :btree
   add_index "schedules", ["psychic_id", "date"], name: "index_schedules_on_psychic_id_and_date", using: :btree
+
+  create_table "subscribers", force: true do |t|
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "surveys", force: true do |t|
     t.string   "name"

@@ -168,18 +168,39 @@ footer {
   width: 100%;
 }
 
-#faq-modal {
+#faq-modal, #confirmation-modal {
+  @include thin-font(15px);
+
   display: none;
-  width: 600px;
   position: fixed;
-  top: 100px;
   left: 50%;
-  margin-left: -300px;
   background: #fff;
   border: 1px #aaa solid;
   padding: 20px;
   box-shadow: 5px 5px 0.5em #333;
   border-radius: 15px;
+
+  .modal-actions {
+    width: 400px;
+
+    a {
+      @include thin-font($button-font-size);
+      @include button;
+      margin: 0 auto;
+    }
+  }
+}
+
+#confirmation-modal {
+  width: 400px;
+  top: 50%;
+  margin-left: -200px;
+}
+
+#faq-modal {
+  width: 600px;
+  top: 100px;
+  margin-left: -300px;
 
   .question {
     @include regular-font(15px);
@@ -187,15 +208,5 @@ footer {
 
   .answer {
     @include thin-font(15px);
-  }
-
-  .modal-actions {
-    width: 600px;
-
-    a {
-      @include thin-font($button-font-size);
-      @include button;
-      margin: 0 auto;
-    }
   }
 }

@@ -39,11 +39,21 @@
 </section>
 
 <section class="subscribe">
-  <div class="text">Be the first to know when we launch</div>
+  <%= form_for @subscriber, remote: true do |f| %>
+    <div class="text">Be the first to know when we launch</div>
 
-  <div class="input">
-    <input type="text" placeholder="Subscribe Now!">
-    <%= link_to "", "#" %>
+    <div class="input">
+      <%= f.text_field :email, placeholder: "Subscribe Now!" %>
+      <%= link_to "", "#", id: "subscribe" %>
+    </div>
+  <% end %>
+</section>
+
+<section id="confirmation-modal">
+  <p align="center" class="message"></p>
+
+  <div class="modal-actions">
+    <%= link_to "Close", "#", id: "close-button" %>
   </div>
 </section>
 

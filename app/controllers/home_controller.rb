@@ -13,10 +13,11 @@ class HomeController < AuthorizedController
       :day => ("%02d" % (diff[:week] * 7 + diff[:day])).split(""),
       :hour => ("%02d" % diff[:hour]).split("")
     }
+
+    @subscriber = Subscriber.new
   end
 
   def apna
-
   end
 
   def show
