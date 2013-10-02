@@ -10,7 +10,7 @@ class HomeController < AuthorizedController
 
     @diff = {
       :month => ("%02d" % diff[:month]).split(""),
-      :day => ("%02d" % diff[:day]).split(""),
+      :day => ("%02d" % (diff[:week] * 7 + diff[:day])).split(""),
       :hour => ("%02d" % diff[:hour]).split("")
     }
   end
