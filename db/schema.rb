@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130923230736) do
+ActiveRecord::Schema.define(version: 20131002184209) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -288,6 +288,7 @@ ActiveRecord::Schema.define(version: 20130923230736) do
     t.string   "resume"
     t.datetime "declined_at"
     t.string   "phone"
+    t.boolean  "terms"
   end
 
   create_table "psychics", force: true do |t|
@@ -372,6 +373,16 @@ ActiveRecord::Schema.define(version: 20130923230736) do
     t.boolean  "featured",   default: false
   end
 
+  create_table "schedules", force: true do |t|
+    t.integer  "psychic_id"
+    t.date     "date"
+    t.datetime "start_time"
+    t.datetime "end_time"
+  end
+
+  add_index "schedules", ["date"], name: "index_schedules_on_date", using: :btree
+  add_index "schedules", ["psychic_id", "date"], name: "index_schedules_on_psychic_id_and_date", using: :btree
+
   create_table "surveys", force: true do |t|
     t.string   "name"
     t.boolean  "active"
@@ -430,6 +441,6 @@ ActiveRecord::Schema.define(version: 20130923230736) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
-  add_foreign_key "faqs", "categories", :name => "faqs_category_id_fk"
+  add_foreign_key "faqs", "categories", name: "faqs_category_id_fk"
 
 end

@@ -1,7 +1,7 @@
 require 'time_ext'
 
 class HomeController < AuthorizedController
-  before_filter :authenticate_user!, except: [:index]
+  before_filter :authenticate_user!, except: [:index, :apna]
   layout :select_layout
 
   def index
@@ -13,6 +13,10 @@ class HomeController < AuthorizedController
       :day => ("%02d" % (diff[:week] * 7 + diff[:day])).split(""),
       :hour => ("%02d" % diff[:hour]).split("")
     }
+  end
+
+  def apna
+
   end
 
   def show
@@ -43,10 +47,12 @@ class HomeController < AuthorizedController
   protected
 
   def select_layout
-    if action_name == "index"
-      return "splash"
-    else
+    if action_name == "show"
       return "application"
+    elsif action_name == "apna"
+      return "splash-nologo"
+    else
+      return "splash"
     end
   end
 end

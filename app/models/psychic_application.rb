@@ -12,6 +12,7 @@ class PsychicApplication < ActiveRecord::Base
   validates :has_experience, inclusion: { in: [true, false], message: "can't be blank" }
   validates :phone, :cellular_number, as_phone_number: true
   validates :emergency_contact_number, as_phone_number: true, if: ->(pa) { pa.emergency_contact_number }
+  validates :terms, acceptance: {accept: true}
 
   localize :phone, :cellular_number, :emergency_contact_number, :using => PhoneParser
   localize :date_of_birth, :using => KeepDateParser

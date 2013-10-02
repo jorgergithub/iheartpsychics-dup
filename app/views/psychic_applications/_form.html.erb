@@ -76,3 +76,11 @@
     <%= add_text_field f, :other, "Other", size: "120x10", class: "input-xxlarge" %>
   </div>
 </fieldset>
+
+<div class="privacy_document">
+  <%= link_to "Applicant Privacy Notification for Application", apna_path, target: "_privacy_document" %>
+</div>
+
+<div class="acceptance">
+  <%= add_checkbox f, :terms, "By submitting this form, I acknowledge, understand, and agree to the terms as identified in the Applicant Privacy Notification for Application document above." %>
+</div>
