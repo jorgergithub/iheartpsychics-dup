@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable
+         :omniauthable, :timeoutable
 
   attr_accessor :create_as
   attr_accessor :phone_number
