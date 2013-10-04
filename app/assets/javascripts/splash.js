@@ -11,14 +11,14 @@ $(document).ready(function() {
     $('#faq-modal').fadeIn();
   });
 
-  $('#close-button').click(function(e) {
+  $('.close-button').on('click', function(e) {
     e.preventDefault();
     e.stopPropagation();
 
     $("#confirmation-modal").fadeOut();
     $("#faq-modal").fadeOut();
     $('.overlay').fadeOut();
-  })
+  });
 
   $("#subscribe").click(function(e) {
     e.preventDefault();
