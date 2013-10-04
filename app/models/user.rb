@@ -29,6 +29,9 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true
   validates :username, uniqueness: true
+  validates :time_zone, :inclusion => { :in => ActiveSupport::TimeZone.zones_map(&:name) }
+  validates :phone_number, presence: true, if: Proc.new { |u| u.create_as == 'client' }
+  validate :uniqueness_of_phone_number, if: Proc.new { |u| u.create_as == 'client' }
 
   before_create :build_relation
 

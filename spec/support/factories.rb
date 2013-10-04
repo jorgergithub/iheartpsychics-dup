@@ -13,6 +13,7 @@ FactoryGirl.define do
     email { generate(:email) }
     username { generate(:username) }
     password "testpass"
+    time_zone "Eastern Time (US & Canada)"
   end
 
   factory :client_phone do

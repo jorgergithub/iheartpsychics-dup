@@ -1,5 +1,6 @@
 class ClientsController < AuthorizedController
-  before_filter :find_client
+  before_action :find_client
+  before_action :update_time_zone
 
   def show
     unless @client.balance?
@@ -84,11 +85,17 @@ class ClientsController < AuthorizedController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :username, :email,
-      :password, :password_confirmation, client_attributes: [:id, :receive_newsletters])
+      :password, :password_confirmation, :time_zone, client_attributes: [:id, :receive_newsletters])
   end
 
   def find_client
     redirect_to :root unless current_user.client?
     @client = current_client
+  end
+
+  def update_time_zone
+    if current_user.time_zone.blank? && cookies.has_key?("jstz_time_zone")
+      current_user.update_attribute(:time_zone, cookies["jstz_time_zone"])
+    end
   end
 end

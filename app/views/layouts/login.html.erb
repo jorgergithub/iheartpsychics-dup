@@ -4,6 +4,7 @@
   <title>IHeartPsychics</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.4/jstz.min.js" %>
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= controller.controller_name %>">
@@ -39,5 +40,10 @@
     <%= yield %>
   </div>
 
+  <script type="text/javascript">
+    $(function() {
+      document.cookie = 'jstz_time_zone=' + jstz.determine().name() + ';path=/;';
+    });
+  </script>
 </body>
 </html>
