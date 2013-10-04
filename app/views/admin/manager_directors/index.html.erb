@@ -16,7 +16,7 @@
         <tbody>
           <% @manager_directors.each do |md| %>
             <tr>
-              <td>
+              <td class="admin-actions">
                 <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_admin_website_admin_path(md) %>
                 <%= link_to '<i class="icon-remove"></i>'.html_safe, [:admin, md], data: {confirm: "Are you sure?" }, :method => "delete" %>
               </td>
