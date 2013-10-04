@@ -7,9 +7,11 @@
     margin: 0 auto;
     width: 900px;
 
-    a.submit {
+    a.button {
       @include thin-font($button-font-size);
       @include button;
+      float: left;
+      margin-right: 10px;
     }
   }
 
