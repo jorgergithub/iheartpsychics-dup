@@ -51,7 +51,7 @@
       <i class="resume-not-uploaded">Not uploaded</i>
     <% end %>
   <% else %>
-    <%= add_file_field f, @psychic_application, :resume %>
+    <%= add_file_field f, @psychic_application, :resume, "Resume (optional)" %>
   <% end %>
 
   <legend>Questions</legend>
