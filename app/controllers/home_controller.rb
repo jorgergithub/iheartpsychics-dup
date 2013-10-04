@@ -5,6 +5,8 @@ class HomeController < AuthorizedController
   layout :select_layout
 
   def index
+    return if go_home
+
     finish = Time.zone.parse("2013-12-01 00:00:00")
     diff = Time.diff(finish, Time.zone.now)
 
@@ -21,31 +23,37 @@ class HomeController < AuthorizedController
   end
 
   def show
-    if current_user.client?
-      redirect_to client_path
-      return
-    elsif current_user.psychic?
-      redirect_to psychic_path
-      return
-    elsif current_user.rep?
-      redirect_to customer_service_representative_path
-      return
-    elsif current_user.admin?
-      redirect_to admin_dashboard_path
-      return
-    elsif current_user.manager_director?
-      redirect_to admin_psychic_applications_path
-      return
-    elsif current_user.website_admin?
-      redirect_to admin_dashboard_path
-      return
-    elsif current_user.accountant?
-      redirect_to admin_invoices_path
-      return
-    end
+    go_home
   end
 
   protected
+
+  def go_home
+    return false unless current_user
+
+    if current_user.client?
+      redirect_to client_path
+      return true
+    elsif current_user.psychic?
+      redirect_to psychic_path
+      return true
+    elsif current_user.rep?
+      redirect_to customer_service_representative_path
+      return true
+    elsif current_user.admin?
+      redirect_to admin_dashboard_path
+      return true
+    elsif current_user.manager_director?
+      redirect_to admin_psychic_applications_path
+      return true
+    elsif current_user.website_admin?
+      redirect_to admin_dashboard_path
+      return true
+    elsif current_user.accountant?
+      redirect_to admin_invoices_path
+      return true
+    end
+  end
 
   def select_layout
     if action_name == "show"
