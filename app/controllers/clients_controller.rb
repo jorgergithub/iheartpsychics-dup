@@ -84,7 +84,7 @@ class ClientsController < AuthorizedController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :username, :email,
-      :password, :password_confirmation, client_attributes: [:receive_newsletters])
+      :password, :password_confirmation, client_attributes: [:id, :receive_newsletters])
   end
 
   def find_client
