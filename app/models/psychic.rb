@@ -13,7 +13,10 @@ class Psychic < ActiveRecord::Base
 
   has_and_belongs_to_many :favorited_by_clients, class_name: "Client"
 
-  accepts_nested_attributes_for :schedules
+  accepts_nested_attributes_for :schedules,
+    reject_if: proc { |attr|
+      !attr["start_time_string"].present? && !attr["end_time_string"].present?
+    }
 
   delegate :username, :first_name, :last_name, :full_name, :email,
            to: :user, allow_nil: true
@@ -77,11 +80,8 @@ class Psychic < ActiveRecord::Base
 
     (start_date..end_date).inject({}) do |h, date|
       result = schedules.where(date: date.to_date)
-      if result.count > 0
-        h[date] = result.load.to_a
-      else
-        h[date] = [schedules.new(date: date)]
-      end
+      h[date] = result.load.to_a
+      h[date] << schedules.new(date: date)
       h
     end
   end
