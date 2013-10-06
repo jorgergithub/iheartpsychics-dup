@@ -3,17 +3,28 @@ function remove_fields(link) {
   $(link).closest(".fields").hide();
 }
 
-function add_fields(link, association, content) {
+function add_fields(link, association, content, elementFinder) {
   var new_id = new Date().getTime();
   var regex = new RegExp("new_" + association, "g");
   var $link = $(link);
+  var replacedContent = $(content.replace(regex, new_id))
+
   var insertBefore;
-  if ($link.parent().is(".controls")) {
-    insertBefore = $link.parent().parent();
+
+  if (elementFinder) {
+    insertBefore = elementFinder(replacedContent, $link);
+    if (!insertBefore) {
+      return;
+    }
   }
   else {
-    insertBefore = link;
+    if ($link.parent().is(".controls")) {
+      insertBefore = $link.parent().parent();
+    }
+    else {
+      insertBefore = link;
+    }
   }
 
-  $(content.replace(regex, new_id)).insertBefore(insertBefore);
+  replacedContent.insertBefore(insertBefore);
 }

@@ -37,6 +37,7 @@
 //= require datepicker
 //= require horoscopes
 //= require psychic_application
+//= require schedules
 //= require survey
 //= require splash
 //= require tabs

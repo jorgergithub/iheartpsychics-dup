@@ -14,7 +14,14 @@ module ApplicationHelper
       render(association.to_s.singularize + "_fields", :f => builder)
     end
 
-    link_to_function(name, "add_fields(this, \"#{ association }\", \"#{ escape_javascript(fields) }\")", options)
+    element_finder = ""
+    if element_finder = options.delete(:element_finder)
+      element_finder = ", #{element_finder}"
+    end
+
+    link_to_function(name, "add_fields(this,
+      \"#{ association }\",
+      \"#{ escape_javascript(fields) }\"#{element_finder})", options)
   end
 
   def format_date(date)

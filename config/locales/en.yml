@@ -4,6 +4,7 @@ en:
       short: "%b %d"
       normal: "%B %d"
       schedule: "%a, %b %d"
+      date_only: "%Y-%m-%d"
   time:
     formats:
       schedule: "%I:%M %p"
