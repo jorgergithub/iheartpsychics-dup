@@ -8,7 +8,7 @@ function scheduleElementFinder(content, $link) {
   $td.attr("rowspan", rowspan + 1);
 
   content.attr("data-date", date);
-  content.find("input[type=hidden]").val(date);
+  content.find("input[type=hidden].date").val(date);
 
   if (rowspan <= 1) {
     // inserts after the row itself

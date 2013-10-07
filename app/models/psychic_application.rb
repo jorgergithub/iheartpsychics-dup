@@ -23,6 +23,10 @@ class PsychicApplication < ActiveRecord::Base
 
   scope :pending, -> { where("approved_at IS NULL AND declined_at IS NULL") }
 
+  def to_s
+    full_name
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
