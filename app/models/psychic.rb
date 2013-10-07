@@ -10,6 +10,7 @@ class Psychic < ActiveRecord::Base
   has_many :reviews
   has_many :invoices
   has_many :schedules
+  has_many :hours
 
   has_and_belongs_to_many :favorited_by_clients, class_name: "Client"
 
@@ -87,6 +88,19 @@ class Psychic < ActiveRecord::Base
       end
       h
     end
+  end
+
+  def available?
+    return false unless hours.any?
+    hours.last.start?
+  end
+
+  def available!
+    hours.create(action: "start")
+  end
+
+  def unavailable!
+    hours.create(action: "finish")
   end
 
   private

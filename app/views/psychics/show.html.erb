@@ -6,6 +6,16 @@
       <table class="table table-hover">
         <tbody>
           <tr>
+            <td>Your status</td>
+            <td>
+              <% if @psychic.available? %>
+                Available
+              <% else %>
+                Unavailable
+              <% end %>
+            </td>
+          </tr>
+          <tr>
             <td>Your Extension</td>
             <td><%= @psychic.extension %></td>
           </tr>
@@ -25,6 +35,14 @@
           </tr>
         </tbody>
       </table>
+
+      <div class="actions">
+        <% if @psychic.available? %>
+          <%= link_to "Stop working", unavailable_psychic_path, class: "btn btn-primary" %>
+        <% else %>
+          <%= link_to "Start working", available_psychic_path, class: "btn btn-primary" %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>

@@ -87,8 +87,8 @@ IHeartPsychics::Application.routes.draw do
   resource :psychic do
     resources :reviews, only: [], shallow: true do
       member do
-        get 'mark_as_featured', action: :mark_as_featured, as: :mark_as_featured
-        get 'unmark_as_featured', action: :unmark_as_featured, as: :unmark_as_featured
+        get 'mark_as_featured'   , action: :mark_as_featured   , as: :mark_as_featured
+        get 'unmark_as_featured' , action: :unmark_as_featured , as: :unmark_as_featured
       end
     end
 
@@ -97,6 +97,11 @@ IHeartPsychics::Application.routes.draw do
 
     collection do
       get 'search', action: :search, as: :search
+    end
+
+    member do
+      get 'available'   , action: :available   , as: :available
+      get 'unavailable' , action: :unavailable , as: :unavailable
     end
   end
 

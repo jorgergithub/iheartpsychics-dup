@@ -1,6 +1,9 @@
 require "spec_helper"
 
 describe Psychic do
+  let(:psychic) { create(:psychic) }
+
+
   describe "#assign_extension" do
     let(:psychic) { FactoryGirl.create(:psychic) }
 
@@ -11,9 +14,7 @@ describe Psychic do
   end
 
   describe "#featured_review" do
-    let(:psychic) { create(:psychic) }
-
-    it "returns first review marked as featured" do
+    it "returns first review marked as festured" do
       featured_review = create(:featured_review, psychic: psychic)
       review = create(:review, psychic: psychic)
 
@@ -22,7 +23,6 @@ describe Psychic do
   end
 
   describe "#next_week_schedules" do
-    let(:psychic) { create(:psychic) }
     subject { psychic.next_week_schedules }
 
     before { Timecop.freeze(Time.zone.parse("2013-09-28 00:00")) }
@@ -53,7 +53,6 @@ describe Psychic do
   end
 
   describe "#weekly_schedule" do
-    let(:psychic) { create(:psychic) }
     subject { psychic.weekly_schedule }
 
     before do
@@ -107,6 +106,46 @@ describe Psychic do
       it "returns Friday as the last schedule" do
         expect(subject.last.date.wday).to eql(5)
       end
+    end
+  end
+
+  describe "#available?" do
+    context "when there are no hour entries" do
+      it "is false" do
+        expect(psychic).to_not be_available
+      end
+    end
+
+    context "when last hour entry has start action" do
+      before { psychic.available! }
+      it "is true" do
+        expect(psychic).to be_available
+      end
+    end
+
+    context "when status is unavailable" do
+      before { psychic.unavailable! }
+      it "is false" do
+        expect(psychic).to_not be_available
+      end
+    end
+  end
+
+  describe "#available!" do
+    before {
+      psychic.available!
+    }
+    it "makes the psychic available" do
+      expect(psychic).to be_available
+    end
+  end
+
+  describe "#unavailable!" do
+    before {
+      psychic.unavailable!
+    }
+    it "makes the psychic unavailable" do
+      expect(psychic).to_not be_available
     end
   end
 end

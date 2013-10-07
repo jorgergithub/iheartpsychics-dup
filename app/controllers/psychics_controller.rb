@@ -32,6 +32,16 @@ class PsychicsController < AuthorizedController
       "CONCAT(psychics.pseudonym, ' ', SUBSTR(users.last_name, 1, 1)) LIKE ?", "%#{params[:q]}%")
   end
 
+  def available
+    @psychic.available!
+    redirect_to dashboard_path, notice: "You're now available"
+  end
+
+  def unavailable
+    @psychic.unavailable!
+    redirect_to dashboard_path, notice: "You're now unavailable"
+  end
+
   protected
 
   def find_psychic

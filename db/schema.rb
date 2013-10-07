@@ -180,6 +180,15 @@ ActiveRecord::Schema.define(version: 20131007215659) do
     t.string   "love_compatibility_to"
   end
 
+  create_table "hours", force: true do |t|
+    t.integer  "psychic_id"
+    t.string   "action"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hours", ["psychic_id"], name: "index_hours_on_psychic_id", using: :btree
+
   create_table "invoices", force: true do |t|
     t.integer  "psychic_id"
     t.integer  "total_minutes"
@@ -390,9 +399,6 @@ ActiveRecord::Schema.define(version: 20131007215659) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "schedules", ["date"], name: "index_schedules_on_date", using: :btree
-  add_index "schedules", ["psychic_id", "date"], name: "index_schedules_on_psychic_id_and_date", using: :btree
 
   create_table "surveys", force: true do |t|
     t.string   "name"
