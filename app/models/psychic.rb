@@ -13,9 +13,10 @@ class Psychic < ActiveRecord::Base
 
   has_and_belongs_to_many :favorited_by_clients, class_name: "Client"
 
-  accepts_nested_attributes_for :schedules, reject_if: proc { |attr|
-    !attr["start_date_string"].present? && !attr["end_date_string"].present?
-  }
+  accepts_nested_attributes_for :schedules, allow_destroy: true,
+    reject_if: proc { |attr|
+      !attr["start_date_string"].present? && !attr["end_date_string"].present?
+    }
 
   delegate :username, :first_name, :last_name, :full_name, :email,
            to: :user, allow_nil: true

@@ -1,9 +1,12 @@
 <td>
   <%= f.hidden_field :date %>
   <%= f.text_field :start_time_string,
-    data: { format: "HH:mm PP", mask: t("masks.time") } %>
+    data: { format: "HH:mm PP", mask: t("masks.time") }, class: "start_time" %>
 </td>
 <td>
   <%= f.text_field :end_time_string,
-    data: { format: "HH:mm PP", mask: t("masks.time") } %>
+    data: { format: "HH:mm PP", mask: t("masks.time") }, class: "end_time" %>
+
+  <%= link_to_remove_fields('<i class="icon-remove"></i>'.html_safe, f,
+    title: "Delete this entry.", function: "removeSchedule") %>
 </td>

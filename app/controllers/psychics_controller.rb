@@ -49,6 +49,7 @@ class PsychicsController < AuthorizedController
       :specialties_pet_and_animals, :specialties_past_lives,
       :specialties_deceased, :style_compassionate, :style_inspirational,
       :style_straightforward, :about, :price, :pseudonym,
-      schedules_attributes: [:id, :date, :start_time_string, :end_time_string] )
+      schedules_attributes: [:id, :date, :start_time_string, :end_time_string,
+        :_destroy] )
   end
 end

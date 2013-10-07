@@ -22,14 +22,14 @@
         </thead>
         <tbody>
           <% @schedules.each_pair do |date, schedules| %>
-            <tr data-date="<%=l date.in_time_zone.to_date, format: :date_only %>">
+            <tr class="fields" data-date="<%=l date.in_time_zone.to_date, format: :date_only %>">
               <td rowspan="<%= schedules.size %>">
                 <%=l date.in_time_zone.to_date, format: :schedule %>
                 <%= link_to_add_fields "<i class='icon-plus-sign'></i>".html_safe, f, :schedules, element_finder: "scheduleElementFinder" %>
               </td>
               <% schedules.each_with_index do |schedule, i| %>
                 <%= f.fields_for :schedules, schedule do |sf| %>
-                  <% if i > 0 %><tr data-id="<%= f.object.id %>"><% end %>
+                  <% if i > 0 %><tr class="fields" data-date="<%=l date.in_time_zone.to_date, format: :date_only %>"><% end %>
 
                   <%= render schedule, f: sf %>
 

@@ -1,10 +1,8 @@
-var scheduleElementFinder = function(content, $link) {
+function scheduleElementFinder(content, $link) {
   var $tr = $link.closest("tr");
   var date = $tr.data("date");
   var $td = $tr.children("td:first");
   var rowspan = parseInt($td.attr("rowspan"), 10);
-
-  console.info("rowspan", rowspan);
 
   // increases the rowspan to include this new row
   $td.attr("rowspan", rowspan + 1);
@@ -22,4 +20,26 @@ var scheduleElementFinder = function(content, $link) {
   }
 
   return false;
-};
+}
+
+function removeSchedule(link) {
+  $link = $(link);
+  $tr = $link.parents("tr");
+  var date = $tr.data("date");
+  $fTr = $tr.siblings("tr[data-date='" + date + "']:first");
+  $td = $fTr.children("td:first");
+  var rowspan = parseInt($td.attr("rowspan"), 10);
+  $td.attr("rowspan", rowspan - 1);
+
+  $link.prev("input[type=hidden]").val("1");
+
+  // if this is an initial row
+  if ($tr.children("td").length == 3) {
+    $tr.find("input.start_time").val("");
+    $tr.find("input.end_time").val("");
+  }
+  else {
+    // removing is alright
+    $tr.hide();
+  }
+}

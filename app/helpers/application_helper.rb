@@ -5,7 +5,8 @@ module ApplicationHelper
   end
 
   def link_to_remove_fields(name, f, options = {})
-    f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)", options)
+    function = options.delete(:function) || "remove_fields"
+    f.hidden_field(:_destroy) + link_to_function(name, "#{function}(this)", options)
   end
 
   def link_to_add_fields(name, f, association, options = {})
