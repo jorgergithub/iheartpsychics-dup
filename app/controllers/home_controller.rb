@@ -1,7 +1,7 @@
 require 'time_ext'
 
 class HomeController < AuthorizedController
-  before_filter :authenticate_user!, except: [:index, :apna]
+  before_filter :authenticate_user!, except: [:index, :apna, :confirmation]
   layout :select_layout
 
   def index
@@ -24,6 +24,9 @@ class HomeController < AuthorizedController
 
   def show
     go_home
+  end
+
+  def confirmation
   end
 
   protected

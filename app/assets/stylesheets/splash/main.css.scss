@@ -1,5 +1,18 @@
 @import "splash/mixins";
 
+body.home {
+  height: 100%;
+}
+
+.wrapper {
+  min-height: 100%;
+}
+
+.inner {
+  overflow: auto;
+  padding-bottom: 54px;
+}
+
 body.home header {
   margin-bottom: $countdown-margin;
 }
@@ -84,6 +97,20 @@ body.home header {
   }
 }
 
+.confirmation {
+  @include thin-font($main-text-font-size);
+  margin-bottom: 150px;
+
+  p {
+    color: #000;
+
+    a {
+      text-decoration: none;
+      color: #af00a5;
+    }
+  }
+}
+
 .actions {
   margin: 0 auto;
   width: (2 * $button-width) + $button-spacing;
@@ -99,6 +126,17 @@ body.home header {
 
   a.last {
     margin-right: 0;
+  }
+}
+
+.back {
+  margin: 0 auto;
+  width: $button-width;
+  height: $button-area-height;
+
+  a {
+    @include thin-font($button-font-size);
+    @include button;
   }
 }
 
@@ -148,10 +186,14 @@ body.home header {
 footer {
   @include thin-font($footer-font-size);
 
+  position: relative;
+  height: 24px;
+  margin-top: -54px;
   width: 100%;
   padding: $footer-padding 0;
   color: #fff;
   background: #232d3b;
+  clear: both;
 }
 
 .overlay {

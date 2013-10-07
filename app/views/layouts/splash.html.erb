@@ -13,13 +13,17 @@
 <body class="<%= controller.controller_name %>" data-page="<%= current_page %>">
   <div class="overlay"></div>
 
-  <header>
-    <div class="container container_12">
-      <a href="/"><%= image_tag "logo.png" %></a>
-    </div>
-  </header>
+  <div class="wrapper">
+    <div class="inner">
+      <header>
+        <div class="container container_12">
+          <a href="/"><%= image_tag "logo.png" %></a>
+        </div>
+      </header>
 
-  <%= yield %>
+      <%= yield %>
+    </div>
+  </div>
 
   <footer>
     <div class="container_12">
