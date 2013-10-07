@@ -37,4 +37,13 @@ describe PsychicApplication do
     it { should allow_value(true).for(:has_experience) }
     it { should allow_value(false).for(:has_experience) }
   end
+
+  describe "#alias_name" do
+    it "returns pseudonym with first letter of last name" do
+      subject.last_name = "Tracy"
+      subject.pseudonym = "Jack"
+
+      expect(subject.alias_name).to eq "Jack T"
+    end
+  end
 end

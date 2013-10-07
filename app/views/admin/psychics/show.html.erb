@@ -2,7 +2,7 @@
   <div class="row-fluid">
     <div class="span12">
       <h3>
-        <%= @psychic.full_name %>
+        <%= @psychic.alias_name %>
         <span>| Ext. <%= @psychic.extension %></span>
       </h3>
 
@@ -27,7 +27,7 @@
       </div>
 
       <div class="about">
-        <div class="title">About <%= @psychic.full_name %></div>
+        <div class="title">About <%= @psychic.alias_name %></div>
         <div class="body"><%= @psychic.about %></div>
       </div>
     </div>

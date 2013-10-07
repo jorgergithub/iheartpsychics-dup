@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131002223759) do
+ActiveRecord::Schema.define(version: 20131007215659) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -289,6 +289,7 @@ ActiveRecord::Schema.define(version: 20131002223759) do
     t.datetime "declined_at"
     t.string   "phone"
     t.boolean  "terms"
+    t.string   "pseudonym"
   end
 
   create_table "psychics", force: true do |t|
@@ -351,6 +352,7 @@ ActiveRecord::Schema.define(version: 20131002223759) do
     t.boolean  "style_straightforward"
     t.text     "about"
     t.decimal  "price",                              precision: 8, scale: 2
+    t.string   "pseudonym"
   end
 
   add_index "psychics", ["extension"], name: "index_psychics_on_extension", unique: true, using: :btree
@@ -373,15 +375,15 @@ ActiveRecord::Schema.define(version: 20131002223759) do
     t.boolean  "featured",   default: false
   end
 
-  create_table "schedules", force: true do |t|
-    t.integer  "psychic_id"
-    t.date     "date"
-    t.datetime "start_time"
-    t.datetime "end_time"
+  create_table "schedule_jobs", force: true do |t|
+    t.string   "description", null: false
+    t.string   "week_day",    null: false
+    t.string   "at",          null: false
+    t.string   "model",       null: false
+    t.string   "action",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "schedules", ["date"], name: "index_schedules_on_date", using: :btree
-  add_index "schedules", ["psychic_id", "date"], name: "index_schedules_on_psychic_id_and_date", using: :btree
 
   create_table "subscribers", force: true do |t|
     t.string   "email"
@@ -440,6 +442,7 @@ ActiveRecord::Schema.define(version: 20131002223759) do
     t.string   "role"
     t.string   "provider"
     t.string   "uid"
+    t.string   "time_zone"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

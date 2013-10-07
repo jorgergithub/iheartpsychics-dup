@@ -26,8 +26,8 @@ class PsychicsController < AuthorizedController
 
   def search
     @client = current_client
-    @psychics = Psychic.joins(:user).order("users.first_name, users.last_name").where(
-      "CONCAT(users.first_name, ' ', users.last_name) LIKE ?", "%#{params[:q]}%")
+    @psychics = Psychic.joins(:user).order("psychics.pseudonym, SUBSTR(users.last_name, 1, 1)").where(
+      "CONCAT(psychics.pseudonym, ' ', SUBSTR(users.last_name, 1, 1)) LIKE ?", "%#{params[:q]}%")
   end
 
   protected
@@ -46,6 +46,6 @@ class PsychicsController < AuthorizedController
       :specialties_lost_objects, :specialties_dream_interpretation,
       :specialties_pet_and_animals, :specialties_past_lives,
       :specialties_deceased, :style_compassionate, :style_inspirational,
-      :style_straightforward, :about, :price)
+      :style_straightforward, :about, :price, :pseudonym)
   end
 end

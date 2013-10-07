@@ -96,7 +96,7 @@
                   <%= link_to '<i class="icon-heart-empty favorite"></i>'.html_safe, make_favorite_client_path(psychic_id: psychic.id) %>
                 <% end %>
               </td>
-              <td><%= psychic.full_name %></td>
+              <td><%= psychic.alias_name %></td>
               <td><%= psychic.extension %></td>
               <td><%= number_to_currency psychic.price %></td>
               <td>
@@ -151,7 +151,7 @@
               <td><%= call.id %></td>
               <td><%= call.parsed_start_time %></td>
               <td><%= call.formatted_number %></td>
-              <td><%= call.psychic_name %></td>
+              <td><%= call.psychic_alias_name %></td>
               <td class="right">
                 <%= call.formatted_duration %>
               </td>

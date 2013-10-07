@@ -15,7 +15,7 @@ class Psychic < ActiveRecord::Base
            to: :user, allow_nil: true
 
   validates :extension, uniqueness: true
-  validates :phone, presence: true
+  validates :phone, :pseudonym, presence: true
   validates :phone, as_phone_number: true
 
   localize :phone, :cellular_number, :emergency_contact_number, using: PhoneParser
@@ -42,6 +42,10 @@ class Psychic < ActiveRecord::Base
       arr
 
     end.join(", ")
+  end
+
+  def alias_name
+    "#{pseudonym} #{last_name.first}"
   end
 
   private

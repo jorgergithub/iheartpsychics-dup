@@ -19,6 +19,7 @@
             <th></th>
             <th>Username</th>
             <th>Name</th>
+            <th>Alias</th>
             <th>Email</th>
             <th>Extension</th>
             <th>State</th>
@@ -35,6 +36,7 @@
               </td>
               <td><%= link_to p.username, edit_admin_psychic_path(p) %></td>
               <td><%= p.full_name %></td>
+              <td><%= p.alias_name %></td>
               <td><%= p.email %></td>
               <td><%= p.extension %></td>
               <td><%= p.state %></td>

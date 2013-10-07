@@ -37,7 +37,7 @@ class Admin::PsychicsController < AuthorizedController
   def user_params
     params.require(:user).permit(
       :first_name, :last_name, :username, :email, :password,
-      psychic_attributes: [ :id, :ability_clairvoyance, :ability_clairaudient,
+      psychic_attributes: [ :id, :pseudonym, :ability_clairvoyance, :ability_clairaudient,
       :ability_clairsentient, :ability_empathy, :ability_medium,
       :ability_channeler, :ability_dream_analysis, :tools_tarot,
       :tools_oracle_cards, :tools_runes, :tools_crystals, :tools_pendulum,

@@ -1,6 +1,18 @@
 require 'spec_helper'
 
 describe Call do
+  it { should belong_to :client }
+  it { should belong_to :invoice }
+  it { should belong_to :psychic }
+
+  it { should have_one(:call_survey).dependent(:destroy) }
+  it { should have_one(:survey).through(:call_survey) }
+
+  it { should have_many :credits }
+
+  it { should delegate(:alias_name).to(:psychic).allowing_nil(true).prefix(true) }
+  it { should delegate(:full_name).to(:psychic).allowing_nil(true).prefix(true) }
+
   let!(:psychic) { FactoryGirl.create(:psychic, price: 4.50) }
   let!(:client)  { FactoryGirl.create(:client) }
   let!(:call)    { FactoryGirl.create(:call, client: client, psychic: psychic) }
@@ -122,21 +134,6 @@ describe Call do
       before { call.build_call_survey }
       it "is true" do
         expect(call).to be_survey_completed
-      end
-    end
-  end
-
-  describe "#psychic_name" do
-    context "when the psychic exists" do
-      it "is the psychic full name" do
-        expect(call.psychic_name).to eql(call.psychic.full_name)
-      end
-    end
-
-    context "when the psychic doesn't exist" do
-      before { call.psychic.destroy }
-      it "is empty" do
-        expect(call.reload.psychic_name).to be_empty
       end
     end
   end

@@ -1,17 +1,17 @@
 <div class="row-fluid">
   <div class="span12">
-    <h3>Survey for your call with <%= @call.psychic_name %></h3>
+    <h3>Survey for your call with <%= @call.psychic_alias_name %></h3>
 
     <%= form_for(@call_survey, :url => answer_survey_path(@call)) do |f| %>
       <%= render @call_survey.answers, f: f %>
 
       <p>
-        The section below is your opportunity to provide feedback specifically for your recent call with <%= @call.psychic_name %>.  Your review will be publicly displayed on our website and helps others learn about your call experience specifically with <%= @call.psychic_name %>.  We ask that your review be honest, genuine, and professional.  Please <a href="#">click here</a> for our review guidelines.
+        The section below is your opportunity to provide feedback specifically for your recent call with <%= @call.psychic_alias_name %>.  Your review will be publicly displayed on our website and helps others learn about your call experience specifically with <%= @call.psychic_alias_name %>.  We ask that your review be honest, genuine, and professional.  Please <a href="#">click here</a> for our review guidelines.
       </p>
 
       <%= fields_for @review do |rev| %>
         <div class="question">
-          Please rate your overall experience with <%= @call.psychic_name %>
+          Please rate your overall experience with <%= @call.psychic_alias_name %>
           <div class="options">
             <% 5.downto(1) do |i| %>
               <label class="radio">
@@ -24,7 +24,7 @@
         </div>
 
         <div class="question">
-          Your review of <%= @call.psychic_name %>
+          Your review of <%= @call.psychic_alias_name %>
           <div class="answer">
             <%= rev.text_area :text, rows: 7, class: "input-xxlarge" %>
           </div>

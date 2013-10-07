@@ -34,7 +34,7 @@ accountant = User.create!(first_name: 'Accountant', last_name: '',
                          password: 'ipass123', create_as: 'accountant',
                          confirmed_at: Time.now)
 
-app1 = PsychicApplication.create!(first_name: 'Unfortunate', last_name: 'Teller',
+app1 = PsychicApplication.create!(first_name: 'Unfortunate', last_name: 'Teller', pseudonym: 'Ruffus',
                    username: 'ufteller', email: 'ufteller@iheartpsychics.co',
                    address: '3032 47th St', city: 'Lansing', state: 'MI',
                    zip_code: Faker::Address.zip_code,
@@ -59,7 +59,7 @@ app1 = PsychicApplication.create!(first_name: 'Unfortunate', last_name: 'Teller'
                    professional_goals: Faker::Lorem.paragraph,
                    how_did_you_hear: 'Friend')
 
-app2 = PsychicApplication.create!(first_name: 'Trinity', last_name: 'Megan',
+app2 = PsychicApplication.create!(first_name: 'Trinity', last_name: 'Megan', pseudonym: 'Magus',
                    username: 'tmegan', email: 'trinity@iheartpsychics.co',
                    address: '1022 32nd St', city: 'Miami', state: 'FL',
                    zip_code: Faker::Address.zip_code,
@@ -103,6 +103,7 @@ csr.rep.update_attributes phone: "+13054502995"
   begin
     app = PsychicApplication.create!(first_name: first_name,
                                last_name: last_name,
+                               pseudonym: Faker::Name.first_name,
                                username: Faker::Internet.user_name,
                                email: Faker::Internet.email(name: "#{first_name} #{last_name}"),
                                address: Faker::Address.street_address,

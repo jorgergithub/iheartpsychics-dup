@@ -22,8 +22,45 @@ FactoryGirl.define do
 
   factory :psychic do
     association :user
+    pseudonym "Jack"
     phone "+15186335473"
     price "4.50"
+  end
+
+  factory :psychic_application do
+    first_name 'Unfortunate'
+    last_name 'Teller'
+    username 'ufteller'
+    email 'ufteller@iheartpsychics.co'
+    pseudonym 'Ruffus'
+    address '3032 47th St'
+    city 'Lansing'
+    state 'MI'
+    zip_code { Faker::Address.zip_code }
+    password 'ipass123'
+    phone '+17863295531'
+    cellular_number '+13054502992'
+    ssn { Faker::Base.regexify(/\d{3}-?\d{2}-?\d{4}/) }
+    date_of_birth "1985-01-01"
+    emergency_contact { Faker::Name.name }
+    emergency_contact_number "+13044440404"
+    us_citizen true
+    has_experience true
+    experience { Faker::Lorem.paragraph }
+    gift { "Empathy Medium" }
+    explain_gift { Faker::Lorem.paragraph }
+    age_discovered 12
+    reading_style { Faker::Lorem.paragraph }
+    why_work { Faker::Lorem.paragraph }
+    friends_describe { Faker::Lorem.paragraph }
+    strongest_weakest_attributes { Faker::Lorem.paragraph }
+    how_to_deal_challenging_client { Faker::Lorem.paragraph }
+    specialties { "Love and relationships" }
+    tools { Faker::Lorem.paragraph }
+    professional_goals { Faker::Lorem.paragraph }
+    how_did_you_hear 'Other'
+    other { Faker::Lorem.paragraph }
+    resume { File.open("#{Rails.root}/spec/fixtures/example_resume.pdf") }
   end
 
   factory :review do
