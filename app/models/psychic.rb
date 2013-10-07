@@ -16,7 +16,7 @@ class Psychic < ActiveRecord::Base
 
   accepts_nested_attributes_for :schedules, allow_destroy: true,
     reject_if: proc { |attr|
-      !attr["start_date_string"].present? && !attr["end_date_string"].present?
+      !attr["start_time_string"].present? && !attr["end_time_string"].present?
     }
 
   delegate :username, :first_name, :last_name, :full_name, :email,
