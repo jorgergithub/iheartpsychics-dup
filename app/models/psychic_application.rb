@@ -19,6 +19,8 @@ class PsychicApplication < ActiveRecord::Base
 
   mount_uploader :resume, ResumeUploader
 
+  after_create :send_confirmation_email
+
   scope :pending, -> { where("approved_at IS NULL AND declined_at IS NULL") }
 
   def full_name
@@ -65,6 +67,6 @@ class PsychicApplication < ActiveRecord::Base
   protected
 
   def send_confirmation_email
-    PsychicMailer.confirmation_email(self).deliver
+    PsychicMailer.delay.confirmation_email(self)
   end
 end
