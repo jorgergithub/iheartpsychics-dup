@@ -25,6 +25,13 @@ module ApplicationHelper
       \"#{ escape_javascript(fields) }\"#{element_finder})", options)
   end
 
+  def template_for_field(f, association, options = {})
+    new_object = f.object.class.reflect_on_association(association).klass.new
+    fields = f.fields_for(association, new_object, :child_index => "new_#{ association }") do |builder|
+      render(association.to_s.singularize + "_fields", :f => builder)
+    end
+  end
+
   def format_date(date)
     date.strftime("%b %d, %Y")
   end

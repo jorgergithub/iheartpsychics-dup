@@ -3,9 +3,7 @@
   <%= hidden_field_tag :redirect_message, "Schedule was successfully updated." %>
 
   <script type="text/html" id="new_schedule">
-    <%= f.fields_for :schedules, @new_schedule do |sf| %>
-      <%= render @new_schedule, f: sf %>
-    <% end %>
+    <%= template_for_field f, :schedules %>
   </script>
 
   <div class="row-fluid">
