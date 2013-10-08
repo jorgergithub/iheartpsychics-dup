@@ -21,7 +21,7 @@
           </td>
           <td><%= link_to "##{cs.call.id}", edit_admin_call_path(cs.client) %></td>
           <td><%= link_to cs.client.full_name, edit_admin_client_path(cs.client) %></td>
-          <td><%= link_to cs.psychic_name, edit_admin_psychic_path(cs.psychic) %></td>
+          <td><%= link_to cs.psychic_full_name, edit_admin_psychic_path(cs.psychic) %></td>
           <td><%= format_datetime cs.created_at %></td>
         </tr>
       <% end %>
@@ -44,7 +44,7 @@
               Survey for
               <b><%= link_to "call ##{cs.call.id}", edit_admin_call_path(cs.client) %></b>
               with
-              <b><%= link_to cs.psychic_name, edit_admin_psychic_path(cs.psychic) %></b>
+              <b><%= link_to cs.psychic_full_name, edit_admin_psychic_path(cs.psychic) %></b>
             </td>
           </tr>
           <%= render cs.answers %>

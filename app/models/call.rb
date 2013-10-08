@@ -7,9 +7,13 @@ class Call < ActiveRecord::Base
   belongs_to :client
   belongs_to :psychic
   belongs_to :invoice
-  has_many :credits, as: :target
+
   has_one :call_survey, dependent: :destroy
   has_one :survey, through: :call_survey
+
+  has_many :credits, as: :target
+
+  delegate :alias_name, :full_name, to: :psychic, allow_nil: true, prefix: true
 
   before_save :calculate_duration
 
@@ -44,10 +48,6 @@ class Call < ActiveRecord::Base
 
   def twilio_call
     @twilio_call ||= twilio_account.calls.get(sid)
-  end
-
-  def psychic_name
-    psychic.try(:full_name) || ""
   end
 
   def process
@@ -118,10 +118,6 @@ class Call < ActiveRecord::Base
 
   def survey_completed?
     call_survey.present?
-  end
-
-  def psychic_name
-    psychic.try(:full_name) || ""
   end
 
   def bonus?

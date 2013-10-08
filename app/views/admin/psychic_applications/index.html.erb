@@ -7,6 +7,7 @@
         <thead>
           <tr>
             <th>Name</th>
+            <th>Alias</th>
             <th>Email</th>
             <th>Landline #</th>
             <th>Cell #</th>
@@ -19,6 +20,7 @@
           <% localized(@psychic_applications).each do |app| %>
             <tr>
               <td><%= link_to app.full_name, admin_psychic_application_path(app) %></td>
+              <td><%= app.alias_name %></td>
               <td><%= app.email %></td>
               <td><%= app.phone %></td>
               <td><%= app.cellular_number %></td>

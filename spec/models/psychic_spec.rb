@@ -13,6 +13,7 @@ describe Psychic do
   it { should delegate(:username).to(:user).allowing_nil(true) }
 
   describe "validations" do
+    it { should validate_presence_of(:pseudonym) }
     it { should validate_presence_of(:phone) }
     it { should validate_as_phone_number(:phone) }
     it { should validate_uniqueness_of(:extension) }
@@ -27,13 +28,12 @@ describe Psychic do
     end
   end
 
-  describe "#assign_extension" do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:psychic) { Psychic.create(user: user, phone: "+15186335473") }
+  describe "#alias_name" do
+    it "returns pseudonym with first letter of last name" do
+      subject.stub(:last_name => "Tracy")
+      subject.pseudonym = "Jack"
 
-    it "assigns a random extension when creating" do
-      RandomUtils.stub(:random_extension => "1234")
-      expect(psychic.extension).to eq "1234"
+      expect(subject.alias_name).to eq "Jack T"
     end
   end
 end

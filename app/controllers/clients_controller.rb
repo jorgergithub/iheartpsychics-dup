@@ -64,7 +64,7 @@ class ClientsController < AuthorizedController
     psychic = Psychic.find(params[:psychic_id])
     @client.favorite_psychics << psychic
     if @client.save
-      redirect_to :back, notice: "#{psychic.full_name} marked as favorite."
+      redirect_to :back, notice: "#{psychic.alias_name} marked as favorite."
     else
       redirect_to :back, error: "Could not mark as favorite."
     end
@@ -74,7 +74,7 @@ class ClientsController < AuthorizedController
     psychic = Psychic.find(params[:psychic_id])
     @client.favorite_psychics.delete(psychic)
     if @client.save
-      redirect_to :back, notice: "#{psychic.full_name} removed from favorites."
+      redirect_to :back, notice: "#{psychic.alias_name} removed from favorites."
     else
       redirect_to :back, error: "Could not remove as favorite."
     end
