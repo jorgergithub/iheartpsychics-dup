@@ -3,7 +3,6 @@ require "spec_helper"
 describe Psychic do
   let(:psychic) { create(:psychic) }
 
-
   describe "#assign_extension" do
     let(:psychic) { FactoryGirl.create(:psychic) }
 
@@ -56,6 +55,7 @@ describe Psychic do
     subject { psychic.weekly_schedule }
 
     before do
+      Timecop.freeze(current_datetime)
       today = Date.today.in_time_zone
 
       -10.upto(20) do |i|
@@ -66,9 +66,10 @@ describe Psychic do
       end
     end
 
+    after { Timecop.return }
+
     context "when day is a Saturday" do
-      before { Timecop.freeze(Time.zone.parse("2013-09-28 00:00")) }
-      after  { Timecop.return }
+      let(:current_datetime) { Time.zone.parse("2013-09-28 00:00") }
 
       it "returns one schedule for each day of the week, up to Friday" do
         expect(subject.size).to eql(7)
@@ -88,8 +89,7 @@ describe Psychic do
     end
 
     context "when day is a Wednesday" do
-      before { Timecop.freeze(Time.zone.parse("2013-09-25 00:00")) }
-      after  { Timecop.return }
+      let(:current_datetime) { Time.zone.parse("2013-09-25 00:00") }
 
       it "returns one schedule for each day of the week, up to Friday" do
         expect(subject.size).to eql(3)
