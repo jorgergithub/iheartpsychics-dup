@@ -44,8 +44,9 @@
           <label class="radio">
             <%= f.radio_button :card_id, nil %>
             New card:
+          </label>
 
-            <div class="control-group">
+          <div class="control-group">
               <%= f.label :card_number, class: 'control-label' %>
               <div class="controls">
                 <%= f.text_field :card_number, maxlength: 16,
@@ -74,7 +75,6 @@
                 <span id="card-cvc-validation-error" class="validation-error"></span>
               </div>
             </div>
-          </label>
         </div>
       </div>
     </section>
