@@ -2,13 +2,13 @@ Module("IHP.Pages.SchedulesIndex", function(SchedulesIndex) {
   "use strict";
 
   SchedulesIndex.fn.initialize = function(el) {
-    this.el = $(el);
+    this.el = $($(el).find(".schedules"));
     this.addEventListeners();
   };
 
   SchedulesIndex.fn.addEventListeners = function() {
-    this.el.find(".add_schedule").on("click", this.addSchedule.bind(this));
-    this.el.find(".remove_schedule").on("click", this.removeSchedule.bind(this));
+    this.el.on("click", ".add_schedule", this.addSchedule.bind(this));
+    this.el.on("click", ".remove_schedule", this.removeSchedule.bind(this));
   };
 
   SchedulesIndex.fn.addScheduleRow = function(date, el) {
