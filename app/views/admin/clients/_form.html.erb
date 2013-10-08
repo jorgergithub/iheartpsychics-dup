@@ -1,11 +1,10 @@
-<%= form_for([:admin, @client.user], :url => admin_client_path(@client), :html => { :class => 'form form-horizontal' }) do |f| %>
+<%= form_for([:admin, object], :url => admin_client_path(@client), :html => { :class => 'form form-horizontal' }) do |f| %>
 
   <ul class="nav nav-tabs" id="tabs">
     <li class="active" data-toggle="tab"><%= link_to "Client", "#form" %></li>
-
     <% if f.object.persisted? %>
-      <li data-toggle="tab"><%= link_to "Survey Responses (#{@client.call_surveys.count})", "#responses" %></li>
       <li data-toggle="tab"><%= link_to "Phones", "#phones" %></li>
+      <li data-toggle="tab"><%= link_to "Survey Responses (#{@client.call_surveys.count})", "#responses" %></li>
     <% end %>
   </ul>
 
@@ -13,7 +12,7 @@
     <div class="tab-pane active" id="form">
       <legend>Personal Info</legend>
 
-      <%= render 'errors', object: @client.user, model_name: "client" %>
+      <%= render 'errors', object: @user, model_name: "user" %>
 
       <div class="control-group">
         <%= f.label :first_name, "Name", :class => 'control-label' %>
@@ -37,33 +36,36 @@
         </div>
       </div>
 
-      <%= f.fields_for :client do |cf| %>
+      <%= f.fields_for :client do |fields_for_client| %>
+        <% unless f.object.persisted? %>
+          <div class="control-group">
+            <%= render "devise/registrations/phone_number", :f => fields_for_client %>
+          </div>
+        <% end %>
+
         <div class="control-group">
-          <%= cf.label :balance, "Balance", :class => 'control-label' %>
+          <%= fields_for_client.label :balance, "Balance", :class => 'control-label' %>
           <div class="controls">
-            <%= cf.text_field :balance %>
+            <%= fields_for_client.text_field :balance %>
           </div>
         </div>
 
-        <%= f.fields_for :client do |cf| %>
-          <%= add_checkbox cf, :receive_newsletters %>
-        <% end %>
+        <%= add_checkbox fields_for_client, :receive_newsletters %>
       <% end %>
     </div>
 
-    <div class="tab-pane" id="phones">
-      <div class="control-group">
-        <%= f.fields_for :client do |cf| %>
-          <%= cf.fields_for :phones, localized(@user.client.phones) do |builder| %>
-            <%= render "phone_fields", :f => builder %>
-          <% end %>
-
-          <%= link_to_add_fields("Add a new phone number", cf, :phones, :class => "btn btn-small", :title => "Add a new phone number to this Client.") %>
-        <% end %>
-      </div>
-    </div>
-
     <% if f.object.persisted? %>
+      <div class="tab-pane" id="phones">
+        <div class="control-group">
+          <%= f.fields_for :client do |fields_for_client| %>
+            <%= fields_for_client.fields_for :phones, localized(@phones) do |fields_for_phones| %>
+              <%= render "phone_fields", :f => fields_for_phones %>
+            <% end %>
+            <%= link_to_add_fields("Add a new phone number", fields_for_client, :phones, :class => "btn btn-small", :title => "Add a new phone number to this Client.") %>
+          <% end %>
+        </div>
+      </div>
+
       <div class="tab-pane" id="responses">
         <%= render "admin/surveys", target: @client %>
       </div>

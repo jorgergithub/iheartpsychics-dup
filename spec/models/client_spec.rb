@@ -20,16 +20,12 @@ describe Client do
   it { should delegate(:last_name).to(:user).allowing_nil(true) }
   it { should delegate(:username).to(:user).allowing_nil(true) }
 
-  let(:user)   { User.create(email: "felipe.coury@gmail.com", password: "pass123")}
-  let(:client) { Client.create(user: user, pin: "1234", balance: 60) }
+  let(:user)   { FactoryGirl.create(:user)}
+  let(:client) { FactoryGirl.create(:client, user: user, pin: "1234", balance: 60) }
 
-  describe "creating a client with a phone number" do
+  describe "creating a client with pin" do
     let!(:client) do
-      Client.create(user: user, pin: "1234", phone_number: "+17641233322")
-    end
-
-    it "saves the phone number" do
-      expect(client.reload.phones.first.number).to eql("+17641233322")
+      FactoryGirl.create(:client, user: user, pin: "1234")
     end
 
     it "saves the pin number" do
@@ -39,7 +35,7 @@ describe Client do
 
   describe "deleting a client" do
     context "with a phone" do
-      let!(:user) { FactoryGirl.create(:user, phone_number: "7641233322", create_as: "client") }
+      let!(:user) { FactoryGirl.create(:user, create_as: "client") }
       let!(:client) { user.client }
       let!(:phone) { client.phones.first }
 
@@ -66,7 +62,7 @@ describe Client do
   end
 
   describe "#set_random_pin" do
-    let(:client) { Client.create(user: user) }
+    let(:client) { FactoryGirl.create(:client, user: user) }
 
     before { RandomUtils.stub(digits_s: "1234") }
 
@@ -87,6 +83,7 @@ describe Client do
 
     context "when pin is set" do
       it "is true" do
+        client.pin = "1234"
         expect(client).to be_pin
       end
     end

@@ -2,6 +2,10 @@
 
 <p>Welcome to I Heart Psychics!</p>
 
+<% if @resource.generated_password == true  %>
+  <p>Your generated password is '<%=@resource.password%>'. Please, change it as soon as possible.</p>
+<% end %>
+
 <p>Now please confirm your account email through the link below:</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>

@@ -1,15 +1,11 @@
 require "spec_helper"
 
 describe User do
-  describe "creating a client with a phone number" do
-    let(:user) { create(:user, phone_number: "+13054502983", create_as: "client") }
+  describe "creating user as a clint" do
+    let(:user) { create(:user, create_as: "client") }
 
     it "creates the client" do
       expect(user.client).to_not be_nil
-    end
-
-    it "creates a client with a phone number" do
-      user.client.phones.first.number.should == "+13054502983"
     end
 
     it "creates the user with client role" do
@@ -18,16 +14,6 @@ describe User do
 
     it "returns true to client?" do
       expect(user).to be_client
-    end
-
-    it "validates uniqueness of phone number" do
-      create(:user, create_as: "client", phone_number: "764-123-3322")
-
-      subject.create_as = "client"
-      subject.phone_number = "764-123-3322"
-      subject.valid?
-
-      expect(subject.errors[:phone_number]).to include("has already been taken")
     end
   end
 

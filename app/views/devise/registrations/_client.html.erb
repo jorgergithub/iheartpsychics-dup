@@ -26,10 +26,9 @@
   </div>
 
   <div class="control-group">
-    <%= f.label :phone_number, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :phone_number, data: { mask: t('masks.phone') } %>
-    </div>
+    <%= f.fields_for :client do |fields_for_client| %>
+      <%= render "phone_number", :f => fields_for_client %>
+    <% end %>
   </div>
 
   <% if f.object.password_required? %>

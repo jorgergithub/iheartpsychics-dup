@@ -15,9 +15,15 @@ FactoryGirl.define do
     password "testpass"
   end
 
+  factory :client_phone do
+    desc "Main"
+    number { "+1#{rand(1000000000...9999999999)}" }
+  end
+
   factory :client do
     association :user
     balance 60
+    phones { [FactoryGirl.create(:client_phone)] }
   end
 
   factory :psychic do
