@@ -9,8 +9,8 @@ Module("IHP.Pages.Orders.Payment", function(Payment) {
 
     this.newCard = this.el.find("#order_card_id");
     this.cardNumber = this.el.find("#order_card_number");
-    this.cardExpMonth = this.el.find("#order_card_month");
-    this.cardExpYear = this.el.find("#order_card_year");
+    this.cardExpMonth = this.el.find("#order_card_exp_month");
+    this.cardExpYear = this.el.find("#order_card_exp_year");
     this.cardCvc = this.el.find("#order_card_cvc");
 
     this.cardNumberValidationError = this.el.find("#card-number-validation-error");
@@ -21,9 +21,15 @@ Module("IHP.Pages.Orders.Payment", function(Payment) {
   };
 
   Payment.fn.addEventListeners = function() {
-    // this.cardNumber.on("blur", this.validate.bind(this));
-    // this.cardCvc.on("blur", this.validate.bind(this));
-  }
+    this.cardNumber.on("focus", this.setNewCard.bind(this));
+    this.cardExpMonth.on("focus", this.setNewCard.bind(this));
+    this.cardExpYear.on("focus", this.setNewCard.bind(this))
+    this.cardCvc.on("focus", this.setNewCard.bind(this));
+  };
+
+  Payment.fn.setNewCard = function(event) {
+    this.newCard.prop("checked", true);
+  };
 
   Payment.fn.setNumberValidationError = function(error) {
     this.cardNumberValidationError.text(error);
