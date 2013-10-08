@@ -394,6 +394,16 @@ ActiveRecord::Schema.define(version: 20131007215659) do
     t.datetime "updated_at"
   end
 
+  create_table "schedules", force: true do |t|
+    t.integer  "psychic_id"
+    t.date     "date"
+    t.datetime "start_time"
+    t.datetime "end_time"
+  end
+
+  add_index "schedules", ["date"], name: "index_schedules_on_date", using: :btree
+  add_index "schedules", ["psychic_id", "date"], name: "index_schedules_on_psychic_id_and_date", using: :btree
+
   create_table "subscribers", force: true do |t|
     t.string   "email"
     t.datetime "created_at"
