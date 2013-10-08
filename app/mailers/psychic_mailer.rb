@@ -3,7 +3,7 @@ class PsychicMailer < ActionMailer::Base
 
   def confirmation_email(psychic)
     @psychic = psychic
-    mail(to: "recruiting@iheartpsychic.co",
+    mail(to: "recruiting@iheartpsychics.co",
          subject: "I Heart Psychics - New Psychic Application")
   end
 
