@@ -108,6 +108,7 @@ IHeartPsychics::Application.routes.draw do
     member do
       get 'available'   , action: :available   , as: :available
       get 'unavailable' , action: :unavailable , as: :unavailable
+      get '/:id/about'  , action: :about       , as: :about
     end
   end
 

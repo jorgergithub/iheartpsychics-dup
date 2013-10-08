@@ -1,6 +1,6 @@
 class PsychicsController < AuthorizedController
-  skip_before_filter :authenticate_user!, only: [:new]
-  before_filter :find_psychic, except: [:new, :search]
+  skip_before_filter :authenticate_user!, only: :new
+  before_filter :find_psychic, except: [:new, :search, :about]
 
   attr_accessor :resource, :resource_name
   helper_method :resource, :resource_name
@@ -28,8 +28,11 @@ class PsychicsController < AuthorizedController
 
   def search
     @client = current_client
-    @psychics = Psychic.joins(:user).order("psychics.pseudonym, SUBSTR(users.last_name, 1, 1)").where(
-      "CONCAT(psychics.pseudonym, ' ', SUBSTR(users.last_name, 1, 1)) LIKE ?", "%#{params[:q]}%")
+    @psychics = Psychic.by_alias_name(params[:q])
+  end
+
+  def about
+    @psychic = Psychic.find(params[:id])
   end
 
   def available

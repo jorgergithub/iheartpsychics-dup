@@ -32,6 +32,12 @@ class Psychic < ActiveRecord::Base
 
   before_create :assign_extension
 
+  scope :by_alias_name, ->(value) {
+    joins(:user).
+    where("CONCAT(psychics.pseudonym, ' ', SUBSTR(users.last_name, 1, 1)) LIKE ?", "%#{value}%").
+    order("psychics.pseudonym, SUBSTR(users.last_name, 1, 1)")
+  }
+
   def featured_review
     reviews.featured.first
   end

@@ -19,7 +19,7 @@
               </div>
 
               <div class="name">
-                <a href="<%= admin_psychic_path(psychic) %>" class="details">
+                <a href="<%= about_psychic_path(psychic) %>" class="details">
                   <%= psychic.alias_name %>
                 </a>
               </div>
@@ -34,7 +34,7 @@
 
               <div class="actions">
                 <%= link_to '<i class="icon-comment reviews"></i>'.html_safe,
-                  admin_psychic_path(psychic) %>
+                  about_psychic_path(psychic) %>
 
                 <% if @client.favorite?(psychic) %>
                   <%= link_to '<i class="icon-heart favorited"></i>'.html_safe, remove_favorite_client_path(psychic_id: psychic.id) %>
