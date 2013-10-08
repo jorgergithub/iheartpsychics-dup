@@ -1,4 +1,4 @@
-class Hour < EnumerateIt::Base
+class TheHour < EnumerateIt::Base
   associate_values :one_am    => "1AM",
                    :two_am    => "2AM",
                    :three_am  => "3AM",
