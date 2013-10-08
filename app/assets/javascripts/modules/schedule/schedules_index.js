@@ -21,6 +21,8 @@ Module("IHP.Pages.SchedulesIndex", function(SchedulesIndex) {
     content.find("input[type=hidden].date").val(date);
     content.insertAfter(el);
 
+    content.find(".start_time").focus();
+
     return content;
   };
 
