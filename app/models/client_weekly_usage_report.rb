@@ -4,8 +4,7 @@ class ClientWeeklyUsageReport
     end_date = 1.week.ago.in_time_zone.end_of_week(:sunday)
 
     Client.all.each do |client|
-      puts client.full_name
-      self.deliver_for(client, start_date, end_date)
+      self.deliver_for(client, start_date, end_date) if client.balance > 0
     end
   end
 
