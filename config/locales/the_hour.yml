@@ -1,6 +1,6 @@
 en:
   enumerations:
-    hour:
+    the_hour:
       one_am: "1AM"
       two_am: "2AM"
       three_am: "3AM"

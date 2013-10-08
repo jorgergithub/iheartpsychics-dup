@@ -31,12 +31,14 @@
 //= require modules/order/package
 //= require modules/order/payment
 //= require modules/order/orders_new
+//= require modules/schedule/schedules_index
 //
 // App Code ===============================================
 //= require boot
 //= require datepicker
 //= require horoscopes
 //= require psychic_application
+//= require schedules
 //= require survey
 //= require splash
 //= require tabs

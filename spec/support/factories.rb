@@ -189,4 +189,11 @@ FactoryGirl.define do
     bonus_minutes 140
     total 163.8
   end
+
+  factory :schedule do
+    psychic
+    date Date.today.in_time_zone.to_date
+    start_time Time.now
+    end_time Time.now + 8.hours
+  end
 end

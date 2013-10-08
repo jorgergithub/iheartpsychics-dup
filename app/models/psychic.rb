@@ -1,4 +1,5 @@
 require "random_utils"
+require "date_time_mixin"
 
 class Psychic < ActiveRecord::Base
   include I18n::Alchemy
@@ -8,8 +9,15 @@ class Psychic < ActiveRecord::Base
   has_many :calls
   has_many :reviews
   has_many :invoices
+  has_many :schedules
+  has_many :hours
 
   has_and_belongs_to_many :favorited_by_clients, class_name: "Client"
+
+  accepts_nested_attributes_for :schedules, allow_destroy: true,
+    reject_if: proc { |attr|
+      !attr["start_time_string"].present? && !attr["end_time_string"].present?
+    }
 
   delegate :username, :first_name, :last_name, :full_name, :email,
            to: :user, allow_nil: true
@@ -46,6 +54,53 @@ class Psychic < ActiveRecord::Base
 
   def alias_name
     "#{pseudonym} #{last_name.first}"
+  end
+
+  def weekly_schedule
+    delta = 5 - Date.today.in_time_zone.to_date.wday
+    delta += 7 if delta < 0
+
+    first_date = Date.today.in_time_zone.to_date
+    last_date = first_date + delta.days
+
+    schedules.where('date >= ? AND date <= ?', first_date, last_date)
+  end
+
+  def next_week_schedules
+    today = Date.today.in_time_zone.to_datetime.extend(DateTimeMixin)
+    start_date = today.next_wday(6)
+    end_date = start_date + 6.days
+
+    schedules.where("date >= ? AND date <= ?", start_date.to_date, end_date.to_date)
+  end
+
+  def next_week_schedules_by_date
+    today = Date.today.in_time_zone.to_datetime.extend(DateTimeMixin)
+    start_date = today.next_wday(6)
+    end_date = start_date + 6.days
+
+    (start_date..end_date).inject({}) do |h, date|
+      result = schedules.where(date: date.to_date)
+      if result.count > 0
+        h[date] = result.load.to_a
+      else
+        h[date] = [schedules.new(date: date)]
+      end
+      h
+    end
+  end
+
+  def available?
+    return false unless hours.any?
+    hours.last.start?
+  end
+
+  def available!
+    hours.create(action: "start")
+  end
+
+  def unavailable!
+    hours.create(action: "finish")
   end
 
   private

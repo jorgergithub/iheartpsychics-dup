@@ -36,4 +36,48 @@ describe Psychic do
       expect(subject.alias_name).to eq "Jack T"
     end
   end
+
+  context "availability" do
+    let(:psychic) { create(:psychic) }
+
+    describe "#available?" do
+      context "when there are no hour entries" do
+        it "is false" do
+          expect(psychic).to_not be_available
+        end
+      end
+
+      context "when last hour entry has start action" do
+        before { psychic.available! }
+        it "is true" do
+          expect(psychic).to be_available
+        end
+      end
+
+      context "when status is unavailable" do
+        before { psychic.unavailable! }
+        it "is false" do
+          expect(psychic).to_not be_available
+        end
+      end
+    end
+
+    describe "#available!" do
+      before {
+        psychic.available!
+      }
+      it "makes the psychic available" do
+        expect(psychic).to be_available
+      end
+    end
+
+    describe "#unavailable!" do
+      before {
+        psychic.unavailable!
+      }
+      it "makes the psychic unavailable" do
+        expect(psychic).to_not be_available
+      end
+    end
+  end
 end
