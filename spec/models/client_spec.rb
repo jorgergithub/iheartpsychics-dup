@@ -132,6 +132,31 @@ describe Client do
     end
   end
 
+  describe "#remove_credits" do
+    context "with an user with no credits" do
+      before do
+        client.update_attributes(balance: nil)
+      end
+
+      it "removes credits" do
+        client.remove_credits(3.41)
+        expect(client.balance).to eql -3.41
+      end
+    end
+
+    context "with an user with credits" do
+      before do
+        client.update_attributes(balance: nil)
+        client.add_credits(12.29)
+      end
+
+      it "removes credits" do
+        client.remove_credits(5.24)
+        expect(client.balance.to_f).to eq 7.05
+      end
+    end
+  end
+
   describe "#discount_credits" do
     let(:call)   { FactoryGirl.create(:call, cost: 4.55) }
     let(:credit) { client.credits.first }

@@ -31,6 +31,8 @@
 //= require modules/order/package
 //= require modules/order/payment
 //= require modules/order/orders_new
+//= require modules/order/admin/client
+//= require modules/order/admin/orders_new
 //= require modules/schedule/schedules_index
 //
 // App Code ===============================================

@@ -64,6 +64,7 @@
                 <%= f.collection_select :card_exp_year,
                   Rails.configuration.credit_card[:years], :value, :name, {},
                     { class: 'input-small', data: { stripe: "exp-year" } } %>
+                <span id="card-exp-date-validation-error" class="validation-error"></span>
               </div>
             </div>
 

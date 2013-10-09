@@ -26,6 +26,7 @@ class Client < ActiveRecord::Base
   before_save  :set_random_pin
   before_save  :set_unsubscribe_key
 
+  scope :by_name, -> { joins(:user).order("users.first_name, users.last_name") }
   scope :subscribed, -> { where('receive_newsletters') }
 
   def valid_pin?(pin)
@@ -55,6 +56,15 @@ class Client < ActiveRecord::Base
     credits.create(credits: m, description: desc, target: target)
     self.balance ||= 0
     self.balance += m.to_f
+    self.save
+  end
+
+  def remove_credits(m, target=nil)
+    desc = "Removed credits"
+    desc = "#{desc} - #{target.to_desc}" if target
+    credits.create(credits: -m, description: desc, target: target)
+    self.balance ||= 0
+    self.balance -= m.to_f
     self.save
   end
 
