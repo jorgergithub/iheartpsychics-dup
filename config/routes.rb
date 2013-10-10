@@ -20,8 +20,13 @@ IHeartPsychics::Application.routes.draw do
     resources :customer_service_representatives
     resources :horoscopes
 
-    resources :invoices do
+    resources :invoices, only: :show do
       resources :payments
+
+      collection do
+        get 'paid', action: :paid, as: :paid
+        get 'pending', action: :pending, as: :pending
+      end
     end
 
     resources :manager_directors

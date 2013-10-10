@@ -16,7 +16,7 @@ class Admin::PaymentsController < AuthorizedController
     @payment = @invoice.payments.build(invoice_params)
 
     if @payment.save
-      redirect_to admin_invoices_path, notice: "Payment was successfully saved."
+      redirect_to pending_admin_invoices_path, notice: "Payment was successfully saved."
     else
       render action: "show"
     end

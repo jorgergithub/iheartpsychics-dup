@@ -1,7 +1,7 @@
 class ClientWeeklyUsageReport
   def self.deliver
     start_date = 1.week.ago.in_time_zone.beginning_of_week(:sunday)
-    end_date = 1.week.ago.in_time_zone.end_of_week(:sunday)
+    end_date = 1.week.ago.in_time_zone.end_of_week(:saturday)
 
     Client.all.each do |client|
       self.deliver_for(client, start_date, end_date) if client.balance > 0

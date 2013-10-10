@@ -1,6 +1,12 @@
 require "spec_helper"
 
 describe Invoice do
+  it { should belong_to :psychic }
+  it { should belong_to :tier }
+
+  it { should have_many(:calls).dependent(:nullify) }
+  it { should have_many(:payments) }
+
   describe ".generate" do
     context "when today is Sunday" do
       before { Timecop.freeze(Time.zone.parse("2013-09-22 23:59")) }

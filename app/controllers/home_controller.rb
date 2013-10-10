@@ -53,7 +53,7 @@ class HomeController < AuthorizedController
       redirect_to admin_dashboard_path
       return true
     elsif current_user.accountant?
-      redirect_to admin_invoices_path
+      redirect_to pending_admin_invoices_path
       return true
     end
   end

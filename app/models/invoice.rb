@@ -3,11 +3,12 @@ class Invoice < ActiveRecord::Base
 
   belongs_to :psychic
   belongs_to :tier
+
   has_many :calls, dependent: :nullify
   has_many :payments
 
-  scope :pending, -> { where("paid_at IS NULL") }
   scope :paid, -> { where("paid_at IS NOT NULL") }
+  scope :pending, -> { where("paid_at IS NULL") }
 
   def self.generate
     today = Date.today.in_time_zone

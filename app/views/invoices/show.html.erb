@@ -107,8 +107,17 @@
 <div class="span12">
 
   <div class="form-actions">
-    <%= link_to "Back", :back, class: 'btn' %>
+    <% if current_user.psychic? %>
+      <%= link_to "Back", psychic_invoices_path, class: 'btn' %>
+    <% end %>
+
     <% if current_user.accountant? %>
+      <% if @invoice.paid? %>
+        <%= link_to "Back", paid_admin_invoices_path, class: 'btn' %>
+      <% else %>
+        <%= link_to "Back", pending_admin_invoices_path, class: 'btn' %>
+      <% end %>
+
       <%= link_to '<i class="icon-money"></i> Pay Invoice'.html_safe, new_admin_invoice_payment_path(@invoice), class: 'btn btn-primary' %>
     <% end %>
   </div>
