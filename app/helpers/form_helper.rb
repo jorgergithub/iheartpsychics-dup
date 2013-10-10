@@ -14,6 +14,7 @@ module FormHelper
   def add_text_field(form, field_name, label=nil, options={})
     input_options = options.delete(:input) if options
     input_options ||= {}
+
     add_field(form, field_name, label, options) do
       form.text_field(field_name, options.merge(input_options)).html_safe
     end
