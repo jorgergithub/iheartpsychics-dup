@@ -1,0 +1,32 @@
+@import "main/helpers";
+
+.nav {
+  background: #af00a5;
+  height: 40px;
+  padding: 15px;
+}
+
+.nav-links {
+  @extend %flat-list;
+  float: left;
+}
+
+.nav-link {
+  padding: 10px 20px;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: normal;
+  }
+}
+
+.nav-info {
+  background: url(image-path("nav-info-phone.png")) no-repeat 0 7px;
+  padding: 10px 0 10px 40px;
+  float: right;
+
+  span {
+    font-weight: bold;
+  }
+}

@@ -64,7 +64,7 @@ class HomeController < AuthorizedController
     elsif action_name == "apna"
       return "splash-nologo"
     else
-      return "splash"
+      return "main"
     end
   end
 end

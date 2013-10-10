@@ -1,0 +1,34 @@
+@mixin regular-font($size) {
+  font-family: "Roboto";
+  font-weight: 400;
+  font-size: $size;
+}
+
+@mixin thin-font($size) {
+  font-family: "Roboto";
+  font-weight: 300;
+  font-size: $size;
+}
+
+%image-replace {
+  overflow: hidden;
+  white-space: nowrap;
+  text-indent: 100%;
+}
+
+%clearfix:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+%clearfix {
+  zoom: 1;
+}
+
+%flat-list {
+  @extend %clearfix;
+
+  list-style: none;
+  > * { float: left; }
+}

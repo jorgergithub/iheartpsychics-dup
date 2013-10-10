@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>IHeartPsychics</title>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,300,300italic,100italic,100' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag    "main", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= controller.controller_name %>" data-page="<%= current_page %>">
+
+  <section class="user">
+    <div class="container_12">
+      <div class="signup">
+        <h1>Sign Up or Connect With</h1>
+
+        <ul class="signup-links">
+          <li class="signup-link">
+            <%= link_to(image_tag("twitter.png", alt: "Twitter"), "#") %>
+          </li>
+
+          <li class="signup-link">
+            <%= link_to(image_tag("facebook.png", alt: "Facebook"), "#") %>
+          </li>
+
+          <li class="signup-link">
+            <%= link_to(image_tag("google+.png", alt: "Google+"), "#") %>
+          </li>
+        </ul>
+      </div>
+
+      <div class="signin">
+        <h1>Sign Up or Connect With</h1>
+
+        <%= form_tag "#", class: "signin-form" do %>
+          <div class="signin-inputs">
+            <div class="signin-input">
+              <%= text_field_tag "username", "", placeholder: "Username" %>
+            </div>
+
+            <div class="signin-input">
+              <%= password_field_tag "password", "", placeholder: "Password" %>
+            </div>
+
+            <%= submit_tag "Sign In" %>
+          </div>
+
+          <p class="signin-actions">
+            <a href="#" class="signin-actions-forgot">Forgot Username or Password?</a>
+            <input type="checkbox" name="remember_me" id="remember">
+            <label for="remember" class="signin-actions-remember">Remember Me</label>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <header class="header container_12">
+    <div class="header-fold"></div>
+
+    <%= link_to(image_tag("logo.png", alt: "IHeartPsychics"), root_url) %>
+
+    <nav class="header-nav">
+      <ul class="header-nav-links">
+        <li class="dashboard header-nav-link"><a href="#">Dashboard</a></li>
+        <li class="balance header-nav-link"><a href="#">Balance $35</a></li>
+        <li class="signout header-nav-link"><a href="#">Sign Out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <nav class="nav">
+    <div class="container_12">
+      <ul class="nav-links">
+        <li class="nav-link"><a href="#">Home</a></li>
+        <li class="nav-link"><a href="#">Special Offers</a></li>
+        <li class="nav-link"><a href="#">Find a Reader</a></li>
+        <li class="nav-link"><a href="#">Horoscopes</a></li>
+        <li class="nav-link"><a href="#">Blog</a></li>
+      </ul>
+
+      <aside class="nav-info">
+        Call Today: <span>1.888.PSYCHICS</span>
+      </aside>
+    </div>
+  </nav>
+
+  <section class="hero"></section>
+
+  <section class="container">
+    <div>Offer</div>
+    <div>Offer</div>
+    <div>Offer</div>
+
+    <nav>
+      <ul>
+        <a href="#">All Online</a>
+        <span>750</span>
+      </ul>
+      <ul>
+        <a href="#">Available</a>
+        <span>230</span>
+      </ul>
+      <ul><a href="#">Featured</a></ul>
+      <ul><a href="#">By Specialty</a></ul>
+      <ul><a href="#">By Tool</a></ul>
+      <ul>
+        <a href="#">By Price</a>
+        $1 <div></div> $15
+      </ul>
+    </nav>
+
+    <input type="search" results="5" placeholder="Search">
+
+    <div>
+      <img src="http://placehold.it/370x275">
+      <h1>Jenny</h1>
+      $17<span>Min</span>
+      Ext: 4892
+      <p>
+        I Specialize In:
+        At vero eos et accusamus et iusto odio
+        dignissimos ducimus qui blanditis praesentium
+        volupatum molestias...
+      </p>
+      <a href="#">Read more</a>
+      <a href="#">All Reviews</a>
+      <div>I'm available</div>
+    </div>
+
+    <div>
+      <img src="http://placehold.it/370x275">
+      <h1>Jenny</h1>
+      $17<span>Min</span>
+      Ext: 4892
+      <p>
+        I Specialize In:
+        At vero eos et accusamus et iusto odio
+        dignissimos ducimus qui blanditis praesentium
+        volupatum molestias...
+      </p>
+      <a href="#">Read more</a>
+      <a href="#">All Reviews</a>
+      <div>I'm available</div>
+    </div>
+
+    <div>
+      <img src="http://placehold.it/370x275">
+      <h1>Jenny</h1>
+      $17<span>Min</span>
+      Ext: 4892
+      <p>
+        I Specialize In:
+        At vero eos et accusamus et iusto odio
+        dignissimos ducimus qui blanditis praesentium
+        volupatum molestias...
+      </p>
+      <a href="#">Read more</a>
+      <a href="#">All Reviews</a>
+      <div>I'm available</div>
+    </div>
+
+    <a href="#">More Readers</a>
+  </section>
+
+  <section>
+    <h2>Your Daily Horoscope</h2>
+    <h1>Gemini</h1>
+    <h3>5.21 - 6.21</h3>
+
+    <p>
+      Your thinking is clear today, Gemini, but it might be hard to take action on your thoughts. A restrictive force may seem to be holding you back. A sense of discipline is welling up within you, reminding you to add a touch of conservatism to whatever it is that you have in mind.
+    </p>
+
+    <img src="gemini.png" alt="Gemini">
+  </section>
+
+  <section>
+    <ul>
+      <li>
+        <h1>Psychic Readings</h1>
+        <ul>
+          <li><a href="#">How it Works</a></li>
+          <li><a href="#">Psychic Quality</a></li>
+          <li><a href="#">Psychic Dictionary</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <h1>Your Account</h1>
+        <ul>
+          <li><a href="#">Update Subscription</a></li>
+          <li><a href="#">Make an Appointment</a></li>
+          <li><a href="#">Rewards &amp; Offers</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <h1>Site</h1>
+        <ul>
+          <li><a href="#">Site Map</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">TOS</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <h1>Company</h1>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <aside>
+      <h1>Social</h1>
+      Get Your Daily Horoscope On
+      <ul>
+        <li><a href="#"><img src="twitter.png" alt="Twitter"></a></li>
+        <li><a href="#"><img src="facebook.png" alt="Facebook"></a></li>
+        <li><a href="#"><img src="google+.png" alt="Google+"></a></li>
+      </ul>
+    </aside>
+  </section>
+
+  <footer>
+    <div class="container_12">
+      &copy; Copyright I Heart Psychics Co. 2013
+    </div>
+  </footer>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-44607874-1', 'iheartpsychics.co');
+    ga('send', 'pageview');
+  </script>
+</body>
