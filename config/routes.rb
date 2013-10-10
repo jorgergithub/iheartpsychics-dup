@@ -133,7 +133,7 @@ IHeartPsychics::Application.routes.draw do
   get "/dashboard", to: "home#show", as: "dashboard"
   get "/unsubscribe/:id", to: "unsubscribe#unsubscribe", as: "unsubscribe"
 
-  get "/confirmation", to: "home#confirmation", as: "confirmation"
+  get "/email_confirmation", to: "home#confirmation", as: "email_confirmation"
   get "/apna", to: "home#apna", as: "apna"
   root to: 'home#index'
 end

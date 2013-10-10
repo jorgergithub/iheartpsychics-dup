@@ -19,7 +19,7 @@ class PsychicApplicationsController < ApplicationController
   end
 
   def confirmation
-    redirect_to confirmation_url
+    redirect_to email_confirmation_url
   end
 
   protected
