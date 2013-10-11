@@ -34,3 +34,29 @@
     margin-right: 0;
   }
 }
+
+.container-nav {
+  font-size: 18px;
+  background: #232d3b;
+  border-radius: 40px;
+  height: 30px;
+  padding: 25px 0 19px 45px;
+}
+
+.container-nav-links {
+  @extend %flat-list;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+.container-nav-link {
+  margin-right: 25px;
+
+  span {
+    color: #6acd00;
+    font-weight: normal;
+  }
+}
