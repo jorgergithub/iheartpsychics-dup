@@ -138,7 +138,8 @@
         <thead>
           <tr>
             <th>Call ID</th>
-            <th>Date and time</th>
+            <th>Date</th>
+            <th>Time</th>
             <th>From</th>
             <th>Psychic</th>
             <th>Duration</th>
@@ -149,7 +150,8 @@
           <% @processed_calls.reverse.each do |call| %>
             <tr>
               <td><%= call.id %></td>
-              <td><%= call.parsed_start_time %></td>
+              <td><%= call.parsed_start_date_only %></td>
+              <td><%= call.parsed_start_time_only %></td>
               <td><%= call.formatted_number %></td>
               <td><%= call.psychic_alias_name %></td>
               <td class="right">
@@ -181,7 +183,8 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>Date and time</th>
+            <th>Date</th>
+            <th>Time</th>
             <th>Credits</th>
             <th>Description</th>
           </tr>
@@ -189,7 +192,8 @@
         <tbody>
           <% @credits.by_date.reverse.each do |credit| %>
             <tr>
-              <td><%= credit.created_at %></td>
+              <td><%= credit.parsed_date_only %></td>
+              <td><%= credit.parsed_time_only %></td>
               <td><%= number_to_currency credit.credits %></td>
               <td>
                 <% if credit.target %>

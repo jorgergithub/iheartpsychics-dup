@@ -35,7 +35,15 @@ class Call < ActiveRecord::Base
   end
 
   def parsed_start_time
-    Time.parse(start_time).in_time_zone
+    Time.parse(start_time).in_time_zone.strftime("%b %d, %Y %H:%M")
+  end
+
+  def parsed_start_time_only
+    Time.parse(start_time).in_time_zone.strftime("%I:%M %p")
+  end
+
+  def parsed_start_date_only
+    Time.parse(start_time).in_time_zone.strftime("%b %d, %Y")
   end
 
   def parsed_end_time
