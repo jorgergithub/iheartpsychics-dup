@@ -116,9 +116,8 @@
         <%= link_to "Back", paid_admin_invoices_path, class: 'btn' %>
       <% else %>
         <%= link_to "Back", pending_admin_invoices_path, class: 'btn' %>
+        <%= link_to '<i class="icon-money"></i> Pay Invoice'.html_safe, new_admin_invoice_payment_path(@invoice), class: 'btn btn-primary' %>
       <% end %>
-
-      <%= link_to '<i class="icon-money"></i> Pay Invoice'.html_safe, new_admin_invoice_payment_path(@invoice), class: 'btn btn-primary' %>
     <% end %>
   </div>
 </div>
