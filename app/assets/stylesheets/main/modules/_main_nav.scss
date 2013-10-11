@@ -21,6 +21,11 @@
   }
 }
 
+.active {
+  background: #6e0068;
+  border-radius: 30px;
+}
+
 .nav-info {
   background: url(image-path("nav-info-phone.png")) no-repeat 0 7px;
   padding: 10px 0 10px 40px;
