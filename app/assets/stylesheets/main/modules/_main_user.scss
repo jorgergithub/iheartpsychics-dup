@@ -20,7 +20,23 @@
 
   .signup {
     width: 280px;
+    border-right: 1px solid #bf00b7;
   }
+
+  .signin {
+    border-left: 1px solid #8c0084;
+    padding-left: 40px;
+  }
+}
+
+.user-container {
+  position: relative;
+}
+
+.user-close {
+  position: absolute;
+  top: 60px;
+  right: 35px;
 }
 
 .signup-links {

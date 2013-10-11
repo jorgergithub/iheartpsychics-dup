@@ -13,7 +13,7 @@
 <body class="<%= controller.controller_name %>" data-page="<%= current_page %>">
 
   <section class="user">
-    <div class="container_12">
+    <div class="user-container container_12">
       <div class="signup">
         <h1>Sign Up or Connect With</h1>
 
@@ -55,6 +55,8 @@
             <label for="remember_me" class="signin-actions-remember">Remember Me</label>
           </p>
         <% end %>
+
+        <%= link_to(image_tag("user-close.png", alt: "Close"), "#", class: "user-close") %>
       </div>
     </div>
   </section>
