@@ -3,30 +3,30 @@
 .user {
   background: #af00a5;
   height: 160px;
+}
 
-  .user-signup,
-  .user-signin {
-    padding: 20px 0;
-    float: left;
-    height: 120px;
+.user-signup,
+.user-signin {
+  padding: 20px 0;
+  float: left;
+  height: 120px;
 
-    h1 {
-      font-weight: 100;
-      font-size: 18px;
-      margin-bottom: 15px;
-      margin-left: 25px;
-    }
+  h1 {
+    font-weight: 100;
+    font-size: 18px;
+    margin-bottom: 15px;
+    margin-left: 25px;
   }
+}
 
-  .user-signup {
-    width: 280px;
-    border-right: 1px solid #bf00b7;
-  }
+.user-signup {
+  width: 280px;
+  border-right: 1px solid #bf00b7;
+}
 
-  .user-signin {
-    border-left: 1px solid #8c0084;
-    padding-left: 40px;
-  }
+.user-signin {
+  border-left: 1px solid #8c0084;
+  padding-left: 40px;
 }
 
 .user-container {
