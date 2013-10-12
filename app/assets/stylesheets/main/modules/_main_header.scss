@@ -25,6 +25,7 @@
 
 .header-nav-links {
   @extend %flat-list;
+  cursor: pointer;
 
   .dashboard {
     background: url(image-path("header-nav-dashboard.png")) no-repeat top right;
@@ -34,6 +35,7 @@
     background: url(image-path("header-nav-balance.png")) no-repeat top right;
   }
 
+  .signin,
   .signout {
     background: url(image-path("header-nav-dashboard.png")) no-repeat top right;
   }

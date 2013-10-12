@@ -4,8 +4,8 @@
   background: #af00a5;
   height: 160px;
 
-  .signup,
-  .signin {
+  .user-signup,
+  .user-signin {
     padding: 20px 0;
     float: left;
     height: 120px;
@@ -18,12 +18,12 @@
     }
   }
 
-  .signup {
+  .user-signup {
     width: 280px;
     border-right: 1px solid #bf00b7;
   }
 
-  .signin {
+  .user-signin {
     border-left: 1px solid #8c0084;
     padding-left: 40px;
   }
@@ -104,4 +104,8 @@
 }
 
 .signin-actions-remember {
+}
+
+.user-signin-element {
+  display: none;
 }
