@@ -1,0 +1,49 @@
+.horoscope {
+  background-color: #000;
+}
+
+.horoscope-container {
+  position: relative;
+  padding: 40px 100px;
+  width: 970px;
+}
+
+.horoscope-title,
+.horoscope-sign-title,
+.horoscope-period {
+  font-weight: 100;
+}
+
+.horoscope-title {
+  font-size: 25px;
+}
+
+.horoscope-sign-title {
+  font-size: 100px;
+  color: #af00a5;
+}
+
+.horoscope-period {
+  font-size: 24px;
+}
+
+.horoscope-text {
+  font-size: 24px;
+  color: #babbbd;
+  margin-top: 20px;
+  width: 660px;
+}
+
+.horoscope-sign {
+  position: absolute;
+  width: 269px;
+  height: 328px;
+  right: 100px;
+  bottom: 0;
+  background: url(image-path("horoscope-sign-bg.png"));
+  text-align: center;
+}
+
+.horoscope-sign-image {
+  margin-top: 55px;
+}
