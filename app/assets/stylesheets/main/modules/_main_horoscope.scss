@@ -1,11 +1,12 @@
+@import "main/helpers";
+
 .horoscope {
   background-color: #000;
 }
 
 .horoscope-container {
   position: relative;
-  padding: 40px 100px;
-  width: 970px;
+  @extend %footer-container;
 }
 
 .horoscope-title,

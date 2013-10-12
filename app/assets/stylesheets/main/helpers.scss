@@ -47,3 +47,8 @@
   list-style: none;
   > * { float: left; }
 }
+
+%footer-container {
+  padding: 40px 100px;
+  width: 970px;
+}

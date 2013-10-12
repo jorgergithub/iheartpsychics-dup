@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>IHeartPsychics</title>
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,300,300italic,100italic,100' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    "main", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= stylesheet_link_tag "" %>
@@ -250,61 +251,117 @@
     </div>
   </section>
 
-  <section>
-    <ul>
-      <li>
-        <h1>Psychic Readings</h1>
-        <ul>
-          <li><a href="#">How it Works</a></li>
-          <li><a href="#">Psychic Quality</a></li>
-          <li><a href="#">Psychic Dictionary</a></li>
+  <footer class="footer">
+    <section class="footer-links">
+      <div class="footer-container container_12">
+        <ul class="footer-links-groups">
+          <li class="footer-links-groups-link">
+            <h1 class="footer-links-group-title">Psychic Readings</h1>
+            <ul class="footer-links-group-links">
+              <li class="footer-links-group-link">
+                <a href="#">How it Works</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">Psychic Quality</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">Psychic Dictionary</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="footer-links-groups-link">
+            <h1 class="footer-links-group-title">Your Account</h1>
+            <ul class="footer-links-group-links">
+              <li class="footer-links-group-link">
+                <a href="#">Update Subscription</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">Make an Appointment</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">Rewards &amp; Offers</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="footer-links-groups-link">
+            <h1 class="footer-links-group-title">Site</h1>
+            <ul class="footer-links-group-links">
+              <li class="footer-links-group-link">
+                <a href="#">Site Map</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">Privacy</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">TOS</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="footer-links-groups-link">
+            <h1 class="footer-links-group-title">Company</h1>
+            <ul class="footer-links-group-links">
+              <li class="footer-links-group-link">
+                <a href="#">About Us</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">Contact Us</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">FAQs</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">Careers</a>
+              </li>
+            </ul>
+          </li>
         </ul>
-      </li>
 
-      <li>
-        <h1>Your Account</h1>
-        <ul>
-          <li><a href="#">Update Subscription</a></li>
-          <li><a href="#">Make an Appointment</a></li>
-          <li><a href="#">Rewards &amp; Offers</a></li>
-        </ul>
-      </li>
+        <aside class="footer-social">
+          <h1 class="footer-social-title">Social</h1>
 
-      <li>
-        <h1>Site</h1>
-        <ul>
-          <li><a href="#">Site Map</a></li>
-          <li><a href="#">Privacy</a></li>
-          <li><a href="#">TOS</a></li>
-        </ul>
-      </li>
+          <p class="footer-social-text">
+            Get Your Daily Horoscope On
+          </p>
 
-      <li>
-        <h1>Company</h1>
-        <ul>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">FAQs</a></li>
-          <li><a href="#">Careers</a></li>
-        </ul>
-      </li>
-    </ul>
+          <ul class="footer-social-links">
+            <li class="footer-social-link">
+              <%= link_to(image_tag("twitter.png", alt: "Twitter"), "#") %>
 
-    <aside>
-      <h1>Social</h1>
-      Get Your Daily Horoscope On
-      <ul>
-        <li><a href="#"><img src="twitter.png" alt="Twitter"></a></li>
-        <li><a href="#"><img src="facebook.png" alt="Facebook"></a></li>
-        <li><a href="#"><img src="google+.png" alt="Google+"></a></li>
-      </ul>
-    </aside>
-  </section>
+            </li>
 
-  <footer>
-    <div class="container_12">
-      &copy; Copyright I Heart Psychics Co. 2013
-    </div>
+            <li class="footer-social-link">
+              <%= link_to(image_tag("facebook.png", alt: "Facebook"), "#") %>
+
+            </li>
+
+            <li class="footer-social-link">
+              <%= link_to(image_tag("google+.png", alt: "Google+"), "#") %>
+
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="footer-copyright">
+      <div class="container_12">
+        <div class="footer-copyright-container">
+          &copy; Copyright I Heart Psychics Co. 2013
+        </div>
+      </div>
+    </section>
   </footer>
 
   <script>
