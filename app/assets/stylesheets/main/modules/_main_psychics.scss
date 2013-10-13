@@ -2,7 +2,7 @@
 
 .psychics {
   @extend %clearfix;
-  margin: 30px 0 80px 0;
+  margin: 40px 0 80px 0;
   color: #677488;
 }
 
@@ -10,10 +10,12 @@
   width: 370px;
   float: left;
   outline: 1px solid #e1e6e9;
+  margin-right: 30px;
+  margin-bottom: 80px;
 }
 
-.psychic + .psychic {
-  margin-left: 30px;
+.psychic:nth-child(3n+3) {
+  margin-right: 0;
 }
 
 .psychic-details {
