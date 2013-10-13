@@ -8,9 +8,11 @@
 // Vendor Libs ============================================
 //= require vendor/module/module
 //= require vendor/emitter/emitter
+//= require vendor/clamp.js/clamp
 //
 // App Modules ============================================
 //= require main/modules/home/index
 //
-// App Code ===============================================
+// App Startup Code =======================================
+//= require clamp
 //= require boot

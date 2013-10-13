@@ -7,16 +7,7 @@ class HomeController < AuthorizedController
   def index
     return if go_home
 
-    finish = Time.zone.parse("2013-12-01 00:00:00")
-    diff = Time.diff(finish, Time.zone.now)
-
-    @diff = {
-      :month => ("%02d" % diff[:month]).split(""),
-      :day => ("%02d" % (diff[:week] * 7 + diff[:day])).split(""),
-      :hour => ("%02d" % diff[:hour]).split("")
-    }
-
-    @subscriber = Subscriber.new
+    @psychics = Psychic.all
   end
 
   def apna

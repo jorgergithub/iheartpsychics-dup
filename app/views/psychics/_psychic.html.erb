@@ -1,0 +1,39 @@
+<div class="psychic">
+  <img class="psychic-avatar" src="http://placehold.it/374x275">
+
+  <div class="psychic-body">
+    <div class="psychic-details">
+      <h1 class="psychic-name"><%= psychic.first_name %></h1>
+
+      <aside class="psychic-info">
+        <div class="psychic-price">
+          <%= number_to_currency psychic.price %><span>Min</span>
+        </div>
+        <div class="psychic-extension">
+          Ext: <span><%= psychic.extension %></span>
+        </div>
+      </aside>
+    </div>
+
+    <%= image_tag("psychic-card-shadow.png", class: "psychic-shadow") %>
+
+    <div class="psychic-description">
+      <h2 class="psychic-specialized-title">I Specialize In:</h2>
+
+      <p class="psychic-about clamp">
+        <%= psychic.about %>
+      </p>
+
+      <ul class="psychic-links">
+        <li class="psychic-link"><a href="#">Read more</a></li>
+        <li class="psychic-link"><a href="#">All Reviews</a></li>
+      </ul>
+    </div>
+
+    <%= image_tag("psychic-card-shadow.png", class: "psychic-shadow") %>
+
+    <div class="psychic-status">I'm Available</div>
+  </div>
+
+  <div class="psychic-card-bottom"></div>
+</div>
