@@ -108,9 +108,60 @@
 .psychic-card-bottom {
   position: absolute;
   bottom: -24px;
+  left: 0;
   width: 375px;
   height: 24px;
   background: url(image-path("psychic-card-bottom.png"));
+}
+
+.psychic-card-favorite-off {
+  position: absolute;
+  width: 94px;
+  height: 100px;
+  bottom: -50px;
+  left: 20px;
+  background: url(image-path("psychic-card-favorite-off.png"));
+  z-index: 2;
+}
+
+.psychic-card-favorite-on {
+  position: absolute;
+  width: 94px;
+  height: 100px;
+  bottom: -50px;
+  left: 20px;
+  background: url(image-path("psychic-card-favorite-on.png"));
+  z-index: 3;
+}
+
+.psychic-card-reviews-off {
+  position: absolute;
+  width: 94px;
+  height: 100px;
+  bottom: -50px;
+  right: 20px;
+  background: url(image-path("psychic-card-reviews-off.png"));
+  z-index: 2;
+}
+
+.psychic-card-reviews-on {
+  position: absolute;
+  width: 94px;
+  height: 100px;
+  bottom: -50px;
+  right: 20px;
+  background: url(image-path("psychic-card-reviews-on.png"));
+  z-index: 3;
+}
+
+.psychic-card-phone {
+  position: absolute;
+  width: 163px;
+  height: 171px;
+  bottom: -80px;
+  left: 105px;
+  background: url(image-path("psychic-card-phone.png"));
+  z-index: 1;
 }
 
 .psychics-more {
