@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "module": "https://github.com/fnando/module.git",
-    "emitter": "https://github.com/fnando/emitter.git"
+    "emitter": "https://github.com/fnando/emitter.git",
+    "clamp.js": "*"
   }
 }
