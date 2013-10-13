@@ -25,4 +25,9 @@ module PsychicsHelper
     result << "(#{psychic.reviews.count})"
     result.html_safe
   end
+
+  def random_avatar
+    gender, count = { male: 13, female: 4 }.to_a.sample
+    "psychic-avatar-#{gender}-#{"%02d" % (rand(count)+1).to_i}"
+  end
 end

@@ -1,5 +1,6 @@
 <div class="psychic">
-  <img class="psychic-avatar" src="http://placehold.it/374x275">
+  <%= image_tag("psychic-banner-#{%w(work money destiny pet pastlives).sample}.png", class: "psychic-banner") %>
+  <%= image_tag("#{random_avatar}.png", class: "psychic-avatar") %>
 
   <div class="psychic-body">
     <div class="psychic-details">
@@ -26,7 +27,6 @@
 
       <ul class="psychic-links">
         <li class="psychic-link"><a href="#">Read more</a></li>
-        <li class="psychic-link"><a href="#">All Reviews</a></li>
       </ul>
     </div>
 
@@ -46,6 +46,4 @@
       <span><%= psychic.reviews.count %></span>
     </div>
   <% end %>
-
-  <div class="psychic-card-bottom"></div>
 </div>
