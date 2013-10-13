@@ -41,7 +41,11 @@
   <div class="psychic-card-phone"></div>
 
   <div class="psychic-card-reviews-off"></div>
-  <div class="psychic-card-reviews-on">13</div>
+  <% if psychic.reviews.any? %>
+    <div class="psychic-card-reviews">
+      <span><%= psychic.reviews.count %></span>
+    </div>
+  <% end %>
 
   <div class="psychic-card-bottom"></div>
 </div>

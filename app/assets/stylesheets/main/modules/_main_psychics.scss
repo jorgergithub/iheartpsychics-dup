@@ -13,7 +13,7 @@
   height: 650px;
   float: left;
   margin-right: 15px;
-  margin-bottom: 80px;
+  margin-bottom: 120px;
   background: url(image-path("psychic-card-bg.png")) repeat-y;
 }
 
@@ -144,7 +144,7 @@
   z-index: 2;
 }
 
-.psychic-card-reviews-on {
+.psychic-card-reviews {
   position: absolute;
   width: 94px;
   height: 100px;
@@ -152,6 +152,15 @@
   right: 20px;
   background: url(image-path("psychic-card-reviews-on.png"));
   z-index: 3;
+}
+
+.psychic-card-reviews span {
+  display: block;
+  padding-top: 34px;
+  width: 94px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
 }
 
 .psychic-card-phone {
