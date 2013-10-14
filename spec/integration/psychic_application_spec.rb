@@ -16,8 +16,9 @@ describe PsychicApplication do
       expect(psychic.pseudonym).to eq psychic_application.pseudonym
       expect(psychic.address).to eq psychic_application.address
       expect(psychic.city).to eq psychic_application.city
+      expect(psychic.country).to eq psychic_application.country
       expect(psychic.state).to eq psychic_application.state
-      expect(psychic.zip_code).to eq psychic_application.zip_code
+      expect(psychic.postal_code).to eq psychic_application.postal_code
       expect(psychic.phone).to eq psychic_application.phone
       expect(psychic.cellular_number).to eq psychic_application.cellular_number
       expect(psychic.ssn).to eq psychic_application.ssn

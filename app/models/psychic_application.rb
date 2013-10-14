@@ -2,8 +2,8 @@ class PsychicApplication < ActiveRecord::Base
   include I18n::Alchemy
 
   validates :first_name, :last_name, :pseudonym, :username, :password, :email,
-            :address, :city, :state, :zip_code, :phone, :cellular_number, :ssn,
-            :date_of_birth,  :experience, :gift, :explain_gift,
+            :address, :city, :country, :state, :postal_code, :phone, :cellular_number,
+            :ssn, :date_of_birth,  :experience, :gift, :explain_gift,
             :age_discovered, :reading_style, :why_work, :friends_describe,
             :strongest_weakest_attributes, :how_to_deal_challenging_client,
             :tools, :specialties, :professional_goals, :how_did_you_hear,
@@ -51,8 +51,8 @@ class PsychicApplication < ActiveRecord::Base
       user.save!
 
       psychic = user.psychic
-      fields = %w[pseudonym address city state zip_code phone cellular_number ssn
-                  date_of_birth emergency_contact emergency_contact_number
+      fields = %w[pseudonym address city country state postal_code phone cellular_number
+                  ssn date_of_birth emergency_contact emergency_contact_number
                   us_citizen resume has_experience experience gift explain_gift
                   age_discovered reading_style why_work friends_describe
                   strongest_weakest_attributes how_to_deal_challenging_client

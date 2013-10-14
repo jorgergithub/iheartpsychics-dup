@@ -6,6 +6,7 @@ describe PsychicApplication do
     it { should validate_presence_of(:age_discovered) }
     it { should validate_presence_of(:cellular_number) }
     it { should validate_presence_of(:city) }
+    it { should validate_presence_of(:country) }
     it { should validate_presence_of(:date_of_birth) }
     it { should validate_presence_of(:experience) }
     it { should validate_presence_of(:explain_gift) }
@@ -17,6 +18,7 @@ describe PsychicApplication do
     it { should validate_presence_of(:last_name) }
     it { should validate_presence_of(:password) }
     it { should validate_presence_of(:phone) }
+    it { should validate_presence_of(:postal_code) }
     it { should validate_presence_of(:professional_goals) }
     it { should validate_presence_of(:reading_style) }
     it { should validate_presence_of(:specialties) }
@@ -26,7 +28,6 @@ describe PsychicApplication do
     it { should validate_presence_of(:tools) }
     it { should validate_presence_of(:username) }
     it { should validate_presence_of(:why_work) }
-    it { should validate_presence_of(:zip_code) }
 
     it { should validate_as_phone_number(:cellular_number) }
     it { should validate_as_phone_number(:phone) }

@@ -42,8 +42,9 @@ FactoryGirl.define do
     pseudonym 'Ruffus'
     address '3032 47th St'
     city 'Lansing'
+    country 'United States'
     state 'MI'
-    zip_code { Faker::Address.zip_code }
+    postal_code { Faker::Address.zip_code }
     password 'ipass123'
     phone '+17863295531'
     cellular_number '+13054502992'

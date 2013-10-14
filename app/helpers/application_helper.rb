@@ -50,9 +50,9 @@ module ApplicationHelper
 
   def current_page
     if admin_controller?
-      "admin_#{controller.controller_name}_#{controller.action_name}".camelize
+      "admin_#{controller.controller_name}_#{action_name}".camelize
     else
-      "#{controller.controller_name}_#{controller.action_name}".camelize
+      "#{controller.controller_name}_#{action_name}".camelize
     end
   end
 
@@ -68,5 +68,16 @@ module ApplicationHelper
 
   def admin_controller?
     controller.class.name.split("::").first == "Admin"
+  end
+
+  def action_name
+    case controller.action_name
+    when "new", "create"
+      "new"
+    when "edit", "update"
+      "update"
+    else
+      controller.action_name
+    end
   end
 end

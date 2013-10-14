@@ -26,8 +26,23 @@
 
   <%= add_text_field f, :address, "Street Address", class: "input-xxlarge" %>
   <%= add_text_field f, :city %>
-  <%= add_state_select f, :state %>
-  <%= add_text_field f, :zip_code %>
+
+  <div class='control-group'>
+    <%= f.label :country, :class => 'control-label' %>
+    <div class='controls'>
+      <%= f.country_select :country, ["United States", "Canada"] %>
+    </div>
+  </div>
+
+  <div class='control-group'>
+    <%= f.label :state, :class => 'control-label' %>
+    <div class='controls'>
+      <%= f.select :state, us_states, include_blank: true %>
+      <%= f.text_field :state %>
+    </div>
+  </div>
+
+  <%= add_text_field f, :postal_code %>
   <%= add_text_field f, :phone, "Landline Number", data: { mask: t('masks.phone') } %>
   <%= add_text_field f, :cellular_number, "", data: { mask: t('masks.phone') } %>
   <%= add_text_field f, :ssn, "SS#", data: { mask: t('masks.ssn') } %>

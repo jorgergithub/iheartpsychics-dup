@@ -33,6 +33,9 @@
 //= require modules/order/orders_new
 //= require modules/order/admin/client
 //= require modules/order/admin/orders_new
+//= require modules/psychic_application/country
+//= require modules/psychic_application/psychic_applications_new
+//= require modules/psychic_application/admin/psychic_applications_show
 //= require modules/schedule/schedules_index
 //
 // App Code ===============================================
