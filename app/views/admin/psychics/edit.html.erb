@@ -4,9 +4,9 @@
   </div>
   <div class="span12">
     <ul class="nav nav-tabs" id="tabs">
-      <li class="active" data-toggle="tab"><%= link_to "Psychic", "#form" %></li>
-      <li data-toggle="tab"><%= link_to "Employment", "#employment" %></li>
-      <li data-toggle="tab"><%= link_to "Reviews (#{@psychic.reviews.count})", "#reviews" %></li>
+      <li class="active"><%= link_to "Psychic", "#form", :data => { :toggle => 'tab'} %></li>
+      <li><%= link_to "Employment", "#employment", :data => { :toggle => 'tab'}  %></li>
+      <li><%= link_to "Reviews (#{@psychic.reviews.count})", "#reviews", :data => { :toggle => 'tab'}  %></li>
     </ul>
 
     <div class="tab-content">
