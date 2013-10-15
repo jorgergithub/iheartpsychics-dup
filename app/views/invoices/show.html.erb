@@ -108,7 +108,7 @@
 
   <div class="form-actions">
     <% if current_user.psychic? %>
-      <%= link_to "Back", psychic_invoices_path, class: 'btn' %>
+      <%= link_to "Back", psychic_invoices_path(anchor: status(@invoice)), class: 'btn' %>
     <% end %>
 
     <% if current_user.accountant? %>

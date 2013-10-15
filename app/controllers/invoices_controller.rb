@@ -2,8 +2,11 @@ class InvoicesController < AuthorizedController
   before_action :find_invoice
 
   def index
-    @invoices = @psychic.invoices.order("created_at DESC")
-                        .page(params[:page]).per(params[:per])
+    @pending_invoices = Invoice.pending.where(psychic: @psychic)
+      .order("created_at DESC").page(params[:pending_page]).per(params[:per])
+
+    @paid_invoices = Invoice.paid.where(psychic: @psychic)
+      .order("created_at DESC").page(params[:paid_page]).per(params[:per])
   end
 
   def show
