@@ -155,7 +155,6 @@ Psychic.all.each { |p| p.update_attributes price: [4.5, 5.0, 5.5, 6.0, 6.5].samp
                        last_name: last_name,
                        username: Faker::Internet.user_name,
                        email: Faker::Internet.email(name: "#{first_name} #{last_name}"),
-                       phone_number: "+1#{Faker::Base.regexify(/\d{10}/)}",
                        password: 'ipass123', create_as: 'client', confirmed_at: Time.now)
 
     cli = user.client
