@@ -10,9 +10,8 @@
             <th>Alias</th>
             <th>Email</th>
             <th>Landline #</th>
-            <th>Cell #</th>
-            <th>City</th>
-            <th>State</th>
+            <th>City, State</th>
+            <th>Country</th>
             <th>Submitted</th>
           </tr>
         </thead>
@@ -23,9 +22,8 @@
               <td><%= app.alias_name %></td>
               <td><%= app.email %></td>
               <td><%= app.phone %></td>
-              <td><%= app.cellular_number %></td>
-              <td><%= app.city %></td>
-              <td><%= app.state %></td>
+              <td><%= app.city %>, <%= app.state %></td>
+              <td><%= app.country %></td>
               <td><%=l app.created_at.to_date, format: :short %></td>
             </tr>
           <% end %>
