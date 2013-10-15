@@ -8,3 +8,4 @@ en:
     attributes:
       psychic_application:
         pseudonym: "Alias"
+        state: "State / Province"
