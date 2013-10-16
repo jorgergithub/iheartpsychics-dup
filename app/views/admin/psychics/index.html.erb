@@ -22,7 +22,7 @@
             <th>Alias</th>
             <th>Email</th>
             <th>Extension</th>
-            <th>State</th>
+            <th>State, Country</th>
             <th>Created</th>
             <th>Featured?</th>
           </tr>
@@ -39,7 +39,7 @@
               <td><%= p.alias_name %></td>
               <td><%= p.email %></td>
               <td><%= p.extension %></td>
-              <td><%= p.state %></td>
+              <td><%= p.state %>, <%= p.country %></td>
               <td><%=l p.created_at, format: :short %></td>
               <td>
                 <% if p.featured? %>
