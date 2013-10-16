@@ -47,3 +47,4 @@
 //= require survey
 //= require splash
 //= require tabs
+//= require svg
