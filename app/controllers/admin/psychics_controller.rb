@@ -48,7 +48,7 @@ class Admin::PsychicsController < AuthorizedController
       :specialties_deceased, :style_compassionate, :style_inspirational,
       :style_straightforward, :about, :price,
       :extension, :address, :city, :state, :featured,
-      :zip_code, :phone, :cellular_number, :ssn, :date_of_birth,
+      :postal_code, :phone, :cellular_number, :ssn, :date_of_birth,
       :emergency_contact, :emergency_contact_number, :us_citizen, :resume,
       :has_experience, :experience, :gift, :explain_gift, :age_discovered,
       :reading_style, :why_work, :friends_describe,
