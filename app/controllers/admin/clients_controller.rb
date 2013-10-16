@@ -36,7 +36,8 @@ class Admin::ClientsController < AuthorizedController
 
   def update
     if @user.localized.update_attributes(user_params)
-      redirect_to admin_clients_path, notice: "Client was successfully updated."
+      redirect_to edit_admin_client_path(@client, anchor: params[:anchor]),
+        notice: "Client was successfully updated."
     else
       render action: "edit"
     end

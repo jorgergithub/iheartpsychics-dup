@@ -1,5 +1,7 @@
 <%= form_for([:admin, object], :url => admin_client_path(@client), :html => { :class => 'form form-horizontal' }) do |f| %>
 
+  <%= hidden_field_tag :anchor %>
+
   <ul class="nav nav-tabs" id="tabs">
     <li class="active" data-toggle="tab"><%= link_to "Client", "#form" %></li>
     <% if f.object.persisted? %>
