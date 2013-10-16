@@ -1,14 +1,14 @@
-Module("IHP.Pages.PsychicApplications.Country", function(Country) {
+Module("IHP.Pages.Commons.Country", function(Country) {
   "use strict";
 
-  Country.fn.initialize = function(el) {
-    this.form = el;
-
-    this.country = this.form.find("#psychic_application_country");
+  Country.fn.initialize = function(form) {
+    this.form = form;
+    this.country = this.form.find('select[name$="[country]"]');
     this.state = this.form.find('select[name$="[state]"]');
     this.stateOutsideUSA = this.form.find('input[name$="[state]"]');
 
     this.handleCountry();
+
     this.addEventListeners();
   };
 

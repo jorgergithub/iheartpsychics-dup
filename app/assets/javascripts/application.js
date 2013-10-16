@@ -28,12 +28,13 @@
 //= require vendor/emitter/emitter
 //
 // App Modules ============================================
+//= require modules/commons/country
 //= require modules/order/package
 //= require modules/order/payment
 //= require modules/order/orders_new
 //= require modules/order/admin/client
 //= require modules/order/admin/orders_new
-//= require modules/psychic_application/country
+//= require modules/psychic/admin/psychics_update.js
 //= require modules/psychic_application/psychic_applications_new
 //= require modules/psychic_application/admin/psychic_applications_show
 //= require modules/schedule/schedules_index

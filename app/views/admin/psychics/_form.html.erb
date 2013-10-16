@@ -1,34 +1,33 @@
-<%= form_for([:admin, @psychic.user], :url => admin_psychic_path(@psychic), :html => { :class => 'form form-horizontal' }) do |pf| %>
-  <fieldset>
-    <legend>Personal Info</legend>
+<%= render 'errors', object: @psychic.user, model_name: "psychic" %>
 
-    <%= render 'errors', object: @psychic.user, model_name: "psychic" %>
+<ul class="nav nav-tabs" id="tabs">
+  <li class="active">
+    <%= link_to "Psychic", "#main", :data => { :toggle => 'tab'} %>
+  </li>
+  <li>
+    <%= link_to "Employment", "#employment", :data => { :toggle => 'tab'}  %>
+  </li>
+  <li>
+    <%= link_to "Reviews (#{@psychic.reviews.count})", "#reviews", :data => { :toggle => 'tab'}  %>
+  </li>
+</ul>
 
-    <div class="control-group">
-      <%= pf.label :first_name, "Name", :class => 'control-label' %>
-      <div class="controls">
-        <%= pf.text_field :first_name, placeholder: "First name", autofocus: true, autocomplete: 'on' %>
-        <%= pf.text_field :last_name, placeholder: "Last name", autocomplete: 'on' %>
-      </div>
+<%= form_for([:admin, @psychic.user], :url => admin_psychic_path(@psychic), :html => { :class => 'form form-horizontal' }) do |f| %>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="main">
+      <%= render "main", f: f %>
     </div>
 
-    <%= add_text_field pf, :username %>
-    <%= add_text_field pf, :email %>
-    <% if @psychic.new_record? %>
-      <%= add_password_field pf, :password %>
-      <%= add_password_field pf, :password_confirmation %>
-    <% end %>
+    <div class="tab-pane" id="employment">
+      <%= render "employment", f: f %>
+    </div>
 
-    <%= pf.fields_for :psychic do |f| %>
-      <%= add_text_field f, :phone, nil, input: { data: { mask: t('masks.phone') } } %>
+    <div class="tab-pane" id="reviews">
+      <%= render "admin/reviews", target: @psychic %>
+    </div>
+  </div>
 
-      <%= add_checkbox f, :featured %>
-
-      <legend>Profile Information</legend>
-
-      <%= render "psychics/fields", f: f %>
-    <% end %>
-  </fieldset>
-
-  <%= pf.submit "Save", class: "btn btn-primary" %>
+  <%= f.submit "Save", class: "btn btn-primary" %>
+  <%= link_to "Cancel", admin_psychics_path, class: "btn" %>
 <% end %>

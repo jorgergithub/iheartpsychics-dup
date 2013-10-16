@@ -11,6 +11,6 @@ Module("IHP.Pages.AdminPsychicApplicationsShow", function(PsychicApplication) {
     this.form = $(el).find("form");
 
     // sub components
-    this.country = IHP.Pages.PsychicApplications.Country(this.form);
+    this.country = IHP.Pages.Commons.Country(this.form);
   };
 });

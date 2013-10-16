@@ -19,7 +19,7 @@ class Admin::PsychicsController < AuthorizedController
 
   def update
     if @user.localized.update_attributes(user_params)
-      redirect_to edit_admin_psychic_path(@user.psychic), notice: "Psychic was successfully updated."
+      redirect_to edit_admin_psychic_path(@user.psychic.localized), notice: "Psychic was successfully updated."
     else
       render action: "edit"
     end
@@ -30,7 +30,7 @@ class Admin::PsychicsController < AuthorizedController
   def find_psychic
     return unless params[:id]
 
-    @psychic = Psychic.find(params[:id]).localized
+    @psychic = Psychic.find(params[:id])
     @user = @psychic.user
   end
 
@@ -47,7 +47,7 @@ class Admin::PsychicsController < AuthorizedController
       :specialties_pet_and_animals, :specialties_past_lives,
       :specialties_deceased, :style_compassionate, :style_inspirational,
       :style_straightforward, :about, :price,
-      :extension, :address, :city, :state, :featured,
+      :extension, :address, :city, :country, :state, :featured,
       :postal_code, :phone, :cellular_number, :ssn, :date_of_birth,
       :emergency_contact, :emergency_contact_number, :us_citizen, :resume,
       :has_experience, :experience, :gift, :explain_gift, :age_discovered,

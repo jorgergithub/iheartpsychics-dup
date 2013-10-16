@@ -1,13 +1,13 @@
-Module("IHP.Pages.PsychicApplicationsNew", function(PsychicApplication) {
+Module("IHP.Pages.AdminPsychicsUpdate", function(Psychic) {
   "use strict";
 
-  PsychicApplication.fn.initialize = function(el) {
+  Psychic.fn.initialize = function(el) {
     Emitter.extend(this);
 
     // element
     this.el = $(el);
 
-    // psychic application form
+    // psychic form
     this.form = $(el).find("form");
 
     // sub components
