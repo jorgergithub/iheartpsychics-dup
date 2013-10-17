@@ -1,0 +1,89 @@
+class Ability
+  include CanCan::Ability
+
+  def initialize(user)
+    can :access, :home
+    can :create, "devise/sessions"
+
+    if user
+      authorize_user(user)
+    else
+      authorize_guests
+    end
+  end
+
+  private
+
+  def authorize_user(user)
+    can :destroy, "devise/sessions"
+
+    if user.role
+      self.send("authorize_#{user.role}")
+    end
+  end
+
+  def admin_roles
+    %w(
+      admin/customer_service_representatives
+      admin/manager_directors
+      admin/website_admins
+      admin/accountants
+      admin/schedule_jobs
+    )
+  end
+
+  def admin_and_website_admin_roles
+    %w(
+      admin/dashboards
+      admin/psychics
+      admin/clients
+      admin/packages
+    )
+  end
+
+  def website_admin_roles
+    %w(
+      admin/orders
+      admin/surveys
+      admin/categories
+      admin/horoscopes
+      admin/newsletters
+    )
+  end
+
+  def authorize_accountant
+    can :access, %w(admin/invoices admin/payments)
+  end
+
+  def authorize_admin
+    can :access, admin_and_website_admin_roles + admin_roles
+  end
+
+  def authorize_website_admin
+    can :access, admin_and_website_admin_roles + website_admin_roles
+  end
+
+  def authorize_client
+    can [:update, :edit, :show, :reset_pin, :make_favorite, :remove_favorite], :clients
+    can [:show, :new, :create], :orders
+    can [:search, :about], :psychics
+    can :access, :client_phones
+    can :access, :surveys
+  end
+
+  def authorize_csr
+    can :access, [:customer_service_representatives, "admin/clients"]
+  end
+
+  def authorize_guests
+    can :create, [:registrations, :psychic_applications]
+  end
+
+  def authorize_manager_director
+    can :access, %w(admin/psychic_applications admin/psychics)
+  end
+
+  def authorize_psychic
+    can :access, [:psychics, :schedules, :invoices]
+  end
+end

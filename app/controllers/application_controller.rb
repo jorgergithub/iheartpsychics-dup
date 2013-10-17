@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
+  enable_authorization
+
+  rescue_from CanCan::Unauthorized, :with => :unauthorized
+
   protected
 
   def user_time_zone(&block)
@@ -25,6 +29,14 @@ class ApplicationController < ActionController::Base
       "login"
     else
       "application"
+    end
+  end
+
+  def unauthorized
+    if request.xhr?
+      render :nothing => true, :status => :unauthorized
+    else
+      render :file => 'public/401', :layout => nil, :status => 401
     end
   end
 

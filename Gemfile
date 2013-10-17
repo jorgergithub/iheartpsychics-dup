@@ -11,6 +11,7 @@ gem 'jquery-rails'  , '~> 3.0.4'
 gem 'turbolinks'    , '~> 1.3.0'
 gem 'jbuilder'      , '~> 1.2'
 
+gem "cancan"                 , :git => 'git://github.com/ryanb/cancan.git', :branch => '2.0'
 gem 'bootstrap-sass'         , '~> 2.3.2.0'
 gem 'carrierwave'            , '~> 0.9.0'
 gem 'ckeditor'               , :git => 'https://github.com/gistia/ckeditor'
