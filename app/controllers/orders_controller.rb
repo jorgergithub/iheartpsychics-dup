@@ -22,6 +22,12 @@ class OrdersController < AuthorizedController
     redirect_to :new_order
   end
 
+  def paypal
+    Rails.logger.info "Doing some PayPal stuff"
+    package = Package.find(order_params[:package_id])
+    @paypal = package.to_paypal(view_context, 1)
+  end
+
   private
 
   def find_order

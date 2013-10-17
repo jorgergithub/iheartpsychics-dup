@@ -13,7 +13,7 @@
 
     <label class="radio" >
       <%= radio_button_tag 'order[card_id]', nil, !@client.card, id: 'order_card_id' %>
-      New card:
+      New cardxxx:
     </label>
 
     <div id="new-card-fields">
@@ -48,5 +48,10 @@
         </div>
       </div>
     </div>
+
+    <label class="radio">
+      <%= radio_button_tag 'order[card_id]', 'paypal', false, id: 'order_paypal' %>
+      Pay using PayPal
+    </label>
   </div>
 </div>

@@ -120,7 +120,11 @@ IHeartPsychics::Application.routes.draw do
   resource :customer_service_representative
   resource :accountant
 
-  resources :orders
+  resources :orders do
+    collection do
+      post 'paypal', action: :paypal, as: :paypal
+    end
+  end
   resources :psychic_applications do
     collection do
       get 'confirmation', action: :confirmation, as: :confirmation
@@ -134,6 +138,10 @@ IHeartPsychics::Application.routes.draw do
   end
 
   resources :subscribers
+
+  post "/paypal/callback" , to: "paypal#callback" , as: "paypal_callback"
+  get  "/paypal/success"  , to: "paypal#success"  , as: "paypal_success"
+  get  "/paypal/cancel"   , to: "paypal#cancel"   , as: "paypal_cancel"
 
   get "/dashboard", to: "home#show", as: "dashboard"
   get "/unsubscribe/:id", to: "unsubscribe#unsubscribe", as: "unsubscribe"
