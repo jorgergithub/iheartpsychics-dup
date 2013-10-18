@@ -4,11 +4,11 @@
 
 <% if @order.refunded? %>
   <p>
-    This is a receipt for <%= @order.to_desc %> placed on <%= @order.localized.created_at %>
+    This is a receipt for <%= @order.to_desc %> refunded on <%= @order.localized.created_at %>
   </p>
 <% else %>
   <p>
-    This is a receipt for <%= @order.to_desc %> refund placed on <%= @order.localized.created_at %>
+    This is a receipt for <%= @order.to_desc %> placed on <%= @order.localized.created_at %>
   </p>
 <% end %>
 
