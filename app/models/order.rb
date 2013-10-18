@@ -48,6 +48,15 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def add_credits
+    transaction do
+      client.add_credits(item.package_credits, self) if item and item.package
+      paid!
+    end
+
+    send_email
+  end
+
   def send_email
     OrderMailer.delay.confirmation_email(self)
   end

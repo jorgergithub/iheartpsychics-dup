@@ -23,9 +23,12 @@ class OrdersController < AuthorizedController
   end
 
   def paypal
-    Rails.logger.info "Doing some PayPal stuff"
-    package = Package.find(order_params[:package_id])
-    @paypal = package.to_paypal(view_context, 1)
+    @order = @client.orders.new(order_params)
+    if @order.save
+      @paypal = @order.package.to_paypal(view_context, @order.id)
+    else
+      # TODO render action: "new"
+    end
   end
 
   private

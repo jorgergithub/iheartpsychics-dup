@@ -3,12 +3,13 @@ describe("IHP.Pages.Orders.Payment", function() {
   var newCard, cardNumber, cardExpMonth, cardExpMonth, cardCvc;
   var cardNumberValidationError, cardExpirationDateValidationError,
       cardCvcValidationError, paymentError;
+  var paypal;
 
   beforeEach(function() {
-    form = $("<form/>").appendTo(".output");
+    form = $("<form action='/orders'/>").appendTo(".output");
     container = $("<div class='payment'/>").appendTo(form);
 
-    newCard = $("<input type='radio' id='order_card_id'/>").appendTo(container);
+    newCard = $("<input type='radio' name='order[card_id]' id='order_card_id'/>").appendTo(container);
     cardNumber = $("<input id='order_card_number'/>").appendTo(container);
     cardExpMonth = $("<input id='order_card_exp_month'>").appendTo(container);
     cardExpYear = $("<input id='order_card_exp_year'>").appendTo(container);
@@ -23,10 +24,70 @@ describe("IHP.Pages.Orders.Payment", function() {
 
     paymentError = $("<div class='payment-errors'>").appendTo(container);
 
+    paypal = $("<input type='radio' name='order[card_id]' id='order_paypal'/>").appendTo(container);
+
     payment = IHP.Pages.Orders.Payment(form);
 
     spyOn(form[0], "submit");
     spyOn(Stripe, "createToken");
+  });
+
+  describe("togglePayPal", function() {
+    describe("when PayPal is selected", function() {
+      beforeEach(function() {
+        spyOn(payment, "setPayPal");
+        payment.paypal.prop("checked", true);
+      });
+
+      it("calls setPayPal", function() {
+        payment.togglePayPal();
+        expect(payment.setPayPal).toHaveBeenCalled();
+      });
+    });
+
+    describe("when PayPal isn't selected", function() {
+      beforeEach(function() {
+        spyOn(payment, "clearPayPal");
+        payment.paypal.prop("checked", false);
+      });
+
+      it("calls clearPayPal", function() {
+        payment.togglePayPal();
+        expect(payment.clearPayPal).toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe("setPayPal", function() {
+    beforeEach(function() {
+      payment.form.attr("action", "/orders");
+      payment.form.data("remote", false);
+      payment.setPayPal();
+    });
+
+    it("changes the form action to /orders/paypal", function() {
+      expect(form.attr("action")).toEqual("/orders/paypal");
+    });
+
+    it("sets the form data-remote", function() {
+      expect(form.attr("data-remote")).toBeTruthy();
+    });
+  });
+
+  describe("clearPayPal", function() {
+    beforeEach(function() {
+      payment.form.attr("action", "/orders/paypal");
+      payment.form.data("remote", true);
+      payment.clearPayPal();
+    });
+
+    it("reverts the form action back to /orders", function() {
+      expect(form.attr("action")).toEqual("/orders");
+    });
+
+    it("resets the form data-remote", function() {
+      expect(form.attr("data-remote")).toBeFalsy();
+    });
   });
 
   describe("setNumberValidationError", function() {

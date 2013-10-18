@@ -18,6 +18,9 @@ Module("IHP.Pages.Orders.Payment", function(Payment) {
     this.cardCvcValidationError = this.el.find("#card-cvc-validation-error");
     this.paymentError = this.form.find(".payment-errors");
 
+    this.paypal = this.form.find("#order_paypal");
+    this.paymentOptions = this.form.find("[name='order[card_id]']");
+
     this.addEventListeners();
   };
 
@@ -26,6 +29,7 @@ Module("IHP.Pages.Orders.Payment", function(Payment) {
     this.cardExpMonth.on("focus", this.setNewCard.bind(this));
     this.cardExpYear.on("focus", this.setNewCard.bind(this))
     this.cardCvc.on("focus", this.setNewCard.bind(this));
+    this.paymentOptions.on("change", this.togglePayPal.bind(this));
   };
 
   Payment.fn.setNewCard = function(event) {
@@ -127,5 +131,24 @@ Module("IHP.Pages.Orders.Payment", function(Payment) {
     this.emit("paymentStarted");
     Stripe.createToken(this.form, this.stripeResponseHandler.bind(this));
     return false;
+  };
+
+  Payment.fn.togglePayPal = function() {
+    if (this.paypal.is(":checked")) {
+      this.setPayPal();
+    }
+    else {
+      this.clearPayPal();
+    }
+  };
+
+  Payment.fn.setPayPal = function() {
+    this.form.attr("action", "/orders/paypal");
+    this.form.attr("data-remote", true);
+  };
+
+  Payment.fn.clearPayPal = function() {
+    this.form.attr("action", "/orders");
+    this.form.attr("data-remote", false);
   };
 });

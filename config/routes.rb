@@ -140,7 +140,7 @@ IHeartPsychics::Application.routes.draw do
   resources :subscribers
 
   post "/paypal/callback" , to: "paypal#callback" , as: "paypal_callback"
-  get  "/paypal/success"  , to: "paypal#success"  , as: "paypal_success"
+  post "/paypal/success"  , to: "paypal#success"  , as: "paypal_success"
   get  "/paypal/cancel"   , to: "paypal#cancel"   , as: "paypal_cancel"
 
   get "/dashboard", to: "home#show", as: "dashboard"

@@ -1,5 +1,5 @@
 console.log("Let's get it started");
-var formContents = '<%= @paypal.form %>';
+var formContents = '<%= escape_javascript(@paypal.form) %>';
 console.log(formContents);
 
 var paypalForm = $(formContents);

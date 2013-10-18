@@ -13,13 +13,15 @@ class PayPal
       @view_context.hidden_field_tag :encrypted, encrypted
       yield if block_given?
     end
-    "<form id=\"paypal_form\"
 
-    <<-EOS.strip_heredoc!
+    form = <<-EOS.strip_heredoc
     <form accept-charset="UTF-8" action="https://www.sandbox.paypal.com/cgi-bin/webscr" id="paypal_form" method="post">
-
+      <input type="hidden" name="cmd" value="_s-xclick">
+      <input type="hidden" name="encrypted" value="#{encrypted}">
     </form>
     EOS
+
+    form.html_safe
   end
 
   def encrypted
@@ -30,9 +32,10 @@ class PayPal
         File.read(ENV["PAYPAL_APP_KEY"]), ''),
       values.map { |k, v| "#{k}=#{v}" }.join("\n"),
       [], OpenSSL::PKCS7::BINARY)
+
     OpenSSL::PKCS7::encrypt(
       [OpenSSL::X509::Certificate.new(
-        File.read(ENV["PAYPAL_APP_CERT"]))],
+        File.read(ENV["PAYPAL_CERT"]))],
       signed.to_der,
       OpenSSL::Cipher::Cipher::new("DES3"),
       OpenSSL::PKCS7::BINARY).to_s.gsub("\n", "")
@@ -51,7 +54,7 @@ class PayPal
         currency_code: "USD",
         custom: @reference,
         return: ENV["PAYPAL_SUCCESS_URL"],
-        cancel_return: ENV["PAYPAL_CANCEL_URL"],
+        cancel_return: "#{ENV["PAYPAL_CANCEL_URL"]}?reference=#{@reference}",
         notify_url: ENV["PAYPAL_NOTIFY_URL"],
         bn: "IHP_ST",
         rm: "2",
