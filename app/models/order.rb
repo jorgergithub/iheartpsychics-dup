@@ -16,6 +16,11 @@ class Order < ActiveRecord::Base
 
   scope :most_recent, -> { order(created_at: :desc) }
 
+  def package
+    return nil unless items.count == 1
+    items.first.package
+  end
+
   def to_desc
     "Order ##{id}"
   end

@@ -120,4 +120,34 @@ describe Order do
       expect(item.description).to eql(package.name)
     end
   end
+
+  describe "#package" do
+    context "when order was one item" do
+      before {
+        order.package_id = package.id
+        order.save
+      }
+
+      it "returns the first item package" do
+        expect(order.package).to eql(order.items.first.package)
+      end
+    end
+
+    context "when order has no items" do
+      it "returns nil" do
+        expect(order.package).to be_nil
+      end
+    end
+
+    context "when order has more than one item" do
+      before {
+        order.items.create(description: "Something", qty: 1, unit_price: 10)
+        order.items.create(description: "Something else", qty: 2, unit_price: 15)
+      }
+
+      it "returns nil" do
+        expect(order.package).to be_nil
+      end
+    end
+  end
 end
