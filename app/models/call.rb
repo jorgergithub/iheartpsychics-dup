@@ -136,6 +136,10 @@ class Call < ActiveRecord::Base
     invoice.present?
   end
 
+  def refunded?
+    status == "refunded"
+  end
+
   private
 
   def calculate_duration

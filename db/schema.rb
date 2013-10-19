@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131021201753) do
+ActiveRecord::Schema.define(version: 20131022002908) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -185,8 +185,10 @@ ActiveRecord::Schema.define(version: 20131021201753) do
     t.string   "action"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "call_id"
   end
 
+  add_index "hours", ["call_id"], name: "index_hours_on_call_id", using: :btree
   add_index "hours", ["psychic_id"], name: "index_hours_on_psychic_id", using: :btree
 
   create_table "invoices", force: true do |t|
@@ -271,7 +273,6 @@ ActiveRecord::Schema.define(version: 20131021201753) do
     t.string   "state"
     t.string   "postal_code"
     t.string   "cellular_number"
-    t.string   "ssn"
     t.date     "date_of_birth"
     t.string   "emergency_contact"
     t.string   "emergency_contact_number"
@@ -302,6 +303,16 @@ ActiveRecord::Schema.define(version: 20131021201753) do
     t.string   "pseudonym"
     t.string   "country"
   end
+
+  create_table "psychic_events", force: true do |t|
+    t.integer  "psychic_id"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "psychic_events", ["psychic_id"], name: "idx_psychic_events_psychic_id", using: :btree
+  add_index "psychic_events", ["psychic_id"], name: "index_psychic_events_on_psychic_id", using: :btree
 
   create_table "psychics", force: true do |t|
     t.integer  "user_id"

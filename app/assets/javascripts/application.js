@@ -38,6 +38,9 @@
 //= require modules/psychic_application/psychic_applications_new
 //= require modules/psychic_application/admin/psychic_applications_show
 //= require modules/schedule/schedules_index
+//= require modules/call/admin/calls_index
+//= require modules/call/admin/calls_show
+//= require modules/call/admin/calls
 //
 // App Code ===============================================
 //= require boot
