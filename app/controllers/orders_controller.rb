@@ -25,7 +25,7 @@ class OrdersController < AuthorizedController
   def paypal
     @order = @client.orders.new(order_params)
     if @order.save
-      @paypal = @order.to_paypal(@order.id)
+      @paypal = @order.to_paypal
     else
       # TODO render action: "new"
     end
