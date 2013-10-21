@@ -1,6 +1,5 @@
 class PayPal
-  def initialize(view_context, reference, description, amount, tax=0)
-    @view_context = view_context
+  def initialize(reference, description, amount, tax=0)
     @reference = reference
     @description = description
     @amount = amount
@@ -8,12 +7,6 @@ class PayPal
   end
 
   def form(*args)
-    @view_context.form_tag ENV["PAYPAL_URL"], id: "paypal_form" do
-      @view_context.hidden_field_tag :cmd, "_s-xclick"
-      @view_context.hidden_field_tag :encrypted, encrypted
-      yield if block_given?
-    end
-
     form = <<-EOS.strip_heredoc
     <form accept-charset="UTF-8" action="https://www.sandbox.paypal.com/cgi-bin/webscr" id="paypal_form" method="post">
       <input type="hidden" name="cmd" value="_s-xclick">
