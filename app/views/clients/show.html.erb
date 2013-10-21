@@ -190,7 +190,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @credits.by_date.reverse.each do |credit| %>
+          <% @credits.each do |credit| %>
             <tr>
               <td><%= credit.parsed_date_only %></td>
               <td><%= credit.parsed_time_only %></td>
