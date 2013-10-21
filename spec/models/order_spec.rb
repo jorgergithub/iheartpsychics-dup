@@ -150,4 +150,21 @@ describe Order do
       end
     end
   end
+
+  describe "#to_paypal" do
+    let(:paypal) { double(:paypal) }
+    let!(:package) { create(:package, name: "PACKAGE_NAME", price: 9.99) }
+
+    subject { create(:order, total: 9.99) }
+
+    before do
+      subject.add_package_item(package)
+      subject.save
+    end
+
+    it "creates a new PayPal object with the package name and total" do
+      PayPal.should_receive(:new).with(subject.id, "PACKAGE_NAME", 9.99).and_return(paypal)
+      expect(subject.to_paypal).to eql(paypal)
+    end
+  end
 end

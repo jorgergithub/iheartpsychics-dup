@@ -21,6 +21,10 @@ class Order < ActiveRecord::Base
     items.first.package
   end
 
+  def to_paypal
+    PayPal.new(id, item.package_name, total.to_f)
+  end
+
   def to_desc
     "Order ##{id}"
   end
@@ -41,8 +45,7 @@ class Order < ActiveRecord::Base
       end
 
       client.charge(total, "Order ##{id}", order_id: id)
-      client.add_credits(item.package_credits, self) if item and item.package
-      paid!
+      self.add_credits
 
       send_email
     end
@@ -53,8 +56,6 @@ class Order < ActiveRecord::Base
       client.add_credits(item.package_credits, self) if item and item.package
       paid!
     end
-
-    send_email
   end
 
   def send_email
