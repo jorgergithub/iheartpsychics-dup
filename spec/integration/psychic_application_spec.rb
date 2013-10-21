@@ -21,7 +21,6 @@ describe PsychicApplication do
       expect(psychic.postal_code).to eq psychic_application.postal_code
       expect(psychic.phone).to eq psychic_application.phone
       expect(psychic.cellular_number).to eq psychic_application.cellular_number
-      expect(psychic.ssn).to eq psychic_application.ssn
       expect(psychic.date_of_birth).to eq psychic_application.date_of_birth
       expect(psychic.emergency_contact).to eq psychic_application.emergency_contact
       expect(psychic.emergency_contact_number).to eq psychic_application.emergency_contact_number

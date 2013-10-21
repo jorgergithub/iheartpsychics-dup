@@ -48,7 +48,6 @@ FactoryGirl.define do
     password 'ipass123'
     phone '+17863295531'
     cellular_number '+13054502992'
-    ssn { Faker::Base.regexify(/\d{3}-?\d{2}-?\d{4}/) }
     date_of_birth "1985-01-01"
     emergency_contact { Faker::Name.name }
     emergency_contact_number "+13044440404"

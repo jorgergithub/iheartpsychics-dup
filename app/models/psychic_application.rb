@@ -2,15 +2,15 @@ class PsychicApplication < ActiveRecord::Base
   include I18n::Alchemy
 
   validates :first_name, :last_name, :pseudonym, :username, :password, :email,
-            :address, :city, :country, :state, :postal_code, :phone, :cellular_number,
-            :ssn, :date_of_birth,  :experience, :gift, :explain_gift,
-            :age_discovered, :reading_style, :why_work, :friends_describe,
-            :strongest_weakest_attributes, :how_to_deal_challenging_client,
-            :tools, :specialties, :professional_goals, :how_did_you_hear,
-            :presence => true
+            :address, :city, :country, :state, :postal_code, :date_of_birth,  
+            :experience, :gift, :explain_gift, :age_discovered, :reading_style, 
+            :why_work, :friends_describe, :strongest_weakest_attributes, 
+            :how_to_deal_challenging_client, :tools, :specialties, :professional_goals, 
+            :how_did_you_hear, :presence => true
   validates :us_citizen, inclusion: { in: [true, false], message: "can't be blank" }
   validates :has_experience, inclusion: { in: [true, false], message: "can't be blank" }
-  validates :phone, :cellular_number, as_phone_number: true
+  validates :phone, as_phone_number: true, if: ->(pa) { pa.phone.present? }
+  validates :cellular_number, as_phone_number: true, if: ->(pa) { pa.cellular_number.present? }
   validates :emergency_contact_number, as_phone_number: true, if: ->(pa) { pa.emergency_contact_number.present? }
   validates :terms, acceptance: { accept: true }
 
@@ -52,7 +52,7 @@ class PsychicApplication < ActiveRecord::Base
 
       psychic = user.psychic
       fields = %w[pseudonym address city country state postal_code phone cellular_number
-                  ssn date_of_birth emergency_contact emergency_contact_number
+                  date_of_birth emergency_contact emergency_contact_number
                   us_citizen resume has_experience experience gift explain_gift
                   age_discovered reading_style why_work friends_describe
                   strongest_weakest_attributes how_to_deal_challenging_client
