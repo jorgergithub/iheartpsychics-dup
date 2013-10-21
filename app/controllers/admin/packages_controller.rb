@@ -17,7 +17,7 @@ class Admin::PackagesController < AuthorizedController
     if @package.save
       redirect_to admin_packages_path, notice: "New package was successfully created."
     else
-      render action: "show"
+      render action: "edit"
     end
   end
 
@@ -25,7 +25,7 @@ class Admin::PackagesController < AuthorizedController
     if @package.update_attributes(package_params)
       redirect_to admin_packages_path, notice: "Package was successfully updated."
     else
-      render action: "show"
+      render action: "edit"
     end
   end
 
@@ -36,6 +36,6 @@ class Admin::PackagesController < AuthorizedController
   end
 
   def package_params
-    params.require(:package).permit(:name, :balance, :price, :active, :phone)
+    params.require(:package).permit(:name, :credits, :price, :active, :phone)
   end
 end
