@@ -149,6 +149,6 @@ Module("IHP.Pages.Orders.Payment", function(Payment) {
 
   Payment.fn.clearPayPal = function() {
     this.form.attr("action", "/orders");
-    this.form.attr("data-remote", false);
+    this.form.removeAttr("data-remote");
   };
 });

@@ -61,7 +61,7 @@ describe("IHP.Pages.Orders.Payment", function() {
   describe("setPayPal", function() {
     beforeEach(function() {
       payment.form.attr("action", "/orders");
-      payment.form.data("remote", false);
+      payment.form.removeAttr("data-remote");
       payment.setPayPal();
     });
 
@@ -70,14 +70,14 @@ describe("IHP.Pages.Orders.Payment", function() {
     });
 
     it("sets the form data-remote", function() {
-      expect(form.attr("data-remote")).toBeTruthy();
+      expect($("form[data-remote=true]").attr("action")).toEqual("/orders/paypal");
     });
   });
 
   describe("clearPayPal", function() {
     beforeEach(function() {
       payment.form.attr("action", "/orders/paypal");
-      payment.form.data("remote", true);
+      payment.form.attr("data-remote", true);
       payment.clearPayPal();
     });
 
@@ -85,8 +85,8 @@ describe("IHP.Pages.Orders.Payment", function() {
       expect(form.attr("action")).toEqual("/orders");
     });
 
-    it("resets the form data-remote", function() {
-      expect(form.attr("data-remote")).toBeFalsy();
+    it("removes the form data-remote attribute", function() {
+      expect($("form[data-remote=true]").length).toEqual(0);
     });
   });
 

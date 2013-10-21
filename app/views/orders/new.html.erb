@@ -2,7 +2,7 @@
   Stripe.setPublishableKey("<%= Rails.configuration.stripe[:publishable_key] %>")
 </script>
 
-<%= form_for(@order, remote: true, html: { :class => 'form form-horizontal' }) do |f| %>
+<%= form_for(@order, html: { :class => 'form form-horizontal' }) do |f| %>
   <fieldset>
     <span class="payment-errors"></span>
 
