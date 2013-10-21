@@ -32,6 +32,12 @@ describe PaypalController do
           post :callback, callback_hash(order)
         }.to change{ client.transactions.count }.by(1)
       end
+
+      it "creates a new credit entry" do
+        expect {
+          post :callback, callback_hash(order)
+        }.to change{ client.credits.count }.by(1)
+      end
     end
 
     context "when the payment was not completed" do

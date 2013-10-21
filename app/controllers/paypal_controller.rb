@@ -6,7 +6,7 @@ class PaypalController < ApplicationController
 
     if params[:payment_status] == "Completed"
       if order = Order.find(params[:invoice])
-        order.add_credits
+        order.pay_with_paypal(params)
       else
         Rails.logger.error "Got a notification from PayPal for order #{params[:invoice]} but the order was not found."
       end
