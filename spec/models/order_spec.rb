@@ -76,6 +76,84 @@ describe Order do
     end
   end
 
+  describe "#pay_with_paypal" do
+    let!(:client) { user = create(:user, create_as: "client"); user.client }
+    let!(:order) { create(:order, client: client, payment_method: "paypal") }
+    let!(:package) { create(:package) }
+
+    before do
+      client.update_attributes balance: 8.60
+      order.add_package_item(package)
+      order.save
+    end
+
+    context "when payment_status is completed" do
+      it "creates a new transaction" do
+        expect {
+          order.pay_with_paypal(payment_status: "Completed", txn_id: "TRANSACTION")
+        }.to change {
+          order.transactions.count
+        }.by(1)
+      end
+
+      it "adds a new credit entry" do
+        expect {
+          order.pay_with_paypal(payment_status: "Completed", txn_id: "TRANSACTION")
+        }.to change {
+          client.credits.count
+        }.by(1)
+      end
+
+      it "adds credits to the client" do
+        expect {
+          order.pay_with_paypal(payment_status: "Completed", txn_id: "TRANSACTION")
+        }.to change {
+          client.balance.to_f
+        }.by(order.item.package.credits)
+      end
+
+      context "the credit entry" do
+        before { order.pay_with_paypal("payment_status" => "Completed", "txn_id" => "TRANSACTION") }
+
+        let(:credit) { client.credits.last }
+
+        it "sets the correct amount of credits" do
+          expect(credit.credits).to eql(order.item.package_credits)
+        end
+      end
+
+      context "the transaction" do
+        before { order.pay_with_paypal("payment_status" => "Completed", "txn_id" => "TRANSACTION") }
+
+        let(:transaction) { order.transactions.last }
+
+        it "is created for the order client" do
+          expect(transaction.client).to eql(order.client)
+        end
+
+        it "has a charge operation" do
+          expect(transaction.operation).to eql("charge")
+        end
+
+        it "has the paypal transaction id" do
+          expect(transaction.transaction_id).to eql("TRANSACTION")
+        end
+
+        it "is successful" do
+          expect(transaction).to be_success
+        end
+
+        it "has the order total" do
+          expect(transaction.amount).to eql(order.total)
+        end
+
+        it "has PayPal as the card used" do
+          expect(transaction.card).to eql("PayPal")
+        end
+      end
+    end
+  end
+
   describe "#paid?" do
     it "is true when status is paid" do
       order.status = "paid"

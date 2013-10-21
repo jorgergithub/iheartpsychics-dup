@@ -51,6 +51,13 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def pay_with_paypal(params)
+    transactions.create(
+      client: self.client, operation: "charge", transaction_id: params["txn_id"],
+      success: true, amount: self.total, card: "PayPal")
+    add_credits
+  end
+
   def add_credits
     transaction do
       client.add_credits(item.package_credits, self) if item and item.package
