@@ -4,10 +4,12 @@ class PaypalController < ApplicationController
   def callback
     Rails.logger.info "[PAYPAL-CALLBACK] #{params.inspect}"
 
-    if order = Order.find(params[:invoice])
-      order.add_credits
-    else
-      Rails.logger.error "Got a notification from PayPal for order #{params[:invoice]} but the order was not found."
+    if params[:payment_status] == "Completed"
+      if order = Order.find(params[:invoice])
+        order.add_credits
+      else
+        Rails.logger.error "Got a notification from PayPal for order #{params[:invoice]} but the order was not found."
+      end
     end
 
     render nothing: true
