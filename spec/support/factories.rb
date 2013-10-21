@@ -118,6 +118,7 @@ FactoryGirl.define do
 
   factory :order do
     association :client
+    payment_method "credit_card"
     total "9.99"
     status nil
   end
