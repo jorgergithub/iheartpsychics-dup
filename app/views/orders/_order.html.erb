@@ -67,6 +67,7 @@
         <tr>
           <th>Id</th>
           <th>Date</th>
+          <th>Transaction ID</th>
           <th>Card</th>
           <th>Amount</th>
           <th>Success</th>
@@ -77,6 +78,7 @@
           <tr>
             <td><%= t.id %></td>
             <td><%= t.localized.created_at %></td>
+            <td><%= t.transaction_id %></td>
             <td><%= t.card %></td>
             <td><%= number_to_currency t.amount %></td>
             <td>
