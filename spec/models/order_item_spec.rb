@@ -8,4 +8,13 @@ describe OrderItem do
       expect(order_item.total_price).to eql(28.35)
     end
   end
+
+  describe "#package_name" do
+    let(:package) { create(:package, name: "NAME") }
+    subject { create(:order_item, package: package) }
+
+    it "is the package name" do
+      expect(subject.package_name).to eql("NAME")
+    end
+  end
 end
