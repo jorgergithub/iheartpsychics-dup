@@ -100,6 +100,8 @@ class Call < ActiveRecord::Base
       self.save
       self.send_statistics
     end
+
+    psychic.finish_call!(self)
   end
 
   def send_statistics

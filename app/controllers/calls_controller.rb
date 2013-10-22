@@ -68,6 +68,11 @@ class CallsController < ApplicationController
       return
     end
 
+    unless @psychic.available?
+      render :psychic_unavailable
+      return
+    end
+
     @caller_id = incoming_number || "+1-866-866-8288"
   end
 
@@ -84,6 +89,8 @@ class CallsController < ApplicationController
       render :wrong_do_transfer_option
       return
     end
+
+    @psychic.on_a_call!
   end
 
   def topup
@@ -154,6 +161,8 @@ class CallsController < ApplicationController
     when "completed"
       record_call(sid, psychic_id)
     when "busy", "no-answer", "failed", "canceled"
+      @psychic.cancel_call!
+
       response = Twilio::TwiML::Response.new do |r|
         r.Say "The psychic is not available", :voice => 'woman'
       end
