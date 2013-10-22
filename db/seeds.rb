@@ -12,6 +12,32 @@ ScheduleJob.create!(description: 'Client Weekly Usage Report',
                     model: 'ClientWeeklyUsageReport',
                     action: 'deliver')
 
+survey = Survey.create(name: "Client Survey", active: true)
+
+question = survey.questions.create(type: "OptionsQuestion", text: "How often do you have a Psychic reading a month?")
+question.options.create(text: "More than 10 times a month")
+question.options.create(text: "6 - 10 times a month")
+question.options.create(text: "2 - 5 times a month")
+question.options.create(text: "Once a month")
+
+question = survey.questions.create(type: "YesNoQuestion", text: "Do you currently use other Psychic services besides I Heart Psychics? ")
+
+question = survey.questions.create(type: "OptionsQuestion", text: "How is your experience with I Heart Psychics versus the other Psychic services you have used?")
+question.options.create(text: "Much Better")
+question.options.create(text: "Better")
+question.options.create(text: "The Same")
+question.options.create(text: "Worst")
+question.options.create(text: "Not Applicable")
+
+question = survey.questions.create(type: "OptionsQuestion", text: "Based upon your experience with I Heart Psychics, how likely are you to use the service again?")
+question.options.create(text: "Definitely Will")
+question.options.create(text: "Probably Will")
+question.options.create(text: "May or May Not")
+question.options.create(text: "Probably Will Not")
+question.options.create(text: "Definitely Will Not")
+
+question = survey.questions.create(type: "TextQuestion", text: "Please share a few things that I Heart Psychics could do better to improve your experience:")
+
 Package.create(name: "$32 for $30", credits: 32, price: 30, active: true, phone: true)
 Package.create(name: "$55 for $50", credits: 55, price: 50, active: true, phone: true)
 
@@ -42,7 +68,7 @@ accountant = User.create!(first_name: 'Accountant', last_name: '',
 
 app1 = PsychicApplication.create!(first_name: 'Unfortunate', last_name: 'Teller', pseudonym: 'Ruffus',
                    username: 'ufteller', email: 'ufteller@iheartpsychics.co',
-                   address: '3032 47th St', city: 'Lansing', state: 'MI',
+                   address: '3032 47th St', city: 'Lansing', state: 'MI', country: "United States",
                    postal_code: Faker::Address.zip_code,
                    password: 'ipass123', phone: '+17863295531',
                    cellular_number: '+13054502992',
@@ -67,8 +93,8 @@ app1 = PsychicApplication.create!(first_name: 'Unfortunate', last_name: 'Teller'
 
 app2 = PsychicApplication.create!(first_name: 'Trinity', last_name: 'Megan', pseudonym: 'Magus',
                    username: 'tmegan', email: 'trinity@iheartpsychics.co',
-                   address: '1022 32nd St', city: 'Miami', state: 'FL',
-                   zip_code: Faker::Address.zip_code,
+                   address: '1022 32nd St', city: 'Miami', state: 'FL', country: "United States",
+                   postal_code: Faker::Address.zip_code,
                    password: 'ipass123', phone: '+17863295532',
                    cellular_number: '+13054502993',
                    ssn: Faker::Base.regexify(/\d{3}-?\d{2}-?\d{4}/),
@@ -115,6 +141,7 @@ csr.rep.update_attributes phone: "+13054502995"
                                address: Faker::Address.street_address,
                                city: Faker::Address.city,
                                state: Faker::Address.state,
+                               country: "United States",
                                postal_code: Faker::Address.zip_code,
                                password: 'ipass123',
                                phone: "+1#{Faker::Base.regexify(/\d{10}/)}",
