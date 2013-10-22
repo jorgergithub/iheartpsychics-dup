@@ -55,6 +55,7 @@ IHeartPsychics::Application.routes.draw do
 
     resources :schedule_jobs, :only => [:index, :edit, :update]
     resources :surveys
+    resources :subscribers
     resources :website_admins
 
     get "/debug", to: "debug#index"
