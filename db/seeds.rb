@@ -38,8 +38,9 @@ question.options.create(text: "Definitely Will Not")
 
 question = survey.questions.create(type: "TextQuestion", text: "Please share a few things that I Heart Psychics could do better to improve your experience:")
 
-Package.create(name: "$32 for $30", credits: 32, price: 30, active: true, phone: true)
-Package.create(name: "$55 for $50", credits: 55, price: 50, active: true, phone: true)
+Package.create(name: "$32 in credits", credits: 32, price: 30, active: true, phone: true)
+Package.create(name: "$55 in credits", credits: 55, price: 50, active: true, phone: true)
+Package.create(name: "$10 in credits", credits: 10, price: 5.99, active: true, phone: true)
 
 Tier.create(name: 'Bronze',   from: 0, to: 999, percent: 14)
 Tier.create(name: 'Silver',   from: 1000, to: 1199, percent: 19)
@@ -70,7 +71,7 @@ app1 = PsychicApplication.create!(first_name: 'Unfortunate', last_name: 'Teller'
                    username: 'ufteller', email: 'ufteller@iheartpsychics.co',
                    address: '3032 47th St', city: 'Lansing', state: 'MI', country: "United States",
                    postal_code: Faker::Address.zip_code,
-                   password: 'ipass123', phone: '+17863295531',
+                   password: 'ipass123', phone: '+17863295532',
                    cellular_number: '+13054502992',
                    ssn: Faker::Base.regexify(/\d{3}-?\d{2}-?\d{4}/),
                    date_of_birth: "1985-01-01",
@@ -173,6 +174,17 @@ csr.rep.update_attributes phone: "+13054502995"
 end
 
 Psychic.all.each { |p| p.update_attributes price: [4.5, 5.0, 5.5, 6.0, 6.5].sample}
+
+user = User.create!(first_name: "Felipe",
+                   last_name: "Coury",
+                   username: "fcoury",
+                   email: "felipe.coury@gmail.com",
+                   password: "ipass123",
+                   create_as: "client",
+                   confirmed_at: Time.now)
+client = user.client
+client.balance = 250
+client.phones.create(number: "+17863295532")
 
 100.times do
   first_name = Faker::Name.first_name
