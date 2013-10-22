@@ -7,6 +7,7 @@ en:
       date_only: "%Y-%m-%d"
   time:
     formats:
+      default: "%b %d, %Y %I:%M %p"
       schedule: "%I:%M %p"
   number:
       format:
