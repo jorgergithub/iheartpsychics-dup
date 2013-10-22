@@ -46,7 +46,7 @@ class Client < ActiveRecord::Base
   def discount_credits(call)
     credits.create(
       credits: -call.cost,
-      description: "Call with #{call.psychic.full_name}", target: call)
+      description: "Call with #{call.psychic.alias_name}", target: call)
     self.balance ||= 0
     self.balance -= call.cost
     self.save
