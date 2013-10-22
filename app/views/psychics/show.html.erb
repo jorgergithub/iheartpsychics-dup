@@ -8,11 +8,7 @@
           <tr>
             <td>Your status</td>
             <td>
-              <% if @psychic.available? %>
-                Available
-              <% else %>
-                Unavailable
-              <% end %>
+              <%= @psychic.current_state.humanize %>
             </td>
           </tr>
           <tr>

@@ -6,13 +6,16 @@ class Psychic < ActiveRecord::Base
   include CsvExportable
   include I18n::Alchemy
 
+  STATES = %w[unavailable available on_a_call]
+
   belongs_to :user
 
   has_many :calls
-  has_many :reviews
-  has_many :invoices
-  has_many :schedules
+  has_many :events, class_name: "PsychicEvent"
   has_many :hours
+  has_many :invoices
+  has_many :reviews
+  has_many :schedules
 
   has_and_belongs_to_many :favorited_by_clients, class_name: "Client"
 
@@ -23,6 +26,8 @@ class Psychic < ActiveRecord::Base
 
   delegate :username, :first_name, :last_name, :full_name, :email,
            to: :user, allow_nil: true
+
+  delegate :unavailable?, :available?, :on_a_call?, to: :current_state
 
   validates :extension, uniqueness: true
   validates :phone, :pseudonym, presence: true
@@ -39,6 +44,10 @@ class Psychic < ActiveRecord::Base
     where("CONCAT(psychics.pseudonym, ' ', SUBSTR(users.last_name, 1, 1)) LIKE ?", "%#{value}%").
     order("psychics.pseudonym, SUBSTR(users.last_name, 1, 1)")
   }
+
+  def current_state
+    (events.last.try(:state) || STATES.first).inquiry
+  end
 
   def featured_review
     reviews.featured.first
@@ -98,17 +107,40 @@ class Psychic < ActiveRecord::Base
     end
   end
 
-  def available?
-    return false unless hours.any?
-    hours.last.start?
-  end
-
   def available!
-    hours.create(action: "start")
+    if unavailable?
+      events.create! state: "available"
+      hours.create! action: "start"
+    end
   end
 
   def unavailable!
-    hours.create(action: "finish")
+    if available?
+      events.create! state: "unavailable"
+      hours.create! action: "finish"
+    end
+  end
+
+  def on_a_call!
+    if available?
+      events.create! state: "on_a_call"
+      hours.create! action: "call_start"
+    end
+  end
+
+  def cancel_call!(call)
+    if on_a_call?
+      events.create! state: "available"
+      hours.last.destroy
+    end
+  end
+
+  def finish_call!(call)
+    if on_a_call?
+      events.create! state: "available"
+      hours.last.update_attribute :call_id, call.id
+      hours.create! action: "call_finish", call: call
+    end
   end
 
   private
