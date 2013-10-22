@@ -273,7 +273,6 @@ ActiveRecord::Schema.define(version: 20131022002908) do
     t.string   "state"
     t.string   "postal_code"
     t.string   "cellular_number"
-    t.string   "ssn"
     t.date     "date_of_birth"
     t.string   "emergency_contact"
     t.string   "emergency_contact_number"

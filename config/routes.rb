@@ -14,7 +14,13 @@ IHeartPsychics::Application.routes.draw do
     resource :dashboard
     resources :accountants
     resources :call_surveys
-    resources :calls
+
+    resources :calls do 
+      member do
+        post :refund
+      end
+    end
+    
     resources :categories
     resources :clients
     resources :customer_service_representatives
