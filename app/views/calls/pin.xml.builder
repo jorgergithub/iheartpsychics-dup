@@ -1,6 +1,6 @@
 xml.instruct!
 xml.Response do
-  xml.Gather(action: calls_url_for("transfer", phone_number)) do
+  xml.Gather(action: calls_url_for("transfer", phone_number), timeout: 15) do
     xml.Say <<-EOS, voice: "woman"
       Thank you #{@client.first_name}.
       You have #{price_to_phrase @client.balance} remaining in your account.
