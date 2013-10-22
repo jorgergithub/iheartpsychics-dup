@@ -326,7 +326,6 @@ ActiveRecord::Schema.define(version: 20131022002908) do
     t.string   "state"
     t.string   "postal_code"
     t.string   "cellular_number"
-    t.string   "ssn"
     t.date     "date_of_birth"
     t.string   "emergency_contact"
     t.string   "emergency_contact_number"
@@ -377,6 +376,7 @@ ActiveRecord::Schema.define(version: 20131022002908) do
     t.decimal  "price",                              precision: 8, scale: 2
     t.string   "pseudonym"
     t.string   "country"
+    t.string   "ssn"
   end
 
   add_index "psychics", ["extension"], name: "index_psychics_on_extension", unique: true, using: :btree

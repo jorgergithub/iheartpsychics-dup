@@ -13,10 +13,17 @@ class ClientsController < AuthorizedController
       ClientMailer.delay.pin_email(@client, @pin)
     end
 
-    @credits = @client.credits.order('id desc').page(params[:page_credits]).per(params[:per])
-    @phones = @client.phones.order(:id).page(params[:page_phones]).per(params[:per])
-    @psychics = @client.psychics.order(:id).page(params[:page_psychics]).per(params[:per])
-    @processed_calls = @client.calls.processed.order(:id).page(params[:page_processed_calls]).per(params[:per])
+    @transactions = @client.transactions.order('created_at desc').
+      page(params[:page_transactions]).per(params[:per])
+
+    @phones = @client.phones.order(:id).page(params[:page_phones]).
+      per(params[:per])
+
+    @psychics = @client.psychics.order(:id).page(params[:page_psychics]).
+      per(params[:per])
+
+    @processed_calls = @client.calls.processed.order(:id).
+      page(params[:page_processed_calls]).per(params[:per])
   end
 
   def edit
@@ -85,7 +92,8 @@ class ClientsController < AuthorizedController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :username, :email,
-      :password, :password_confirmation, :time_zone, client_attributes: [:id, :receive_newsletters])
+      :password, :password_confirmation, :time_zone, client_attributes: [:id,
+      :receive_newsletters])
   end
 
   def find_client

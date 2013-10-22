@@ -133,7 +133,7 @@
 
 <div class="row-fluid">
   <div class="span12">
-    <h3>Call History</h3>
+    <h3>My Call History</h3>
 
     <% if @processed_calls.any? %>
       <table class="table table-hover">
@@ -152,8 +152,8 @@
           <% @processed_calls.reverse.each do |call| %>
             <tr>
               <td><%= call.id %></td>
-              <td><%= call.parsed_start_date_only %></td>
-              <td><%= call.parsed_start_time_only %></td>
+              <td><%= parse_only_date call.start_time %></td>
+              <td><%= parse_only_time call.start_time %></td>
               <td><%= call.formatted_number %></td>
               <td><%= call.psychic_alias_name %></td>
               <td class="right">
@@ -179,41 +179,32 @@
 
 <div class="row-fluid">
   <div class="span12">
-    <h3>Credit Summary</h3>
+    <h3>My Purchase History</h3>
 
-    <% if @credits.any? %>
+    <% if @transactions.any? %>
       <table class="table table-hover">
         <thead>
           <tr>
+            <th>Card Used</th>
+            <th>Amount</th>
             <th>Date</th>
-            <th>Time</th>
-            <th>Credits</th>
-            <th>Description</th>
+            <th>Confirmation #</th>
           </tr>
         </thead>
         <tbody>
-          <% @credits.each do |credit| %>
+          <% @transactions.each do |transaction| %>
             <tr>
-              <td><%= credit.parsed_date_only %></td>
-              <td><%= credit.parsed_time_only %></td>
-              <td><%= number_to_currency credit.credits %></td>
-              <td>
-                <% if credit.target %>
-                  <% if credit.target.is_a?(Call) %>
-                    <%= credit.description %>
-                  <% else %>
-                    <%= link_to credit.description, credit.target %>
-                  <% end %>
-                <% else %>
-                  <%= credit.description %>
-                <% end %>
-              </td>
+              <td><%= transaction.card %></td>
+              <td><%= number_to_currency transaction.amount %></td>
+              <td><%= "#{parse_only_date transaction.created_at} at
+                #{parse_only_time transaction.created_at}" %></td>
+              <td><%= transaction.id %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
 
-      <%= paginate @credits, :param_name => :page_credits %>
+      <%= paginate @transactions, :param_name => :page_transactions %>
 
     <% else %>
       <div class="blank-state">
