@@ -10,6 +10,21 @@ describe OrdersController do
     sign_in user
   }
 
+  describe "POST create" do
+    context "with order params" do
+      let(:attributes) { {order: {package_id: package.id}} }
+
+      before do
+        Order.any_instance.stub(:pay)
+        post :create, attributes
+      end
+
+      it "creates the order with credit card as the payment method" do
+        expect(assigns[:order].payment_method).to eql("credit_card")
+      end
+    end
+  end
+
   describe "POST paypal" do
     context "with order params" do
       let(:paypal) { double(:paypal) }
@@ -22,6 +37,10 @@ describe OrdersController do
 
       it "renders the paypal form for the order" do
         expect(assigns[:paypal]).to eql(paypal)
+      end
+
+      it "creates the order with paypal as the payment method" do
+        expect(assigns[:order].payment_method).to eql("paypal")
       end
     end
   end

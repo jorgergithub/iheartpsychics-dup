@@ -9,7 +9,7 @@ class OrdersController < AuthorizedController
   end
 
   def create
-    @order = @client.orders.new(order_params)
+    @order = @client.orders.new(order_params.merge(payment_method: "credit_card"))
     if @order.save
       @order.pay
       redirect_to client_path, notice: "Your order was successfully processed"
@@ -23,7 +23,7 @@ class OrdersController < AuthorizedController
   end
 
   def paypal
-    @order = @client.orders.new(order_params)
+    @order = @client.orders.new(order_params.merge(payment_method: "paypal"))
     if @order.save
       @paypal = @order.to_paypal
     else
