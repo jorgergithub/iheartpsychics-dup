@@ -1,4 +1,4 @@
-<% if current_user.website_admin? && @order.paid? %>
+<% if current_user.website_admin? && @order.refundable? %>
   <%= link_to 'Refund it', admin_order_refunds_path(@order), data: { confirm: "Are you sure?" }, :method => "post", class: 'btn btn-danger' %>
 <% end %>
 

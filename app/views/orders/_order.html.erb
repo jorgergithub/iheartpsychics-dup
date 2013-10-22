@@ -13,8 +13,10 @@
           <td>
             <% if @order.paid? %>
               <span class="label label-success">Paid</span>
-            <% else @order.refunded? %>
+            <% elsif @order.refunded? %>
               <span class="label label-warning">Refunded</span>
+            <% else %>
+              <span class="label">New</span>
             <% end %>
           </td>
         </tr>
