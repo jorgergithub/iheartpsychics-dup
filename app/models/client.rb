@@ -1,6 +1,8 @@
 require "random_utils"
+require "csv_exportable"
 
 class Client < ActiveRecord::Base
+  include CsvExportable
   include I18n::Alchemy
 
   belongs_to :user

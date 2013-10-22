@@ -1,7 +1,9 @@
 require "random_utils"
 require "date_time_mixin"
+require "csv_exportable"
 
 class Psychic < ActiveRecord::Base
+  include CsvExportable
   include I18n::Alchemy
 
   belongs_to :user

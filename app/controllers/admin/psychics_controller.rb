@@ -2,15 +2,21 @@ class Admin::PsychicsController < AuthorizedController
   before_filter :find_psychic
 
   def index
-    @psychics = Psychic.includes(:user)
-      .order("users.first_name, users.last_name")
-      .page(params[:page]).per(params[:per])
+    respond_to do |format|
+      format.html {
+        @psychics = Psychic.includes(:user)
 
-    if query = params[:q]
-      @psychics = @psychics.where(<<-EOQ, query: "%#{query}%")
-        CONCAT(users.first_name, ' ', users.last_name) LIKE :query OR
-        users.username LIKE :query
-      EOQ
+        if query = params[:q]
+          @psychics = @psychics.where(<<-EOQ, query: "%#{query}%")
+            CONCAT(users.first_name, ' ', users.last_name) LIKE :query OR
+            users.username LIKE :query
+          EOQ
+        end
+
+        @psychics = @psychics.order("users.first_name, users.last_name")
+          .page(params[:page]).per(params[:per])
+      }
+      format.csv { send_data Psychic.to_csv }
     end
   end
 

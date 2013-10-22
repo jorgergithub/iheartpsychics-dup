@@ -40,5 +40,6 @@
       </div>
     <% end %>
     <%= link_to "Add new client", new_admin_client_path, class: "btn btn-small" %>
+    <%= link_to "Download as CSV", admin_clients_path(format: "csv"), class: "btn btn-small" %>
   </div>
 </div>

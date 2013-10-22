@@ -2,7 +2,11 @@ class Admin::ClientsController < AuthorizedController
   before_filter :find_client
 
   def index
-    @clients = Client.order(:id).page(params[:page]).per(params[:per])
+    respond_to do |format|
+      format.html { @clients = Client.order(:id).page(params[:page]).per(params[:per]) }
+      format.csv { send_data Client.to_csv }
+    end
+
   end
 
   def show
