@@ -81,6 +81,17 @@ class Order < ActiveRecord::Base
     status == "refunded"
   end
 
+  def paypal?
+    payment_method == "paypal"
+  end
+
+  def refundable?
+    return false unless paid?
+    return false if refunded?
+    return false if paypal?
+    true
+  end
+
   def item
     items.first
   end

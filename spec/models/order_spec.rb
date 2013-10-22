@@ -245,4 +245,54 @@ describe Order do
       expect(subject.to_paypal).to eql(paypal)
     end
   end
+
+  describe "#paypal?" do
+    context "when payment_method is paypal" do
+      before { order.payment_method = "paypal" }
+      it "is true" do
+        expect(order).to be_paypal
+      end
+    end
+
+    context "when payment_method is credit_card" do
+      before { order.payment_method = "credit_card" }
+      it "is false" do
+        expect(order).to_not be_paypal
+      end
+    end
+  end
+
+  describe "#refundable?" do
+    context "when not paid" do
+      before { order.status = nil }
+
+      it "is false" do
+        expect(order).not_to be_refundable
+      end
+    end
+
+    context "when paid" do
+      before { order.status = "paid" }
+
+      it "is true" do
+        expect(order).to be_refundable
+      end
+    end
+
+    context "when already refunded" do
+      before { order.status = "refunded" }
+
+      it "is false" do
+        expect(order).not_to be_refundable
+      end
+    end
+
+    context "when payment_method is paypal" do
+      before { order.payment_method = "paypal" }
+
+      it "is false" do
+        expect(order).not_to be_refundable
+      end
+    end
+  end
 end
