@@ -12,6 +12,7 @@ class Call < ActiveRecord::Base
   has_one :survey, through: :call_survey
 
   has_many :credits, as: :target
+  has_many :reviews
 
   delegate :alias_name, :full_name, to: :psychic, allow_nil: true, prefix: true
 

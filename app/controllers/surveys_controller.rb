@@ -30,7 +30,9 @@ class SurveysController < AuthorizedController
       @call_survey.answers.build(params)
     end
 
-    @review = current_client.reviews.build(review_params.merge(psychic: @call.psychic))
+    @review = current_client.reviews.build(review_params.merge(
+      psychic: @call.psychic, call: @call))
+
     ActiveRecord::Base.transaction do
       if @call_survey.save and @review.save
         [User.manager_directors, User.website_admins].flatten.each do |md|

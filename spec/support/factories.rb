@@ -74,6 +74,7 @@ FactoryGirl.define do
   factory :review do
     association :client
     association :psychic
+    association :call
     rating 5
     text "I'm in love"
 
