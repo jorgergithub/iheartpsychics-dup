@@ -172,7 +172,7 @@ describe Client do
       end
 
       it "records the credit summary" do
-        expect(credit.description).to eql("Call with John Doe")
+        expect(credit.description).to eql("Call with Jack D")
         expect(credit.credits).to eql(-4.55)
       end
     end
