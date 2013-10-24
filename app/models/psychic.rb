@@ -31,7 +31,7 @@ class Psychic < ActiveRecord::Base
 
   validates :extension, uniqueness: true
   validates :phone, :pseudonym, presence: true
-  validates :phone, as_phone_number: true
+  validates :phone, as_phone_number: true, if: ->(p) { p.phone.present? }
 
   localize :phone, :cellular_number, :emergency_contact_number, using: PhoneParser
 
