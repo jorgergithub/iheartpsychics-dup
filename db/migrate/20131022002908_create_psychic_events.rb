@@ -6,7 +6,5 @@ class CreatePsychicEvents < ActiveRecord::Migration
 
       t.timestamps
     end
-
-    add_index :psychic_events, :psychic_id
   end
 end
