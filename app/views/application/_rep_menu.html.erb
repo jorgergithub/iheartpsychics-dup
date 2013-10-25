@@ -1,4 +1,6 @@
 <ul class="nav">
   <%= dashboard_link %>
-  <li><%= link_to 'Clients', admin_clients_path %></li>
+  <%= admin_link 'Clients', admin_clients_path %>
+  <%= admin_link 'Calls', admin_calls_path %>
+  <%= admin_link 'Orders', admin_orders_path %>
 </ul>

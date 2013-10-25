@@ -53,6 +53,14 @@ class Ability
     )
   end
 
+  def csr_roles
+    %w(
+      admin/clients
+      admin/calls
+      admin/orders
+    )
+  end
+
   def authorize_accountant
     can :access, %w(admin/invoices admin/payments)
   end
@@ -74,7 +82,7 @@ class Ability
   end
 
   def authorize_csr
-    can :access, [:customer_service_representatives, "admin/clients"]
+    can :access, csr_roles
   end
 
   def authorize_guests
