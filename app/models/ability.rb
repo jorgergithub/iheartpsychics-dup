@@ -37,6 +37,7 @@ class Ability
       admin/dashboards
       admin/psychics
       admin/clients
+      admin/calls
       admin/packages
     )
   end
@@ -48,6 +49,7 @@ class Ability
       admin/categories
       admin/horoscopes
       admin/newsletters
+      admin/subscribers
     )
   end
 
