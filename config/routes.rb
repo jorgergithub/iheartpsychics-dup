@@ -15,12 +15,12 @@ IHeartPsychics::Application.routes.draw do
     resources :accountants
     resources :call_surveys
 
-    resources :calls do 
+    resources :calls do
       member do
         post :refund
       end
     end
-    
+
     resources :categories
     resources :clients
     resources :customer_service_representatives
@@ -89,6 +89,8 @@ IHeartPsychics::Application.routes.draw do
       get  'call_finished(:.format)'  , action: :call_finished
     end
   end
+
+  resource :callbacks
 
   resource :client do
     resources :client_phones, shallow: true
