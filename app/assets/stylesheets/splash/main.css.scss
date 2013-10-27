@@ -145,47 +145,72 @@ body.home header {
   }
 }
 
-.subscribe {
+.bottom {
   @include thin-font($subscribe-font-size);
 
-  width: 100%;
   height: $subscribe-height;
   padding: $subscribe-padding 0 0 0;
   background-color: #92278f;
   color: #fff;
   text-align: center;
+}
 
-  div.text {
-    text-transform: uppercase;
+.bottom h3 {
+  font-size: 23px;
+  font-weight: 300;
+}
+
+.bottom-connect {
+  width: 50%;
+  text-align: center;
+  float: right;
+}
+
+.bottom-connect-links {
+  display: inline-block;
+  list-style: none;
+}
+
+.bottom-connect-link {
+  float: left;
+  margin-left: 20px;
+}
+
+.subscribe {
+  width: 50%;
+  float: left;
+}
+
+.subscribe div.text {
+  // text-transform: uppercase;
+}
+
+.subscribe .input {
+  margin: 0 auto;
+  width: 357px;
+  margin-top: 20px;
+}
+
+.subscribe .input input {
+  border: 0;
+  background: url(image-path("subscribe-input.png"));
+  padding: 5px 0 5px 25px;
+  width: 246px;
+  height: 34px;
+  font-size: 18px;
+  float: left;
+
+  &:focus {
+    outline: 0;
   }
+}
 
-  .input {
-    margin: 0 auto;
-    width: 357px;
-    margin-top: 20px;
-
-    input {
-      border: 0;
-      background: url(image-path("subscribe-input.png"));
-      padding: 5px 0 5px 25px;
-      width: 246px;
-      height: 34px;
-      font-size: 18px;
-      float: left;
-
-      &:focus {
-        outline: 0;
-      }
-    }
-
-    a {
-      background: url(image-path("subscribe-button.png"));
-      padding: 0;
-      height: 44px;
-      width: 86px;
-      float: left;
-    }
-  }
+.subscribe .input a {
+  background: url(image-path("subscribe-button.png"));
+  padding: 0;
+  height: 44px;
+  width: 86px;
+  float: left;
 }
 
 footer {

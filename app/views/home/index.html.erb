@@ -38,15 +38,29 @@
   <%= link_to "Apply Now!", new_psychic_application_path, class: "last" %>
 </section>
 
-<section class="subscribe">
-  <%= form_for @subscriber, remote: true do |f| %>
-    <div class="text">Be the first to know when we launch</div>
+<section class="bottom">
+  <div class="container_12">
+    <%= form_for @subscriber, remote: true, html: {class: "subscribe"} do |f| %>
+      <div class="text">Be the first to know when we launch!</div>
 
-    <div class="input">
-      <%= f.text_field :email, placeholder: "Subscribe Now!" %>
-      <%= link_to "", "#", id: "subscribe" %>
+      <div class="input">
+        <%= f.text_field :email, placeholder: "Subscribe Now!" %>
+        <%= link_to "", "#", id: "subscribe" %>
+      </div>
+    <% end %>
+
+    <div class="bottom-connect">
+      <h3>Connect with us!</h3>
+
+      <ul class="bottom-connect-links">
+        <li class="bottom-connect-link"><%= link_to image_tag("connect-twitter.png"), "http://www.twitter.com/iheartpsychics", target: "_twitter" %></li>
+        <li class="bottom-connect-link"><%= link_to image_tag("connect-facebook.png"), "http://www.facebook.com/iheartpsychics", target: "_facebook" %></li>
+        <li class="bottom-connect-link"><%= link_to image_tag("connect-google+.png"), "https://plus.google.com/b/117686678431757185332/117686678431757185332", target: "_google" %></li>
+        <li class="bottom-connect-link"><%= link_to image_tag("connect-instagram.png"), "http://www.instagram.com/iheartpsychics", target: "_instagram" %></li>
+        <li class="bottom-connect-link"><%= link_to image_tag("connect-linkedin.png"), "http://www.linkedin.com/company/iheartpsychics", target: "_linkedin" %></li>
+      </ul>
     </div>
-  <% end %>
+  </section>
 </section>
 
 <section id="confirmation-modal">
