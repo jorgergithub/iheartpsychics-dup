@@ -86,7 +86,8 @@ class Ability
   end
 
   def authorize_guests
-    can :create, [:registrations, :psychic_applications]
+    can [:new, :create, :confirmation], :psychic_applications
+    can :create, :registrations
   end
 
   def authorize_manager_director
