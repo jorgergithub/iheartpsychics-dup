@@ -5,6 +5,7 @@ describe Psychic do
 
   it { should have_many :calls }
   it { should have_many :reviews }
+  it { should have_many :callbacks }
 
   it { should delegate(:email).to(:user).allowing_nil(true) }
   it { should delegate(:first_name).to(:user).allowing_nil(true) }

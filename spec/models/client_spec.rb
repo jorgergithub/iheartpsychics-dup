@@ -11,6 +11,7 @@ describe Client do
   it { should have_many(:phones).dependent(:destroy) }
   it { should have_many(:reviews) }
   it { should have_many(:transactions) }
+  it { should have_many(:callbacks) }
 
   it { should have_and_belong_to_many(:favorite_psychics) }
 
