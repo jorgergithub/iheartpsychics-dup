@@ -18,7 +18,7 @@ describe PaypalController do
     context "when the payment was completed" do
       it "renders 200" do
         post :callback, callback_hash(order)
-        expect(response).to be_ok
+        expect(response.status).to eql(200)
       end
 
       it "adds credits to the user" do
