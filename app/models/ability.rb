@@ -56,6 +56,7 @@ class Ability
 
   def csr_roles
     %w(
+      customer_service_representatives
       admin/clients
       admin/calls
       admin/orders

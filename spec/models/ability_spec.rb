@@ -33,6 +33,10 @@ describe Ability do
     it "can't sign out" do
       subject.should_not be_able_to(:destroy, "devise/sessions")
     end
+
+    it "can post to paypal callback" do
+      subject.should be_able_to(:callback, :paypal)
+    end
   end
 
   describe "as any user" do
@@ -213,7 +217,7 @@ describe Ability do
     end
 
     it "can access customer service representatives" do
-      subject.should be_able_to(:access, :customer_service_representatives)
+      subject.should be_able_to(:access, "customer_service_representatives")
     end
   end
 
