@@ -4,6 +4,7 @@ class Ability
   def initialize(user)
     can :access, :home
     can :create, "devise/sessions"
+    can :callback, :paypal
 
     if user
       authorize_user(user)
