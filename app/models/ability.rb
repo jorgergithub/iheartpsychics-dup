@@ -6,6 +6,7 @@ class Ability
     can :create, "devise/sessions"
     can :callback, :paypal
     can [:create], "calls/psychic_callbacks"
+    can [:create], "calls/client_callbacks"
 
     if user
       authorize_user(user)

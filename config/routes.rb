@@ -69,6 +69,7 @@ IHeartPsychics::Application.routes.draw do
 
   namespace :calls do
     resources :psychic_callbacks
+    resources :client_callbacks
   end
 
   resources :calls do

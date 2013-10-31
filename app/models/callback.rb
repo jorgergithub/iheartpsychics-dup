@@ -31,5 +31,6 @@ class Callback < ActiveRecord::Base
 
   def execute
     psychic.call("http://r.fcoury.com:6674/#{calls_psychic_callbacks_path}?callback_id=#{self.id}")
+    client.call("http://r.fcoury.com:6674/#{calls_client_callbacks_path}?callback_id=#{self.id}")
   end
 end

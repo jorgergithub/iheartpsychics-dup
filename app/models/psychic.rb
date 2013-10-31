@@ -148,6 +148,7 @@ class Psychic < ActiveRecord::Base
   end
 
   def can_callback?(client)
+    return false if available?
     client.balance >= price * 10
   end
 

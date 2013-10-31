@@ -2,7 +2,8 @@ class CallScript < ActiveRecord::Base
   attr_accessor :context
   serialize :params
 
-  def self.process(call_sid, context)
+  def self.process(context)
+    call_sid = context.params[:CallSid]
     self.where(call_sid: call_sid).first_or_initialize.process(context)
   end
 
@@ -56,10 +57,11 @@ class CallScript < ActiveRecord::Base
     self.process(self.context)
   end
 
-  def send_to_conference(conference)
+  def send_to_conference(conference, message=nil)
     Twilio::TwiML::Response.new do |r|
+      r.Say(message) if message
       r.Dial do |d|
-        d.Conference conference
+        d.Conference(conference)
       end
     end.text
   end

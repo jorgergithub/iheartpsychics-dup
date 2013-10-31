@@ -87,13 +87,19 @@ describe Psychic do
     let(:user) { create(:user, create_as: "client") }
     let(:client) { user.client }
 
+    before { client.balance = psychic.price * 10 }
+
+    it "returns false if psychic is available" do
+      psychic.stub(available?: true)
+      expect(psychic.can_callback?(client)).to be_false
+    end
+
     it "returns false if client balance is less than 10 minutes worth of psychic time" do
       client.balance = (psychic.price * 10) - 0.01
       expect(psychic.can_callback?(client)).to be_false
     end
 
     it "returns true if client balance is exactly 10 minutes worth of psychic time" do
-      client.balance = (psychic.price * 10)
       expect(psychic.can_callback?(client)).to be_true
     end
 

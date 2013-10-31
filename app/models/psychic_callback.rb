@@ -12,7 +12,8 @@ class PsychicCallback < CallScript
 
   def proceed
     callback = ::Callback.find(self.context.params[:callback_id])
-    send_to_conference "callback-#{callback.id}"
+    send_to_conference "callback-#{callback.id}",
+      "Please wait while we connect #{callback.client.first_name}."
   end
 
   def cancel

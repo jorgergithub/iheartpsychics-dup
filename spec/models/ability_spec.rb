@@ -37,6 +37,14 @@ describe Ability do
     it "can post to paypal callback" do
       subject.should be_able_to(:callback, :paypal)
     end
+
+    it "can post to psychic callback" do
+      subject.should be_able_to(:create, "calls/psychic_callbacks")
+    end
+
+    it "can post to client callback" do
+      subject.should be_able_to(:create, "calls/client_callbacks")
+    end
   end
 
   describe "as any user" do
