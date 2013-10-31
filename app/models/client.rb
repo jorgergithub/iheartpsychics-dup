@@ -1,9 +1,11 @@
 require "random_utils"
 require "csv_exportable"
+require "inherited_inspect"
 
 class Client < ActiveRecord::Base
   include CsvExportable
   include I18n::Alchemy
+  include InheritedInspect
 
   belongs_to :user
 

@@ -1,5 +1,8 @@
+require "inherited_inspect"
+
 class CustomerServiceRepresentative < ActiveRecord::Base
   include I18n::Alchemy
+  include InheritedInspect
 
   belongs_to :user
 
