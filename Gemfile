@@ -27,7 +27,7 @@ gem 'mini_magick'            , '~> 3.6.0'
 gem 'omniauth-facebook'      , '~> 1.4.1'
 gem 'omniauth-google-oauth2' , '~> 0.2.1'
 gem 'omniauth-twitter'       , '~> 1.0.0'
-gem 'sidekiq'                , '~> 2.13.0'
+gem 'sidekiq'                , '~> 2.16.0'
 gem 'sinatra'                , '>= 1.3.0', :require => nil
 gem 'slim'                   , '>= 1.1.0'
 gem 'stripe'                 , :git => 'https://github.com/stripe/stripe-ruby'
