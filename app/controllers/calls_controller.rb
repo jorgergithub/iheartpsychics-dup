@@ -1,5 +1,3 @@
-require "ostruct"
-
 class CallsController < ApplicationController
   protect_from_forgery :except => :notify
   before_action :identify_client
