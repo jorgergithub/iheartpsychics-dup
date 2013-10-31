@@ -28,4 +28,40 @@ describe Callback do
       expect(subject).to_not be_expired
     end
   end
+
+  describe "#time_for" do
+    before { Timecop.freeze(Time.zone.parse("2013-09-28 00:00")) }
+    after { Timecop.return }
+
+    it "sets the expired_at" do
+      subject.wait_for = 10
+      expect(subject.expires_at).to eql(Time.now.in_time_zone + 10.minutes)
+    end
+
+    it "sets the expired_at to nil if nil" do
+      subject.wait_for = nil
+      expect(subject.expires_at).to be_nil
+    end
+
+    it "returns the number of minutes left" do
+      subject.expires_at = Time.now.in_time_zone + 5.minutes + 30.seconds
+      expect(subject.wait_for).to eql(5)
+    end
+
+    it "returns nil if expires_at is nil" do
+      subject.expires_at = nil
+      expect(subject.wait_for).to be_nil
+    end
+
+    it "converts from string" do
+      subject.wait_for = "15"
+      expect(subject.expires_at).to eql(Time.now.in_time_zone + 15.minutes)
+    end
+  end
+
+  describe "#execute" do
+    it "calls the psychic and redirects to the PsychicCallbacksController index" do
+
+    end
+  end
 end
