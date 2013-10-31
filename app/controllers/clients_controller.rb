@@ -17,6 +17,7 @@ class ClientsController < AuthorizedController
     @phones = @client.phones.order(:id).page(params[:page_phones]).per(params[:per])
     @psychics = @client.psychics.order(:id).page(params[:page_psychics]).per(params[:per])
     @processed_calls = @client.calls.processed.order(:id).page(params[:page_processed_calls]).per(params[:per])
+    @callbacks = @client.callbacks.current.page(params[:page_callbacks]).per(params[:per])
   end
 
   def edit

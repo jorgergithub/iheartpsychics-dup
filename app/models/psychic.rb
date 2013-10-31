@@ -1,10 +1,12 @@
 require "random_utils"
 require "date_time_mixin"
 require "csv_exportable"
+require "inherited_inspect"
 
 class Psychic < ActiveRecord::Base
   include CsvExportable
   include I18n::Alchemy
+  include InheritedInspect
 
   STATES = %w[unavailable available on_a_call]
 
@@ -113,6 +115,7 @@ class Psychic < ActiveRecord::Base
       events.create! state: "available"
       hours.create! action: "start"
     end
+    CallbackWorker.perform_async(self.id)
   end
 
   def unavailable!
@@ -144,7 +147,19 @@ class Psychic < ActiveRecord::Base
     end
   end
 
+  def can_callback?(client)
+    client.balance >= price * 10
+  end
+
+  def call(call_url)
+    twilio_account.calls.create(from: "+17863295532", to: self.phone, url: call_url)
+  end
+
   private
+
+  def twilio_account
+    @twilio_account ||= TwilioHelper.client.account
+  end
 
   def assign_extension
     return if self.extension

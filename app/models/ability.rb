@@ -5,6 +5,7 @@ class Ability
     can :access, :home
     can :create, "devise/sessions"
     can :callback, :paypal
+    can [:create], "calls/psychic_callbacks"
 
     if user
       authorize_user(user)
@@ -80,6 +81,7 @@ class Ability
     can [:show, :new, :create, :paypal], :orders
     can [:search, :about], :psychics
     can [:callback, :success, :cancel], :paypal
+    can [:new, :create], :callbacks
     can :access, :client_phones
     can :access, :surveys
   end

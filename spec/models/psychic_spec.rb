@@ -81,4 +81,42 @@ describe Psychic do
       end
     end
   end
+
+  describe "#can_callback?" do
+    let(:psychic) { create(:psychic) }
+    let(:user) { create(:user, create_as: "client") }
+    let(:client) { user.client }
+
+    it "returns false if client balance is less than 10 minutes worth of psychic time" do
+      client.balance = (psychic.price * 10) - 0.01
+      expect(psychic.can_callback?(client)).to be_false
+    end
+
+    it "returns true if client balance is exactly 10 minutes worth of psychic time" do
+      client.balance = (psychic.price * 10)
+      expect(psychic.can_callback?(client)).to be_true
+    end
+
+    it "returns true if client balance is more than 10 minutes worth of psychic time" do
+      client.balance = (psychic.price * 10) + 0.01
+      expect(psychic.can_callback?(client)).to be_true
+    end
+  end
+
+  describe "#call" do
+    let(:psychic) { build(:psychic, phone: "+13054502995") }
+    let(:calls) { double(:calls) }
+    let(:twilio_account) { double(:twilio_account) }
+
+    before {
+      calls.stub(:create)
+      twilio_account.stub(calls: calls)
+      psychic.stub(twilio_account: twilio_account)
+    }
+
+    it "calls the psychic number using Twilio" do
+      psychic.call("URL")
+      calls.should have_received(:create).with(from: "+17863295532", to: "+13054502995", url: "URL")
+    end
+  end
 end

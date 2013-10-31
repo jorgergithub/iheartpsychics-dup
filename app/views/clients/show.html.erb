@@ -31,6 +31,33 @@
   </div>
 </div>
 
+<% if @callbacks.any? %>
+  <div class="row-fluid">
+    <div class="span12">
+      <h3>My Callbacks</h3>
+    </div>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Psychic</th>
+          <th>Wait Until</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @callbacks.each do |cb| %>
+          <tr>
+            <td></td>
+            <td><%= cb.psychic_alias_name %></td>
+            <td><%=l cb.expires_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
 <div class="row-fluid">
   <div class="span12">
     <h3>Phone numbers</h3>
@@ -100,7 +127,13 @@
               <td><%= psychic.alias_name %></td>
               <td><%= psychic.extension %></td>
               <td><%= number_to_currency psychic.price %></td>
-              <td><%= psychic.current_state.humanize %></td>
+              <td>
+                <%= psychic.current_state.humanize %>
+                <% if psychic.can_callback?(@client) %>
+                  -
+                  <%= link_to "Schedule a Callback", new_callbacks_path(psychic_id: psychic.id) %>
+                <% end %>
+              </td>
               <td>
                 <% if @client.favorite?(psychic) %>
                   <span class="label label-success">Favorite</span>

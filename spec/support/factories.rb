@@ -197,4 +197,10 @@ FactoryGirl.define do
     start_time Time.now
     end_time Time.now + 8.hours
   end
+
+  factory :callback do
+    psychic
+    client
+    wait_for 30
+  end
 end

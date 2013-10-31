@@ -74,6 +74,10 @@ describe Ability do
       subject.should be_able_to(:remove_favorite, :clients)
     end
 
+    it "can add new callback" do
+      subject.should be_able_to(:new, :callbacks)
+    end
+
     it "can't create a new client" do
       subject.should_not be_able_to(:new, :clients)
       subject.should_not be_able_to(:create, :clients)
