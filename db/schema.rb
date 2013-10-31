@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131029225345) do
+ActiveRecord::Schema.define(version: 20131031020339) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(version: 20131029225345) do
     t.datetime "updated_at"
   end
 
+  create_table "call_scripts", force: true do |t|
+    t.string "call_sid"
+    t.string "next_action"
+    t.text   "params"
+  end
+
+  add_index "call_scripts", ["call_sid"], name: "index_call_scripts_on_call_sid", using: :btree
+
   create_table "call_surveys", force: true do |t|
     t.integer  "call_id"
     t.integer  "survey_id"
@@ -37,6 +45,8 @@ ActiveRecord::Schema.define(version: 20131029225345) do
     t.integer  "psychic_id"
     t.integer  "client_id"
     t.datetime "expires_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "callbacks", ["client_id"], name: "index_callbacks_on_client_id", using: :btree

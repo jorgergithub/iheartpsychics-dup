@@ -15,12 +15,12 @@ IHeartPsychics::Application.routes.draw do
     resources :accountants
     resources :call_surveys
 
-    resources :calls do 
+    resources :calls do
       member do
         post :refund
       end
     end
-    
+
     resources :categories
     resources :clients
     resources :customer_service_representatives
@@ -65,6 +65,10 @@ IHeartPsychics::Application.routes.draw do
     resources :website_admins
 
     get "/debug", to: "debug#index"
+  end
+
+  namespace :calls do
+    resources :psychic_callbacks
   end
 
   resources :calls do
@@ -124,6 +128,7 @@ IHeartPsychics::Application.routes.draw do
     end
   end
 
+  resource :callbacks
   resource :customer_service_representative
   resource :accountant
 
