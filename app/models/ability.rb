@@ -3,7 +3,6 @@ class Ability
 
   def initialize(user)
     can :access, :home
-    can :create, "devise/sessions"
     can :callback, :paypal
 
     if user
@@ -16,8 +15,6 @@ class Ability
   private
 
   def authorize_user(user)
-    can :destroy, "devise/sessions"
-
     if user.role
       self.send("authorize_#{user.role}")
     end

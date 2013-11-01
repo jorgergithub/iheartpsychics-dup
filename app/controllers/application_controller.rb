@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
-  enable_authorization
+  enable_authorization unless :devise_controller?
 
   rescue_from CanCan::Unauthorized, :with => :unauthorized
 

@@ -18,10 +18,6 @@ describe Ability do
       subject.should be_able_to(:access, :home)
     end
 
-    it "can sign in" do
-      subject.should be_able_to(:create, "devise/sessions")
-    end
-
     it "can sign up" do
       subject.should be_able_to(:create, :registrations)
     end
@@ -30,20 +26,8 @@ describe Ability do
       subject.should be_able_to(:create, :psychic_applications)
     end
 
-    it "can't sign out" do
-      subject.should_not be_able_to(:destroy, "devise/sessions")
-    end
-
     it "can post to paypal callback" do
       subject.should be_able_to(:callback, :paypal)
-    end
-  end
-
-  describe "as any user" do
-    subject { Ability.new(user) }
-
-    it "can sign out" do
-      subject.should be_able_to(:destroy, "devise/sessions")
     end
   end
 
