@@ -159,7 +159,15 @@ class Client < ActiveRecord::Base
     (balance / psychic.price).floor
   end
 
+  def call(call_url)
+    twilio_account.calls.create(from: "+17863295532", to: self.phones.first.number, url: call_url)
+  end
+
   private
+
+  def twilio_account
+    @twilio_account ||= TwilioHelper.client.account
+  end
 
   def set_unsubscribe_key
     return if self.unsubscribe_key
