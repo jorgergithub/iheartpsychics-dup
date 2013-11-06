@@ -7,6 +7,7 @@ class Ability
     can :callback, :paypal
     can [:create], "calls/psychic_callbacks"
     can [:create], "calls/client_callbacks"
+    can [:index, :user, :pin, :transfer, :do_transfer, :topup, :buy_credits, :confirm_credits, :call_finished, :notify, :phone_number], :calls
 
     if user
       authorize_user(user)
