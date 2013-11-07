@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106201144) do
+ActiveRecord::Schema.define(version: 20131107182357) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 20131106201144) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status"
+    t.string   "client_call_sid"
+    t.string   "psychic_call_sid"
   end
 
   add_index "callbacks", ["client_id"], name: "index_callbacks_on_client_id", using: :btree

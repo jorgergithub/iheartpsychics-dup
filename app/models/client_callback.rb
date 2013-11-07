@@ -12,7 +12,7 @@ class ClientCallback < CallScript
     callback = ::Callback.find(self.context.params[:callback_id])
     send_to_conference "callback-#{callback.id}",
       message: "Please wait while we connect you with #{callback.psychic.alias_name}.",
-      url: "https://ihp-fcoury.pagekite.me/calls/client_callbacks?callback_id=#{callback.id}"
+      url: "/calls/client_callbacks?callback_id=#{callback.id}"
   end
 
   def conference_finished
@@ -27,6 +27,15 @@ class ClientCallback < CallScript
     send_response <<-EOS
       Okay #{callback.client.first_name}, we are now cancelling your callback.
       Thank you.
+    EOS
+  end
+
+  def psychic_cancelled
+    callback = ::Callback.find(self.context.params[:callback_id])
+
+    send_response <<-EOS
+      We are sorry #{callback.client.first_name} but #{callback.psychic.alias_name}
+      has become unavailable and will not be able to take your call at this moment.
     EOS
   end
 end

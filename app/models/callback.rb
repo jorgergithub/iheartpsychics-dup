@@ -1,5 +1,6 @@
 class Callback < ActiveRecord::Base
   include Rails.application.routes.url_helpers
+  include TwilioIntegration
 
   belongs_to :psychic
   belongs_to :client
@@ -39,12 +40,42 @@ class Callback < ActiveRecord::Base
   end
 
   def update_status(new_status)
+    if new_status == "cancelled_by_psychic"
+      handle_psychic_cancellation
+    elsif new_status == "cancelled_by_client"
+      handle_client_cancellation
+    end
+
     update_attributes status: new_status
   end
 
+  def handle_psychic_cancellation
+    script = CallScript.for(client_call_sid)
+    script.advance_to("psychic_cancelled")
+    modify_call(client_call_sid, client_call_url)
+  end
+
+  def handle_client_cancellation
+    script = CallScript.for(psychic_call_sid)
+    script.advance_to("client_cancelled")
+    modify_call(psychic_call_sid, psychic_call_url)
+  end
+
+  def psychic_call_url
+    "#{ENV['BASE_URL']}/#{calls_psychic_callbacks_path}?callback_id=#{self.id}"
+  end
+
+  def client_call_url
+    "#{ENV['BASE_URL']}/#{calls_client_callbacks_path}?callback_id=#{self.id}"
+  end
+
   def execute
-    psychic.call("https://ihp-fcoury.pagekite.me/#{calls_psychic_callbacks_path}?callback_id=#{self.id}")
-    client.call("https://ihp-fcoury.pagekite.me/#{calls_client_callbacks_path}?callback_id=#{self.id}")
+    client_call_response = psychic.call(psychic_call_url)
+    psychic_call_response = client.call(client_call_url)
+
+    self.psychic_call_sid = client_call_response.sid
+    self.client_call_sid = psychic_call_response.sid
+    self.save
   end
 
   def finish(call_sid)

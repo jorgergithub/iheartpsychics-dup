@@ -2,9 +2,13 @@ class CallScript < ActiveRecord::Base
   attr_accessor :context
   serialize :params
 
+  def self.for(call_sid)
+    self.where(call_sid: call_sid).first_or_initialize
+  end
+
   def self.process(context)
     call_sid = context.params[:CallSid]
-    self.where(call_sid: call_sid).first_or_initialize.process(context)
+    self.for(call_sid).process(context)
   end
 
   def context=(c)
@@ -24,6 +28,10 @@ class CallScript < ActiveRecord::Base
     Rails.logger.info "Response for action [#{action}] - #{response}"
 
     return response
+  end
+
+  def advance_to(new_action)
+    self.update_attributes next_action: new_action
   end
 
   def send_menu(greet, options)
@@ -66,7 +74,7 @@ class CallScript < ActiveRecord::Base
     message = options[:message]
     url = options[:url]
     dial_options = {endConferenceOnExit: true}
-    dial_options[:action] = url if url
+    dial_options[:action] = "#{ENV['BASE_URL']}#{url}" if url
 
     Twilio::TwiML::Response.new do |r|
       r.Say(message) if message
