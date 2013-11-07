@@ -80,6 +80,16 @@ describe Callback do
     end
   end
 
+  describe "#finish" do
+    let(:user1) { create(:user, create_as: "client", first_name: "Felipe", last_name: "Coury") }
+    let(:client) { user1.client }
+
+    let(:user2) { create(:user, create_as: "psychic", first_name: "Mike", last_name: "Vid") }
+    let(:psychic) { user2.psychic }
+
+    let(:callback) { create(:callback, client: client, psychic: psychic) }
+  end
+
   describe "#execute" do
     it "calls the psychic and redirects to the PsychicCallbacksController index" do
 

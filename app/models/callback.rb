@@ -51,6 +51,7 @@ class Callback < ActiveRecord::Base
     call = Call.new(sid: call_sid, psychic: self.psychic, client: self.client)
     if call.completed?
       call.process
+      update_status "completed"
     else
       CallbackProcessorWorker.perform_async(self.id, call_sid)
     end
