@@ -7,6 +7,7 @@ class Psychic < ActiveRecord::Base
   include CsvExportable
   include I18n::Alchemy
   include InheritedInspect
+  include TwilioIntegration
 
   STATES = %w[unavailable available on_a_call]
 
@@ -153,13 +154,7 @@ class Psychic < ActiveRecord::Base
   end
 
   def call(call_url)
-    twilio_account.calls.create(from: "+17863295532", to: self.phone, url: call_url)
-  end
-
-  private
-
-  def twilio_account
-    @twilio_account ||= TwilioHelper.client.account
+    create_call(self.phone, call_url)
   end
 
   def assign_extension

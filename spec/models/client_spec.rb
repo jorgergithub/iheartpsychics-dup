@@ -476,4 +476,20 @@ describe Client do
       expect(client.minutes_with(psychic)).to eql(12)
     end
   end
+
+  describe "#call" do
+    let(:client) { create(:client) }
+    let(:phone) { double(:phone, number: "12345") }
+    let(:phone2) { double(:phone, number: "8888") }
+
+    before {
+      client.stub(:create_call)
+      client.stub(phones: [phone, phone2])
+    }
+
+    it "creates the call with client's first phone number" do
+      client.call("URL")
+      expect(client).to have_received(:create_call).with("12345", "URL")
+    end
+  end
 end

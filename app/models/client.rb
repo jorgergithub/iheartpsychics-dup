@@ -6,6 +6,7 @@ class Client < ActiveRecord::Base
   include CsvExportable
   include I18n::Alchemy
   include InheritedInspect
+  include TwilioIntegration
 
   belongs_to :user
 
@@ -161,14 +162,10 @@ class Client < ActiveRecord::Base
 
   def call(call_url)
     phone = phones.first.number
-    twilio_account.calls.create(from: "+17863295532", to: phone, url: call_url)
+    create_call(phone, call_url)
   end
 
   private
-
-  def twilio_account
-    @twilio_account ||= TwilioHelper.client.account
-  end
 
   def set_unsubscribe_key
     return if self.unsubscribe_key

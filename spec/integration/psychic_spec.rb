@@ -108,4 +108,18 @@ describe Psychic do
       end
     end
   end
+
+  describe "#call" do
+    let(:psychic) { create(:psychic) }
+
+    before {
+      psychic.stub(:create_call)
+      psychic.stub(phone: "12345")
+    }
+
+    it "creates the call with psychic's first phone number" do
+      psychic.call("URL")
+      expect(psychic).to have_received(:create_call).with("12345", "URL")
+    end
+  end
 end
