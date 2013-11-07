@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Calls::PsychicCallbacksController do
+describe Calls::ClientCallbacksController do
   let(:user1) { create(:user, create_as: "client", first_name: "Felipe", last_name: "Coury") }
   let(:client) { user1.client }
 
@@ -18,8 +18,8 @@ describe Calls::PsychicCallbacksController do
       expect(response.status).to eql(200)
     end
 
-    it "greets the psychic" do
-      expect(response.body).to match(/Hello #{callback.psychic.first_name}/)
+    it "greets the client" do
+      expect(response.body).to match(/Hello Felipe/)
     end
   end
 
@@ -33,8 +33,8 @@ describe Calls::PsychicCallbacksController do
       expect(response.status).to eql(200)
     end
 
-    it "tells the psychic we're connecting with the client" do
-      expect(response.body).to match(/Please wait while we connect Felipe/)
+    it "tells the client we're connecting with the psychic" do
+      expect(response.body).to match(/Please wait while we connect you with #{psychic.alias_name}/)
     end
 
     it "puts the user on the callback conference" do
@@ -42,7 +42,7 @@ describe Calls::PsychicCallbacksController do
     end
 
     it "sends the URL to handle when the call is finished" do
-      expect(response.body).to include("/calls/psychic_callbacks?callback_id=#{callback.id}")
+      expect(response.body).to include("/calls/client_callbacks?callback_id=#{callback.id}")
     end
   end
 
@@ -56,12 +56,12 @@ describe Calls::PsychicCallbacksController do
       expect(response.status).to eql(200)
     end
 
-    it "tells the psychic the callback is being cancelled" do
-      expect(response.body).to match(/Okay Mike, we are now cancelling your callback./)
+    it "tells the client the callback is being cancelled" do
+      expect(response.body).to match(/Okay Felipe, we are now cancelling your callback./)
     end
 
     it "cancels the callback" do
-      expect(callback.reload.status).to eql("cancelled_by_psychic")
+      expect(callback.reload.status).to eql("cancelled_by_client")
     end
   end
 end
