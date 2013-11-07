@@ -160,7 +160,8 @@ class Client < ActiveRecord::Base
   end
 
   def call(call_url)
-    twilio_account.calls.create(from: "+17863295532", to: self.phones.first.number, url: call_url)
+    phone = phones.first.number
+    twilio_account.calls.create(from: "+17863295532", to: phone, url: call_url)
   end
 
   private
