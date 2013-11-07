@@ -58,6 +58,14 @@ class Call < ActiveRecord::Base
     @twilio_call ||= twilio_account.calls.get(sid)
   end
 
+  def live_status
+    twilio_call.status
+  end
+
+  def completed?
+    live_status == "completed"
+  end
+
   def process
     # Property          Description
     # sid               A 34 character string that uniquely identifies this resource.
@@ -87,6 +95,7 @@ class Call < ActiveRecord::Base
     attributes.each { |a| self.send("#{a}=", twilio_call.send(a)) }
 
     transaction do
+      Rails.logger.info "[Call.process] #{twilio_call.inspect}"
       self.started_at = self.start_time
       self.ended_at = self.end_time
 

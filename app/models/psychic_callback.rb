@@ -13,12 +13,16 @@ class PsychicCallback < CallScript
   def proceed
     callback = ::Callback.find(self.context.params[:callback_id])
     send_to_conference "callback-#{callback.id}",
-      "Please wait while we connect #{callback.client.first_name}."
+      message: "Please wait while we connect #{callback.client.first_name}.",
+      url: "https://ihp-fcoury.pagekite.me/calls/psychic_callbacks?callback_id=#{callback.id}"
   end
 
   def cancel
+    callback = ::Callback.find(self.context.params[:callback_id])
+    callback.cancel_by_psychic
+
     send_response <<-EOS
-      Okay #{@callback.psychic.first_name}, we are now cancelling your callback.
+      Okay #{callback.psychic.first_name}, we are now cancelling your callback.
       Thank you.
     EOS
   end
