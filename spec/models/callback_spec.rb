@@ -59,6 +59,27 @@ describe Callback do
     end
   end
 
+  describe "#update_status" do
+    it "changes the status" do
+      subject.update_status "finished"
+      expect(subject.status).to eql("finished")
+    end
+  end
+
+  describe "#cancel_by_psychic" do
+    it "changes the status to cancelled_by_psychic" do
+      subject.cancel_by_psychic
+      expect(subject.status).to eql("cancelled_by_psychic")
+    end
+  end
+
+  describe "#cancel_by_client" do
+    it "changes the status to cancelled_by_client" do
+      subject.cancel_by_client
+      expect(subject.status).to eql("cancelled_by_client")
+    end
+  end
+
   describe "#execute" do
     it "calls the psychic and redirects to the PsychicCallbacksController index" do
 
