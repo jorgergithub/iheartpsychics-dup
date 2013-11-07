@@ -11,7 +11,7 @@ describe CallScript do
     end
 
     it "sets the params hash" do
-      expect(subject.context.params).to eql({id: 123})
+      expect(subject.context.params).to eql({ Digits: "1", id: "123" })
     end
   end
 

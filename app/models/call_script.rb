@@ -17,8 +17,11 @@ class CallScript < ActiveRecord::Base
   def process(context)
     self.context = context
     self.next_action ||= "initial_state"
+    action = self.next_action
     response = send(self.next_action)
     save
+
+    Rails.logger.info "Response for action [#{action}] - #{response}"
 
     return response
   end
@@ -57,12 +60,29 @@ class CallScript < ActiveRecord::Base
     self.process(self.context)
   end
 
-  def send_to_conference(conference, message=nil)
+  def send_to_conference(conference, options={})
+    self.next_action = "conference_finished"
+
+    message = options[:message]
+    url = options[:url]
+    dial_options = {endConferenceOnExit: true}
+    dial_options[:action] = url if url
+
     Twilio::TwiML::Response.new do |r|
       r.Say(message) if message
-      r.Dial do |d|
+      r.Dial(dial_options) do |d|
         d.Conference(conference)
       end
     end.text
+  end
+
+  def send_response(message)
+    Twilio::TwiML::Response.new do |r|
+      r.Say(message)
+    end.text
+  end
+
+  def conference_finished
+    # does nothing by default
   end
 end
