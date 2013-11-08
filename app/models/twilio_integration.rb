@@ -1,3 +1,5 @@
+require "twilio"
+
 module TwilioIntegration
   def create_call(number, url)
     twilio_account.calls.create(from: "+17863295532", to: number, url: url)
