@@ -195,6 +195,7 @@ class CallsController < ApplicationController
 
   def incoming_number
     number = params[:From] || params[:Caller]
+    number = number.last(10)
     number = "+1#{number}" unless number =~ /^\+1/
     number
   end
