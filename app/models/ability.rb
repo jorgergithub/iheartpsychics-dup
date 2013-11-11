@@ -8,6 +8,7 @@ class Ability
     can [:create], "calls/psychic_callbacks"
     can [:create], "calls/client_callbacks"
     can [:index, :user, :pin, :transfer, :do_transfer, :topup, :buy_credits, :confirm_credits, :call_finished, :notify, :phone_number], :calls
+    can [:twitter, :facebook, :google_oauth2, :all], :omniauth_callbacks
 
     if user
       authorize_user(user)
