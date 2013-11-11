@@ -9,6 +9,9 @@ class Ability
     can [:create], "calls/client_callbacks"
     can [:index, :user, :pin, :transfer, :do_transfer, :topup, :buy_credits, :confirm_credits, :call_finished, :notify, :phone_number], :calls
     can [:twitter, :facebook, :google_oauth2, :all], :omniauth_callbacks
+    can [:create, :confirmation], :registrations
+    can [:new], "devise/confirmations"
+    can [:new], "devise/passwords"
 
     if user
       authorize_user(user)
@@ -95,7 +98,6 @@ class Ability
 
   def authorize_guests
     can [:new, :create, :confirmation], :psychic_applications
-    can [:create, :confirmation], :registrations
   end
 
   def authorize_manager_director
