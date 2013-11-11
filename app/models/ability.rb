@@ -37,6 +37,7 @@ class Ability
       admin/website_admins
       admin/accountants
       admin/schedule_jobs
+      admin/debug
     )
   end
 
