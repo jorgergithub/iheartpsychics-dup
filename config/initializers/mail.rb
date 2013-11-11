@@ -9,5 +9,5 @@ unless Rails.env.development?
     :enable_starttls_auto => true
   }
 
-  ActionMailer::Base.default_url_options[:host] = "iheartpsychics.webbyapp.com"
+  ActionMailer::Base.default_url_options[:host] = ENV['MAILER_HOST'] || 'iheartpsychics.co'
 end
