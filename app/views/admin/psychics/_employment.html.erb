@@ -21,7 +21,6 @@
   </div>
 
   <%= add_text_field pf, :postal_code %>
-  <%= add_text_field pf, :phone, "Landline Number", data: { mask: t('masks.phone') } %>
   <%= add_text_field pf, :cellular_number, "", data: { mask: t('masks.phone') } %>
   <%= add_text_field pf, :ssn, "SS#", data: { mask: t('masks.ssn') } %>
   <%= add_date_field pf, :date_of_birth %>
