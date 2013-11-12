@@ -31,10 +31,6 @@ class Admin::PsychicsController < AuthorizedController
   end
 
   def create
-    Rails.logger.info params
-    Rails.logger.info "\n----\n"
-    Rails.logger.info user_params
-
     @user = User.new(user_params).tap do |object|
       object.localized.assign_attributes(user_params)
     end
