@@ -10,7 +10,7 @@ class Ability
     can [:index, :user, :pin, :transfer, :do_transfer, :topup, :buy_credits, :confirm_credits, :call_finished, :notify, :phone_number], :calls
     can [:twitter, :facebook, :google_oauth2, :all], :omniauth_callbacks
     can [:create, :confirmation], :registrations
-    can [:new], "devise/confirmations"
+    can [:new, :show], "devise/confirmations"
     can [:new, :edit, :create], "devise/passwords"
 
     if user
