@@ -8,6 +8,7 @@ class Admin::PsychicsController < AuthorizedController
 
         if query = params[:q]
           @psychics = @psychics.where(<<-EOQ, query: "%#{query}%")
+            CONCAT(psychics.pseudonym, ' ', users.last_name) LIKE :query OR
             CONCAT(users.first_name, ' ', users.last_name) LIKE :query OR
             users.username LIKE :query
           EOQ
