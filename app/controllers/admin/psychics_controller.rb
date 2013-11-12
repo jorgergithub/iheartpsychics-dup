@@ -20,7 +20,27 @@ class Admin::PsychicsController < AuthorizedController
     end
   end
 
+  def new
+    @user = User.new(create_as: "Psychic")
+    @psychic = Psychic.new(user: @user)
+    @user.psychic = @psychic
+  end
+
   def edit
+  end
+
+  def create
+    Rails.logger.info params
+    Rails.logger.info "\n----\n"
+    Rails.logger.info user_params
+    @user = User.new(user_params)
+    if @user.save
+      redirect_to admin_psychics_path, notice: "Psychic was successfully created"
+    else
+      @psychic = @user.psychic
+      @psychic.user = @user
+      render action: "edit"
+    end
   end
 
   def update
@@ -42,7 +62,7 @@ class Admin::PsychicsController < AuthorizedController
 
   def user_params
     params.require(:user).permit(
-      :first_name, :last_name, :username, :email, :password,
+      :first_name, :last_name, :username, :email, :password, :password_confirmation,
       psychic_attributes: [ :id, :pseudonym, :ability_clairvoyance, :ability_clairaudient,
       :ability_clairsentient, :ability_empathy, :ability_medium,
       :ability_channeler, :ability_dream_analysis, :tools_tarot,
