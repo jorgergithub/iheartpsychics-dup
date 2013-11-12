@@ -10,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
     @user.localized.update_attributes(user_params.merge({ role: "client" }))
 
     if @user.save
-      redirect_to root_path
+      redirect_to new_user_session_path, :notice => "Please confirm your account by clicking the email we just sent you"
     else
       render action: "new"
     end
