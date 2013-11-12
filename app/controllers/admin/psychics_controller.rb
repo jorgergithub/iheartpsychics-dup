@@ -33,7 +33,11 @@ class Admin::PsychicsController < AuthorizedController
     Rails.logger.info params
     Rails.logger.info "\n----\n"
     Rails.logger.info user_params
-    @user = User.new(user_params)
+
+    @user = User.new(user_params).tap do |object|
+      object.localized.assign_attributes(user_params)
+    end
+
     if @user.save
       redirect_to admin_psychics_path, notice: "Psychic was successfully created"
     else
