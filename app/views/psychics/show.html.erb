@@ -104,7 +104,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @psychic.calls.processed.reverse.each do |call| %>
+          <% @psychic.calls.processed.each do |call| %>
             <tr>
               <td><%= call.id %></td>
               <td><%= call.parsed_start_time %></td>

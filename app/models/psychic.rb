@@ -13,7 +13,7 @@ class Psychic < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :calls
+  has_many :calls, -> { order(id: :desc) }
   has_many :events, class_name: "PsychicEvent"
   has_many :hours
   has_many :invoices
