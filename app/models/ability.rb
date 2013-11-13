@@ -49,6 +49,7 @@ class Ability
       admin/calls
       admin/packages
       admin/reviews
+      admin/refunds
     )
   end
 

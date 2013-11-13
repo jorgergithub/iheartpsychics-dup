@@ -16,6 +16,14 @@ FactoryGirl.define do
     time_zone "Eastern Time (US & Canada)"
   end
 
+  factory :admin, parent: :user do
+    role "admin"
+  end
+
+  factory :wadmin, parent: :user do
+    role "website_admin"
+  end
+
   factory :psychic_user, parent: :user do
     create_as "psychic"
   end
