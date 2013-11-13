@@ -182,7 +182,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @processed_calls.reverse.each do |call| %>
+          <% @processed_calls.each do |call| %>
             <tr>
               <td><%= call.id %></td>
               <td><%= call.parsed_start_date_only %></td>
