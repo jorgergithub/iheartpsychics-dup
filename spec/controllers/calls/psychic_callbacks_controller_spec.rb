@@ -9,6 +9,10 @@ describe Calls::PsychicCallbacksController do
 
   let(:callback) { create(:callback, client: client, psychic: psychic) }
 
+  before {
+    Callback.any_instance.stub(:modify_call)
+  }
+
   describe "POST create initial action" do
     before {
       post :create, callback_id: callback.id, CallSid: "123"
