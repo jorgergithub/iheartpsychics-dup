@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     can :access, :home
     can :create, "devise/sessions"
-    can :callback, :paypal
+    can [:callback, :success, :cancel], :paypal
     can [:create], "calls/psychic_callbacks"
     can [:create], "calls/client_callbacks"
     can [:index, :user, :pin, :transfer, :do_transfer, :topup, :buy_credits, :confirm_credits, :call_finished, :notify, :phone_number], :calls
