@@ -4,11 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  # before_action :authenticate_user!, unless: :devise_controller?
   around_action :user_time_zone, if: :current_user
 
   layout :layout_by_resource
 
-  enable_authorization
+  enable_authorization unless :devise_controller?
 
   rescue_from CanCan::Unauthorized, :with => :unauthorized
 
