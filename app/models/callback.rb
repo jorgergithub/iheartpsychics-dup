@@ -6,6 +6,7 @@ class Callback < ActiveRecord::Base
   belongs_to :client
 
   delegate :alias_name, :full_name, to: :psychic, allow_nil: true, prefix: true
+  delegate :email, :first_name, :full_name, to: :client, allow_nil: true, prefix: true
 
   scope :active, -> { where("status = ?", "active") }
   scope :current, -> { active.where("expires_at > ?", Time.now).order("expires_at") }
@@ -50,9 +51,7 @@ class Callback < ActiveRecord::Base
   end
 
   def handle_psychic_cancellation
-    script = CallScript.for(client_call_sid)
-    script.advance_to("psychic_cancelled")
-    modify_call(client_call_sid, client_call_url)
+    CallbackMailer.delay.notify_client(self)
   end
 
   def handle_client_cancellation
@@ -62,19 +61,24 @@ class Callback < ActiveRecord::Base
   end
 
   def psychic_call_url
-    "#{ENV['BASE_URL']}/#{calls_psychic_callbacks_path}?callback_id=#{self.id}"
+    "#{ENV['BASE_URL']}#{calls_psychic_callbacks_path}?callback_id=#{self.id}"
   end
 
   def client_call_url
     "#{ENV['BASE_URL']}/#{calls_client_callbacks_path}?callback_id=#{self.id}"
   end
 
-  def execute
-    client_call_response = psychic.call(psychic_call_url)
-    psychic_call_response = client.call(client_call_url)
+  def call_psychic
+    psychic_call_response = psychic.call(psychic_call_url)
 
-    self.psychic_call_sid = client_call_response.sid
-    self.client_call_sid = psychic_call_response.sid
+    self.psychic_call_sid = psychic_call_response.sid
+    self.save
+  end
+
+  def call_client
+    client_call_response = client.call(client_call_url)
+
+    self.client_call_sid = client_call_response.sid
     self.save
   end
 

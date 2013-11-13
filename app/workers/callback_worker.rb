@@ -12,6 +12,6 @@ class CallbackWorker
     return unless callback
 
     Rails.logger.info "[CallbackWorker] Calling psychic"
-    callback.execute
+    callback.call_psychic
   end
 end

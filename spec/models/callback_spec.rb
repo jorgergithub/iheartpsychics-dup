@@ -81,34 +81,34 @@ describe Callback do
     end
   end
 
-  describe "#handle_psychic_cancellation" do
-    context "when there is a client call" do
-      let(:call_script) { double(:call_script) }
+  # describe "#handle_psychic_cancellation" do
+  #   context "when there is a client call" do
+  #     let(:call_script) { double(:call_script) }
 
-      before {
-        subject.stub(client_call_sid: "CLIENT_CALL")
-        subject.stub(client_call_url: "CLIENT_CALL_URL")
-        subject.stub(:modify_call)
+  #     before {
+  #       subject.stub(client_call_sid: "CLIENT_CALL")
+  #       subject.stub(client_call_url: "CLIENT_CALL_URL")
+  #       subject.stub(:modify_call)
 
-        call_script.stub(:advance_to)
-        CallScript.stub(for: call_script)
+  #       call_script.stub(:advance_to)
+  #       CallScript.stub(for: call_script)
 
-        subject.handle_psychic_cancellation
-      }
+  #       subject.handle_psychic_cancellation
+  #     }
 
-      it "retrieves the call script for the client call" do
-        expect(CallScript).to have_received(:for).with("CLIENT_CALL")
-      end
+  #     it "retrieves the call script for the client call" do
+  #       expect(CallScript).to have_received(:for).with("CLIENT_CALL")
+  #     end
 
-      it "changes the call script status" do
-        expect(call_script).to have_received(:advance_to).with("psychic_cancelled")
-      end
+  #     it "changes the call script status" do
+  #       expect(call_script).to have_received(:advance_to).with("psychic_cancelled")
+  #     end
 
-      it "modifies the live call" do
-        expect(subject).to have_received(:modify_call).with("CLIENT_CALL", "CLIENT_CALL_URL")
-      end
-    end
-  end
+  #     it "modifies the live call" do
+  #       expect(subject).to have_received(:modify_call).with("CLIENT_CALL", "CLIENT_CALL_URL")
+  #     end
+  #   end
+  # end
 
   describe "#cancel_by_client" do
     before {

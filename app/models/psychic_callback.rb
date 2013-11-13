@@ -12,6 +12,9 @@ class PsychicCallback < CallScript
 
   def proceed
     callback = ::Callback.find(self.context.params[:callback_id])
+
+    ClientCallbackWorker.perform_async(callback.id)
+
     send_to_conference "callback-#{callback.id}",
       message: "Please wait while we connect #{callback.client.first_name}.",
       url: "/calls/psychic_callbacks?callback_id=#{callback.id}"
