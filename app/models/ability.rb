@@ -48,6 +48,7 @@ class Ability
       admin/clients
       admin/calls
       admin/packages
+      admin/reviews
     )
   end
 
@@ -106,6 +107,7 @@ class Ability
   end
 
   def authorize_psychic
-    can :access, [:psychics, :schedules, :invoices]
+    can :access, [:psychics, :schedules, :invoices, :reviews]
+    can [:mark_as_featured, :unmark_as_featured], :reviews
   end
 end

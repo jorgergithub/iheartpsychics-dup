@@ -16,6 +16,10 @@ FactoryGirl.define do
     time_zone "Eastern Time (US & Canada)"
   end
 
+  factory :psychic_user, parent: :user do
+    create_as "psychic"
+  end
+
   factory :client_phone do
     desc "Main"
     number { "+1#{rand(1000000000...9999999999)}" }
@@ -28,10 +32,16 @@ FactoryGirl.define do
   end
 
   factory :psychic do
-    association :user
+    association :user, factory: :psychic_user
     pseudonym "Jack"
     phone "+15186335473"
     price "4.50"
+
+    after(:create) do |psychic, evaluator|
+      user = psychic.user
+      user.psychic = psychic
+      user.save
+    end
   end
 
   factory :psychic_application do
