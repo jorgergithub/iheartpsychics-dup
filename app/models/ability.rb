@@ -11,7 +11,7 @@ class Ability
     can [:twitter, :facebook, :google_oauth2, :all], :omniauth_callbacks
     can [:create, :confirmation], :registrations
     can [:new, :show], "devise/confirmations"
-    can [:new, :edit, :create], "devise/passwords"
+    can [:new, :edit, :create, :update], "devise/passwords"
 
     if user
       authorize_user(user)
