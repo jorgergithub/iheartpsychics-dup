@@ -20,6 +20,17 @@ describe Psychic do
     it { should validate_uniqueness_of(:extension) }
   end
 
+  describe "#assign_extension" do
+    it "assigns a random extension when creating" do
+      RandomUtils.stub(:random_extension => "1234")
+
+      subject.run_callbacks(:create)
+
+      expect(subject.extension).to_not be_nil
+      expect(subject.extension).to eq "1234"
+    end
+  end
+
   describe "#specialties" do
     it "returns the specialties as string" do
       subject.specialties_love_and_relationships = true
