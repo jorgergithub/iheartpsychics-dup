@@ -1,17 +1,30 @@
-<%= @client.first_name %>,
+Hello <%= @client.first_name %>,
 
 <% if @order.refunded? %>
-  This is a receipt for <%= @order.to_desc %> refunded on <%= @order.localized.created_at %>
+Credit has been successfully refunded to your account!
 <% else %>
-  This is a receipt for <%= @order.to_desc %> placed on <%= @order.localized.created_at %>
+Credit has been successfully added to your account!
 <% end %>
 
-<% @order.items.each do |i| %>
-  <%= i.qty %> x <%= i.description %> = <%= number_to_currency i.total_price %>
-<% end %>
+Do you wonder what the future may hold for you?  Is there a big decision
+looming overhead that you just can’t seem to make?  Let I Heart Psychics be
+your guide in determining the best approach for you and your journey here.
 
-Total: <%= number_to_currency @order.total %>
+Please explore our team of psychic readers and determine which one is best
+suited for your particular situation.  If you are still unsure, feel free to
+contact Customer Care at XXX-XXX-XXXX.
 
---
-I Heart Psychics
-http://iheartpsychics.com
+Remember, a psychic reading and reader are as unique as a thumbprint and no
+two psychics will read the same. Each experience is tailored around you and
+your desires. Our Customer Care Representatives are ready to link you to the
+specialized psychic that is most suited for your questions and needs.
+
+We would like to thank you for including I Heart Psychics on such a unique and
+personal journey!
+
+Love and light,
+
+The I Heart Psychics team
+
+
+ <%= root_url %>

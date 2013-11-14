@@ -1,12 +1,15 @@
 class ClientWeeklyUsageMailer < ActionMailer::Base
   default from: "noreply@iheartpsychics.co"
 
-  def weekly_usage(client, calls, cost, duration)
+  def weekly_usage(start_date, client, calls, cost, duration, hearts)
     @client = client
     @calls = calls
     @cost = cost
     @duration = duration
+    @hearts = hearts
+    @start_date = start_date
 
-    mail(to: @client.email, subject: "I Heart Psychics - Weekly Usage Report")
+    title = "I Heart Psychics - Your Weekly Usage Report for the Week of #{@start_date}"
+    mail(to: @client.email, subject: title)
   end
 end

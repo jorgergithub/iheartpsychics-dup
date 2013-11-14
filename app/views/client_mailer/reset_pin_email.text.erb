@@ -2,12 +2,16 @@ Hi <%= @client.first_name %>,
 
 Your PIN has just been reset to <%= @client.pin %>.
 
-You will need to enter this PIN number every time you
-call a psychic.
+You will need to enter this PIN number every time you call a psychic.
 
-You can always <%= link_to "reset your PIN online", reset_pin_client_url %>
+Please note that you can always reset your PIN online on
+<%= reset_pin_client_url %>
 
-Best,
+Happy reading and thank you for including I Heart Psychics on such a unique and personal journey!
 
-I Heart Psychics<br/>
-<%= link_to "http://iheartpsychics.co", "http://iheartpsychics.co" %>
+Love and light,
+
+The I Heart Psychics team
+
+
+ <%= root_url %>

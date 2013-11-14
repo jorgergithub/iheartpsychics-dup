@@ -1,53 +1,42 @@
 <p>
-  Dear <%= @client.first_name %>,
+  Dear Client,
 </p>
 
 <p>
-  Below is your I Heart Psychics weekly usage summary
-</p>
-
-<% if @calls.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th>From</th>
-        <th>Duration</th>
-        <th>Cost</th>
-        <th>Psychic</th>
-        <th>Started at</th>
-        <th>Ended at</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @calls.each do |call| %>
-        <tr>
-          <td><%= call.formatted_number %></td>
-          <td><%= call.formatted_duration %></td>
-          <td><%= number_to_currency call.cost %></td>
-          <td><%= call.psychic_alias_name %></td>
-          <td><%=l call.started_at, format: :short %></td>
-          <td><%=l call.ended_at, format: :short %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <p>
-    Last week you used <%= @duration %> and was charged for <%= number_to_currency @cost %>.
-  </p>
-<% else %>
-  <p>
-    You didn't made calls last week.
-  </p>
-<% end %>
-
-<p>
-  Your current balance is <%= number_to_currency @client.balance %>.
+  For the week of <%= @start_date %>, your usage with I Hearts Psychics was the
+  following:
 </p>
 
 <p>
-  Sincerely,<br>
-  The I Heart Psychics Team<br>
-  http://iheartpsychics.co
+  Calls: <%= @calls.size %>
+  Minutes: <%= @duration %>
+  Credits Remaining: <%= @client.balance %>
+  Hearts: <%= @hearts %>
+</p>
+
+<p>
+  We hope that you have enjoyed your readings and we are deeply grateful that you
+  have chosen I Heart Psychics as your premier psychic platform.
+</p>
+
+<p>
+  Please feel free to contact Customer Care at XXX-XXX-XXXX with any questions
+  and / or concerns.
+</p>
+
+<p>
+  On behalf of the entire I Heart Psychics team, we would like to thank you for
+  including I Heart Psychics on such a unique and personal journey!
+</p>
+
+<p>
+  Love and light,
+</p>
+
+<p>
+  The I Heart Psychics team<br>
+</p>
+
+<p>
+   <%= root_url %>
 </p>

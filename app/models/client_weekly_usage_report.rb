@@ -4,7 +4,8 @@ class ClientWeeklyUsageReport
     end_date = 1.week.ago.in_time_zone.end_of_week(:saturday)
 
     Client.all.each do |client|
-      self.deliver_for(client, start_date, end_date) if client.balance > 0
+      self.deliver_for(client, start_date, end_date) if client.balance != nil &&
+        client.balance > 0
     end
   end
 
@@ -14,8 +15,10 @@ class ClientWeeklyUsageReport
     calls = client.calls.period(start_date, end_date)
     cost = total_cost(calls)
     duration = total_duration(calls)
+    hearts = total_hearts(client.reviews)
 
-    ClientWeeklyUsageMailer.delay.weekly_usage(client, calls, cost, duration)
+    ClientWeeklyUsageMailer.delay.weekly_usage(start_date, client, calls, cost,
+      duration, hearts)
   end
 
   def self.total_cost(calls)
@@ -29,5 +32,9 @@ class ClientWeeklyUsageReport
     formatted.gsub!("00h ", "")
     formatted.gsub!("00m ", "")
     formatted
+  end
+
+  def self.total_hearts(reviews)
+    reviews.map(&:rating).inject(0, :+)
   end
 end

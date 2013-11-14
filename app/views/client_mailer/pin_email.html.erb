@@ -4,28 +4,36 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p>Hi <%= @client.first_name %>,</p>
+    <p>Welcome <%= @client.first_name %>,</p>
 
     <p>
-      Please take note on your account PIN number - <%= @pin %>.
+      The following is your unique I Heart Psychics PIN number: <%= @pin %>.
     </p>
 
     <p>
-      You will need to enter this PIN number every time you
-      call a psychic.
+      You will need to enter this PIN number every time you call I Heart
+      Psychics.
     </p>
 
     <p>
-      You can always <%= link_to "reset your PIN online", reset_pin_client_url %>
+      Please note that you can always <%= link_to "reset your PIN online", reset_pin_client_url %>
     </p>
 
     <p>
-      Best,
+      Happy reading and we would like to thank you for including I Heart
+      Psychics on such a unique and personal journey!
     </p>
 
     <p>
-      I Heart Psychics<br/>
-      <%= link_to "http://iheartpsychics.co", "http://iheartpsychics.co" %>
+      Love and light,
+    </p>
+
+    <p>
+      The I Heart Psychics team<br>
+    </p>
+
+    <p>
+       <%= root_url %>
     </p>
   </body>
 </html>

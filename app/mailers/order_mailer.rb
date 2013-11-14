@@ -4,6 +4,6 @@ class OrderMailer < ActionMailer::Base
   def confirmation_email(order)
     @order = order
     @client = order.client
-    mail(to: @client.email, subject: "I Heart Psychics new order notification")
+    mail(to: @client.email, subject: "I Heart Psychics - Credits Purchase Notification")
   end
 end

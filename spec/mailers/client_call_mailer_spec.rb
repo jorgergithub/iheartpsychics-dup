@@ -16,7 +16,7 @@ describe ClientCallMailer do
     end
 
     it "sends out an email with the right subject" do
-      subject = "Your I Heart Psychics call with #{psychic.alias_name}"
+      subject = "I Heart Psychics - Your Call Summary With #{psychic.alias_name}"
       expect(email.subject).to include(subject)
     end
 

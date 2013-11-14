@@ -6,7 +6,7 @@ class ClientCallMailer < ActionMailer::Base
     @client = call.client
     @psychic = call.psychic
 
-    title = "Your I Heart Psychics call with #{@psychic.alias_name}"
+    title = "I Heart Psychics - Your Call Summary With #{@psychic.alias_name} on #{call.date}"
     mail(to: @client.email, subject: title)
   end
 end

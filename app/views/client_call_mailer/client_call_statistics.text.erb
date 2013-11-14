@@ -1,8 +1,10 @@
 Dear <%= @client.first_name %>,
 
-Thank you for your recent call and for giving us the opportunity to serve you better.
+Thank you for your latest reading and the opportunity to connect with you.
+We hope that your experience was uplifting and look forward to your next I Heart
+Psychics call!
 
-Below is your call summary for your latest call with I Heart Psychics:
+Below is the call summary for your latest reading:
 
 Date:               <%= @call.date %>
 Time:               <%= @call.time %>
@@ -10,11 +12,21 @@ Psychic:            <%= @psychic.alias_name %>
 Call Duration:      <%= @call.duration_str %>
 Current Balance:    <%= @client.balance %>
 
-Please help us by taking a few minutes to tell us about your recent experience with I Heart Psychics.  We appreciate your business and want to ensure that we are constantly improving our service to meet your needs.
+Please help us by taking a few moments to tell us about your recent experience
+with I Heart Psychics. We are grateful that you have chosen us and it is our
+goal to improve your experience with each visit.
 
 Your unique survey is here: <%= survey_url(@call) %>
 
-In return for your time and efforts, we will give you an account reward of 100 hearts for each completed and returned survey.
+For your time and in appreciation, we will give you an account reward of 100
+hearts for each completed and returned survey.
 
-Sincerely,
-The I Heart Psychics Team
+Happy reading and thank you for including I Heart Psychics on such a unique and
+personal journey!
+
+Love and light,
+
+The I Heart Psychics team
+
+
+ <%= root_url %>

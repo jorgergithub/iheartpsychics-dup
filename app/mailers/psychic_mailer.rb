@@ -10,11 +10,11 @@ class PsychicMailer < ActionMailer::Base
   def approved_email(psychic, psychic_application)
     @psychic = psychic
     @psychic_application = psychic_application
-    mail(to: psychic.email, subject: "Your application to I Heart Psychics was approved")
+    mail(to: psychic.email, subject: "I Heart Psychics – Your Psychic Application Has Been Approved")
   end
 
   def declined_email(psychic)
     @psychic = psychic
-    mail(to: psychic.email, subject: "Your application to I Heart Psychics was declined")
+    mail(to: psychic.email, subject: "I Heart Psychic - Your Psychic Application Has Been Reviewed")
   end
 end
