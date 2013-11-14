@@ -74,11 +74,11 @@ class Callback < ActiveRecord::Base
   end
 
   def execute
-    client_call_response = psychic.call(psychic_call_url)
-    psychic_call_response = client.call(client_call_url)
+    psychic_call_response = psychic.call(psychic_call_url)
+    client_call_response = client.call(client_call_url)
 
-    self.psychic_call_sid = client_call_response.sid
-    self.client_call_sid = psychic_call_response.sid
+    self.psychic_call_sid = psychic_call_response.sid
+    self.client_call_sid = client_call_response.sid
     self.save
   end
 
