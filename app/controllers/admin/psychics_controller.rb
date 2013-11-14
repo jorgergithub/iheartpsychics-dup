@@ -62,7 +62,7 @@ class Admin::PsychicsController < AuthorizedController
   end
 
   def user_params
-    params.require(:user).permit(
+    ret = params.require(:user).permit(
       :first_name, :last_name, :username, :email, :password, :password_confirmation,
       psychic_attributes: [ :id, :pseudonym, :ability_clairvoyance, :ability_clairaudient,
       :ability_clairsentient, :ability_empathy, :ability_medium,
@@ -81,5 +81,6 @@ class Admin::PsychicsController < AuthorizedController
       :reading_style, :why_work, :friends_describe,
       :strongest_weakest_attributes, :how_to_deal_challenging_client,
       :specialties, :tools, :professional_goals, :how_did_you_hear, :other])
+    ret.merge(role: "psychic")
   end
 end
