@@ -151,6 +151,14 @@ class Call < ActiveRecord::Base
     status == "refunded"
   end
 
+  def status_humanize
+    if status
+      status.underscore.humanize
+    else
+      "-"
+    end
+  end
+
   private
 
   def calculate_duration

@@ -177,6 +177,7 @@
             <th>Time</th>
             <th>From</th>
             <th>Psychic</th>
+            <th>Status</th>
             <th>Duration</th>
             <th>Price</th>
           </tr>
@@ -189,6 +190,9 @@
               <td><%= call.parsed_start_time_only %></td>
               <td><%= call.formatted_number %></td>
               <td><%= call.psychic_alias_name %></td>
+              <td>
+                <%= call.status_humanize %>
+              </td>
               <td class="right">
                 <%= call.formatted_duration %>
               </td>

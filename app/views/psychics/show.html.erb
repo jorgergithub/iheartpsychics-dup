@@ -100,6 +100,7 @@
             <th>Call ID</th>
             <th>Date and Time</th>
             <th>Client First Name</th>
+            <th>Status</th>
             <th>Duration</th>
           </tr>
         </thead>
@@ -109,6 +110,7 @@
               <td><%= call.id %></td>
               <td><%= call.parsed_start_time %></td>
               <td><%= call.client.first_name %></td>
+              <td><%= call.status_humanize %></td>
               <td class="right">
                 <%= call.formatted_duration %>
               </td>

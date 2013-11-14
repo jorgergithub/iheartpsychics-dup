@@ -50,12 +50,16 @@ class Callback < ActiveRecord::Base
   end
 
   def handle_psychic_cancellation
+    create_cancelled_call(psychic_call_sid)
+
     script = CallScript.for(client_call_sid)
     script.advance_to("psychic_cancelled")
     modify_call(client_call_sid, client_call_url)
   end
 
   def handle_client_cancellation
+    create_cancelled_call(client_call_sid)
+
     script = CallScript.for(psychic_call_sid)
     script.advance_to("client_cancelled")
     modify_call(psychic_call_sid, psychic_call_url)
@@ -85,6 +89,26 @@ class Callback < ActiveRecord::Base
       update_status "completed"
     else
       CallbackProcessorWorker.perform_async(self.id, call_sid)
+    end
+  end
+
+  private
+
+  def create_cancelled_call(call_sid)
+    call = Call.new(
+      sid: call_sid,
+      psychic: self.psychic,
+      client: self.client
+    )
+
+    process_call(call)
+
+    transaction do
+      call.duration = nil
+      call.cost = 0
+      call.cost_per_minute = call.psychic.price
+      call.status = "cancelled"
+      call.save
     end
   end
 end
