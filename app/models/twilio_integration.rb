@@ -5,12 +5,24 @@ module TwilioIntegration
     twilio_account.calls.create(from: "+17863295532", to: number, url: url)
   end
 
+  def get_call(call_sid)
+    twilio_account.calls.get(call_sid)
+  end
+
   def hangup_call(call_sid)
-    twilio_account.calls.get(call_sid).hangup
+    get_call(call_sid).hangup
   end
 
   def modify_call(call_sid, url)
-    twilio_account.calls.get(call_sid).redirect_to(url)
+    call = get_call(call_sid)
+    return unless call.status == "in-progress"
+
+    call.redirect_to(url)
+  end
+
+  def call_status(call_sid)
+    call = get_call(call_sid)
+    call.status if call
   end
 
   def process_call(call)
