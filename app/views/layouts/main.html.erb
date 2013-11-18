@@ -99,67 +99,7 @@
     </div>
   </nav>
 
-  <section class="hero"></section>
-
-  <section class="container container_12">
-    <div class="container-offers">
-      <div class="container-offer"><div>Offer</div></div>
-      <div class="container-offer"><div>Offer</div></div>
-      <div class="container-offer last"><div>Offer</div></div>
-    </div>
-
-    <nav class="container-nav">
-      <ul class="container-nav-links">
-        <li class="container-nav-link">
-          <a href="#">All Online</a>
-          <span class="container-nav-highlight">750</span>
-        </li>
-        <li class="container-nav-link">
-          <a href="#">Available</a>
-          <span class="container-nav-highlight">230</span>
-        </li>
-        <li class="container-nav-link"><a href="#">Featured</a></li>
-        <li class="container-nav-link"><a href="#">By Specialty</a></li>
-        <li class="container-nav-link"><a href="#">By Tool</a></li>
-        <li class="container-nav-link">
-          <a href="#" class="container-nav-price-label">By Price</a>
-          <div class="container-nav-price">
-            <div class="container-nav-price-min">$1</div>
-            <div class="container-nav-price-slider"></div>
-            <div class="container-nav-price-max">$15</div>
-          </div>
-        </li>
-      </ul>
-
-      <aside class="container-nav-search">
-        <%= text_field_tag "search", "", placeholder: "Search", class: "container-nav-search-input" %>
-      </aside>
-    </nav>
-
-    <div class="psychics">
-      <% @psychics[0,10].each do |p| %>
-        <%= render p %>
-      <% end %>
-    </div>
-
-    <a href="#" class="psychics-more">More Readers</a>
-  </section>
-
-  <section class="horoscope">
-    <div class="horoscope-container container_12">
-      <h2 class="horoscope-title">Your Daily Horoscope</h2>
-      <h1 class="horoscope-sign-title">Gemini</h1>
-      <h3>5.21 - 6.21</h3>
-
-      <p class="horoscope-text">
-        Your thinking is clear today, Gemini, but it might be hard to take action on your thoughts. A restrictive force may seem to be holding you back. A sense of discipline is welling up within you, reminding you to add a touch of conservatism to whatever it is that you have in mind.
-      </p>
-
-      <div class="horoscope-sign">
-        <%= image_tag("horoscope-gemini.png", alt: "Gemini", class: "horoscope-sign-image") %>
-      </div>
-    </div>
-  </section>
+  <%= yield %>
 
   <footer class="footer">
     <section class="footer-links">
