@@ -1,8 +1,15 @@
 @import "main/helpers";
 
 .nav {
-  background: #af00a5;
+  background: #e4ecf0;
   // height: 40px;
+}
+
+.nav:after {
+  content: " ";
+  background: #ccd7dd;
+  height: 4px;
+  display: block;
 }
 
 .nav-container {
@@ -18,7 +25,7 @@
   padding: 10px 20px;
 
   a {
-    color: #fff;
+    color: #6a6f78;
     text-decoration: none;
     font-weight: normal;
   }
@@ -29,10 +36,15 @@
   border-radius: 30px;
 }
 
+.active a {
+  color: #fff;
+}
+
 .nav-info {
   background: url(image-path("nav-info-phone.png")) no-repeat 0 7px;
   padding: 10px 0 10px 40px;
   float: right;
+  color: #6a6f78;
 
   span {
     font-weight: bold;

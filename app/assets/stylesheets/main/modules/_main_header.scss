@@ -10,11 +10,12 @@
 }
 
 .header-fold {
-  position: absolute;
+  position: relative;
   width: 53px;
   height: 21px;
-  top: 0;
-  right: 63px;
+  top: -25px;
+  left: 930px;
+  margin-bottom: -21px;
   background: url(image-path("user-fold.png")) no-repeat top right;
 }
 
