@@ -1,7 +1,18 @@
+@import "main/helpers";
+
 body {
   min-width: 1170px;
 }
 
 .container_12 {
   width: 1170px;
+}
+
+.small_container {
+  @extend %clearfix;
+
+  width: 970px;
+  zoom: 1;
+  margin-left: auto;
+  margin-right: auto;
 }
