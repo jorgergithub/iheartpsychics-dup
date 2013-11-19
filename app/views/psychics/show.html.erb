@@ -1,125 +1,672 @@
-<div class="row-fluid">
-  <div class="span6">
-    <h3>Account info</h3>
-
-    <%= form_for @psychic do |f| %>
-      <table class="table table-hover">
-        <tbody>
-          <tr>
-            <td>Your status</td>
-            <td>
-              <%= @psychic.current_state.humanize %>
-            </td>
-          </tr>
-          <tr>
-            <td>Your Extension</td>
-            <td><%= @psychic.extension %></td>
-          </tr>
-          <tr>
-            <td>Phone</td>
-            <td>
-              <div class="input-append">
-                <%= f.text_field :phone,
-                      class: "input-small",
-                      style: "width: 120px",
-                      autofocus: !@psychic.phone.present?,
-                      data: { mask: t('masks.phone') } %>
-
-                <%= f.submit "Save", class: "btn" %>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="actions">
-        <% if @psychic.available? %>
-          <%= link_to "Stop working", unavailable_psychic_path, class: "btn btn-primary" %>
-        <% else %>
-          <%= link_to "Start working", available_psychic_path, class: "btn btn-primary" %>
-        <% end %>
-      </div>
-    <% end %>
+<section class="profile-container small_container">
+  <div class="profile-avatar profile-item">
+    <ul>
+      <li>
+        <%= link_to(image_tag("avatar.png", class: "avatar"), "#") %>
+      </li>
+      <li>
+        <a class="tooltip" href="#">
+          <span>Edit Your Picture</span>
+          <%= image_tag "customer-edit-profile.png", alt: "Edit Your Picture" %>
+        </a>
+      </li>
+    </ul>
   </div>
-</div>
 
-<div class="row-fluid">
-  <div class="span12">
-    <h3>This Week Schedule</h3>
+  <div class="profile-psychic profile-info profile-item">
+    <h2>
+      Hello, <span class="name">Stephanie</span>!
+    </h2>
 
-    <% if @psychic.weekly_schedule.any? %>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Start</th>
-            <th>End</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @psychic.weekly_schedule.group_by(&:date).each_pair do |date, schedules| %>
-            <tr>
-              <td rowspan="<%= schedules.size %>">
-                <%=l date, format: :schedule %>
-              </td>
-              <% schedules.each_with_index do |schedule, i| %>
-                <% if i > 0 %>
-                  <tr>
-                    <td><%=l schedule.start_time, format: :schedule %></td>
-                    <td><%=l schedule.end_time, format: :schedule %></td>
-                  </tr>
-                <% else %>
-                  <td><%=l schedule.start_time, format: :schedule %></td>
-                  <td><%=l schedule.end_time, format: :schedule %></td>
-                <% end %>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <div class="blank-state">
-        No entries for this week's schedule.
-      </div>
-    <% end %>
+    <p class="alias">
+      <span>Alias:</span> StephanieMagic
+    </p>
 
-    <div class="actions">
-      <%= link_to "Manage Schedule", psychic_schedules_path, class: "btn btn-primary" %>
+    <p class="status">
+      Status: Available
+    </p>
+
+    <h3>Your Number</h3>
+
+    <p class="your-number">
+      553-277-8676 <span class="extension">Ext:</span> 5643
+    </p>
+
+    <p class="edit-profile">
+      <%= link_to "Edit Profile", "#" %>
+    </p>
+  </div>
+
+  <div class="profile-current-rate profile-item">
+    <p>
+      Your Current Rate Per Min Is <span class="rate">$15.50</span> Per Minute
+    </p>
+  </div>
+</section>
+
+<section class="actions-container small_container">
+  <h2 class="section-title">My Stats</h2>
+
+  <div class="total-calls psychic-action-item action-item">
+    <h2>Total Calls This Paid Period</h2>
+
+    <div class="total-calls-badge badge">
+      23
     </div>
   </div>
-</div>
 
-<div class="row-fluid">
-  <div class="span12">
-    <h3>My Call History</h3>
+  <div class="total-minutes psychic-action-item action-item">
+    <h2>Total Minutes Talked</h2>
 
-    <% if @psychic.calls.any? %>
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Call ID</th>
-            <th>Date and Time</th>
-            <th>Client First Name</th>
-            <th>Duration</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @psychic.calls.processed.each do |call| %>
-            <tr>
-              <td><%= call.id %></td>
-              <td><%= call.parsed_start_time %></td>
-              <td><%= call.client.first_name %></td>
-              <td class="right">
-                <%= call.formatted_duration %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <div class="blank-state">
-        No calls logged yet.
-      </div>
-    <% end %>
+    <div class="psychic-badge badge">
+      982
+    </div>
   </div>
-</div>
+
+  <div class="average-minutes psychic-action-item action-item">
+    <h2>Average Minutes Per Call</h2>
+
+    <div class="psychic-badge badge">
+      23
+    </div>
+  </div>
+
+  <div class="total-pay-percentage psychic-action-item action-item">
+    <h2>Total Pay Percentage</h2>
+
+    <div class="psychic-badge badge">
+      38%
+    </div>
+  </div>
+</section>
+
+<section class="about-psychic-container small_container">
+  <div class="my-bio about-item">
+    <h2>My Bio</h2>
+
+    <p>
+      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolor
+    </p>
+  </div>
+
+  <div class="my-expertises about-item">
+    <h2>My Areas of Expertise</h2>
+
+    <div class="area">
+      <h3>Tools</h3>
+
+      <ul>
+        <li>Tarot</li>
+        <li>Oracle Cards</li>
+      </ul>
+    </div>
+
+    <div class="area">
+      <h3>Specialties</h3>
+
+      <ul>
+        <li class="highlighted">Money & Finance</li>
+      </ul>
+    </div>
+
+    <div class="area">
+      <h3>Style</h3>
+
+      <ul>
+        <li>Compassionate</li>
+      </ul>
+    </div>
+
+    <div class="area">
+      <h3>Abilities</h3>
+
+      <ul>
+        <li>Empathy</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="psychic-call-history-container small_container">
+  <h2 class="section-title">My Call History</h2>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th style="width: 130px;">Call ID</th>
+        <th>Date & Time</th>
+        <th>Customer Name</th>
+        <th style="width: 130px;">Call Duration</th>
+        <th style="width: 100px;">Review</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>1772</td>
+        <td>July, 25, 2013 9:10PM</td>
+        <td>Damon Huynh</td>
+        <td>32 Mins</td>
+        <td>Yes</td>
+      </tr>
+
+      <tr>
+        <td>4699</td>
+        <td>August, 13, 2013 6:45PM</td>
+        <td>Sthephanie Bartholomew</td>
+        <td>47 Mins</td>
+        <td>Yes</td>
+      </tr>
+
+      <tr>
+        <td>3267</td>
+        <td>August, 28, 2013 8:00PM</td>
+        <td>Jennifer Jones</td>
+        <td>32 Mins</td>
+        <td>No</td>
+      </tr>
+
+      <tr>
+        <td>2356</td>
+        <td>September, 3, 2013 7:23PM</td>
+        <td>Sterling Hawkins</td>
+        <td>136 Mins</td>
+        <td>Yes</td>
+      </tr>
+
+      <tr>
+        <td>5352</td>
+        <td>October, 1, 2013 5:41PM</td>
+        <td>Jane Doe</td>
+        <td>103 Mins</td>
+        <td>No</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="psychic-schedule-container small_container">
+  <h2 class="section-title">My Schedule: <span class="month-year">October, 2013</span></h2>
+
+  <table class="schedule">
+    <thead>
+      <tr>
+        <th style="width: 120px">Date</th>
+        <th>Sun</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td class="time-odd">12 AM</td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+        <td>N/A</td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+        <td>N/A</td>
+      </tr>
+
+      <tr>
+        <td class="time-even">01 AM</td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+      </td>
+        <td>N/A</td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+      </td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+      </td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+      </td>
+      </tr>
+
+      <tr>
+        <td class="time-odd">02 AM</td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+      </td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+      </td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+      </td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+      </td>
+        <td>N/A</td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+      </td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+      </td>
+      </tr>
+
+      <tr>
+        <td class="time-even">03 AM</td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+        <td>N/A</td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="time-odd">04 AM</td>
+        <td>N/A</td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+        <td>N/A</td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+        <td>
+          <div class="available">Avail.</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="psychic-schedule-container small_container">
+  <h2 class="section-title">My Upcoming Weekly Schedule</span></h2>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th style="width: 250px;">Date</th>
+        <th>Start</th>
+        <th>End</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td class="upcoming-date">
+          <%= link_to "Thu, 27 Sep", "#" %>
+        </td>
+        <td>
+          <div class="upcoming-time">
+            <span class="time">01:00 AM</span>
+            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+          </div>
+        </td>
+        <td>
+          <div class="upcoming-time">
+            <span class="time">09:00 AM</span>
+            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="upcoming-date">
+          <%= link_to "Fri, 28 Sep", "#" %>
+        </td>
+        <td>
+          <div class="upcoming-time">
+            <span class="time">01:00 AM</span>
+            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+          </div>
+        </td>
+        <td>
+          <div class="upcoming-time">
+            <span class="time">09:00 AM</span>
+            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="upcoming-date">
+          <%= link_to "Sat, 29 Sep", "#" %>
+        </td>
+        <td>
+          <div class="upcoming-time">
+            <span class="time">01:00 AM</span>
+            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+          </div>
+        </td>
+        <td>
+          <div class="upcoming-time">
+            <span class="time">09:00 AM</span>
+            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="upcoming-date">
+          <%= link_to "Sun, 30 Sep", "#" %>
+        </td>
+        <td>
+          <div class="upcoming-time">
+            <span class="time">01:00 AM</span>
+            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+          </div>
+        </td>
+        <td>
+          <div class="upcoming-time">
+            <span class="time">09:00 AM</span>
+            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="upcoming-date">
+          <%= link_to "Mon, 01 Oct", "#" %>
+        </td>
+        <td>
+          <div class="upcoming-time">
+            <span class="time">01:00 AM</span>
+            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+          </div>
+        </td>
+        <td>
+          <div class="upcoming-time">
+            <span class="time">09:00 AM</span>
+            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="upcoming-date">
+          <%= link_to "Tue, 02 Oct", "#" %>
+        </td>
+        <td>
+          <div class="upcoming-time">
+            <span class="time">01:00 AM</span>
+            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+          </div>
+        </td>
+        <td>
+          <div class="upcoming-time">
+            <span class="time">09:00 AM</span>
+            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="upcoming-date">
+          <%= link_to "Wed, 03 Oct", "#" %>
+        </td>
+        <td>
+          <div class="upcoming-time">
+            <span class="time">01:00 AM</span>
+            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+          </div>
+        </td>
+        <td>
+          <div class="upcoming-time">
+            <span class="time">09:00 AM</span>
+            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="psychic-invoices-container small_container">
+  <h2 class="section-title">My Pending Invoices</h2>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>Invoice ID</th>
+        <th>Period</th>
+        <th>Created</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= link_to "0001772", "#" %></td>
+        <td>Oct 27 to Nov 4</td>
+        <td>11/10/2013 11:27</td>
+        <td>$1050.50</td>
+      </tr>
+
+      <tr>
+        <td><%= link_to "0002356", "#" %></td>
+        <td>Oct 27 to Nov 4</td>
+        <td>11/10/2013 11:27</td>
+        <td>$1220.00</td>
+      </tr>
+
+      <tr>
+        <td><%= link_to "0003267", "#" %></td>
+        <td>Oct 27 to Nov 4</td>
+        <td>11/10/2013 11:27</td>
+        <td>$1190.85</td>
+      </tr>
+
+      <tr>
+        <td><%= link_to "0004699", "#" %></td>
+        <td>Oct 27 to Nov 4</td>
+        <td>11/10/2013 11:27</td>
+        <td>$1330.55</td>
+      </tr>
+
+      <tr>
+        <td><%= link_to "0005352", "#" %></td>
+        <td>Oct 27 to Nov 4</td>
+        <td>11/10/2013 11:27</td>
+        <td>$1239</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="psychic-invoices-container small_container">
+  <h2 class="section-title">My Paid Invoices</h2>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th>Invoice ID</th>
+        <th>Period</th>
+        <th>Created</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= link_to "0001772", "#" %></td>
+        <td>Oct 27 to Nov 4</td>
+        <td>11/10/2013 11:27</td>
+        <td>$1050.50</td>
+      </tr>
+
+      <tr>
+        <td><%= link_to "0002356", "#" %></td>
+        <td>Oct 27 to Nov 4</td>
+        <td>11/10/2013 11:27</td>
+        <td>$1220.00</td>
+      </tr>
+
+      <tr>
+        <td><%= link_to "0003267", "#" %></td>
+        <td>Oct 27 to Nov 4</td>
+        <td>11/10/2013 11:27</td>
+        <td>$1190.85</td>
+      </tr>
+
+      <tr>
+        <td><%= link_to "0004699", "#" %></td>
+        <td>Oct 27 to Nov 4</td>
+        <td>11/10/2013 11:27</td>
+        <td>$1330.55</td>
+      </tr>
+
+      <tr>
+        <td><%= link_to "0005352", "#" %></td>
+        <td>Oct 27 to Nov 4</td>
+        <td>11/10/2013 11:27</td>
+        <td>$1239</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="psychic-reviews-container small_container">
+  <div class="my-reviews">
+    <h2 class="section-title">My Reviews:</h2>
+
+    <div class="my-reviews-badge">
+      5
+    </div>
+  </div>
+
+  <table class="records">
+    <thead>
+      <tr>
+        <th style="width: 50px;"></th>
+        <th style="width: 50px;">ID</th>
+        <th>Client</th>
+        <th>Rating</th>
+        <th>Date & Time</th>
+        <th>Featured</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>
+          <%= link_to(image_tag("add-gray.png"), "#") %>
+        </td>
+        <td>31</td>
+        <td>Damon Huynh</td>
+        <td>
+          <i class="star star-1"></i>
+        </td>
+        <td>
+          <span class="review-date">July, 25 2013</span>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td>
+          <%= link_to(image_tag("add-gray.png"), "#") %>
+        </td>
+        <td>20</td>
+        <td>Sthephanie Bartholomew</td>
+        <td>
+          <i class="star star-2"></i>
+        </td>
+        <td>
+          <span class="review-date">July, 25 2013</span>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td>
+          <%= link_to(image_tag("add-gray.png"), "#") %>
+        </td>
+        <td>8</td>
+        <td>Jennifer Jones</td>
+        <td>
+          <i class="star star-3"></i>
+        </td>
+        <td>
+          <span class="review-date">July, 25 2013</span>
+        </td>
+        <td>
+          <%= image_tag "featured.png", alt: "Featured" %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <%= link_to(image_tag("add-gray.png"), "#") %>
+        </td>
+        <td>13</td>
+        <td>Sterling Hawkins</td>
+        <td>
+          <i class="star star-4"></i>
+        </td>
+        <td>
+          <span class="review-date">July, 25 2013</span>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td>
+          <%= link_to(image_tag("add-gray.png"), "#") %>
+        </td>
+        <td>25</td>
+        <td>Jane Doe</td>
+        <td>
+          <i class="star star-5"></i>
+        </td>
+        <td>
+          <span class="review-date">July, 25 2013</span>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

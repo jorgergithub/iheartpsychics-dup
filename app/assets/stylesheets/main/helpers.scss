@@ -1,3 +1,9 @@
+@mixin bold-font($size) {
+  font-family: "Roboto";
+  font-weight: 600;
+  font-size: $size;
+}
+
 @mixin regular-font($size) {
   font-family: "Roboto";
   font-weight: 400;
