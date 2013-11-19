@@ -1,71 +1,226 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>IHeartPsychics</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,300,300italic,100italic,100' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag    "main", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "main", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "https://js.stripe.com/v2/" %>
-  <%= stylesheet_link_tag "" %>
-  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= controller.controller_name %>" data-page="<%= current_page %>">
+  <section class="user user-signin-element">
+    <div class="user-container container_12">
+      <div class="user-signup">
+        <h1>Sign Up or Connect With</h1>
 
-  <div class="navbar">
-    <div class="navbar-inner">
-      <a class="brand" href="/">IHeartPsychics</a>
-      <% if current_user.admin? %>
-        <%= render "admin_menu" %>
-      <% elsif current_user.manager_director? %>
-        <%= render "manager_director_menu" %>
-      <% elsif current_user.website_admin? %>
-        <%= render "website_admin_menu" %>
-      <% elsif current_user.accountant? %>
-        <%= render "accountant_menu" %>
-      <% elsif current_user.psychic? %>
-        <%= render "psychic_menu" %>
-      <% elsif current_user.client? %>
-        <%= render "client_menu" %>
-      <% elsif current_user.rep? %>
-        <%= render "rep_menu" %>
-      <% else %>
-        <ul class="nav">
-          <li><%= link_to 'Dashboard', dashboard_path %></li>
+        <ul class="signup-links">
+          <li class="signup-link">
+            <%= link_to(image_tag("twitter.png", alt: "Twitter"), "#") %>
+          </li>
+
+          <li class="signup-link">
+            <%= link_to(image_tag("facebook.png", alt: "Facebook"), "#") %>
+          </li>
+
+          <li class="signup-link">
+            <%= link_to(image_tag("google+.png", alt: "Google+"), "#") %>
+          </li>
         </ul>
-      <% end %>
-      <ul class="nav pull-right">
-        <li>
-          <%= link_to current_user.full_name, dashboard_path %>
-        </li>
-        <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
-      </ul>
+      </div>
+
+      <div class="user-signin">
+        <h1>Sign Up or Connect With</h1>
+
+        <%= form_for("user", url: user_session_path, html: { class: "signin-form" }) do |f| %>
+          <div class="signin-inputs">
+            <div class="signin-input">
+              <%= f.text_field :login, placeholder: "Username" %>
+            </div>
+
+            <div class="signin-input">
+              <%= f.password_field :password, placeholder: "Password" %>
+            </div>
+
+            <%= submit_tag "Sign In" %>
+          </div>
+
+          <p class="signin-actions">
+            <a href="#" class="signin-actions-forgot">Forgot Username or Password?</a>
+            <%= f.check_box :remember_me %>
+            <label for="user_remember_me" class="signin-actions-remember">Remember Me</label>
+          </p>
+        <% end %>
+
+        <%= link_to(image_tag("user-close.png", alt: "Close"), "#", class: "user-close") %>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="container">
-    <% if flash[:alert] %>
-      <div class="alert">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= flash[:alert] %>
+  <header class="header">
+    <div class="header-container small_container">
+      <div class="header-fold user-signin-element"></div>
+
+      <%= link_to(image_tag("logo.png", alt: "IHeartPsychics"), root_url) %>
+
+      <nav class="header-nav">
+        <ul class="header-nav-links">
+          <% if current_user %>
+            <li class="dashboard header-nav-link"><a href="#">Dashboard</a></li>
+            <li class="balance header-nav-link"><a href="#">Balance $35</a></li>
+            <li class="signout header-nav-link"><a href="#">Sign Out</a></li>
+          <% else %>
+            <li class="signin header-nav-link">
+              <a href="#">Sign In</a>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="nav-container small_container">
+      <ul class="nav-links">
+        <li class="active nav-link"><a href="#">Home</a></li>
+        <li class="nav-link"><a href="#">Special Offers</a></li>
+        <li class="nav-link"><a href="#">Find a Reader</a></li>
+        <li class="nav-link"><a href="#">Horoscopes</a></li>
+        <li class="nav-link"><a href="#">Blog</a></li>
+      </ul>
+
+      <aside class="nav-info">
+        Call Today: <span>1.888.PSYCHICS</span>
+      </aside>
+    </div>
+  </nav>
+
+  <%= yield %>
+
+  <footer class="footer">
+    <section class="footer-links">
+      <div class="footer-container container_12">
+        <ul class="footer-links-groups">
+          <li class="footer-links-groups-link">
+            <h1 class="footer-links-group-title">Psychic Readings</h1>
+            <ul class="footer-links-group-links">
+              <li class="footer-links-group-link">
+                <a href="#">How it Works</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">Psychic Quality</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">Psychic Dictionary</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="footer-links-groups-link">
+            <h1 class="footer-links-group-title">Your Account</h1>
+            <ul class="footer-links-group-links">
+              <li class="footer-links-group-link">
+                <a href="#">Update Subscription</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">Make an Appointment</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">Rewards &amp; Offers</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="footer-links-groups-link">
+            <h1 class="footer-links-group-title">Site</h1>
+            <ul class="footer-links-group-links">
+              <li class="footer-links-group-link">
+                <a href="#">Site Map</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">Privacy</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">TOS</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="last footer-links-groups-link">
+            <h1 class="footer-links-group-title">Company</h1>
+            <ul class="footer-links-group-links">
+              <li class="footer-links-group-link">
+                <a href="#">About Us</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">Contact Us</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">FAQs</a>
+              </li>
+
+              <li class="footer-links-group-link">
+                <a href="#">Careers</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <aside class="footer-social">
+          <h1 class="footer-social-title">Social</h1>
+
+          <p class="footer-social-text">
+            Get Your Daily Horoscope On
+          </p>
+
+          <ul class="footer-social-links">
+            <li class="footer-social-link">
+              <%= link_to(image_tag("twitter.png", alt: "Twitter"), "#") %>
+
+            </li>
+
+            <li class="footer-social-link">
+              <%= link_to(image_tag("facebook.png", alt: "Facebook"), "#") %>
+
+            </li>
+
+            <li class="footer-social-link">
+              <%= link_to(image_tag("google+.png", alt: "Google+"), "#") %>
+
+            </li>
+          </ul>
+        </aside>
       </div>
-    <% end %>
+    </section>
 
-    <% if flash[:notice] %>
-      <div class="alert">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= flash[:notice] %>
+    <section class="footer-copyright">
+      <div class="container_12">
+        <div class="footer-copyright-container">
+          &copy; Copyright I Heart Psychics Co. 2013
+        </div>
       </div>
-    <% end %>
+    </section>
+  </footer>
 
-    <% if flash[:error] %>
-      <div class="alert alert-error">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= flash[:error] %>
-      </div>
-    <% end %>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    <%= yield %>
-  </div>
+    ga('create', 'UA-44607874-1', 'iheartpsychics.co');
+    ga('send', 'pageview');
+  </script>
 </body>
 </html>

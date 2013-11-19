@@ -1,0 +1,88 @@
+@import "main/helpers";
+
+.profile-info {
+  color: #5d687a;
+  height: 325px;
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 370px;
+
+  h2 {
+    @include thin-font(36px);
+
+    .name {
+      @include regular-font(36px);
+    }
+  }
+}
+
+.profile-daily-fortune {
+  text-align: left;
+
+  .title {
+    @include regular-font(18px);
+    color: #20293a;
+    margin-top: 40px;
+  }
+
+  .text {
+    @include thin-font(32px);
+  }
+}
+
+.profile-share-horoscope {
+  text-align: left;
+
+  h2 {
+    @include regular-font(18px);
+    color: #2a3542;
+    margin-top: 89px;
+  }
+}
+
+.share-links {
+  @extend %flat-list;
+  margin-top: 25px;
+}
+
+.share-link {
+  margin-right: 25px;
+}
+
+.client-action-item {
+  height: 230px;
+  width: 158px;
+}
+
+.my-credits {
+  background-image: url(image_path('my-credits.png'));
+}
+
+.my-cards-on-file {
+  background-image: url(image_path('my-cards-on-file.png'));
+}
+
+.my-pin {
+  background-image: url(image_path('my-pin.png'));
+}
+
+.my-password {
+  background-image: url(image_path('my-password.png'));
+}
+
+.my-phone {
+  background-image: url(image_path('my-phone.png'));
+}
+
+.my-birthday-timezone {
+  background-image: url(image_path('my-birthday-timezone.png'));
+}
+
+.client-badge {
+  right: 5px;
+}
+
+.client-history-container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}

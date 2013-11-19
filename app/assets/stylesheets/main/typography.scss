@@ -3,4 +3,9 @@
 body {
   @include thin-font(18px);
   color: #fff;
+
+  &.clients {
+    color: #000;
+  }
 }
+

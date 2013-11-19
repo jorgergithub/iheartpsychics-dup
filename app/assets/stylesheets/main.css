@@ -15,6 +15,10 @@
  *= require main/modules/_main_psychics
  *= require main/modules/_main_horoscope
  *= require main/modules/_main_footer
+ *= require main/modules/_dashboard
+ *= require main/modules/_client_dashboard
+ *= require main/modules/_psychic_dashboard
+ *= require main/modules/_rating
  *= require main/accessory
  *= require main/ethics
  *= require main/contact

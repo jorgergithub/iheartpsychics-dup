@@ -1,0 +1,346 @@
+@import "main/helpers";
+
+.profile-psychic {
+  border-right: 1px solid #cccccc;
+  text-align: left;
+
+  h3 {
+    @include bold-font(20px);
+    color: #5d687a;
+  }
+
+  .alias {
+    @include regular-font(12px);
+    color: #5d687a;
+    margin-top: 5px;
+
+    span {
+      color: #3f4955;
+      font-weight: 600;
+    }
+  }
+
+  .status {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  .your-number {
+    @include thin-font(22px);
+    color: #687689;
+  }
+
+  .extension {
+    font-weight: 400;
+  }
+
+  .edit-profile {
+    margin-top: 25px;
+
+    a {
+      @include thin-font(19px);
+      color: #1578ff;
+      display: block;
+      text-decoration: none;
+    }
+
+    a:before {
+      background: url(image_path('psychic-edit-profile.png')) no-repeat right -5px bottom 20px;
+      content: "";
+      margin: 0 5px 0 0;
+      padding: 0 35px 35px 0;
+    }
+  }
+}
+
+.profile-current-rate {
+  background: url(image_path('psychic-current-rate.png')) no-repeat center top;
+  padding-top: 200px;
+  width: 285px;
+
+  p {
+    @include regular-font(14px);
+    color: #687689;
+    line-height: 2em;
+
+    .rate {
+      @include bold-font(40px);
+      color: #3f4955;
+      display: block;
+    }
+  }
+}
+
+.psychic-action-item {
+  height: 190px;
+  width: 240px;
+}
+
+.total-calls {
+  background-image: url(image_path('total-calls.png'));
+}
+
+.total-minutes {
+  background-image: url(image_path('total-minutes.png'));
+}
+
+.average-minutes {
+  background-image: url(image_path('average-minutes.png'));
+}
+
+.total-pay-percentage {
+  background-image: url(image_path('total-pay-percentage.png'));
+}
+
+.psychic-badge {
+  right: 35px;
+}
+
+.total-calls-badge {
+  right: 60px;
+}
+
+.about-psychic-container {
+  @extend %clearfix;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.about-item {
+  float: left;
+
+  h2 {
+    @include thin-font(35px);
+    color: #5d687a;
+    padding-bottom: 50px;
+  }
+}
+
+.my-bio {
+  text-align: left;
+  width: 415px;
+
+  p {
+    @include regular-font(14px);
+    border-right: 1px solid #c2c2c2;
+    color: #687689;
+    padding-right: 20px;
+  }
+}
+
+.my-expertises {
+  padding-left: 20px;
+
+  .area {
+    float: left;
+    margin-right: 50px;
+
+    h3 {
+      @include bold-font(18px);
+      color: #3f4955;
+      padding-bottom: 25px;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    li {
+      @include regular-font(12px);
+      color: #687689;
+      padding-bottom: 10px;
+
+      &.highlighted {
+        color: #40b500;
+      }
+    }
+  }
+
+  .area:last-child {
+    margin-right: 0;
+  }
+}
+
+.psychic-call-history-container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.psychic-schedule-container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.month-year {
+  @include bold-font(35px);
+  color: #242d3c;
+}
+
+table.schedule {
+  border-collapse: collapse;
+  border-spacing: 0;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 1px 1px #dce2e6;
+  -moz-box-shadow: 0 1px 1px #dce2e6;
+  box-shadow: 0 1px 1px #dce2e6;
+  width: 100%;
+
+  th {
+    @include regular-font(22px);
+    background: #92278f;
+    color: #fff;
+  }
+
+  td {
+    @include thin-font(20px);
+    color: #8590a1;
+  }
+
+  th, td {
+    padding: 2%;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  th:first-child {
+    -moz-border-radius: 9px 0 0 0;
+    -webkit-border-radius: 9px 0 0 0;
+    border-radius: 9px 0 0 0;
+  }
+
+  th:last-child {
+    -moz-border-radius: 0 9px 0 0;
+    -webkit-border-radius: 0 9px 0 0;
+    border-radius: 0 9px 0 0;
+  }
+
+  tr:last-child td:first-child {
+    -moz-border-radius: 0 0 0 9px;
+    -webkit-border-radius: 0 0 0 9px;
+    border-radius: 0 0 0 9px;
+  }
+
+  tr:last-child td:last-child {
+    -moz-border-radius: 0 0 9px 0;
+    -webkit-border-radius: 0 0 9px 0;
+    border-radius: 0 0 9px 0;
+  }
+
+  tr:nth-child(even) {
+    background: #f3f5f6;
+  }
+
+  td.time-odd {
+    background: #dbe2ed;
+    color: #fff;
+  }
+
+  td.time-even {
+    background: #bac4d2;
+    color: #fff;
+  }
+
+  .available {
+    background: #a8e782;
+    border: 1px solid #83c856;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    color: #fff;
+    padding: 15px 10px;
+    opacity: 0.9;
+  }
+}
+
+table.schedule:last-child {
+  padding-bottom: 50px;
+}
+
+.upcoming-date {
+  a {
+    color: #8590a1;
+    display: block;
+    text-decoration: none;
+  }
+
+  a:after {
+    background: url(image_path('add-green.png')) no-repeat right 0 top 2px;
+    content: "";
+    padding: 0 40px 1px 0;
+  }
+}
+
+.upcoming-time {
+  @include regular-font(14px);
+  background: #bac4d2;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  color: #fff;
+  height: 40px;
+  display: table-cell;
+  vertical-align: middle;
+  width: 150px;
+  position: relative;
+  left: 50%;
+
+  .time {
+    border-right: 2px solid #96a4ba;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 20px;
+    vertical-align: middle;
+  }
+
+  .edit-time {
+    height: 22px;
+    padding-left: 5px;
+    width: 22px;
+  }
+}
+
+.psychic-invoices-container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  a {
+    @include thin-font(20px);
+    color: #8590a1;
+  }
+}
+
+.psychic-reviews-container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.my-reviews {
+  position: relative;
+  text-align: center;
+
+  h2 {
+    display: inline-block;
+  }
+}
+
+.my-reviews-badge {
+  @include bold-font(30px);
+  background: #6acd00;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  color: #fff;
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  margin-left: 10px;
+  text-align: center;
+  width: 50px;
+}
+
+.review-date {
+  display: block;
+}
