@@ -161,5 +161,8 @@ IHeartPsychics::Application.routes.draw do
 
   get "/email_confirmation", to: "home#confirmation", as: "email_confirmation"
   get "/apna", to: "home#apna", as: "apna"
+  get "/ethics", to: "home#ethics", as: "ethics"
+  get "/contact", to: "home#contact", as: "contact"
+
   root to: 'home#index'
 end

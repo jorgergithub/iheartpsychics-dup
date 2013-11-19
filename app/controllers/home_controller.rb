@@ -1,7 +1,8 @@
 require 'time_ext'
 
 class HomeController < AuthorizedController
-  before_filter :authenticate_user!, except: [:index, :apna, :confirmation]
+  # before_filter :authenticate_user!, except: [:index, :apna, :confirmation]
+  skip_filter :authenticate_user!
   layout :select_layout
 
   def index
@@ -11,6 +12,12 @@ class HomeController < AuthorizedController
   end
 
   def apna
+  end
+
+  def ethics
+  end
+
+  def contact
   end
 
   def show

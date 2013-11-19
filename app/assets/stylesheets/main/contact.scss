@@ -1,0 +1,46 @@
+.contact {
+  aside {
+    float: right;
+    width: 370px;
+  }
+
+  aside p {
+    padding-bottom: 55px;
+  }
+
+  h3, label {
+    font-size: 24px;
+    text-transform: uppercase;
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+    color: #000;
+    margin-bottom: 5px;
+  }
+
+  input, textarea {
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 18px;
+    color: #8590a1;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  input {
+    width: 370px;
+    height: 45px;
+  }
+
+  textarea {
+    width: 540px;
+    height: 180px;
+  }
+
+  .contact-main {
+    padding: 50px 0;
+  }
+}
