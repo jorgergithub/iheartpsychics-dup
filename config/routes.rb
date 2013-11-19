@@ -151,6 +151,7 @@ IHeartPsychics::Application.routes.draw do
   end
 
   resources :subscribers
+  resources :messages
 
   post "/paypal/callback" , to: "paypal#callback" , as: "paypal_callback"
   post "/paypal/success"  , to: "paypal#success"  , as: "paypal_success"

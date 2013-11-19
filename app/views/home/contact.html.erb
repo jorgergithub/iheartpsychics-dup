@@ -25,23 +25,40 @@
     </p>
 
     <h3>Social Networks</h3>
-    <p>
-
-    </p>
+    <ul class="contact-social-links">
+      <li class="contact-social-link">
+        <%= link_to(image_tag("color-logo-facebook.png", alt: "Facebook"), "http://www.facebook.com/iheartpsychics") %>
+      </li>
+      <li class="contact-social-link">
+        <%= link_to(image_tag("color-logo-twitter.png", alt: "Twitter"), "http://www.twitter.com/iheartpsychics") %>
+      </li>
+      <li class="contact-social-link">
+        <%= link_to(image_tag("color-logo-google+.png", alt: "Google+"), "https://plus.google.com/b/117686678431757185332/117686678431757185332") %>
+      </li>
+      <li class="contact-social-link">
+        <%= link_to(image_tag("color-logo-linkedin.png", alt: "LinkedIn"), "http://www.linkedin.com/company/iheartpsychics") %>
+      </li>
+      <li class="contact-social-link">
+        <%= link_to(image_tag("color-logo-youtube.png", alt: "YouTube"), "http://www.youtube.com/iheartpsychics") %>
+      </li>
+    </ul>
   </aside>
 
-  <form>
-    <label for="name">Name</label>
-    <input name="name">
+  <%= form_for @message do |f| %>
+    <%= render 'errors', object: @message, error_action: "sent" %>
 
-    <label for="email">Email</label>
-    <input name="email"></input>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
 
-    <label for="phone">Phone#</label>
-    <input name="phone">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
 
-    <label for="suggestions">Suggestions</label>
-    <textarea name="suggestions"></textarea>
-  </form>
+    <%= f.label :phone %>
+    <%= f.text_field :phone %>
 
+    <%= f.label :suggestions %>
+    <%= f.text_area :suggestions %>
+
+    <%= f.submit "Send", class: "contact-send-button" %>
+  <% end %>
 </section>
