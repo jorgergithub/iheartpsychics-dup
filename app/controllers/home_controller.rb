@@ -18,6 +18,7 @@ class HomeController < AuthorizedController
   end
 
   def contact
+    @message = Message.new
   end
 
   def show
