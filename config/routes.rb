@@ -164,6 +164,7 @@ IHeartPsychics::Application.routes.draw do
   get "/apna", to: "home#apna", as: "apna"
   get "/ethics", to: "home#ethics", as: "ethics"
   get "/contact", to: "home#contact", as: "contact"
+  get "/careers", to: "home#careers", as: "careers"
 
   root to: 'home#index'
 end
