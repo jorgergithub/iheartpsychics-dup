@@ -21,6 +21,9 @@ class HomeController < AuthorizedController
     @message = Message.new
   end
 
+  def careers
+  end
+
   def show
     go_home
   end
