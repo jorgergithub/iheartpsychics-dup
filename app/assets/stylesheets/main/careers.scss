@@ -18,6 +18,7 @@
     padding: 15px 20px;
     margin-bottom: 25px;
     border-radius: 4px;
+    cursor: pointer;
   }
 
   aside li a {
@@ -41,7 +42,7 @@
     display: none;
   }
 
-  article.active {
+  article.selected {
     display: block;
   }
 
