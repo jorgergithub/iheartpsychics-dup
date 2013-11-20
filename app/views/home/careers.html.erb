@@ -1,4 +1,5 @@
-<section class="careers small_container">
+<%= select ||= params[:select]  %>
+<section class="careers small_container" data-selected-tab="<%= select %>">
 
   <aside>
     <ul>
@@ -53,9 +54,32 @@
       Please use the following form below in order to apply for all non-psychic positions with I Heart Psychics. If you are interested in applying and joining us as a Psychic, please click here. We thank you in advance for your interest.
     </p>
 
-    <form>
+    <%= form_for @application do |f| %>
+      <%= render 'errors', object: @application, error_action: "sent" %>
 
-    </form>
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
+
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :phone %>
+      <%= f.text_field :phone %>
+
+      <%= f.label :position %>
+      <%= f.text_field :position %>
+
+      <%= f.label :attachment %>
+      <%= f.file_field :attachment %>
+
+      <%= f.label :comments %>
+      <%= f.text_area :comments %>
+
+      <%= f.submit "Send", class: "carrers-resume-send-button" %>
+    <% end %>
   </article>
 
 </section>
