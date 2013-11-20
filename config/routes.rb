@@ -154,6 +154,7 @@ IHeartPsychics::Application.routes.draw do
   resources :messages
   resources :applications
   resources :faqs
+  resources :horoscopes, only: :index
 
   post "/paypal/callback" , to: "paypal#callback" , as: "paypal_callback"
   post "/paypal/success"  , to: "paypal#success"  , as: "paypal_success"
