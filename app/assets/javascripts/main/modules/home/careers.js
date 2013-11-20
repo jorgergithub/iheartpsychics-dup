@@ -3,7 +3,9 @@ Module("IHP.Pages.HomeCareers", function(HomeCareers) {
 
   HomeCareers.fn.initialize = function(el) {
     this.el = $($(el).find(".careers aside"));
-    this.tab = this.extractTab(document.location.toString()) || "main";
+    this.tab = $("section.careers").attr("data-selected-tab");
+    this.tab = this.tab || this.extractTab(document.location.toString())
+    this.tab = this.tab || "main";
     this.addEventListeners();
     this.displayProperTab();
   };
@@ -43,3 +45,5 @@ Module("IHP.Pages.HomeCareers", function(HomeCareers) {
     }
   };
 });
+
+IHP.Pages.ApplicationsNew = IHP.Pages.HomeCareers;

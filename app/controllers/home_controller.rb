@@ -22,6 +22,7 @@ class HomeController < AuthorizedController
   end
 
   def careers
+    @application = Application.new
   end
 
   def show
