@@ -3,6 +3,7 @@ class Ability
 
   def initialize(user)
     can :access, :home
+    can :access, :horoscopes
     can :create, "devise/sessions"
     can [:callback, :success, :cancel], :paypal
     can [:create], "calls/psychic_callbacks"

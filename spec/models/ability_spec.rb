@@ -18,6 +18,10 @@ describe Ability do
       subject.should be_able_to(:access, :home)
     end
 
+    it "can access horoscopes" do
+      subject.should be_able_to(:access, :horoscopes)
+    end
+
     it "can sign in" do
       subject.should be_able_to(:create, "devise/sessions")
     end
