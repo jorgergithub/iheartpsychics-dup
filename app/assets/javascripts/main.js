@@ -13,6 +13,7 @@
 // App Modules ============================================
 //= require main/modules/home/index
 //= require main/modules/home/careers
+//= require main/modules/faqs/index
 //
 // App Startup Code =======================================
 //= require clamp

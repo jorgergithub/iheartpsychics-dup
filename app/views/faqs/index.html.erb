@@ -1,0 +1,23 @@
+<%= select ||= params[:select]  %>
+<section class="faqs small_container" data-selected-tab="<%= select %>">
+
+  <aside>
+    <ul>
+      <% @categories.each do |cat| %>
+        <li class="faqs-link-<%= cat.to_slug %>" href="#<%= cat.to_slug %>"><%= link_to cat.name, "##{cat.to_slug}" %></li>
+      <% end %>
+    </ul>
+  </aside>
+
+  <% @categories.each do |cat| %>
+    <article class="faq faqs-<%= cat.to_slug %>">
+      <% cat.faqs.each_with_index do |faq, i| %>
+        <section class="faqs-entry">
+          <div class="faqs-question-number"><%= i+1 %></div>
+          <h2 class="faqs-question"><%= faq.question %></h2>
+          <p class="faqs-answer"><%= faq.answer %></p>
+        </section>
+      <% end %>
+    </article>
+  <% end %>
+</section>

@@ -48,6 +48,32 @@ Tier.create(name: 'Gold',     from: 1200, to: 1599, percent: 19.5)
 Tier.create(name: 'Platinum', from: 1600, to: 1999, percent: 20)
 Tier.create(name: 'Diamond',  from: 2000, to: 999999, percent: 21)
 
+cat_general = Category.create(name: "General Questions")
+cat_account = Category.create(name: "Account Questions")
+cat_psychic = Category.create(name: "Psychic Questions")
+cat_csr     = Category.create(name: "Customer Service")
+cat_minutes = Category.create(name: "Adding Minutes")
+cat_cancel  = Category.create(name: "Canceling Account")
+cat_careers = Category.create(name: "Careers")
+
+cat_general.faqs.create(question: "How do I call or chat with a Psychic?", answer: <<-EOS)
+Simply select a psychic from the home page listings or browse psychic descriptions by category. If the psychic is available to take calls, you will see a “Call Me” button. If a psychic is available to chat you will see a “Chat Now” button. Click the psychic’s “Call Me” or “Chat Now” button to connect.
+
+If you’re a first-time customer, you will be asked to set up an account before being connected. If you’re an existing customer, you must log in first to be connected with a psychic.
+EOS
+
+lorem = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, dicta, eligendi, tempore sed maiores magni quibusdam libero quam quis ducimus voluptatum odio illum fuga excepturi aperiam totam iste ab temporibus."
+cat_general.faqs.create(question: "What if my Psychic isn’t available?", answer: lorem)
+cat_general.faqs.create(question: "What kind of question can I ask?", answer: lorem)
+cat_general.faqs.create(question: "What if I run out of time during my
+reading?", answer: lorem)
+cat_general.faqs.create(question: "How will I know when I’m running
+out of time?", answer: lorem)
+cat_general.faqs.create(question: "Do I have to use my minutes all at
+once?", answer: lorem)
+cat_general.faqs.create(question: "What if I forget my 10-digit account
+number or 4-digit PIN?", answer: lorem)
+
 admin = User.create!(first_name: 'Master', last_name: 'Admin',
                     username: 'admin', email: 'admin@iheartpsychics.co',
                     password: 'ipass123', create_as: 'admin', confirmed_at: Time.now)
