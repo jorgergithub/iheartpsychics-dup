@@ -28,6 +28,9 @@ class HomeController < AuthorizedController
   def dictionary
   end
 
+  def privacy
+  end
+
   def show
     go_home
   end
