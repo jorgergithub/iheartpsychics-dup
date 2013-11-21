@@ -15,6 +15,8 @@ Module("IHP.Pages.HomeCareers", function(HomeCareers) {
   };
 
   HomeCareers.fn.changeSelection = function(e) {
+    e.preventDefault();
+
     var link = this.extractTab($(e.target).attr("href"));
 
     $(".careers aside ul li.selected").removeClass("selected");
@@ -23,8 +25,6 @@ Module("IHP.Pages.HomeCareers", function(HomeCareers) {
     $(".careers article.careers-" + link).addClass("selected");
 
     location.hash = link;
-
-    return false;
   };
 
   HomeCareers.fn.displayProperTab = function() {

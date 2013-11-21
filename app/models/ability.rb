@@ -14,6 +14,7 @@ class Ability
     can [:new, :edit, :show, :create, :update], "devise/passwords"
     can [:create, :edit], :messages
     can [:create, :edit], :applications
+    can [:index, :show], :faqs
 
     if user
       authorize_user(user)
