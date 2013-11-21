@@ -162,11 +162,12 @@ IHeartPsychics::Application.routes.draw do
   get "/dashboard", to: "home#show", as: "dashboard"
   get "/unsubscribe/:id", to: "unsubscribe#unsubscribe", as: "unsubscribe"
 
-  get "/email_confirmation", to: "home#confirmation", as: "email_confirmation"
   get "/apna", to: "home#apna", as: "apna"
-  get "/ethics", to: "home#ethics", as: "ethics"
-  get "/contact", to: "home#contact", as: "contact"
   get "/careers", to: "home#careers", as: "careers"
+  get "/contact", to: "home#contact", as: "contact"
+  get "/dictionary", to: "home#dictionary", as: "dictionary"
+  get "/email_confirmation", to: "home#confirmation", as: "email_confirmation"
+  get "/ethics", to: "home#ethics", as: "ethics"
 
   root to: 'home#index'
 end

@@ -25,6 +25,9 @@ class HomeController < AuthorizedController
     @application = Application.new
   end
 
+  def dictionary
+  end
+
   def show
     go_home
   end
