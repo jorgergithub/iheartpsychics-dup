@@ -14,9 +14,9 @@ ScheduleJob.create!(description: 'Client Weekly Usage Report',
 
 horoscope = Horoscope.new(date: Date.today)
 Horoscope::SIGNS.each do |sign|
-  horoscope.send("#{sign}=", Faker::Lorem.paragraphs(5))
+  horoscope.send("#{sign.name.downcase}=", Faker::Lorem.paragraphs(3))
 end
-horoscope.lovescope = Faker::Lorem.paragraphs(5)
+horoscope.lovescope = Faker::Lorem.paragraphs(3)
 horoscope.friendship_compatibility_from = Horoscope::SIGNS.sample.name
 horoscope.friendship_compatibility_to = Horoscope::SIGNS.sample.name
 horoscope.love_compatibility_from = Horoscope::SIGNS.sample.name
