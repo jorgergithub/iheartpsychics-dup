@@ -1,34 +1,16 @@
 <nav class="signs">
   <div class="container_12">
     <%= image_tag "signs/left_arrow.png", class: "arrow left" %>
+
     <ul class="first selected">
       <% @horoscope.signs[0..5].each_with_index do |sign, index| %>
-        <li class="<%= 'selected' if index == 0 %>" data-sign="<%= sign.name %>">
-          <%= image_tag "signs/selected/#{sign.name.downcase}.png", class: :selected %>
-          <%= image_tag "signs/unselected/#{sign.name.downcase}.png", class: :unselected %>
-          <h1>
-            <%= sign.name %>
-          </h1>
-          <time>
-            <%= sign.first_day.strftime("%m.%d").gsub(/^0/,"") %> - 
-            <%= sign.last_day.strftime("%m.%d").gsub(/^0/,"") %>
-          </time>
-        </li>
+        <%= render "nav_sign_item", sign: sign, selected: select_if_first(index) %>
       <% end %>
     </ul>
+
     <ul class="last">
       <% @horoscope.signs[6..11].each_with_index do |sign| %>
-        <li data-sign="<%= sign.name %>">
-          <%= image_tag "signs/selected/#{sign.name.downcase}.png", class: :selected %>
-          <%= image_tag "signs/unselected/#{sign.name.downcase}.png", class: :unselected %>
-          <h1>
-            <%= sign.name %>
-          </h1>
-          <time>
-            <%= sign.first_day.strftime("%m.%d").gsub(/^0/,"") %> - 
-            <%= sign.last_day.strftime("%m.%d").gsub(/^0/,"") %>
-          </time>
-        </li>
+        <%= render "nav_sign_item", sign: sign, selected: "" %>
       <% end %>
     </ul>
     <%= image_tag "signs/right_arrow.png", class: "arrow right" %>

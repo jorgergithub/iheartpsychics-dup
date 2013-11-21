@@ -1,0 +1,16 @@
+<article class="sign <%= selected %>" data-sign="<%= sign.name %>">
+  <div class="row">
+    <%= render "horoscopes/sign/horoscope", sign: sign %>
+    <%= render "horoscopes/sign/love_scope", sign: sign %>
+  </div>
+
+  <div class="row">
+    <%= render "horoscopes/sign/lucky_numbers" %>
+    <%= render "horoscopes/sign/lucky_numbers" %>
+  </div>
+
+  <div class="row">
+    <%= render "horoscopes/sign/friendship", horoscope: sign.horoscope %>
+    <%= render "horoscopes/sign/love", horoscope: sign.horoscope %>
+  </div>
+</article>
