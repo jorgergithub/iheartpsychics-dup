@@ -51,6 +51,11 @@
     color: #8590a1;
   }
 
+  a {
+    color: #8590a1;
+    font-weight: bold;
+  }
+
   form {
     font-size: 16px;
   }
@@ -101,6 +106,7 @@
     padding: 20px;
     margin-bottom: 20px;
     color: black;
+    border-radius: 4px;
   }
 
   #error_explanation h2 {
@@ -111,5 +117,20 @@
   #error_explanation ul {
     list-style-type: square;
     padding: 10px 0 0 20px;
+  }
+
+  .carrers-psychics-apply-now {
+    display: block;
+    border: 0;
+    border-radius: 4px;
+    width: 170px;
+    padding: 18px 0;
+    background-color: #6acd00;
+    font-size: 20px;
+    font-weight: normal;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    margin: 0 auto;
   }
 }
