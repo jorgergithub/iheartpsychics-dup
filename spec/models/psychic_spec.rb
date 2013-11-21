@@ -100,6 +100,11 @@ describe Psychic do
 
     before { client.balance = psychic.price * 10 }
 
+    it "returns false if psychic has no price" do
+      psychic.price = nil
+      expect(psychic.can_callback?(client)).to be_false
+    end
+
     it "returns false if psychic is available" do
       psychic.stub(available?: true)
       expect(psychic.can_callback?(client)).to be_false
