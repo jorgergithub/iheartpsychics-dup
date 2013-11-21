@@ -14,9 +14,9 @@ ScheduleJob.create!(description: 'Client Weekly Usage Report',
 
 horoscope = Horoscope.new(date: Date.today)
 Horoscope::SIGNS.each do |sign|
-  horoscope.send("#{sign.name.downcase}=", Faker::Lorem.paragraphs(3))
+  horoscope.send("#{sign.name.downcase}=", Faker::Lorem.paragraphs(5).join("\n"))
 end
-horoscope.lovescope = Faker::Lorem.paragraphs(3)
+horoscope.lovescope = Faker::Lorem.paragraphs(5).join("\n")
 horoscope.friendship_compatibility_from = Horoscope::SIGNS.sample.name
 horoscope.friendship_compatibility_to = Horoscope::SIGNS.sample.name
 horoscope.love_compatibility_from = Horoscope::SIGNS.sample.name
@@ -115,7 +115,7 @@ app1 = PsychicApplication.create!(first_name: 'Unfortunate', last_name: 'Teller'
                    emergency_contact_number: "+13044440404",
                    us_citizen: true, has_experience: true,
                    experience: Faker::Lorem.paragraph,
-                   gift: Faker::Lorem.words,
+                   gift: Faker::Lorem.words.join,
                    explain_gift: Faker::Lorem.paragraph,
                    age_discovered: 12,
                    reading_style: Faker::Lorem.paragraph,
@@ -139,7 +139,7 @@ app2 = PsychicApplication.create!(first_name: 'Trinity', last_name: 'Megan', pse
                    emergency_contact_number: "+13044440404",
                    us_citizen: true, has_experience: true,
                    experience: Faker::Lorem.paragraph,
-                   gift: Faker::Lorem.words,
+                   gift: Faker::Lorem.words.join,
                    explain_gift: Faker::Lorem.paragraph,
                    age_discovered: 12,
                    reading_style: Faker::Lorem.paragraph,
@@ -187,7 +187,7 @@ csr.rep.update_attributes phone: "+13054502995"
                                emergency_contact_number: "+1#{Faker::Base.regexify(/\d{10}/)}",
                                us_citizen: true, has_experience: true,
                                experience: Faker::Lorem.paragraph,
-                               gift: Faker::Lorem.words,
+                               gift: Faker::Lorem.words.join,
                                explain_gift: Faker::Lorem.paragraph,
                                age_discovered: 12,
                                reading_style: Faker::Lorem.paragraph,
@@ -250,7 +250,7 @@ psychic.reviews.create(client: Client.first(offset: rand(Client.count)), rating:
 300.times do
   psychic = Psychic.first(offset: rand(Psychic.count))
   psychic.reviews.create(client: Client.first(offset: rand(Client.count)),
-                         rating: 4, text: Faker::Lorem.words(10))
+                         rating: 4, text: Faker::Lorem.words(10).join)
 end
 
 now = DateTime.now
