@@ -1,4 +1,4 @@
-.ethics, .contact {
+.ethics, .contact, .dictionary {
   padding: 100px 0 70px 0;
   color: #8590a1;
 
@@ -18,5 +18,17 @@
     color: #5d687a;
     line-height: 1.5em;
     padding: 10px 0;
+  }
+}
+
+.dictionary h1 {
+  margin-bottom: 40px;
+}
+
+.dictionary p {
+  font-weight: normal;
+
+  span {
+    font-weight: bold;
   }
 }
