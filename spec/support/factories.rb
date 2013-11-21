@@ -241,6 +241,8 @@ FactoryGirl.define do
     friendship_compatibility_to "Taurus"
     love_compatibility_from "Virgo"
     love_compatibility_to "Capricorn"
+
+    lovescope ""
   end
 
   factory :sign do
