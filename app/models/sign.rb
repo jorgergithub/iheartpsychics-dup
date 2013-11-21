@@ -3,7 +3,7 @@ class Sign
   attr_reader :name, :first_day, :last_day
 
   def initialize(name, first_day, last_day)
-    @horoscope, @name, @first_day, @last_day = horoscope, name, first_day, last_day
+    @name, @first_day, @last_day = name, first_day, last_day
   end
 
   def text
