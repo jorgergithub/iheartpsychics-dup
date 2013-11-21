@@ -66,32 +66,6 @@
           <%= image_tag "signs/#{@horoscope.love_compatibility_to.downcase}.png" %>
         </article>
       </div>
-
-      <div class="row">
-        <article class="email">
-          <header>
-            <h1>Email My Horoscope</h1>
-          </header>
-
-          <form>
-            <%= text_field_tag :email, nil, placeholder: "Your Email Here..." %>
-            <%= image_submit_tag "signs/send_email.png" %>
-          </form>
-
-        </article>
-
-        <article class="social">
-          <header>
-            <h1>Share my Horoscope</h1>
-          </header>
-
-          <ul>
-            <li><%= link_to image_tag("signs/twitter.png"), "#" %></li>
-            <li><%= link_to image_tag("signs/facebook.png"), "#" %></li>
-            <li><%= link_to image_tag("signs/google_plus.png"), "#" %></li>
-          </ul>
-        </article>
-      </div>
     </article>
   <% end %>
 </section>
