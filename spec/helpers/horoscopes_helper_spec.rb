@@ -12,7 +12,7 @@ describe HoroscopesHelper do
 
 
     it "adds prefix to select if present" do
-      expect(helper.select_if_first(0, :horoscope)).to be_eql "horoscope-selected"
+      expect(helper.select_if_first(0, :horoscope)).to be_eql "horoscope_selected"
     end
   end
 end

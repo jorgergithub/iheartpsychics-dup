@@ -2,6 +2,6 @@
 
 <section id="details" class="container_12">
   <% @horoscope.signs.each_with_index do |sign, index| %>
-    <%= render "sign", sign: sign, selected: select_if_first(index) %>
+    <%= render "sign", sign: sign, selected: select_if_first(index, :horoscope) %>
   <% end %>
 </section>
