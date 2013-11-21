@@ -6,6 +6,7 @@
  *= require lib/960
  *= require main/helpers
  *= require main/horoscopes/nav
+ *= require main/horoscopes/details
  *= require main/typography
  *= require main/main
  *= require main/modules/_main_user

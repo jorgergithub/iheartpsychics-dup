@@ -1,47 +1,95 @@
 <%= render "nav" %>
 
 <section id="details" class="container_12">
-  <article class="aries">
-    <article class="lucky">
-      <header>
-        <h1>Aries</h1>
-        <time>April 20 - May 20</time>
-      </header>
+  <article class="sign aries">
+    <div class="row">
+      <article class="lucky">
+        <header>
+          <h1>Aries</h1>
+          <time>April 20 - May 20</time>
+        </header>
 
-      <p>
-        If you have the time today, work on reconnecting with some people from your past. Email is a great way to get back in touch without making too much of a commitment. Even if no one replies, you will feel good knowing you got things out into the universe. Take a stab in the dark and think about who is least likely to reply -- and then reach out to them. Your generosity is itching to get out and show itself, so let it lead the way in everything you write.
-      </p>
+        <p>
+          If you have the time today, work on reconnecting with some people from your past. Email is a great way to get back in touch without making too much of a commitment. Even if no one replies, you will feel good knowing you got things out into the universe. Take a stab in the dark and think about who is least likely to reply -- and then reach out to them. Your generosity is itching to get out and show itself, so let it lead the way in everything you write.
+        </p>
 
-      <aside class="lucky_numbers">
-        <h1>Your Lucky Numbers for today are:</h1>
+        <aside class="lucky_numbers">
+          <h1>Your Lucky Numbers for today are:</h1>
+
+          <ul>
+            <% [4,8,15,16,23,42].each do |number| %>
+              <li><%= number %></li>
+            <% end %>
+          </ul>
+        </aside>
+      </article>
+
+      <article class="love_scope">
+        <header>
+          <h1>Weekly Lovescope</h1>
+          <time>Thrusday, August 01, 2013</time>
+        </header>
+
+        <p>
+          Making a sacrifice is never very much fun, but today it will be easy. You will see a clear benefit to making a tiny, painless alteration to your plans. A slight change will also be called for in your romantic life when someone asks you to sacrifice something you want for the sake of your relationship. Only you will know if this is asking too much; but before you decide if this is a deal-breaker, ask yourself if they would do the same for you.
+        </p>
+
+        <aside class="lucky_numbers">
+          <h1>Your Lucky Numbers for today are:</h1>
+
+          <ul>
+            <% [4,8,15,16,23,42].each do |number| %>
+              <li><%= number %></li>
+            <% end %>
+          </ul>
+        </aside>
+      </article>
+    </div>
+
+    <div class="row">
+      <article class="friendship">
+        <header>
+          <h1>Today's Friendship Compatibility</h1>
+        </header>
+
+        <%= image_tag "signs/taurus.png" %>
+        <%= image_tag "signs/sagittarius.png" %>
+      </article>
+
+      <article class="friendship">
+        <header>
+          <h1>Today's Love Compatibility</h1>
+        </header>
+
+        <%= image_tag "signs/taurus.png" %>
+        <%= image_tag "signs/scorpio.png" %>
+      </article>
+    </div>
+
+    <div class="row">
+      <article class="email">
+        <header>
+          <h1>Email My Horoscope</h1>
+        </header>
+
+        <form>
+          <%= text_field_tag :email, nil, placeholder: "Your Email Here..." %>
+          <%= image_submit_tag "signs/send_email.png" %>
+        </form>
+
+      </article>
+
+      <article class="social">
+        <header>
+          <h1>Share my Horoscope</h1>
+        </header>
 
         <ul>
-          <% [4,8,15,16,23,42].each do |number| %>
-            <li><%= number %></li>
-          <% end %>
+          <li><%= link_to image_tag("signs/twitter.png"), "#" %></li>
+          <li><%= link_to image_tag("signs/facebook.png"), "#" %></li>
+          <li><%= link_to image_tag("signs/google_plus.png"), "#" %></li>
         </ul>
-      </aside>
-    </article>
-
-    <article class="love">
-      <header>
-        <h1>Weekly Lovescope</h1>
-        <time>Thrusday, August 01, 2013</time>
-      </header>
-
-      <p>
-        Making a sacrifice is never very much fun, but today it will be easy. You will see a clear benefit to making a tiny, painless alteration to your plans. A slight change will also be called for in your romantic life when someone asks you to sacrifice something you want for the sake of your relationship. Only you will know if this is asking too much; but before you decide if this is a deal-breaker, ask yourself if they would do the same for you.
-      </p>
-
-      <aside class="lucky_numbers">
-        <h1>Your Lucky Numbers for today are:</h1>
-
-        <ul>
-          <% [4,8,15,16,23,42].each do |number| %>
-            <li><%= number %></li>
-          <% end %>
-        </ul>
-      </aside>
-    </article>
+      </article>
+    </div>
   </article>
 </section>
