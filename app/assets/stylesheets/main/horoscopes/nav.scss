@@ -10,15 +10,15 @@
     margin-left: 15px;
   }
 
-  ul.selected {
+  ul.horoscope_selected {
     display: inline-block;
   }
 
-  img.arrow.left {
+  img.horoscope_arrow.horoscope_left {
     margin-left: 10px;
   }
 
-  img.arrow.right {
+  img.horoscope_arrow.horoscope_right {
     margin-right: 10px;
   }
 
@@ -43,7 +43,7 @@
     font-size: 16px;
   }
 
-  li.selected {
+  li.horoscope_selected {
     color: white;
     background: #7fd14d;
     -webkit-border-radius: 3px;
@@ -51,16 +51,16 @@
     border-radius: 3px;
   }
 
-  li img.selected {
+  li img.horoscope_selected {
     display: none;
   }
 
-  li.selected img.selected {
+  li.horoscope_selected img.horoscope_selected {
     display: inline-block;
   }
 
 
-  li.selected img.unselected {
+  li.horoscope_selected img.horoscope_unselected {
     display: none;
   }
 
@@ -68,7 +68,7 @@
     margin-bottom: 24px;
   }
 
-  img.arrow {
+  img.horoscope_arrow {
     display: inline-block;
     vertical-align: top;
     margin-top: 67px;

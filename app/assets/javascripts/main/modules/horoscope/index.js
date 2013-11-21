@@ -1,20 +1,20 @@
 $(document).ready(function() {
   $(".horoscopes nav.signs li").on("click", function(e) {
     var sign = $(this).data("sign");
-    $(".horoscopes nav.signs li").removeClass("selected");
-    $(this).addClass("selected");
+    $(".horoscopes nav.signs li").removeClass("horoscope_selected");
+    $(this).addClass("horoscope_selected");
 
-    $(".horoscopes article.sign").removeClass("selected");
-    $(".horoscopes article.sign[data-sign=" + sign + "]").addClass("selected");
+    $(".horoscopes article.horoscopes_sign").removeClass("horoscope_selected");
+    $(".horoscopes article.horoscopes_sign[data-sign=" + sign + "]").addClass("horoscope_selected");
   });
 
-  $(".horoscopes nav.signs img.arrow.left").on("click", function(e) {
-    $(this).siblings("ul.first").addClass("selected");
-    $(this).siblings("ul.last").removeClass("selected");
+  $(".horoscopes nav.signs img.horoscope_arrow.horoscope_left").on("click", function(e) {
+    $(this).siblings("ul.horoscope_first").addClass("horoscope_selected");
+    $(this).siblings("ul.horoscope_last").removeClass("horoscope_selected");
   });
 
-  $(".horoscopes nav.signs img.arrow.right").on("click", function(e) {
-    $(this).siblings("ul.first").removeClass("selected");
-    $(this).siblings("ul.last").addClass("selected");
+  $(".horoscopes nav.signs img.horoscope_arrow.horoscope_right").on("click", function(e) {
+    $(this).siblings("ul.horoscope_first").removeClass("horoscope_selected");
+    $(this).siblings("ul.horoscope_last").addClass("horoscope_selected");
   });
 });
