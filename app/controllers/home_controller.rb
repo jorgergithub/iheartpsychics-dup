@@ -31,6 +31,9 @@ class HomeController < AuthorizedController
   def privacy
   end
 
+  def terms
+  end
+
   def show
     go_home
   end

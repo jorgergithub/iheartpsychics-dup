@@ -169,6 +169,7 @@ IHeartPsychics::Application.routes.draw do
   get "/email_confirmation", to: "home#confirmation", as: "email_confirmation"
   get "/ethics", to: "home#ethics", as: "ethics"
   get "/privacy", to: "home#privacy", as: "privacy"
+  get "/terms", to: "home#terms", as: "terms"
 
   root to: 'home#index'
 end
