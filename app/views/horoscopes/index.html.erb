@@ -1,18 +1,18 @@
 <%= render "nav" %>
 
 <section id="details" class="container_12">
-  <div class="row">
+  <div class="horoscopes_row">
     <% @horoscope.signs.each_with_index do |sign, index| %>
       <%= render "sign", sign: sign, selected: select_if_first(index, :horoscope) %>
     <% end %>
   </div>
 
-  <div class="row">
+  <div class="horoscopes_row">
     <%= render "horoscopes/sign/lucky_numbers" %>
     <%= render "horoscopes/sign/lucky_numbers" %>
   </div>
 
-  <div class="row">
+  <div class="horoscopes_row">
     <%= render "horoscopes/sign/friendship", horoscope: @horoscope %>
     <%= render "horoscopes/sign/love", horoscope: @horoscope %>
   </div>
