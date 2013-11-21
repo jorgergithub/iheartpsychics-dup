@@ -1,0 +1,22 @@
+# Base setup
+
+base: &base
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  password:
+  reconnect: true
+
+# Main database
+
+development:
+  <<: *base
+  database: iheartpsychics
+
+test:
+  <<: *base
+  database: iheartpsychics_test
+
+production:
+  <<: *base
+  database: iheartpsychics
