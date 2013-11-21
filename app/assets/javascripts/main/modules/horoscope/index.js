@@ -4,8 +4,8 @@ $(document).ready(function() {
     $(".horoscopes nav.signs li").removeClass("horoscope_selected");
     $(this).addClass("horoscope_selected");
 
-    $(".horoscopes article.horoscopes_sign").removeClass("horoscope_selected");
-    $(".horoscopes article.horoscopes_sign[data-sign=" + sign + "]").addClass("horoscope_selected");
+    $(".horoscopes div.horoscopes_sign").removeClass("horoscope_selected");
+    $(".horoscopes div.horoscopes_sign[data-sign=" + sign + "]").addClass("horoscope_selected");
   });
 
   $(".horoscopes nav.signs img.horoscope_arrow.horoscope_left").on("click", function(e) {
