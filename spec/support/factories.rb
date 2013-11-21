@@ -221,4 +221,31 @@ FactoryGirl.define do
     client
     wait_for 30
   end
+
+  factory :horoscope do
+    date Date.today
+    aries "aries Horoscope"
+    taurus "taurus Horoscope"
+    gemini "gemini Horoscope"
+    cancer "cancer Horoscope"
+    leo "leo Horoscope"
+    virgo "virgo Horoscope"
+    libra "libra Horoscope"
+    scorpio "scorpio Horoscope"
+    sagittarius "sagittarius Horoscope"
+    capricorn "capricorn Horoscope"
+    aquarius "aquarius Horoscope"
+    pisces "pisces Horoscope"
+
+    friendship_compatibility_from "Aries"
+    friendship_compatibility_to "Taurus"
+    love_compatibility_from "Virgo"
+    love_compatibility_to "Capricorn"
+  end
+
+  factory :sign do
+    name "Aries"
+    first_date Date.new(2014,3,21)
+    last_date Date.new(2014,4,19)
+  end
 end

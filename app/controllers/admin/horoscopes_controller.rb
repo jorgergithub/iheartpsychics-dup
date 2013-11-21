@@ -40,7 +40,8 @@ class Admin::HoroscopesController < AuthorizedController
   def horoscope_params
     params.require(:horoscope).permit(:date, :aries, :taurus, :gemini, :cancer,
       :leo, :virgo, :libra, :scorpio, :sagittarius, :capricorn, :aquarius,
-      :pisces, :lovescope, :friendship_compatibility, :love_compatibility)
+      :pisces, :lovescope, :friendship_compatibility_to, :friendship_compatibility_from, 
+      :love_compatibility_to, :love_compatibility_from)
   end
 
   def find_horoscope
