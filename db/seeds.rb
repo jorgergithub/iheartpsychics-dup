@@ -12,6 +12,17 @@ ScheduleJob.create!(description: 'Client Weekly Usage Report',
                     model: 'ClientWeeklyUsageReport',
                     action: 'deliver')
 
+horoscope = Horoscope.new(date: Date.today)
+Horoscope::SIGNS.each do |sign|
+  horoscope.send("#{sign}=", Faker::Lorem.paragraphs(5))
+end
+horoscope.lovescope = Faker::Lorem.paragraphs(5)
+horoscope.friendship_compatibility_from = Horoscope::SIGNS.sample.name
+horoscope.friendship_compatibility_to = Horoscope::SIGNS.sample.name
+horoscope.love_compatibility_from = Horoscope::SIGNS.sample.name
+horoscope.love_compatibility_to = Horoscope::SIGNS.sample.name
+horoscope.save
+
 survey = Survey.create(name: "Client Survey", active: true)
 
 question = survey.questions.create(type: "OptionsQuestion", text: "How often do you have a Psychic reading a month?")
