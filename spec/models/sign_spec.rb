@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Sign do
   let(:horoscope) { FactoryGirl.build :horoscope }
-  let(:subject)   { Horoscope::Taurus }
+  let(:subject)   { Sign::Taurus }
 
   it "delegates :text to horoscope" do
     horoscope.taurus = "Taurus Horoscope"

@@ -3,7 +3,9 @@
 <section id="details" class="container_12">
   <div class="horoscopes_row">
     <% @horoscope.signs.each_with_index do |sign, index| %>
-      <%= render "sign", sign: sign, selected: select_if_first(index, :horoscope) %>
+      <%= render "sign",  sign: sign, 
+                          lovescope_horoscope: @lovescope_horoscope, 
+                          selected: select_if_first(index, :horoscope) %>
     <% end %>
   </div>
 
