@@ -1,0 +1,10 @@
+#psychic-details {
+  .container_12 {
+    width: 970px;
+  }
+
+  & .container_12 > section,
+  & .container_12 > article {
+    margin: 100px 0px;
+  }
+}
