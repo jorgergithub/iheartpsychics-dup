@@ -1,0 +1,34 @@
+<section class="psychic-reviews">
+  <h1>My Featured Reviews</h1>
+
+  <section class="psychic-reviews-main">
+    <%= image_tag "psychics/left_arrow.png", class: "psychic-arrow psychic-left-arrow" %>
+
+    <% [0,1,2,3,4,5].each do |index| %>
+      <article class="<%= 'psychic-selected' if index == 0 %>" data-page="<%= index %>">
+        <div class="psychic-reviews-review">
+          <%= image_tag "psychics/open_quotes.png", class: "psychic-open-quotes" %>
+          <p>
+            Review <%= index %>. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Quisque eg
+          </p>
+          <%= image_tag "psychics/close_quotes.png", class: "psychic-close-quotes" %>
+        
+          <%= render "psychics/about/reviews/reviewer", name: "Sterling Hawkins, March 15, 2013", stars: 3, star_type: :big %>
+        </div>
+      </article>
+    <% end %>
+    
+    <%= image_tag "psychics/right_arrow.png", class: "psychic-arrow psychic-right-arrow" %>
+  </section>
+
+  <% 2.times do %>
+    <article class="psychic-review">
+      <h1>Excellent Reading! So Impressed!</h1>
+      <p>
+        Phasellus molie magna non est bibendum non venenatis nisl tempor. Dictum feugiat nisl ut dapibus. natis nisl tempor.
+      </p>
+
+      <%= render "psychics/about/reviews/reviewer", name: "Sue Jones, March 15, 2013", stars: 2, star_type: :small %>
+    </article>
+  <% end %>
+</section>

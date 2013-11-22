@@ -13,6 +13,7 @@
  *= require main/psychics/about/profile
  *= require main/psychics/about/pricing
  *= require main/psychics/about/schedule
+ *= require main/psychics/about/reviews
  *= require main/modules/_main_user
  *= require main/modules/_main_header
  *= require main/modules/_main_nav

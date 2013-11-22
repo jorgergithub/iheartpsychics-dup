@@ -15,6 +15,7 @@
 //= require main/modules/home/careers
 //= require main/modules/faqs/index
 //= require main/modules/horoscope/index
+//= require main/modules/psychic/about
 //
 // App Startup Code =======================================
 //= require clamp
