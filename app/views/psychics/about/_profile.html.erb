@@ -1,0 +1,23 @@
+<article class="psychic-profile">
+  <div class="psychic-details-avatar">
+    <%= image_tag "psychics/avatar_sample.png" %>
+    <%= link_to image_tag("psychics/fav_button.png"), "#", class: "fav_button" %>
+  </div>
+
+  <div class="psychic-profile">
+    <h1><%= @psychic.alias_name %></h1>
+    <p>
+      I’ve been doing readings and predictions for the last 20 years. My passion is helping others who have questions about life, love and relationships.
+    </p>
+
+    <p class="psychic-expert">
+      <strong>Expert In:</strong> Love, Jobs, Relationships  
+    </p>
+
+    <p class="psychic-ext">
+      <strong>Ext:</strong> 5643
+    </p>
+
+    <%= link_to image_tag("psychics/im_available.png"), "#" %>
+  </div>
+</article>
