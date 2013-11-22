@@ -1,0 +1,48 @@
+<section class="psychic-similar">
+  <h1>Psychics Similar to <%= @psychic.first_name %>, <b>Available and Ready!</b></h1>
+  
+  <% [["I'm on a call",:busy],
+      ["I'm available",:available],
+      ["I'm offline",:offline]].each do |state| %>
+    
+    <article>
+      <header>
+        <%= image_tag "psychics/avatar_sample.png" %>
+      </header>
+
+      <div class="content">
+        <header>
+          <div class="psychic-similar-left">
+            <h1><%= @psychic.first_name %></h1>
+            <div class="stars">* * * * *</div>
+          </div>
+          <div class="psychic-similar-right">
+            <div class="psychic-similar-price">
+              $17 <small>Min</small>
+            </div>
+            <div class="psychic-similar-ext">
+              Ext: <span>4892</span>
+            </div>
+          </div>
+        </header>
+
+        <h1>
+          I’m a Capricorn! I Specialize in:
+        </h1>
+
+        <p>
+          At vero eos et accusamus et iusto odio dignissimos ducimus qui bla...
+        </p>
+
+        <%= link_to "Read more", "#" %>
+
+        <footer>
+          <span class="<%= state.last %>">
+            <%= state.first %>
+          </span>
+        </footer>
+      </div>
+    </article>
+ 
+  <% end %>
+</section>
