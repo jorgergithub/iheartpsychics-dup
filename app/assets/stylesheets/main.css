@@ -9,6 +9,7 @@
  *= require main/horoscopes/details
  *= require main/typography
  *= require main/main
+ *= require main/psychics/about
  *= require main/modules/_main_user
  *= require main/modules/_main_header
  *= require main/modules/_main_nav

@@ -1,6 +1,7 @@
 class PsychicsController < AuthorizedController
   skip_before_filter :authenticate_user!, only: :new
   before_filter :find_psychic, except: [:new, :search, :about]
+  layout :resolve_layout
 
   attr_accessor :resource, :resource_name
   helper_method :resource, :resource_name
@@ -62,5 +63,9 @@ class PsychicsController < AuthorizedController
       :specialties_past_lives, :specialties_deceased, :style_compassionate,
       :style_inspirational, :style_straightforward, :about, :price,
       schedules_attributes: [:id, :date, :start_time_string, :end_time_string, :_destroy])
+  end
+
+  def resolve_layout
+    return "main" if action_name == "about"
   end
 end
