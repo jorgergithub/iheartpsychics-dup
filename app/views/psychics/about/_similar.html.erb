@@ -1,10 +1,7 @@
 <section class="psychic-similar">
   <h1>Psychics Similar to <%= @psychic.first_name %>, <b>Available and Ready!</b></h1>
   
-  <% [["I'm on a call",:busy],
-      ["I'm available",:available],
-      ["I'm offline",:offline]].each do |state| %>
-    
+  <% Psychic.first(3).each do |psychic| %>
     <article>
       <header>
         <%= image_tag "psychics/avatar_sample.png" %>
@@ -13,35 +10,38 @@
       <div class="content">
         <header>
           <div class="psychic-similar-left">
-            <h1><%= @psychic.first_name %></h1>
-            <%= render "psychics/about/stars", stars: 3, star_type: "small_green" %>
-            <span class="psychics_reviews_amount">(23)</span>
+            <h1><%= psychic.first_name %></h1>
+            <%= render "psychics/about/stars", stars: psychic.rating, star_type: "small_green" %>
+            <span class="psychics_reviews_amount">(<%= psychic.reviews.count %>)</span>
           </div>
           <div class="psychic-similar-right">
             <div class="psychic-similar-price">
-              $17<small>Min</small>
+              $<%= psychic.price %><small>Min</small>
             </div>
             <div class="psychic-similar-ext">
-              Ext: <span>4892</span>
+              Ext: <span><%= psychic.extension %></span>
             </div>
           </div>
         </header>
 
         <div class="body">
           <h1>
-            I’m a Capricorn! I Specialize in:
+            <% if psychic.sign %>
+              I’m a <%= psychic.sign.name %>!
+            <% end %>
+            I Specialize in:
           </h1>
 
           <p>
-            At vero eos et accusamus et iusto odio dignissimos ducimus qui bla...
+            <%= psychic.specialties %>
           </p>
 
-          <%= link_to "Read more", "#" %>
+          <%= link_to "Read more", about_psychic_path(psychic) %>
         </div>
 
         <footer>
-          <span class="<%= state.last %>">
-            <%= state.first %>
+          <span class="<%= psychic.current_state %>">
+            <%= psychic_state(psychic) %>
           </span>
         </footer>
       </div>

@@ -7,17 +7,26 @@
   <div class="psychic-profile">
     <h1><%= @psychic.alias_name %></h1>
     <p>
-      I’ve been doing readings and predictions for the last 20 years. My passion is helping others who have questions about life, love and relationships.
+      <%= @psychic.about %>
     </p>
 
-    <p class="psychic-expert">
-      Expert In: Love, Jobs, Relationships  
-    </p>
+    <% if @psychic.specialties.present? %>
+      <p class="psychic-expert">
+        Expert In: <%= @psychic.specialties.titleize %>
+      </p>
+    <% end %>
 
     <p class="psychic-ext">
-      Ext: 5643
+      Ext: <%= @psychic.extension %>
     </p>
 
-    <%= link_to image_tag("psychics/im_available.png"), "#" %>
+    <div class="psychic_state">
+      <% if @psychic.available? %>
+        <%= image_tag("psychics/im_available.png") %>
+      <% else %>
+        <%= image_tag("psychics/im_on_a_call.png") if @psychic.on_a_call? %>
+        <%= link_to image_tag("psychics/call_me_back.png"), new_callbacks_path(psychic_id: @psychic.id) %>
+      <% end %>
+    </div>
   </div>
 </article>

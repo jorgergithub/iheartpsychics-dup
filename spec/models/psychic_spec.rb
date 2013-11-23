@@ -20,6 +20,13 @@ describe Psychic do
     it { should validate_uniqueness_of(:extension) }
   end
 
+  describe "sign" do
+    it "delegates sign to Sign class" do
+      subject.date_of_birth = Sign::Aries.first_day
+      expect(subject.sign).to be_eql Sign::Aries
+    end
+  end
+
   describe "#assign_extension" do
     it "assigns a random extension when creating" do
       RandomUtils.stub(:random_extension => "1234")
