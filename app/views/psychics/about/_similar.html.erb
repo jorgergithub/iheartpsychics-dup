@@ -14,11 +14,12 @@
         <header>
           <div class="psychic-similar-left">
             <h1><%= @psychic.first_name %></h1>
-            <div class="stars">* * * * *</div>
+            <%= render "psychics/about/stars", stars: 3, star_type: "small_green" %>
+            <span class="psychics_reviews_amount">(23)</span>
           </div>
           <div class="psychic-similar-right">
             <div class="psychic-similar-price">
-              $17 <small>Min</small>
+              $17<small>Min</small>
             </div>
             <div class="psychic-similar-ext">
               Ext: <span>4892</span>
@@ -26,15 +27,17 @@
           </div>
         </header>
 
-        <h1>
-          I’m a Capricorn! I Specialize in:
-        </h1>
+        <div class="body">
+          <h1>
+            I’m a Capricorn! I Specialize in:
+          </h1>
 
-        <p>
-          At vero eos et accusamus et iusto odio dignissimos ducimus qui bla...
-        </p>
+          <p>
+            At vero eos et accusamus et iusto odio dignissimos ducimus qui bla...
+          </p>
 
-        <%= link_to "Read more", "#" %>
+          <%= link_to "Read more", "#" %>
+        </div>
 
         <footer>
           <span class="<%= state.last %>">
