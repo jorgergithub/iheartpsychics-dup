@@ -8,6 +8,7 @@ class Review < ActiveRecord::Base
   validates :client, :psychic, :rating, :text, presence: true
 
   scope :featured, -> { where(featured: true) }
+  scope :regular, -> { where(featured: false) }
 
   Ratings = {
     5 => "I'm in love",
@@ -18,10 +19,6 @@ class Review < ActiveRecord::Base
   }
 
   def mark_as_featured!
-    psychic_reviews.featured.each do |review|
-      review.unmark_as_featured!
-    end
-
     update_attribute(:featured, true)
   end
 

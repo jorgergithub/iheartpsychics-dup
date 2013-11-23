@@ -53,8 +53,12 @@ class Psychic < ActiveRecord::Base
     (events.last.try(:state) || STATES.first).inquiry
   end
 
-  def featured_review
-    reviews.featured.first
+  def featured_reviews
+    reviews.featured
+  end
+
+  def regular_reviews
+    reviews.regular
   end
 
   def rating
@@ -161,5 +165,9 @@ class Psychic < ActiveRecord::Base
     return if self.extension
     existing_extensions = Psychic.pluck("extension")
     self.extension = RandomUtils.random_extension(existing_extensions)
+  end
+
+  def sign
+    Sign.by_date(date_of_birth)
   end
 end

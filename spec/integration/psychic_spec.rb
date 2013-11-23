@@ -3,12 +3,13 @@ require "spec_helper"
 describe Psychic do
   let(:psychic) { create(:psychic) }
 
-  describe "#featured_review" do
-    it "returns first review marked as festured" do
-      featured_review = create(:featured_review, psychic: psychic)
+  describe "#featured_reviews" do
+    it "returns all reviews marked as festured" do
+      featured_review =   create(:featured_review, psychic: psychic)
+      featured_review_2 = create(:featured_review, psychic: psychic)
       review = create(:review, psychic: psychic)
 
-      expect(psychic.featured_review).to eq featured_review
+      expect(psychic.featured_reviews).to eq [featured_review, featured_review_2]
     end
   end
 

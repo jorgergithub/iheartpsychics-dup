@@ -1,4 +1,15 @@
 module PsychicsHelper
+  def psychic_state psychic
+    case psychic.current_state.to_s
+    when "available"
+      "I'm available"
+    when "on_a_call"
+      "I'm on a call"
+    when "unavailable"
+      "I'm offline"
+    end
+  end
+
   def psychic_prices
     values = Array(4.upto(7))
 
