@@ -1,7 +1,11 @@
 <article class="psychic-profile">
   <div class="psychic-details-avatar">
     <%= image_tag "psychics/avatar_sample.png" %>
-    <%= link_to image_tag("psychics/fav_button.png"), "#", class: "fav_button" %>
+    <% if current_user.client.favorite?(@psychic) %>
+      <%= link_to image_tag("psychics/fav_button.png"), remove_favorite_client_path(psychic_id: @psychic.id), class: "fav_button" %>
+    <% else %>
+      <%= link_to image_tag("psychics/fav_button.png"), make_favorite_client_path(psychic_id: @psychic.id), class: "fav_button" %>
+    <% end %>
   </div>
 
   <div class="psychic-profile">
