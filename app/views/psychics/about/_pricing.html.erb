@@ -1,37 +1,48 @@
 <section class="psychic-pricing">
+  <table>
+    <tr>
+      <td>
+        <h1>Per minute</h1>
+        <%= image_tag "psychics/price_icon.png" %>
+        <div class="label">
+          <span>$<%= @psychic.price %></span>
+        </div>
+      </td>
+
+      <% if @psychic.on_a_call? %>
+        <td>
+          <h1>Current Call</h1>
+          <%= image_tag "psychics/current_call_icon.png" %>
+          <div class="label">
+            <span><%= @psychic.calls.first.duration %><small>MIN</small></span>
+          </div>
+        </td>
+      <% end %>
+
+      <td>
+        <h1>Est. Wait Time</h1>
+        <%= image_tag "psychics/clock_icon.png" %>
+        <div class="label">
+          <span>100 <small>MIN</small></span>
+        </div>
+      </td>
+
+      <td>
+        <h1>People Waiting</h1>
+        <%= image_tag "psychics/waiting_icon.png" %>
+        <div class="label">
+          <span><%= @psychic.callbacks.active.count %></span>
+        </div>
+      </td>
+
+      <td>
+        <h1>Call Back Time Set For</h1>
+        <%= image_tag "psychics/clock_icon.png" %>
+        <div class="label">
+          <span>4:30 <small>PM</small></span>
+        </div>
+      </td>
+    </tr>
+  </table>
   <article>
-    <h1>Per minute</h1>
-    <%= image_tag "psychics/price_icon.png" %>
-    <div class="label">
-      <span>$<%= @psychic.price %></span>
-    </div>
-  </article>
-  <article>
-    <h1>Current Call</h1>
-    <%= image_tag "psychics/current_call_icon.png" %>
-    <div class="label">
-      <span>0 <small>MIN</small></span>
-    </div>
-  </article>
-  <article>
-    <h1>Est. Wait Time</h1>
-    <%= image_tag "psychics/clock_icon.png" %>
-    <div class="label">
-      <span>100 <small>MIN</small></span>
-    </div>
-  </article>
-  <article>
-    <h1>People Waiting</h1>
-    <%= image_tag "psychics/waiting_icon.png" %>
-    <div class="label">
-      <span>0</span>
-    </div>
-  </article>
-  <article>
-    <h1>Call Back Time Set For</h1>
-    <%= image_tag "psychics/clock_icon.png" %>
-    <div class="label">
-      <span>4:30 <small>PM</small></span>
-    </div>
-  </article>
 </section>

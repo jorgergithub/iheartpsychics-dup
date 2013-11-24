@@ -6,16 +6,19 @@
   border-radius: 7px;
   font-size: 0;
 
-  article {
-    width: 152px;
-    display: inline-block;
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  td {
     padding-top: 25px;
     padding-bottom: 40px;
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  article + article {
+  td + td {
     border-left: 1px solid #ccd7dd;
   }
 
@@ -51,7 +54,7 @@
     font-size: 14px;
   }
 
-  article img {
+  td img {
     margin-top: 40px;
     margin-left: 5px;
   }
