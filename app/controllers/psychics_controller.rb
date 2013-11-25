@@ -67,6 +67,6 @@ class PsychicsController < AuthorizedController
   end
 
   def resolve_layout
-    return "main" if action_name == "about"
+    return "main" if %w[about show].include?(action_name)
   end
 end
