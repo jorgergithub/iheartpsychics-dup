@@ -41,4 +41,12 @@ module PsychicsHelper
     gender, count = { male: 13, female: 4 }.to_a.sample
     "psychic-avatar-#{gender}-#{"%02d" % (rand(count)+1).to_i}"
   end
+
+  def week_days_from_today
+    week_days = []
+    7.times do |index|
+      week_days << (Date.today + index.days).strftime("%a")
+    end
+    week_days
+  end
 end
