@@ -34,6 +34,7 @@ class PsychicsController < AuthorizedController
 
   def about
     @psychic = Psychic.find(params[:id])
+    @table = ScheduleTable.new @psychic.weekly_schedule
   end
 
   def available
