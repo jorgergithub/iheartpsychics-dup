@@ -1,13 +1,15 @@
-<div id="pin_modal" class="modal">
+<div id="pin_modal" class="modal medium">
   <header>
     <h1>My Pin</h1>
   </header>
 
   <div class="modal-body">
-    <%= form_for :pin, :html => { class: "single_field"} do |f| %>
-      <%= f.label :pin, "My pin" %>
-      <%= f.text_field :pin %>
-      <%= link_to image_tag("modal/reset_btn.png"), "#", class: "reset_form" %>
+    <%= form_for :pin do |f| %>
+      <div class="reset_field">
+        <%= f.label :pin, "My pin" %>
+        <%= f.text_field :pin %>
+        <%= link_to image_tag("modal/reset_btn.png"), "#", class: "reset_form" %>
+      </div>
     <% end %>
   </div>
 

@@ -4,14 +4,24 @@
   overflow: hidden;
   display: none;
   position: fixed;
-  left: 50%;
   width: 640px;
   margin-left: -320px;
+  left: 50%;
   background: #fff;
 
   border: 1px #aaa solid;
   border-radius: 15px;
   box-shadow: 5px 5px 0.5em #333;
+
+  &.medium {
+    width: 640px;
+    margin-left: -320px;
+  }
+
+  &.large {
+    width: 900px;
+    margin-left: -450px;
+  }
 
   .modal-body,
   footer {
@@ -73,6 +83,12 @@
   }
 
   textarea, input { outline: none; margin: 0px; }
+
+  i {
+    position: absolute;
+    margin-top: -38px;
+    right: 17px;
+  }
 }
 
 .modal footer input,
@@ -80,13 +96,54 @@
   vertical-align: top;
 }
 
-.modal form.single_field {
+.modal form .reset_field {
   input {
     width: 350px;
   }
 
   a {
     margin-left: 36px;
+  }
+}
+
+.modal .row {
+  & + .row {
+    margin-top: 40px;
+  }
+
+  .field {
+    vertical-align: top;
+    width: 378px;
+    display: inline-block;
+    position: relative;
+  }
+
+  .field + .field {
+    margin-left: 40px;
+  }
+
+  .field input {
+    width: 346px;
+  }
+
+  .field.small {
+    width: auto;
+
+    & + .field { margin-left: 40px; }
+  }
+
+  .field.small input {
+    width: 55px;
+
+    & + input {
+      margin-left: 20px;
+    }
+  }
+
+  .field.medium {
+    width: auto;
+
+    & input { width: 110px; }
   }
 }
 
