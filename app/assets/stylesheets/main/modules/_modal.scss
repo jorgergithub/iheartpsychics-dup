@@ -126,6 +126,14 @@
     width: 346px;
   }
 
+  .field.custom {
+    width: 100%;
+
+    input + input {
+      margin-left: 40px;
+    }
+  }
+
   .field.small {
     width: auto;
 

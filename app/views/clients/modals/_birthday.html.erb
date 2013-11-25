@@ -1,0 +1,29 @@
+<div id="birthday_modal" class="modal medium">
+  <header>
+    <h1>My Birthday &amp; Timezone</h1>
+  </header>
+
+  <div class="modal-body">
+    <%= form_for :birthday do |f| %>
+      <div class="row">
+        <div class="field custom">
+          <%= f.label :month, "My birthday" %>
+          <%= f.text_field :month, placeholder: "December", style: "width: 160px;" %>
+          <%= f.text_field :day, placeholder: "04", style: "width: 100px;" %>
+          <%= f.text_field :year, placeholder: "1988", style: "width: 100px;" %>
+        </div>
+      </div>
+
+      <div class="row reset_field">
+        <%= f.label :timezone, "Timezone" %>
+        <%= f.text_field :timezone, placeholder: "0402" %>
+        <%= link_to image_tag("modal/reset_btn.png"), "#", class: "reset_form" %>
+      </div>
+    <% end %>
+  </div>
+
+  <footer>
+    <%= image_submit_tag "modal/save_btn.png" %>
+    <%= link_to image_tag("modal/cancel_btn.png"), "#", class: "close-button" %>
+  </footer>
+</div>
