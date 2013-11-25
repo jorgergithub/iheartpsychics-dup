@@ -14,9 +14,9 @@ ScheduleJob.create!(description: 'Client Weekly Usage Report',
 
 horoscope = Horoscope.new(date: Date.today)
 Horoscope::SIGNS.each do |sign|
-  horoscope.send("#{sign.name.downcase}=", Faker::Lorem.paragraphs(5).join("\n"))
+  horoscope.send("#{sign.name.downcase}=", Faker::Lorem.paragraphs(3).join("\n"))
 end
-horoscope.lovescope = Faker::Lorem.paragraphs(5).join("\n")
+horoscope.lovescope = Faker::Lorem.paragraphs(3).join("\n")
 horoscope.friendship_compatibility_from = Horoscope::SIGNS.sample.name
 horoscope.friendship_compatibility_to = Horoscope::SIGNS.sample.name
 horoscope.love_compatibility_from = Horoscope::SIGNS.sample.name
@@ -207,7 +207,21 @@ csr.rep.update_attributes phone: "+13054502995"
   end
 end
 
-Psychic.all.each { |p| p.update_attributes price: [4.5, 5.0, 5.5, 6.0, 6.5].sample}
+Psychic.all.each do |p|
+  p.update_attributes price: [4.5, 5.0, 5.5, 6.0, 6.5].sample,
+    about: Faker::Lorem.paragraphs(3).join("\n")
+
+  (0..(Random.rand(15))).each do |i|
+    start_hour = (0..11).to_a.sample
+    end_hour = (0..11).to_a.sample
+    p.schedules.create(date: Date.today + i, start_time_string: "#{start_hour}:00 AM", end_time_string: "#{end_hour}:00 PM")
+    if end_hour < 3
+      start_hour = end_hour + Random.rand(3)
+      end_hour = start_hour + Random.rand(3)
+      p.schedules.create(date: Date.today + i, start_time_string: "#{start_hour}:00 AM", end_time_string: "#{end_hour}:00 PM")
+    end
+  end
+end
 
 user = User.create!(first_name: "Felipe",
                    last_name: "Coury",
