@@ -48,11 +48,11 @@
     <h2>My Credits</h2>
 
     <div class="client-badge badge">
-      $203
+      $<%= @client.balance %>
     </div>
 
     <div class="action">
-      <a href="#">Add Credits</a>
+      <%= link_to "Add Credits", "#" %>
     </div>
   </div>
 
@@ -60,7 +60,7 @@
     <h2>My Cards on File</h2>
 
     <div class="client-badge badge">
-      3
+      <%= @client.cards.count %>
     </div>
 
     <div class="action highlighted">
@@ -72,8 +72,10 @@
     <h2>My Pin</h2>
 
     <div class="action">
-      <a href="#">Edit</a>
+      <a href="#" class="modal_link" data-modal-id="pin_modal">Edit</a>
     </div>
+
+    <%= render "clients/modals/pin" %>
   </div>
 
   <div class="my-password client-action-item action-item">
@@ -120,45 +122,15 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td>1772</td>
-        <td>July, 25, 2013 9:10PM</td>
-        <td>+1 154 63786</td>
-        <td>Damon Huynh</td>
-        <td>23 Mins</td>
-      </tr>
-
-      <tr>
-        <td>4699</td>
-        <td>August, 13, 2013 6:45PM</td>
-        <td>+1 336 78524</td>
-        <td>Sthephanie Bartholomew</td>
-        <td>47 Mins</td>
-      </tr>
-
-      <tr>
-        <td>3267</td>
-        <td>August, 28, 2013 8:00PM</td>
-        <td>+1 453 69447</td>
-        <td>Jennifer Jones</td>
-        <td>32 Mins</td>
-      </tr>
-
-      <tr>
-        <td>2356</td>
-        <td>September, 3, 2013 7:23PM</td>
-        <td>+1 154 63786</td>
-        <td>Sterling Hawkins</td>
-        <td>136 Mins</td>
-      </tr>
-
-      <tr>
-        <td>5352</td>
-        <td>October, 1, 2013 5:41PM</td>
-        <td>+1 336 78524</td>
-        <td>Jane Doe</td>
-        <td>103 Mins</td>
-      </tr>
+      <% @processed_calls.each do |call| %>
+        <tr>
+          <td><%= call.id %></td>
+          <td><%= call.created_at.strftime("%B, %d, %Y %I:%M%p") %></td>
+          <td><%= call.from %></td>
+          <td><%= call.psychic.user.full_name %></td>
+          <td><%= call.duration %> Mins</td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 </section>
@@ -177,13 +149,6 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td>Visa: 1239</td>
-        <td>$50.00</td>
-        <td>September 3, 2013</td>
-        <td>#12354432</td>
-      </tr>
-
       <tr>
         <td>Amex: 8325</td>
         <td>$120.00</td>
@@ -214,3 +179,5 @@
     </tbody>
   </table>
 </section>
+
+<div class="overlay"></div>
