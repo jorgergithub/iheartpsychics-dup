@@ -2,6 +2,8 @@ class ClientsController < AuthorizedController
   before_action :find_client
   before_action :update_time_zone
 
+  layout :determine_layout
+
   def show
     unless @client.balance?
       redirect_to :new_order
@@ -83,6 +85,10 @@ class ClientsController < AuthorizedController
   end
 
   protected
+
+  def determine_layout
+    "main"
+  end
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :username, :email,

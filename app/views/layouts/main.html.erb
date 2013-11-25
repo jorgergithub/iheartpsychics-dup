@@ -71,8 +71,14 @@
         <ul class="header-nav-links">
           <% if current_user %>
             <li class="dashboard header-nav-link"><a href="#">Dashboard</a></li>
-            <li class="balance header-nav-link"><a href="#">Balance $35</a></li>
-            <li class="signout header-nav-link"><a href="#">Sign Out</a></li>
+            <% if current_user.client? %>
+              <li class="balance header-nav-link">
+                <a href="#">Balance <%= number_to_currency current_user.client.balance %></a>
+              </li>
+            <% end %>
+            <li class="signout header-nav-link">
+              <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+            </li>
           <% else %>
             <li class="signin header-nav-link">
               <a href="#">Sign In</a>
