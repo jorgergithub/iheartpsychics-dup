@@ -1,5 +1,9 @@
 @import "main/helpers";
 
+.footer {
+  color: #fff;
+}
+
 .footer-container {
   @extend %footer-container;
 }
