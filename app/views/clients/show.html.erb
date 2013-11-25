@@ -94,8 +94,10 @@
     <p>214-985-0457</p>
 
     <div class="action">
-      <a href="#">Edit</a>
+      <a href="#" class="modal_link" data-modal-id="phone_modal">Edit</a>
     </div>
+
+    <%= render "clients/modals/phone" %>
   </div>
 
   <div class="my-birthday-timezone client-action-item action-item">
@@ -106,7 +108,6 @@
     <div class="action">
       <a href="#" class="modal_link" data-modal-id="birthday_modal">Edit</a>
     </div>
-
 
     <%= render "clients/modals/birthday" %>
   </div>

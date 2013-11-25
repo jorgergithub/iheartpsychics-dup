@@ -106,7 +106,8 @@
   }
 }
 
-.modal .row {
+.modal.large .row,
+.modal.medium .row {
   & + .row {
     margin-top: 40px;
   }
@@ -152,6 +153,12 @@
     width: auto;
 
     & input { width: 110px; }
+  }
+}
+
+.modal.small {
+  .field.full input {
+    width: 510px;
   }
 }
 
