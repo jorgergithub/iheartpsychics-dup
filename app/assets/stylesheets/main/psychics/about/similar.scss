@@ -1,4 +1,4 @@
-#psychic-details section.psychic-similar {
+.psychics {
   font-size: 0px;
 
   article {
@@ -8,20 +8,45 @@
     border-bottom: 5px solid #e4ecf0;
     font-size: 20px;
     box-shadow: 0px 5px 7px #ddd;
+    position: relative;
 
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
   }
 
-  article + article {
+  article {
     margin-left: 50px;
   }
 
-  article > header{
+  article > header {
     text-align: center;
     height: 180px;
     background-image: url(image-path("psychics/banner_love.png"));
+  }
+
+  article > header.money {
+    background-image: url(image-path("psychic-banner-money.png"));
+  }
+
+  article > header.pet {
+    background-image: url(image-path("psychic-banner-pet.png"));
+  }
+
+  article > header.past-lives {
+    background-image: url(image-path("psychic-banner-pastlives.png"));
+  }
+
+  article > header.love {
+    background-image: url(image-path("psychic-banner-love.png"));
+  }
+
+  article > header.work {
+    background-image: url(image-path("psychic-banner-work.png"));
+  }
+
+  article > header.destiny {
+    background-image: url(image-path("psychic-banner-destiny.png"));
   }
 
   article > header img {
@@ -129,4 +154,64 @@
     .available    { color: #4bcf00; }
     .unavailable  { color: #d7dae0; }
   }
+}
+
+.psychic-card-favorite-off {
+  position: absolute;
+  width: 66px;
+  height: 69px;
+  bottom: -30px;
+  left: 20px;
+  background: url(image-path("psychic-card-favorite-off.png"));
+  z-index: 2;
+}
+
+.psychic-card-favorite-on {
+  position: absolute;
+  width: 66px;
+  height: 69px;
+  bottom: -30px;
+  left: 20px;
+  background: url(image-path("psychic-card-favorite-on.png"));
+  z-index: 3;
+}
+
+.psychic-card-reviews-off {
+  position: absolute;
+  width: 66px;
+  height: 69px;
+  bottom: -30px;
+  right: 20px;
+  background: url(image-path("psychic-card-reviews-off.png"));
+  z-index: 2;
+}
+
+.psychic-card-reviews {
+  position: absolute;
+  width: 66px;
+  height: 69px;
+  bottom: -30px;
+  right: 20px;
+  background: url(image-path("psychic-card-reviews-on.png"));
+  z-index: 3;
+}
+
+.psychic-card-reviews span {
+  display: block;
+  padding-top: 23px;
+  font-size: 13px;
+  width: 66px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}
+
+.psychic-card-phone {
+  position: absolute;
+  width: 114px;
+  height: 120px;
+  bottom: -55px;
+  left: 88px;
+  background: url(image-path("psychic-card-phone.png"));
+  z-index: 1;
 }

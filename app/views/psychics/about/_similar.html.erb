@@ -1,6 +1,6 @@
 <section class="psychic-similar">
   <h1>Psychics Similar to <%= @psychic.first_name %>, <b>Available and Ready!</b></h1>
-  
+
   <% Psychic.first(3).each do |psychic| %>
     <article>
       <header>
@@ -46,6 +46,6 @@
         </footer>
       </div>
     </article>
- 
+
   <% end %>
 </section>
