@@ -21,7 +21,7 @@
   article > header{
     text-align: center;
     height: 180px;
-    background-image: url(<%= image_path("psychics/banner_love.png") %>);
+    background-image: url(image-path("psychics/banner_love.png"));
   }
 
   article > header img {
@@ -50,7 +50,7 @@
 
   div.content div.body,
   div.content footer {
-    background: no-repeat url(<%= image_path("psychics/shadow.png") %>);
+    background: no-repeat url(image_path("psychics/shadow.png"));
     padding: 20px 0px;
   }
 
@@ -84,7 +84,7 @@
     font-size: 24px;
     font-weight: 400;
 
-    & small { 
+    & small {
       color: #cdd1d7;
       font-size: 20px;
       font-weight: 100;
@@ -97,9 +97,9 @@
     font-size: 16px;
     margin-top: 5px;
 
-    & span { 
-      color: #606d82; 
-      font-weight: bold; 
+    & span {
+      color: #606d82;
+      font-weight: bold;
     }
   }
 

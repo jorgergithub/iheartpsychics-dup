@@ -38,7 +38,7 @@
     width: 60px;
     height: 60px;
     text-align: center;
-    background-image: url(<%= asset_path "psychics/label_bg.png" %>);
+    background-image: url(image-path("psychics/label_bg.png"));
   }
 
   div.label span {
