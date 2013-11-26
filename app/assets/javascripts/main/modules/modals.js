@@ -4,20 +4,20 @@ $(document).ready(function() {
     var modalId = $(this).data("modal-id");
     
     if ($(".modal").is(":visible")) {
-      $(".modal").fadeOut(2000, function () {
-        $("#" + modalId).fadeIn(2000);
+      $(".modal:visible").fadeOut(1000, function () {
+        $("#" + modalId).fadeIn(1000);
       });
     } else {
-      $("#" + modalId).fadeIn();
-      $(".overlay").fadeIn();     
+      $("#" + modalId).fadeIn(1000);
+      $(".overlay").fadeIn(1000);
     }
   });
 
   $(".modal .close-button, .overlay").on("click", function(e) {
     e.preventDefault();
 
-    $(".modal").fadeOut();
-    $(".overlay").fadeOut();
+    $(".modal").fadeOut(1000);
+    $(".overlay").fadeOut(1000);
   });
 
   $(".modal .reset_form").on("click", function(e) {
