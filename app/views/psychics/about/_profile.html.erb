@@ -1,6 +1,7 @@
 <article class="psychic-profile">
   <div class="psychic-details-avatar">
-    <%= image_tag "psychics/avatar_sample.png" %>
+    <%= cl_image_tag(@psychic.avatar_id, :width => 270, :height => 270, :crop => :thumb, :gravity => 'faces:center', :radius => :max) %>
+
     <% if current_user and current_user.client %>
       <% if current_user.client.favorite?(@psychic) %>
         <%= link_to image_tag("psychics/fav_button.png"), remove_favorite_client_path(psychic_id: @psychic.id), class: "fav_button" %>
