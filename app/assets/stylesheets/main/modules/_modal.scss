@@ -68,7 +68,7 @@
   .reset_field label {
     text-transform: uppercase;
     font-weight: bold;
-    font-size: bold;
+    font-size: 18px;
     display: block;
     text-align: left;
     margin-bottom: 5px;
@@ -82,7 +82,7 @@
 
   input[type="checkbox"] {
     vertical-align: middle;
-    marign-right: 20px;
+    margin-right: 20px;
   }
 
   p {
@@ -187,7 +187,8 @@
 }
 
 .modal.small {
-  .field.full input {
+  .field.full input,
+  .field.full textarea {
     width: 510px;
   }
 }
@@ -195,6 +196,14 @@
 #pin_modal .reset_field {
   width: 380px;
   margin: 0 auto;
+}
+
+.modal.large {
+  .field.full input,
+  .field.full textarea {
+    width: 770px;
+    height: 100px;
+  }
 }
 
 .overlay {

@@ -19,6 +19,7 @@
  *= require main/modules/modal/credit_card_list
  *= require main/modules/modal/purchase/select_payment_method
  *= require main/modules/modal/purchase/thanks
+ *= require main/modules/modal/psychics/edit_profile
  *= require main/modules/modal/prices
  *= require main/modules/modal/callback
  *= require main/modules/modal/callback_confirmation

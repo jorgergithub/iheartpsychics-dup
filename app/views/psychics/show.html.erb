@@ -1,4 +1,8 @@
 <section class="profile-container small_container">
+  <div class="modal_list">
+    <%= render "psychics/modals/edit_profile" %>
+  </div>
+
   <div class="profile-avatar profile-item">
     <ul>
       <li class="avatar">
@@ -36,7 +40,7 @@
     </p>
 
     <p class="edit-profile">
-      <%= link_to "Edit Profile", "#" %>
+      <%= link_to "Edit Profile", "#", class: "modal_link", "data-modal-id" => "psychic_edit_profile_modal" %>
     </p>
   </div>
 
