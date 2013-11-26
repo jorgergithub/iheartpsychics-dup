@@ -19,7 +19,7 @@
   </div>
 
   <div class="profile-daily-fortune profile-info profile-item">
-    <h2>Hello, <span class="name">Stephanie</span>!</h2>
+    <h2>Hello, <span class="name"><%= @client.first_name %></span>!</h2>
 
     <p class="title">Daily Fortune!</p>
 
@@ -104,7 +104,7 @@
   <div class="my-phone client-action-item action-item">
     <h2>My Phone</h2>
 
-    <p>214-985-0457</p>
+    <p><%= @client.phones.first.number %></p>
 
     <div class="action">
       <a href="#" class="modal_link" data-modal-id="phone_modal">Edit</a>
@@ -142,7 +142,7 @@
           <td><%= call.id %></td>
           <td><%= call.created_at.strftime("%B, %d, %Y %I:%M%p") %></td>
           <td><%= call.from %></td>
-          <td><%= call.psychic.user.full_name %></td>
+          <td><%= call.psychic.alias_name %></td>
           <td><%= call.duration %> Mins</td>
         </tr>
       <% end %>
@@ -153,44 +153,27 @@
 <section class="client-history-container small_container">
   <h2 class="section-title">My Purchase History</h2>
 
-  <table class="records">
-    <thead>
-      <tr>
-        <th>Card Used</th>
-        <th>Amount</th>
-        <th>Date Used</th>
-        <th>Confirmation #</th>
-      </tr>
-    </thead>
+  <% if @credits.any? %>
+    <table class="records">
+      <thead>
+        <tr>
+          <th>Payment</th>
+          <th>Amount</th>
+          <th>Date Used</th>
+          <th>Confirmation #</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr>
-        <td>Amex: 8325</td>
-        <td>$120.00</td>
-        <td>July 23, 2013</td>
-        <td>#12354432</td>
-      </tr>
-
-      <tr>
-        <td>Visa: 3238</td>
-        <td>$75.00</td>
-        <td>February 12, 2013</td>
-        <td>#12354432</td>
-      </tr>
-
-      <tr>
-        <td>Visa: 4229</td>
-        <td>$150.00</td>
-        <td>Februart 13, 2013</td>
-        <td>#12354432</td>
-      </tr>
-
-      <tr>
-        <td>Amex: 1239</td>
-        <td>$25.00</td>
-        <td>January 27, 2013</td>
-        <td>#12354432</td>
-      </tr>
-    </tbody>
-  </table>
+      <tbody>
+        <% @credits.each do |credit| %>
+          <tr>
+            <td><%= credit.payment %></td>
+            <td><%= number_to_currency credit.credits %></td>
+            <td><%= credit.parsed_date_only %></td>
+            <td>#<%= credit.id %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 </section>

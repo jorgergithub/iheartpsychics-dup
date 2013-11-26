@@ -11,4 +11,12 @@ class Credit < ActiveRecord::Base
   def parsed_date_only
     created_at.strftime("%b %d, %Y")
   end
+
+  def payment
+    if target.respond_to?(:transactions)
+      target.transactions.first.card
+    else
+      "N/A"
+    end
+  end
 end
