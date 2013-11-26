@@ -1,20 +1,19 @@
-<div id="pin_modal" class="modal medium">
+<div id="pin_modal" class="modal medium" data-pin="<%= @client.pin %>">
   <header>
     <h1>My Pin</h1>
   </header>
 
-  <div class="modal-body">
-    <%= form_for :pin do |f| %>
+  <%= form_for :client, url: reset_pin_client_path, method: :patch, remote: "true", html: { class: "pin-modal-form" } do |f| %>
+    <div class="modal-body">
       <div class="reset_field">
         <%= f.label :pin, "My pin" %>
-        <%= f.text_field :pin %>
-        <%= link_to image_tag("modal/reset_btn.png"), "#", class: "reset_form" %>
+        <%= f.text_field :pin, maxlength: 4 %>
       </div>
-    <% end %>
-  </div>
+    </div>
 
-  <footer>
-    <%= image_submit_tag "modal/save_btn.png" %>
-    <%= link_to image_tag("modal/cancel_btn.png"), "#", class: "close-button" %>
-  </footer>
+    <footer>
+      <%= image_submit_tag "modal/save_btn.png" %>
+      <%= link_to image_tag("modal/cancel_btn.png"), "#", class: "close-button" %>
+    </footer>
+  <% end %>
 </div>

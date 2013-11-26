@@ -48,7 +48,7 @@
 
 .modal footer {
   text-align: center;
-  
+
   input, a {
     vertical-align: top;
   }
@@ -63,7 +63,7 @@
 
 .modal form {
   text-align: left;
-  
+
   .field label,
   .reset_field label {
     text-transform: uppercase;
@@ -190,6 +190,11 @@
   .field.full input {
     width: 510px;
   }
+}
+
+#pin_modal .reset_field {
+  width: 380px;
+  margin: 0 auto;
 }
 
 .overlay {

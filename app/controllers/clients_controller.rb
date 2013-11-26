@@ -56,10 +56,14 @@ class ClientsController < AuthorizedController
   def reset_pin
     if params[:client]
       pin = params.require(:client).permit(:pin)[:pin]
-      if @client.reset_pin(pin)
-        redirect_to client_path, notice: "Your PIN has been reset."
-      else
-        render action: "reset_pin"
+      respond_to do |format|
+        if @client.reset_pin(pin)
+          format.html { redirect_to client_path, notice: "Your PIN has been reset." }
+          format.js
+        else
+          format.html { render action: "reset_pin" }
+          format.js
+        end
       end
     end
   end
