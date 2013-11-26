@@ -47,6 +47,12 @@
 }
 
 .modal footer {
+  text-align: center;
+  
+  input, a {
+    vertical-align: top;
+  }
+
   input + input,
   input + a,
   a + a,
@@ -90,11 +96,6 @@
     margin-top: -38px;
     right: 17px;
   }
-}
-
-.modal footer input,
-.modal footer a {
-  vertical-align: top;
 }
 
 .modal form .reset_field {

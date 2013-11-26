@@ -3,8 +3,14 @@ $(document).ready(function() {
     e.preventDefault();
     var modalId = $(this).data("modal-id");
     
-    $("#" + modalId).fadeIn();
-    $(".overlay").fadeIn();
+    if ($(".modal").is(":visible")) {
+      $(".modal").fadeOut(2000, function () {
+        $("#" + modalId).fadeIn(2000);
+      });
+    } else {
+      $("#" + modalId).fadeIn();
+      $(".overlay").fadeIn();     
+    }
   });
 
   $(".modal .close-button, .overlay").on("click", function(e) {

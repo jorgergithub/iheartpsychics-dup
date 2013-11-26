@@ -12,4 +12,14 @@ $(document).ready(function() {
     e.preventDefault();
     e.stopPropagation();
   });
+
+  $("#credit_card_list_modal ul.credit_cards li .cc_actions a.delete_card").on("click", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    $(this).closest("li").fadeOut(function() {
+      // remove card from db
+      $(this).remove();
+    });
+  });
 });

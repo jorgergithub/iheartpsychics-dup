@@ -66,8 +66,6 @@
     <div class="action highlighted">
       <a href="#" class="modal_link" data-modal-id="credit_card_list_modal">Edit / Adds</a>
     </div>
-
-    <%= render "clients/modals/credit_card_list" %>
   </div>
 
   <div class="my-pin client-action-item action-item">
@@ -76,8 +74,6 @@
     <div class="action">
       <a href="#" class="modal_link" data-modal-id="pin_modal">Edit</a>
     </div>
-
-    <%= render "clients/modals/pin" %>
   </div>
 
   <div class="my-password client-action-item action-item">
@@ -86,8 +82,6 @@
     <div class="action">
       <a href="#" class="modal_link" data-modal-id="password_modal">Edit</a>
     </div>
-
-    <%= render "clients/modals/password" %>
   </div>
 
   <div class="my-phone client-action-item action-item">
@@ -98,8 +92,6 @@
     <div class="action">
       <a href="#" class="modal_link" data-modal-id="phone_modal">Edit</a>
     </div>
-
-    <%= render "clients/modals/phone" %>
   </div>
 
   <div class="my-birthday-timezone client-action-item action-item">
@@ -110,7 +102,14 @@
     <div class="action">
       <a href="#" class="modal_link" data-modal-id="birthday_modal">Edit</a>
     </div>
+  </div>
 
+  <div class="modal_list">
+    <%= render "clients/modals/credit_card_list" %>
+    <%= render "clients/modals/edit_credit_card" %>
+    <%= render "clients/modals/pin" %>
+    <%= render "clients/modals/password" %>
+    <%= render "clients/modals/phone" %>
     <%= render "clients/modals/birthday" %>
   </div>
 </section>
