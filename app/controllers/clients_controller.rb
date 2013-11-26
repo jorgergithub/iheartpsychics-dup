@@ -96,6 +96,20 @@ class ClientsController < AuthorizedController
     end
   end
 
+  def avatar
+    if params[:client][:avatar_id].present?
+      preloaded = Cloudinary::PreloadedFile.new(params[:client][:avatar_id])
+
+      respond_to do |format|
+        if preloaded.valid? && @client.update_attribute(:avatar_id, preloaded.identifier)
+          format.json { head :no_content }
+        else
+          format.json { render json: "Invalid upload signature", status: :unprocessable_entity }
+        end
+      end
+    end
+  end
+
   protected
 
   def determine_layout

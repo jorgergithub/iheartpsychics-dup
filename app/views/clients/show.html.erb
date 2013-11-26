@@ -1,14 +1,17 @@
 <section class="profile-container small_container">
   <div class="profile-avatar profile-item">
     <ul>
-      <li>
-        <%= link_to(image_tag("avatar.png", class: "avatar"), "#") %>
+      <li class="avatar">
+        <%= cl_image_tag(@client.avatar_id, :width => 265, :height => 265, :crop => :thumb, :gravity => 'faces:center', :radius => :max) %>
       </li>
       <li>
-        <a class="tooltip" href="#">
-          <span>Edit Your Picture</span>
-          <%= image_tag "customer-edit-profile.png", alt: "Edit Your Picture" %>
-        </a>
+        <%= form_for(@client, url: avatar_client_path(@client), method: :patch, remote: true, html: { :class => "upload-picture", :'data-type' => 'json' }) do |f| %>
+
+          <div class="upload">
+            <span>Edit Your Picture</span>
+            <%= f.cl_image_upload :avatar_id %>
+          </div>
+        <% end %>
       </li>
     </ul>
   </div>
@@ -44,11 +47,23 @@
 </section>
 
 <section class="actions-container small_container">
+  <div class="modal_list">
+    <%= render "clients/modals/thank_you" %>
+    <%= render "clients/modals/prices" %>
+    <%= render "clients/modals/purchase/select_card" %>
+    <%= render "clients/modals/credit_card_list" %>
+    <%= render "clients/modals/edit_credit_card" %>
+    <%= render "clients/modals/pin" %>
+    <%= render "clients/modals/password" %>
+    <%= render "clients/modals/phone" %>
+    <%= render "clients/modals/birthday" %>
+  </div>
+
   <div class="my-credits client-action-item action-item">
     <h2>My Credits</h2>
 
     <div class="client-badge badge">
-      $<%= @client.balance %>
+      <%= number_to_currency @client.balance %>
     </div>
 
     <div class="action">
@@ -102,18 +117,6 @@
     <div class="action">
       <a href="#" class="modal_link" data-modal-id="birthday_modal">Edit</a>
     </div>
-  </div>
-
-  <div class="modal_list">
-    <%= render "clients/modals/thank_you" %>
-    <%= render "clients/modals/prices" %>
-    <%= render "clients/modals/purchase/select_card" %>
-    <%= render "clients/modals/credit_card_list" %>
-    <%= render "clients/modals/edit_credit_card" %>
-    <%= render "clients/modals/pin" %>
-    <%= render "clients/modals/password" %>
-    <%= render "clients/modals/phone" %>
-    <%= render "clients/modals/birthday" %>
   </div>
 </section>
 
