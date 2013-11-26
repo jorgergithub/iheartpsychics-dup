@@ -217,3 +217,8 @@
   background: url(image-path("psychic-card-phone.png"));
   z-index: 1;
 }
+
+.psychic-card-action {
+  cursor: pointer;
+  display: none;
+}

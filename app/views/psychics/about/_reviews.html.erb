@@ -1,4 +1,5 @@
 <section class="psychic-reviews">
+  <a name="reviews"></a>
   <h1>My Featured Reviews</h1>
 
   <% if @psychic.featured_reviews.any? %>
@@ -10,7 +11,7 @@
       <% @psychic.featured_reviews.each_with_index do |review, index| %>
         <%= render "psychics/about/reviews/featured_review", review: review, selected: index == 0, page: index %>
       <% end %>
-      
+
       <% if @psychic.featured_reviews.count > 1 %>
         <%= image_tag "psychics/right_arrow.png", class: "psychic-arrow psychic-right-arrow" %>
       <% end %>

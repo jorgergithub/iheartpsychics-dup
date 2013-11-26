@@ -11,9 +11,11 @@
 //= require vendor/clamp.js/clamp
 //
 // App Modules ============================================
-//= require main/modules/home/index
-//= require main/modules/home/careers
+//= require main/modules/global/psychic_card
+//= require main/modules/global/sign_in
 //= require main/modules/faqs/index
+//= require main/modules/home/careers
+//= require main/modules/home/index
 //= require main/modules/horoscope/index
 //= require main/modules/psychic/about
 //

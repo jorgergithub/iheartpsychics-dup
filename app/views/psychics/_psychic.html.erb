@@ -1,5 +1,5 @@
 <% last ||= false %>
-<article class="psychic<% if last %> last<% end %>">
+<article class="psychic<% if last %> last<% end %>" data-psychic-id="<%= psychic.id %>">
   <header class="money">
     <%= image_tag "psychics/avatar_sample.png" %>
   </header>
@@ -39,19 +39,22 @@
     </div>
 
     <footer>
-      <span class="<%= psychic.current_state %>">
+      <span class="psychic-state <%= psychic.current_state %>">
         <%= psychic_state(psychic) %>
       </span>
     </footer>
 
-    <div class="psychic-card-favorite-off"></div>
-    <div class="psychic-card-favorite-on"></div>
+    <% if current_user and current_user.client.favorite?(psychic) %>
+      <div class="psychic-card-action psychic-card-favorite-on"></div>
+    <% else %>
+      <div class="psychic-card-action psychic-card-favorite-off"></div>
+    <% end %>
 
-    <div class="psychic-card-phone"></div>
+    <div class="psychic-card-action psychic-card-phone"></div>
 
-    <div class="psychic-card-reviews-off"></div>
+    <div class="psychic-card-action psychic-card-reviews-off"></div>
     <% if psychic.reviews.any? %>
-      <div class="psychic-card-reviews">
+      <div class="psychic-card-action psychic-card-reviews">
         <span><%= psychic.reviews.count %></span>
       </div>
     <% end %>
