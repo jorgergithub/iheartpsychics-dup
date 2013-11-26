@@ -145,7 +145,6 @@
   .field {
     position: relative;
     vertical-align: top;
-    width: 378px;
     display: inline-block;
   }
 
@@ -202,6 +201,16 @@
   .field.full textarea {
     width: 770px;
   }
+}
+
+.field.full i.border {
+  border-left: 2px solid #bec5d0;
+  position: absolute;
+  margin-top: -50px;
+  right: 17px;
+  padding-left: 10px;
+  height: 40px;
+  padding-top: 10px;
 }
 
 .overlay {

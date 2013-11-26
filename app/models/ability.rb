@@ -29,6 +29,7 @@ class Ability
 
   def authorize_user(user)
     can :destroy, "devise/sessions"
+    can :update, :registrations
 
     if user.role
       self.send("authorize_#{user.role}")

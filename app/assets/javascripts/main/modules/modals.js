@@ -50,4 +50,9 @@ $(document).ready(function() {
     el.fadeOut();
     $(".overlay").fadeOut();
   });
+
+  $(".modal form").on("submit", function() {
+    $(".modal").fadeOut(MODAL_FADE);
+    $(".overlay").fadeOut(MODAL_FADE);
+  })
 });
