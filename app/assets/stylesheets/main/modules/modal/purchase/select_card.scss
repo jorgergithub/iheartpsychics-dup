@@ -7,6 +7,7 @@
     background: #e7e9ec;
     width: 448px;
     padding: 25px 0px;
+    color: #5d687a;
   }
 
   nav li + li {
@@ -16,7 +17,7 @@
   nav ul li.tab_selected {
     background: white;
   }
-
+  
   nav ul {
     font-size: 0;
   }
@@ -33,6 +34,8 @@
     vertical-align: middle;
     display: inline-block;
     margin: 0px 50px;
+    font-style: italic;
+    font-weight: 100;
   }
 
   header h1 {
