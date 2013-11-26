@@ -67,20 +67,32 @@ class ClientsController < AuthorizedController
   def make_favorite
     psychic = Psychic.find(params[:psychic_id])
     @client.favorite_psychics << psychic
-    if @client.save
-      redirect_to :back, notice: "#{psychic.alias_name} marked as favorite."
-    else
-      redirect_to :back, error: "Could not mark as favorite."
+    respond_to do |format|
+      if @client.save
+        format.html { redirect_to :back, notice: "#{psychic.alias_name} marked as favorite." }
+        format.json { render json: @client, status: :created, location: @client }
+        format.js
+      else
+        format.html { redirect_to :back, error: "Could not mark as favorite." }
+        format.json { render json: @subscriber.errors, status: :unprocessable_entity }
+        format.js
+      end
     end
   end
 
   def remove_favorite
     psychic = Psychic.find(params[:psychic_id])
     @client.favorite_psychics.delete(psychic)
-    if @client.save
-      redirect_to :back, notice: "#{psychic.alias_name} removed from favorites."
-    else
-      redirect_to :back, error: "Could not remove as favorite."
+    respond_to do |format|
+      if @client.save
+        format.html { redirect_to :back, notice: "#{psychic.alias_name} removed from favorites." }
+        format.json { render json: @client, status: :created, location: @client }
+        format.js
+      else
+        format.html { redirect_to :back, error: "Could not remove from favorites." }
+        format.json { render json: @subscriber.errors, status: :unprocessable_entity }
+        format.js
+      end
     end
   end
 
