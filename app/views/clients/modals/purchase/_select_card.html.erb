@@ -1,0 +1,33 @@
+<div id="purchase_select_card_modal" class="modal large">
+  <nav>
+    <ul>
+      <li class="paypal_tab">Pay via Paypal</li>
+      <li class="credit_card_tab tab_selected">Pay via Credit Card</li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>40<small>MIN</small></h1>
+    <span>for</span>
+    <h1><small>$</small>25</h1>
+  </header>
+
+  <div class="modal_panel credit_cards_panel">
+    <ul class="credit_cards">
+      <% 3.times do |index| %>
+        <%= render "clients/modals/credit_card", select: (index == 1) %>
+      <% end %>
+    </ul>
+
+    <footer>
+      <%= link_to image_tag("modal/use_selected_cc_btn.png"), "#" %>
+      <%= link_to image_tag("modal/use_new_cc_btn.png"), "#" %>
+    </footer>
+  </div>
+
+  <div class="modal_panel paypal_panel">
+    <footer>
+      <%= link_to image_tag("modal/proceed_to_checkout_btn.png"), "#" %>
+    </footer>
+  </div>
+</div>

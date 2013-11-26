@@ -1,0 +1,16 @@
+<li class="credit_card <%= "cc_selected" if select %>">
+  <%= image_tag "modal/credit_card.png" %>
+  <i><%= image_tag "modal/visa.png" %></i>
+
+  <h1>Card Ending in <b>2345</b></h1>
+
+  <p>
+    2316 Malone Dr.
+    McKinney TX, 75070
+  </p>
+
+  <div class="cc_actions">
+    <%= link_to image_tag("modal/edit_icon.png"), "#", class: "modal_link", "data-modal-id" => :edit_credit_card_modal %>
+    <%= link_to image_tag("modal/delete_icon.png"), "#", class: "delete_card" %>
+  </div>
+</li>
