@@ -1,0 +1,33 @@
+<div id="credit_card_list_modal" class="modal large">
+  <header>
+    <h1>My Cards On File</h1>
+  </header>
+
+  <div class="modal-body">
+    <ul class="credit_cards">
+      <% 3.times do |index| %>
+        <li class="credit_card">
+          <%= image_tag "modal/credit_card.png" %>
+          <i><%= image_tag "modal/visa.png" %></i>
+
+          <h1>Card Ending in <b>2345</b></h1>
+
+          <p>
+            2316 Malone Dr.
+            McKinney TX, 75070
+          </p>
+
+          <div class="cc_actions">
+            <%= link_to image_tag("modal/edit_icon.png"), "#" %>
+            <%= link_to image_tag("modal/delete_icon.png"), "#" %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <footer>
+    <%= image_submit_tag "modal/add_new_card.png" %>
+    <%= link_to image_tag("modal/cancel_btn.png"), "#", class: "close-button" %>
+  </footer>
+</div>

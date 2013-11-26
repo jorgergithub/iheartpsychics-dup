@@ -70,6 +70,7 @@
   input[type="text"],
   input[type="number"],
   input[type="email"],
+  input[type="password"],
   textarea {
     border: 2px solid #bec5d0;
     border-radius: 7px;
@@ -97,12 +98,24 @@
 }
 
 .modal form .reset_field {
+  position: relative;
+
   input {
     width: 350px;
   }
 
   a {
     margin-left: 36px;
+  }
+
+  i.border {
+    border-left: 2px solid #bec5d0;
+    position: absolute;
+    margin-top: -50px;
+    right: 175px;
+    padding-left: 10px;
+    height: 40px;
+    padding-top: 10px;
   }
 }
 
@@ -116,7 +129,6 @@
     vertical-align: top;
     width: 378px;
     display: inline-block;
-    position: relative;
   }
 
   .field + .field {

@@ -64,10 +64,10 @@
     </div>
 
     <div class="action highlighted">
-      <a href="#" class="modal_link" data-modal-id="credit_card_modal">Edit / Adds</a>
+      <a href="#" class="modal_link" data-modal-id="credit_card_list_modal">Edit / Adds</a>
     </div>
 
-    <%= render "clients/modals/credit_card" %>
+    <%= render "clients/modals/credit_card_list" %>
   </div>
 
   <div class="my-pin client-action-item action-item">
@@ -84,8 +84,10 @@
     <h2>My Password</h2>
 
     <div class="action">
-      <a href="#">Edit</a>
+      <a href="#" class="modal_link" data-modal-id="password_modal">Edit</a>
     </div>
+
+    <%= render "clients/modals/password" %>
   </div>
 
   <div class="my-phone client-action-item action-item">

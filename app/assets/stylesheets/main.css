@@ -17,6 +17,7 @@
  *= require main/psychics/card
  *= require main/psychics/about/similar
  *= require main/modules/_modal
+ *= require main/modules/modal/credit_card_list
  *= require main/modules/_main_user
  *= require main/modules/_main_header
  *= require main/modules/_main_nav

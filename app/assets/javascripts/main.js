@@ -18,6 +18,7 @@
 //= require main/modules/home/index
 //= require main/modules/horoscope/index
 //= require main/modules/psychic/about
+//= require main/modules/modal/credit_card_list
 //= require main/modules/modals
 //
 // App Startup Code =======================================
