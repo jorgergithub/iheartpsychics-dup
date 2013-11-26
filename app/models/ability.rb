@@ -91,7 +91,7 @@ class Ability
   end
 
   def authorize_client
-    can [:update, :edit, :show, :reset_pin, :make_favorite, :remove_favorite], :clients
+    can [:update, :edit, :show, :reset_pin, :make_favorite, :remove_favorite, :avatar], :clients
     can [:show, :new, :create, :paypal], :orders
     can [:search, :about], :psychics
     can [:callback, :success, :cancel], :paypal
@@ -113,7 +113,7 @@ class Ability
   end
 
   def authorize_psychic
-    can :access, [:psychics, :schedules, :invoices, :reviews]
+    can :access, [:psychics, :schedules, :invoices, :reviews, :avatar]
     can [:mark_as_featured, :unmark_as_featured], :reviews
   end
 end

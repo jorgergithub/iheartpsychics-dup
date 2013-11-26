@@ -95,7 +95,7 @@ IHeartPsychics::Application.routes.draw do
     end
   end
 
-  resource :client do
+  resource :client, :except => :create do
     resources :client_phones, shallow: true
     member do
       get   'reset_pin'       , action: :reset_pin, as: :reset_pin
@@ -104,6 +104,7 @@ IHeartPsychics::Application.routes.draw do
       patch 'add_credits'     , action: :add_credits
       get   'make_favorite'   , action: :make_favorite, as: :make_favorite
       get   'remove_favorite' , action: :remove_favorite, as: :remove_favorite
+      patch '/:id/avatar'     , action: :avatar, as: :avatar
     end
   end
 
