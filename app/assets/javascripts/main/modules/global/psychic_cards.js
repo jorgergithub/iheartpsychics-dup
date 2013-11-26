@@ -71,7 +71,6 @@ Module("IHP.Components.PsychicCards", function(PsychicCards) {
   };
 
   PsychicCards.fn.whenCallbackButtonIsClicked = function(e) {
-    console.log("whenCallbackButtonIsClicked");
     var psychicId = getPsychicId(e);
     Module.run("IHP.Components.Callbacks", [this.el, psychicId]);
   };
