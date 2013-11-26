@@ -1,4 +1,4 @@
-.psychics {
+.container-psychics {
   font-size: 0px;
 
   article {
@@ -59,10 +59,11 @@
     border-radius: 150px;
   }
 
-  div.content header h1 {
+  div.content header h1 a {
     font-size: 26px;
     color: #606d82;
     font-weight: 300;
+    text-decoration: none;
   }
 
   div.content header > div {
@@ -84,28 +85,28 @@
     margin-bottom: 20px;
   }
 
-  div.content header div.psychic-similar-left {
+  div.content header div.psychic-left {
     padding-right: 10px;
     width: 145px;
     border-right: 1px solid #cdd6db;
   }
 
-  div.content header div.psychic-similar-left div.stars {
+  div.content header div.psychic-left div.stars {
     display: inline-block;
   }
 
-  div.content header div.psychic-similar-left span.psychics_reviews_amount{
+  div.content header div.psychic-left span.psychics_reviews_amount{
     font-size: 16px;
     color: #cdd1d7;
   }
 
-  div.content header div.psychic-similar-right {
+  div.content header div.psychic-right {
     padding-left: 10px;
     width: 77px;
     text-align: center;
   }
 
-  div.content header div.psychic-similar-right .psychic-similar-price {
+  div.content header div.psychic-right .psychic-price {
     color: #606d82;
     font-size: 24px;
     font-weight: 400;
@@ -117,7 +118,7 @@
     }
   }
 
-  div.content header div.psychic-similar-right .psychic-similar-ext {
+  div.content header div.psychic-right .psychic-ext {
     font-family: "Lato" sans-serif;
     color: #cdd1d7;
     font-size: 16px;

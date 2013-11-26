@@ -1,3 +1,4 @@
+<% last ||= false %>
 <article class="psychic<% if last %> last<% end %>">
   <header class="money">
     <%= image_tag "psychics/avatar_sample.png" %>
@@ -5,16 +6,18 @@
 
   <div class="content">
     <header>
-      <div class="psychic-similar-left">
-        <h1><%= psychic.first_name %></h1>
+      <div class="psychic-left">
+        <h1>
+          <%= link_to psychic.alias_name, about_psychic_path(psychic) %>
+        </h1>
         <%= render "psychics/about/stars", stars: psychic.rating, star_type: "small_green" %>
         <span class="psychics_reviews_amount">(<%= psychic.reviews.count %>)</span>
       </div>
-      <div class="psychic-similar-right">
-        <div class="psychic-similar-price">
+      <div class="psychic-right">
+        <div class="psychic-price">
           $<%= psychic.price %><small>Min</small>
         </div>
-        <div class="psychic-similar-ext">
+        <div class="psychic-ext">
           Ext: <span><%= psychic.extension %></span>
         </div>
       </div>

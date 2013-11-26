@@ -31,7 +31,7 @@
     </aside>
   </nav>
 
-  <div class="psychics small_container">
+  <div class="container-psychics small_container">
     <% @psychics[0,10].each_with_index do |p, i| %>
       <%= render p, last: (i+1)%3 == 0 %>
     <% end %>

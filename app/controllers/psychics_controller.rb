@@ -1,5 +1,5 @@
 class PsychicsController < AuthorizedController
-  skip_before_filter :authenticate_user!, only: :new
+  skip_before_filter :authenticate_user!, only: [:new, :about]
   before_filter :find_psychic, except: [:new, :search, :about]
   layout :resolve_layout
 

@@ -16,6 +16,7 @@ class Ability
     can [:create, :edit], :messages
     can [:create, :edit], :applications
     can [:index, :show], :faqs
+    can [:about], :psychics
 
     if user
       authorize_user(user)
