@@ -1,7 +1,7 @@
 <% last ||= false %>
 <article class="psychic<% if last %> last<% end %>" data-psychic-id="<%= psychic.id %>">
   <header class="money">
-    <%= image_tag "psychics/avatar_sample.png" %>
+    <%= cl_image_tag(psychic.avatar_id, :width => 150, :height => 150, :crop => :thumb, :gravity => 'faces:center', :radius => :max) %>
   </header>
 
   <div class="content">
