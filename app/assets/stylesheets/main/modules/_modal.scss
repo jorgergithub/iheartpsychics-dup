@@ -186,23 +186,21 @@
   }
 }
 
-.modal.small {
+.modal.medium {
   .field.full input,
   .field.full textarea {
     width: 510px;
   }
-}
 
-#pin_modal .reset_field {
-  width: 380px;
-  margin: 0 auto;
+  .field.full textarea {
+    height: 100px;
+  }
 }
 
 .modal.large {
   .field.full input,
   .field.full textarea {
     width: 770px;
-    height: 100px;
   }
 }
 
