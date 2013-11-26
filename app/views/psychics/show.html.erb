@@ -2,7 +2,7 @@
   <div class="profile-avatar profile-item">
     <ul>
       <li class="avatar">
-        <%= cl_image_tag(@psychic.avatar_id, :width => 265, :height => 265, :crop => :thumb, :gravity => 'faces:center', :radius => :max) %>
+        <%= avatar_image_tag(@psychic.avatar_id) %>
       </li>
       <li>
         <%= form_for(@psychic, url: avatar_psychic_path(@psychic), method: :patch, remote: true, html: { :class => "upload-picture", :'data-type' => 'json' }) do |f| %>
