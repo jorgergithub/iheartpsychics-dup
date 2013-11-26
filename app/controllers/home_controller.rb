@@ -46,10 +46,11 @@ class HomeController < AuthorizedController
   def go_home
     return false unless current_user
 
-    if current_user.client?
-      redirect_to client_path
-      return true
-    elsif current_user.psychic?
+    # if current_user.client?
+    #   redirect_to client_path
+    #   return true
+    # els
+    if current_user.psychic?
       redirect_to psychic_path
       return true
     elsif current_user.rep?

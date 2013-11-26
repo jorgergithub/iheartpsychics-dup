@@ -70,7 +70,9 @@
       <nav class="header-nav">
         <ul class="header-nav-links">
           <% if current_user %>
-            <li class="dashboard header-nav-link"><a href="#">Dashboard</a></li>
+            <li class="dashboard header-nav-link">
+              <%= link_to "Dashboard", client_path %>
+            </li>
             <% if current_user.client? %>
               <li class="balance header-nav-link">
                 <a href="#">Balance <%= number_to_currency current_user.client.balance %></a>
