@@ -1,23 +1,25 @@
+var MODAL_FADE = 400;
+
 $(document).ready(function() {
   $(".modal_link").on("click", function(e) {
     e.preventDefault();
     var modalId = $(this).data("modal-id");
 
     if ($(".modal").is(":visible")) {
-      $(".modal:visible").fadeOut(1000, function () {
-        $("#" + modalId).fadeIn(1000);
+      $(".modal:visible").fadeOut(MODAL_FADE, function () {
+        $("#" + modalId).fadeIn(MODAL_FADE);
       });
     } else {
-      $("#" + modalId).fadeIn(1000);
-      $(".overlay").fadeIn(1000);
+      $("#" + modalId).fadeIn(MODAL_FADE);
+      $(".overlay").fadeIn(MODAL_FADE);
     }
   });
 
   $(".modal .close-button, .overlay").on("click", function(e) {
     e.preventDefault();
 
-    $(".modal").fadeOut(1000);
-    $(".overlay").fadeOut(1000);
+    $(".modal").fadeOut(MODAL_FADE);
+    $(".overlay").fadeOut(MODAL_FADE);
   });
 
   $(".modal .reset_form").on("click", function(e) {
