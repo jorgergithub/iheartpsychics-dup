@@ -31,4 +31,14 @@
       </div>
     </div>
   </div>
+
+  <% if new_card %>
+    <div class="row">
+      <%= f.check_box :remember_card %>
+      <%= f.label :remember_card, "Remember this card" %>
+      <p>
+        By selecting checkout, you hereby authorize payment to I Heart Psychics Inc. &amp; will be billed $25.00 on a recurring basis starting September 1, 2013
+      </p>
+    </div>
+  <% end %>
 <% end %>

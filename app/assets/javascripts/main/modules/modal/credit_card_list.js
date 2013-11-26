@@ -34,7 +34,7 @@ $(document).ready(function() {
     $(this).siblings().removeClass("tab_selected");
     $(this).addClass("tab_selected");
     $(".modal_panel").hide();
-    $(".modal_panel.credit_cards_panel").hide();
+    $(".modal_panel.paypal_panel").show();
   });
 
   $("#purchase_select_card_modal .credit_card_tab").on("click", function(e) {

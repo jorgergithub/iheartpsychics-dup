@@ -1,9 +1,9 @@
 .modal {
-  top: 7%;
+  top: 10%;
   z-index: 1000;
   overflow: hidden;
   display: none;
-  position: fixed;
+  position: absolute;
   width: 640px;
   margin-left: -320px;
   left: 50%;
@@ -64,13 +64,29 @@
 .modal form {
   text-align: left;
   
-  label {
+  .field label,
+  .reset_field label {
     text-transform: uppercase;
     font-weight: bold;
     font-size: bold;
     display: block;
     text-align: left;
     margin-bottom: 5px;
+    color: #242d3c;
+  }
+
+  label, p {
+    color: #8590a1;
+    font-weight: normal;
+  }
+
+  input[type="checkbox"] {
+    vertical-align: middle;
+    marign-right: 20px;
+  }
+
+  p {
+    margin: 20px 0px;
   }
 
   input[type="text"],
