@@ -14,12 +14,13 @@
  *= require main/psychics/about/pricing
  *= require main/psychics/about/schedule
  *= require main/psychics/about/reviews
- *= require main/psychics/about/similar
+ *= require main/psychics/card
  *= require main/modules/_main_user
  *= require main/modules/_main_header
  *= require main/modules/_main_nav
  *= require main/modules/_main_hearo
  *= require main/modules/_main_container
+ *= require main/modules/_main_offers
  *= require main/modules/_main_psychics
  *= require main/modules/_main_horoscope
  *= require main/modules/_main_footer

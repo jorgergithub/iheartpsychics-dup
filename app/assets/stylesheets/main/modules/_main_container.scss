@@ -5,35 +5,6 @@
   padding-top: 60px;
 }
 
-.container-offers {
-  @extend %clearfix;
-}
-
-.container-offer {
-  width: 370px;
-  height: 500px;
-  background: #232d3b;
-  float: left;
-  margin: 0 0 90px 0;
-  border-radius: 10px;
-  display: table;
-  -webkit-box-shadow: 0px 10px 1px rgba(0, 0, 0, 1);
-  -moz-box-shadow:    0px 10px 1px rgba(0, 0, 0, 1);
-  box-shadow:         0px 10px 1px rgba(0, 0, 0, 1);
-
-  div {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 72px;
-    font-weight: 100;
-  }
-}
-
-.container-offer + .container-offer {
-  margin-left: 30px;
-}
-
 .container-nav {
   font-size: 18px;
   background: #232d3b;

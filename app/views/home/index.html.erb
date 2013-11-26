@@ -1,11 +1,7 @@
 <section class="hero"></section>
 
 <section class="container container_12">
-  <div class="container-offers">
-    <div class="container-offer"><div>Offer</div></div>
-    <div class="container-offer"><div>Offer</div></div>
-    <div class="container-offer last"><div>Offer</div></div>
-  </div>
+  <%= render "offers" %>
 
   <nav class="container-nav">
     <ul class="container-nav-links">
@@ -35,9 +31,9 @@
     </aside>
   </nav>
 
-  <div class="psychics">
-    <% @psychics[0,10].each do |p| %>
-      <%= render p %>
+  <div class="psychics small_container">
+    <% @psychics[0,10].each_with_index do |p, i| %>
+      <%= render p, last: (i+1)%3 == 0 %>
     <% end %>
   </div>
 
