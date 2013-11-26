@@ -1,0 +1,5 @@
+$("#callback-confirmation-modal .psychic-name").html("<%= @callback.psychic.alias_name %>")
+$("#callback-confirmation-modal .callback-minutes").html("<%= @wait_for %>")
+
+$("#callback-confirmation-modal").fadeIn();
+$("#callback-modal").fadeOut();

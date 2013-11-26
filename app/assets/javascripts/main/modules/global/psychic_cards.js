@@ -50,7 +50,7 @@ Module("IHP.Components.PsychicCards", function(PsychicCards) {
         addClass("psychic-card-favorite-on");
     });
 
-    promise.fail(this.handleAjaxError).bind(this);
+    promise.fail(this.handleAjaxError.bind(this));
   };
 
   PsychicCards.fn.whenPsychicIsRemovedAsFavorite = function(e) {
@@ -67,12 +67,12 @@ Module("IHP.Components.PsychicCards", function(PsychicCards) {
         addClass("psychic-card-favorite-off");
     });
 
-    promise.fail(this.handleAjaxError).bind(this);
+    promise.fail(this.handleAjaxError.bind(this));
   };
 
   PsychicCards.fn.whenCallbackButtonIsClicked = function(e) {
     console.log("whenCallbackButtonIsClicked");
-    var psychicId = getPsychicCard(e);
+    var psychicId = getPsychicId(e);
     Module.run("IHP.Components.Callbacks", [this.el, psychicId]);
   };
 
