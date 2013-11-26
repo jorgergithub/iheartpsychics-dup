@@ -1,4 +1,6 @@
-<div id="purchase_select_card_modal" class="modal large">
+<% @thank_you_modal = @client.favorite_psychics.any? ? "psychics_modal" : "thank_you_modal" %>
+
+<div id="select_payment_method_modal" class="modal large">
   <nav>
     <ul>
       <li class="paypal_tab">Pay via Paypal</li>
@@ -20,14 +22,14 @@
     </ul>
 
     <footer>
-      <%= link_to image_tag("modal/use_selected_cc_btn.png"), "#", class: "modal_link", "data-modal-id" => "thank_you_modal" %>
+      <%= link_to image_tag("modal/use_selected_cc_btn.png"), "#", class: "modal_link", "data-modal-id" => @thank_you_modal %>
       <%= link_to image_tag("modal/use_new_cc_btn.png"), "#", class: "new_credit_card_link" %>
     </footer>
   </div>
 
   <div class="modal_panel paypal_panel">
     <footer>
-      <%= link_to image_tag("modal/proceed_to_checkout_btn.png"), "#", class: "modal_link", "data-modal-id" => "thank_you_modal" %>
+      <%= link_to image_tag("modal/proceed_to_checkout_btn.png"), "#", class: "modal_link", "data-modal-id" => @thank_you_modal %>
     </footer>
   </div>
 
@@ -38,7 +40,7 @@
 
     <footer>
       <%= link_to image_tag("modal/use_card_on_file.png"), "#", class: "use_card_on_file_link"  %>
-      <%= link_to image_tag("modal/complete_transaction.png"), "#", class: "modal_link", "data-modal-id" => "thank_you_modal" %>
+      <%= link_to image_tag("modal/complete_transaction.png"), "#", class: "modal_link", "data-modal-id" => @thank_you_modal %>
     </footer>
   </div>
 </div>
