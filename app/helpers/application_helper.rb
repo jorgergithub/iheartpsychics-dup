@@ -64,6 +64,22 @@ module ApplicationHelper
     provider.to_s.titleize
   end
 
+  def avatar_image_tag(image_id, overrides={})
+    options = {
+      width: 265,
+      height: 265,
+      crop: :thumb,
+      gravity: 'faces:center',
+      radius: :max
+    }.merge(overrides)
+
+    if image_id.present?
+      cl_image_tag(image_id, options)
+    else
+      image_tag("avatar.png", alt: "Edit Your Picture")
+    end
+  end
+
   private
 
   def admin_controller?
