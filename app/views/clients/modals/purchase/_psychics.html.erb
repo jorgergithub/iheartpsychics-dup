@@ -1,0 +1,32 @@
+<div id="psychics_modal" class="modal large">
+  <div>
+    <h2>Your purchase is complete!</h2>
+    <h1>Call Your Favorite Psychic?</h1>
+
+    <p>A confirmation email has been sent to <b><%= @client.email %></b></p>
+
+    <% @favorite_psychics = @client.favorite_psychics %>
+
+    <% if @favorite_psychics.count > 3 %>
+      <%= image_tag "modal/left_arrow.png", class: "modal_left_arrow" %>
+    <% end %>
+
+    <nav>
+      <%= @favorite_psychics.each_slice(3) do |psychic_group| %>
+        <ul>
+          <% psychic_group.each do |psychic| %>
+            <li>
+              <%= link_to image_tag("avatar.png", class: "modal_avatar"), about_psychic_path(psychic) %>
+              <h1><%= link_to psychic.alias_name, about_psychic_path(psychic) %></h1>
+              <%= link_to image_tag("modal/connect_now.png"), about_psychic_path(psychic) %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </nav>
+
+    <% if @favorite_psychics.count > 3 %>
+      <%= image_tag "modal/right_arrow.png", class: "modal_right_arrow" %>
+    <% end %>
+  </div>
+</div>
