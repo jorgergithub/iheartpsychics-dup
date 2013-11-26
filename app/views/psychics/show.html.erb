@@ -1,25 +1,28 @@
 <section class="profile-container small_container">
   <div class="profile-avatar profile-item">
     <ul>
-      <li>
-        <%= link_to(image_tag("avatar.png", class: "avatar"), "#") %>
+      <li class="avatar">
+        <%= cl_image_tag(@psychic.avatar_id, :width => 265, :height => 265, :crop => :thumb, :gravity => 'faces:center', :radius => :max) %>
       </li>
       <li>
-        <a class="tooltip" href="#">
-          <span>Edit Your Picture</span>
-          <%= image_tag "customer-edit-profile.png", alt: "Edit Your Picture" %>
-        </a>
+        <%= form_for(@psychic, url: avatar_psychic_path(@psychic), method: :patch, remote: true, html: { :class => "upload-picture", :'data-type' => 'json' }) do |f| %>
+
+          <div class="upload">
+            <span>Edit Your Picture</span>
+            <%= f.cl_image_upload :avatar_id %>
+          </div>
+        <% end %>
       </li>
     </ul>
   </div>
 
   <div class="profile-psychic profile-info profile-item">
     <h2>
-      Hello, <span class="name">Stephanie</span>!
+      Hello, <span class="name"><%= @psychic.first_name %></span>!
     </h2>
 
     <p class="alias">
-      <span>Alias:</span> StephanieMagic
+      <span>Alias:</span> <%= @psychic.alias_name %>
     </p>
 
     <p class="status">
@@ -29,7 +32,7 @@
     <h3>Your Number</h3>
 
     <p class="your-number">
-      553-277-8676 <span class="extension">Ext:</span> 5643
+      <%= @psychic.phone %> <span class="extension">Ext:</span> <%= @psychic.extension %>
     </p>
 
     <p class="edit-profile">
@@ -39,7 +42,9 @@
 
   <div class="profile-current-rate profile-item">
     <p>
-      Your Current Rate Per Min Is <span class="rate">$15.50</span> Per Minute
+      Your Current Rate Per Min Is
+      <span class="rate"><%= number_to_currency @psychic.price %></span>
+      Per Minute
     </p>
   </div>
 </section>

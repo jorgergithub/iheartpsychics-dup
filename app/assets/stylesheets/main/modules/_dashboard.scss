@@ -53,13 +53,24 @@
   }
 }
 
-a.tooltip {
+div.upload {
   @include regular-font(14px);
-  position: relative;
+  background: url(image_path('edit-profile-picture.png'));
   display: inline-block;
+  height: 76px;
+  position: relative;
+  width: 76px;
 }
 
-a.tooltip span {
+div.upload input {
+  display: block !important;
+  width: 76px !important;
+  height: 76px !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+}
+
+div.upload span {
   position: absolute;
   left: 50%;
   width: 140px;
@@ -74,7 +85,7 @@ a.tooltip span {
   border-radius: 10px;
 }
 
-a.tooltip span:after {
+div.upload span:after {
   content: '';
   position: absolute;
   top: 100%;
@@ -87,7 +98,7 @@ a.tooltip span:after {
   border-left: 16px solid transparent;
 }
 
-a:hover.tooltip span {
+div:hover.upload span {
   visibility: visible;
   opacity: 0.9;
   bottom: 95px;

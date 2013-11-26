@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131107182357) do
+ActiveRecord::Schema.define(version: 20131126000922) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20131107182357) do
     t.datetime "expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
+    t.string   "status",           default: "active"
     t.string   "client_call_sid"
     t.string   "psychic_call_sid"
   end
@@ -333,6 +333,7 @@ ActiveRecord::Schema.define(version: 20131107182357) do
     t.datetime "updated_at"
   end
 
+  add_index "psychic_events", ["psychic_id"], name: "idx_psychic_events_psychic_id", using: :btree
   add_index "psychic_events", ["psychic_id"], name: "index_psychic_events_on_psychic_id", using: :btree
 
   create_table "psychics", force: true do |t|
@@ -397,6 +398,7 @@ ActiveRecord::Schema.define(version: 20131107182357) do
     t.decimal  "price",                              precision: 8, scale: 2
     t.string   "pseudonym"
     t.string   "country"
+    t.string   "avatar_id"
   end
 
   add_index "psychics", ["extension"], name: "index_psychics_on_extension", unique: true, using: :btree
@@ -417,7 +419,10 @@ ActiveRecord::Schema.define(version: 20131107182357) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "featured",   default: false
+    t.integer  "call_id"
   end
+
+  add_index "reviews", ["call_id"], name: "index_reviews_on_call_id", using: :btree
 
   create_table "schedule_jobs", force: true do |t|
     t.string   "description", null: false

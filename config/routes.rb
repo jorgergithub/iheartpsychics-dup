@@ -107,7 +107,7 @@ IHeartPsychics::Application.routes.draw do
     end
   end
 
-  resource :psychic do
+  resource :psychic, :except => :create do
     resources :reviews, only: [], shallow: true do
       member do
         get 'mark_as_featured'   , action: :mark_as_featured   , as: :mark_as_featured
@@ -123,9 +123,10 @@ IHeartPsychics::Application.routes.draw do
     end
 
     member do
-      get 'available'   , action: :available   , as: :available
-      get 'unavailable' , action: :unavailable , as: :unavailable
-      get '/:id/about'  , action: :about       , as: :about
+      get   'available'   , action: :available    , as: :available
+      get   'unavailable' , action: :unavailable  , as: :unavailable
+      get   '/:id/about'  , action: :about        , as: :about
+      patch '/:id/avatar' , action: :avatar       , as: :avatar
     end
   end
 

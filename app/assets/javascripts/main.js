@@ -4,6 +4,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
+//= require cloudinary
 //
 // Vendor Libs ============================================
 //= require vendor/module/module
@@ -20,6 +21,7 @@
 //= require main/modules/horoscope/index
 //= require main/modules/psychic/about
 //= require main/modules/psychics/about
+//= require main/modules/psychic/show
 //= require main/modules/modal/credit_card_list
 //= require main/modules/modals
 //

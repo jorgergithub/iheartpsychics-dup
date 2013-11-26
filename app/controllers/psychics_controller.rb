@@ -47,6 +47,20 @@ class PsychicsController < AuthorizedController
     redirect_to dashboard_path, notice: "You're now unavailable"
   end
 
+  def avatar
+    if params[:psychic][:avatar_id].present?
+      preloaded = Cloudinary::PreloadedFile.new(params[:psychic][:avatar_id])
+
+      respond_to do |format|
+        if preloaded.valid? && @psychic.update_attribute(:avatar_id, preloaded.identifier)
+          format.json { head :no_content }
+        else
+          format.json { render json: "Invalid upload signature", status: :unprocessable_entity }
+        end
+      end
+    end
+  end
+
   protected
 
   def find_psychic
