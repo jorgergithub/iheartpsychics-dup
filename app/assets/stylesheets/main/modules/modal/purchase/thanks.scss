@@ -1,0 +1,35 @@
+#thank_you_modal {
+  padding-top: 100px;
+
+  div {
+    width: 600px;
+    margin: auto;
+    text-align: left;
+  }
+
+  h1, h2 {
+    display: inline-block;
+    font-size: 30px;
+  }
+
+  h1 {
+    color: #242d3c;
+    font-weight: 600;
+  }
+
+  h2 {
+    color: #5d687a;
+    font-weight: 100;
+  }
+
+  p {
+    color: #5d687a;
+    font-size: 20px;
+    margin-top: 14px;
+    margin-bottom: 90px;
+  }
+
+  p b {
+    color: #73c248;
+  }
+}

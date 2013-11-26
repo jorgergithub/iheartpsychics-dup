@@ -20,14 +20,14 @@
     </ul>
 
     <footer>
-      <%= link_to image_tag("modal/use_selected_cc_btn.png"), "#" %>
+      <%= link_to image_tag("modal/use_selected_cc_btn.png"), "#", class: "modal_link", "data-modal-id" => "thank_you_modal" %>
       <%= link_to image_tag("modal/use_new_cc_btn.png"), "#", class: "new_credit_card_link" %>
     </footer>
   </div>
 
   <div class="modal_panel paypal_panel">
     <footer>
-      <%= link_to image_tag("modal/proceed_to_checkout_btn.png"), "#" %>
+      <%= link_to image_tag("modal/proceed_to_checkout_btn.png"), "#", class: "modal_link", "data-modal-id" => "thank_you_modal" %>
     </footer>
   </div>
 
@@ -38,7 +38,7 @@
 
     <footer>
       <%= link_to image_tag("modal/use_card_on_file.png"), "#", class: "use_card_on_file_link"  %>
-      <%= link_to image_tag("modal/complete_transaction.png"), "#" %>
+      <%= link_to image_tag("modal/complete_transaction.png"), "#", class: "modal_link", "data-modal-id" => "thank_you_modal" %>
     </footer>
   </div>
 </div>
