@@ -13,7 +13,7 @@ class OrdersController < AuthorizedController
 
     respond_to do |format|
       if @order.save
-        #@order.pay
+        @order.pay
         format.html { redirect_to client_path, notice: "Your order was successfully processed" }
         format.js
       else
