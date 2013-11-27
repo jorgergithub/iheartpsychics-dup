@@ -16,7 +16,7 @@
         <ul>
           <% psychic_group.each do |psychic| %>
             <li>
-              <%= link_to image_tag("avatar.png", class: "modal_avatar"), about_psychic_path(psychic) %>
+              <%= link_to avatar_image_tag(psychic.avatar_id, width: 140, height: 140, class: "modal_avatar"), about_psychic_path(psychic) %>
               <h1><%= link_to psychic.alias_name, about_psychic_path(psychic) %></h1>
               <%= link_to image_tag("modal/connect_now.png"), about_psychic_path(psychic) %>
             </li>

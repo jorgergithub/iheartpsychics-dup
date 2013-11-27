@@ -50,7 +50,11 @@
 
 <section class="actions-container small_container">
   <div class="modal_list">
-    <%= render "clients/modals/purchase/thank_you" %>
+    <% if @client.favorite_psychics.any? %>
+      <%= render "clients/modals/purchase/psychics" %>
+    <% else %>
+      <%= render "clients/modals/purchase/thank_you" %>
+    <% end %>
     <%= render "clients/modals/prices" %>
     <%= render "clients/modals/purchase/select_payment_method" %>
     <%= render "clients/modals/credit_card_list" %>
@@ -177,3 +181,13 @@
     </table>
   <% end %>
 </section>
+
+<% if params[:thanks] %>
+<% @thank_you_modal = @client.favorite_psychics.any? ? "psychics_modal" : "thank_you_modal" %>
+<script>
+$(document).ready(function() {
+  $(".overlay").fadeIn();
+  $("#<%= @thank_you_modal %>").fadeIn();
+});
+</script>
+<% end %>

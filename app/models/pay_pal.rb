@@ -47,11 +47,11 @@ class PayPal
         currency_code: "USD",
         custom: @reference,
         return: ENV["PAYPAL_SUCCESS_URL"],
-        cancel_return: "#{ENV["PAYPAL_CANCEL_URL"]}?reference=#{@reference}",
+        cancel_return: "#{ENV["PAYPAL_CANCEL_URL"]}?reference=#{ENV["PAYPAL_INVOICE_PREFIX"]}#{@reference}",
         notify_url: ENV["PAYPAL_NOTIFY_URL"],
         bn: "IHP_ST",
         rm: "2",
-        invoice: @reference,
+        invoice: "#{ENV["PAYPAL_INVOICE_PREFIX"]}#{@reference}",
         cert_id: ENV["PAYPAL_APP_CERT_ID"]
       }
   end

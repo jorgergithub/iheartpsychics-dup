@@ -76,7 +76,7 @@ module ApplicationHelper
     if image_id.present?
       cl_image_tag(image_id, options)
     else
-      image_tag("avatar.png", alt: "Edit Your Picture")
+      image_tag("avatar.png", {alt: "Edit Your Picture"}.merge(overrides))
     end
   end
 

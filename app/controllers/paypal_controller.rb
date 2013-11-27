@@ -5,7 +5,8 @@ class PaypalController < ApplicationController
     Rails.logger.info "[PAYPAL-CALLBACK] #{params.inspect}"
 
     if params[:payment_status] == "Completed"
-      if order = Order.find(params[:invoice])
+      invoice_id = params[:invoice].split("_")[1]
+      if order = Order.find(invoice_id)
         order.pay_with_paypal(params)
       else
         Rails.logger.error "Got a notification from PayPal for order #{params[:invoice]} but the order was not found."
@@ -17,7 +18,7 @@ class PaypalController < ApplicationController
 
   def success
     Rails.logger.info "[PAYPAL-SUCCESS] #{params.inspect}"
-    redirect_to client_path, notice: "Your order was successfully processed"
+    redirect_to "#{client_path}?thanks=true"
   end
 
   def cancel

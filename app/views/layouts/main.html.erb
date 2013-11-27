@@ -108,24 +108,6 @@
     </div>
   </nav>
 
-  <% if flash[:alert] %>
-    <div class="alert">
-      <%= flash[:alert] %>
-    </div>
-  <% end %>
-
-  <% if flash[:notice] %>
-    <div class="alert">
-      <%= flash[:notice] %>
-    </div>
-  <% end %>
-
-  <% if flash[:error] %>
-    <div class="alert alert-error">
-      <%= flash[:error] %>
-    </div>
-  <% end %>
-
   <%= yield %>
 
   <footer class="footer">
