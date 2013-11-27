@@ -219,14 +219,14 @@ table.records {
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
-  -webkit-box-shadow: 0 1px 1px #dce2e6;
-  -moz-box-shadow: 0 1px 1px #dce2e6;
-  box-shadow: 0 1px 1px #dce2e6;
+  -webkit-box-shadow: 0px 5px 5px #ccc;
+  -moz-box-shadow: 0px 5px 5px #ccc;
+  box-shadow: 0px 5px 5px #ccc;
   width: 100%;
 
   th {
-    @include regular-font(22px);
-    background: #92278f;
+    @include thin-font(22px);
+    background: #af00a5;
     color: #fff;
   }
 
