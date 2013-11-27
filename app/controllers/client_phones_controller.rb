@@ -19,7 +19,7 @@ class ClientPhonesController < AuthorizedController
         format.js { render :update }
       else
         format.html { render action: "new" }
-        format.js { render :update_error }
+        format.js { render :update }
       end
     end
   end
@@ -31,7 +31,7 @@ class ClientPhonesController < AuthorizedController
         format.js
       else
         format.html { render action: "edit" }
-        format.js { render :update_error }
+        format.js
       end
     end
   end
