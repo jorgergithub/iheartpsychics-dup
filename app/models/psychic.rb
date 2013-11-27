@@ -11,6 +11,16 @@ class Psychic < ActiveRecord::Base
 
   STATES = %w[unavailable available on_a_call]
 
+  SPECIALTIES = %w[specialties_love_and_relationships
+                  specialties_career_and_work specialties_money_and_finance
+                  specialties_lost_objects specialties_dream_interpretation
+                  specialties_pet_and_animals specialties_past_lives
+                  specialties_deceased]
+
+  TOOLS = %w(tools_tarot tools_oracle_cards tools_runes tools_crystals
+             tools_pendulum tools_numerology tools_astrology)
+
+
   has_enumeration_for :top_speciality, create_helpers: true
 
   belongs_to :user
@@ -51,8 +61,33 @@ class Psychic < ActiveRecord::Base
     order("psychics.pseudonym, SUBSTR(users.last_name, 1, 1)")
   }
 
+  def self.available
+    self.select { |p| p.available? }
+  end
+
   def self.available_count
-    Psychic.all.select { |p| p.available? }.size
+    available.size
+  end
+
+  def self.add_field_filter(field, value, prefix, collection)
+    raise "invalid #{field} #{value}" unless collection.include?("#{prefix}#{value}")
+
+    scope = self
+    collection.each do |s|
+      expected = s.gsub(/^#{prefix}/, "")
+      if value == expected
+        scope = scope.where("#{s} IS true")
+      end
+    end
+    scope
+  end
+
+  def self.add_specialty_filter(specialty)
+    self.add_field_filter("specialty", specialty, "specialties_", SPECIALTIES)
+  end
+
+  def self.add_tool_filter(tool)
+    self.add_field_filter("tool", tool, "tools_", TOOLS)
   end
 
   def current_state
@@ -214,17 +249,11 @@ class Psychic < ActiveRecord::Base
   end
 
   def tools_enum
-    items = %w(tools_tarot tools_oracle_cards tools_runes tools_crystals
-               tools_pendulum tools_numerology tools_astrology)
-    convert_to_enum(items, "tools_")
+    convert_to_enum(TOOLS, "tools_")
   end
 
   def specialties_enum
-    items = %w(specialties_love_and_relationships specialties_career_and_work
-               specialties_money_and_finance specialties_lost_objects
-               specialties_dream_interpretation specialties_pet_and_animals
-               specialties_past_lives specialties_deceased)
-    convert_to_enum(items, "specialties_")
+    convert_to_enum(SPECIALTIES, "specialties_")
   end
 
   def styles_enum

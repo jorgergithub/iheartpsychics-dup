@@ -244,4 +244,48 @@ describe Psychic do
       expect(psychic.payout_percentage_in_period).to eql(21)
     end
   end
+
+  describe ".add_specialty_filter" do
+    context "when specialty exists" do
+      let!(:psychic1) { create(:psychic, specialties_love_and_relationships: true) }
+      let!(:psychic2) { create(:psychic, specialties_love_and_relationships: false) }
+      let(:result) { Psychic.add_specialty_filter("love_and_relationships") }
+
+      it "includes the psychic with specialty set" do
+        expect(result).to include(psychic1)
+      end
+
+      it "excludes the psychic with specialty unset" do
+        expect(result).not_to include(psychic2)
+      end
+    end
+
+    context "when specialty doesn't exist" do
+      it "raises an error" do
+        expect { Psychic.add_specialty_filter("something") }.to raise_error
+      end
+    end
+  end
+
+  describe ".add_tool_filter" do
+    context "when tool exists" do
+      let!(:psychic1) { create(:psychic, tools_pendulum: true) }
+      let!(:psychic2) { create(:psychic, tools_pendulum: false) }
+      let(:result) { Psychic.add_tool_filter("pendulum") }
+
+      it "includes the psychic with tool set" do
+        expect(result).to include(psychic1)
+      end
+
+      it "excludes the psychic with tool unset" do
+        expect(result).not_to include(psychic2)
+      end
+    end
+
+    context "when specialty doesn't exist" do
+      it "raises an error" do
+        expect { Psychic.add_specialty_filter("something") }.to raise_error
+      end
+    end
+  end
 end

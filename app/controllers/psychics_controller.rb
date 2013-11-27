@@ -1,5 +1,5 @@
 class PsychicsController < AuthorizedController
-  skip_before_filter :authenticate_user!, only: [:new, :about]
+  skip_before_filter :authenticate_user!, only: [:new, :search, :about]
   before_filter :find_psychic, except: [:new, :search, :about]
   layout :resolve_layout
 
@@ -30,7 +30,19 @@ class PsychicsController < AuthorizedController
 
   def search
     @client = current_client
-    @psychics = Psychic.by_alias_name(params[:q])
+    @psychics = Psychic.all
+
+    if params[:specialty]
+      @psychics = @psychics.add_specialty_filter(params[:specialty])
+    end
+
+    if params[:tool]
+      @psychics = @psychics.add_tool_filter(params[:tool])
+    end
+
+    if params[:status] == "available"
+      @psychics = @psychics.available
+    end
   end
 
   def about
