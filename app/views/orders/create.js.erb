@@ -3,6 +3,8 @@
   
   $("#client_balance").text("<%= number_to_currency @client.reload.balance %>");
   showModal("<%= @thanks_modal %>");
+
+  $("#select_payment_method_modal .select_card_panel").replaceWith("<%= escape_javascript render('clients/modals/purchase/select_card_panel') %>");
 <% else %>
   $("#select_payment_method_modal .new_credit_card_panel .payment-errors").html("<span>An error occured when trying to charge your Credit Card.</span>")
 <% end %>
