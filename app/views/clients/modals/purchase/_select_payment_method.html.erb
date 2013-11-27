@@ -9,17 +9,17 @@
   </nav>
 
   <header>
-    <h1>40<small>MIN</small></h1>
-    <span>for</span>
-    <h1><small>$</small>25</h1>
+    <h1><span class="package-credits"></span><small>CREDITS</small></h1>
+    <span class="normal">for</span>
+    <h1><small>$</small><span class="package-price"></span></h1>
   </header>
 
   <div class="modal_panel credit_cards_panel">
+    <ul class="credit_cards"></ul>
     <ul class="credit_cards">
-      <% 3.times do |index| %>
-        <%= render "clients/modals/credit_card", select: (index == 1) %>
-      <% end %>
+      <%= render "clients/modals/credit_card", select: true %>
     </ul>
+    <ul class="credit_cards"></ul>
 
     <footer>
       <%= link_to image_tag("modal/use_selected_cc_btn.png"), "#", class: "modal_link", "data-modal-id" => @thank_you_modal %>

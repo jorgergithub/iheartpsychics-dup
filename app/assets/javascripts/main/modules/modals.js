@@ -2,7 +2,7 @@ var MODAL_FADE = 400;
 
 $(document).ready(function() {
 
-  var executeModalComponent = function(modalId) {
+  var executeModalComponent = function(modalId, modalAttributes) {
     var parts = modalId.split("_");
     var newModalId = "";
     for (var i = 0; i < parts.length; i++) {
@@ -11,12 +11,13 @@ $(document).ready(function() {
     }
 
     console.log("executeModalComponent", newModalId);
-    Module.run("IHP.Modals." + newModalId);
+    Module.run("IHP.Modals." + newModalId, [modalAttributes]);
   };
 
   $("body").on("click", ".modal_link", function(e) {
     e.preventDefault();
     var modalId = $(this).data("modal-id");
+    var modalAttributes = $(this).data("modal-attributes");
 
     if ($(".modal").is(":visible")) {
       $(".modal:visible").fadeOut(MODAL_FADE, function () {
@@ -25,8 +26,8 @@ $(document).ready(function() {
     } else {
       $("#" + modalId).fadeIn(MODAL_FADE);
       $(".overlay").fadeIn(MODAL_FADE);
-      executeModalComponent(modalId);
     }
+    executeModalComponent(modalId, modalAttributes);
   });
 
   $(".modal").on("click", ".close-button", function(e) {

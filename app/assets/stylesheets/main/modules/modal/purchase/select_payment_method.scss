@@ -17,7 +17,7 @@
   nav ul li.tab_selected {
     background: white;
   }
-  
+
   nav ul {
     font-size: 0;
   }
@@ -28,7 +28,7 @@
     margin-bottom: 40px;
   }
 
-  header span {
+  header span.normal {
     color: #8590a1;
     font-size: 30px;
     vertical-align: middle;
@@ -45,7 +45,7 @@
     display: inline-block;
     line-height: 0.5;
     vertical-align: middle;
-    
+
     small {
       font-size: 30px;
       font-weight: bold;

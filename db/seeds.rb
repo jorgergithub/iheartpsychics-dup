@@ -49,9 +49,9 @@ question.options.create(text: "Definitely Will Not")
 
 question = survey.questions.create(type: "TextQuestion", text: "Please share a few things that I Heart Psychics could do better to improve your experience:")
 
-Package.create(name: "$32 in credits", credits: 32, price: 30, active: true, phone: true)
-Package.create(name: "$55 in credits", credits: 55, price: 50, active: true, phone: true)
-Package.create(name: "$10 in credits", credits: 10, price: 5.99, active: true, phone: true)
+Package.create(id: 1, name: "70 for $60", credits: 70, price: 60, active: true, phone: true)
+Package.create(id: 2, name: "95 for $80", credits: 95, price: 80, active: true, phone: true)
+Package.create(id: 3, name: "120 for $99", credits: 120, price: 99, active: true, phone: true)
 
 Tier.create(name: 'Bronze',   from: 0, to: 999, percent: 14)
 Tier.create(name: 'Silver',   from: 1000, to: 1199, percent: 19)

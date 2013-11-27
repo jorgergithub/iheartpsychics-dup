@@ -1,29 +1,20 @@
 <div id="prices_modal" class="modal large">
   <table>
     <tr>
-      <% [[60,14,70],[80,16,95],[99,18,120]].each_with_index do |price, index| %>
-        <td>
+      <% Package.all.each do |package| %>
+        <td class="package-item" data-package-id="<%= package.id %>">
           <header>
-            <h1><small>$</small><%= price[0] %></h1>
-            <%= image_tag "modal/#{price[1]}_off.png" %>
+            <h1><small>$</small><%= package.price.to_i %></h1>
+            <%= image_tag "modal/#{package.discount}_off.png" %>
           </header>
 
-          <% if index == 0 %>
-            <!--<div class="auto_renew">Auto Renew</div>-->
-          <% end %>
-
           <h1>
-            <%= price[2] %><small>MIN</small>
+            <%= package.credits.to_i %>
+            <span>CREDITS</span>
           </h1>
 
-          <% if index == 0%>
-            <!--
-            <aside>Automatically reloaded to your account when you drop below 5 minutes.</aside>
-            -->
-          <% end %>
-
           <footer>
-            <%= link_to image_tag("modal/checkout.png"), "#", class: "modal_link", "data-modal-id" => "select_payment_method_modal" %>
+            <%= link_to image_tag("modal/checkout.png"), "#", class: "modal_link", "data-modal-id" => "select_payment_method_modal", data: { "modal-attributes" => { package: { price: package.price.to_i, credits: package.credits.to_i } } } %>
           </footer>
         </td>
       <% end %>
