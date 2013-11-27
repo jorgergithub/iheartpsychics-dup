@@ -49,9 +49,11 @@
 .modal footer {
   text-align: center;
 
-  input, a {
+  form, input, a {
     vertical-align: top;
+    display: inline-block;
   }
+
 
   input + input,
   input + a,

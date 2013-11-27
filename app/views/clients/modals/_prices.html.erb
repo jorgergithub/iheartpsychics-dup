@@ -14,7 +14,7 @@
           </h1>
 
           <footer>
-            <%= link_to image_tag("modal/checkout.png"), "#", class: "modal_link", "data-modal-id" => "select_payment_method_modal", data: { "modal-attributes" => { package: { price: package.price.to_i, credits: package.credits.to_i } } } %>
+            <%= link_to image_tag("modal/checkout.png"), "#", class: "modal_link", "data-modal-id" => "select_payment_method_modal", data: { "modal-attributes" => { package: { id: package.id, price: package.price.to_i, credits: package.credits.to_i } } } %>
           </footer>
         </td>
       <% end %>
