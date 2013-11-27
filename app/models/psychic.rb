@@ -125,6 +125,7 @@ class Psychic < ActiveRecord::Base
     if unavailable?
       events.create! state: "available"
       hours.create! action: "start"
+      update_attributes status: "available"
     end
     CallbackWorker.perform_async(self.id)
   end
@@ -133,6 +134,7 @@ class Psychic < ActiveRecord::Base
     if available?
       events.create! state: "unavailable"
       hours.create! action: "finish"
+      update_attributes status: "unavailable"
     end
   end
 
@@ -140,6 +142,7 @@ class Psychic < ActiveRecord::Base
     if available?
       events.create! state: "on_a_call"
       hours.create! action: "call_start"
+      update_attributes status: "on_a_call"
     end
   end
 

@@ -85,18 +85,51 @@ describe Psychic do
       before {
         psychic.available!
       }
+
       it "makes the psychic available" do
         expect(psychic).to be_available
+      end
+
+      it "sets the status field" do
+        expect(psychic.status).to eql("available")
+      end
+    end
+
+    describe "#on_a_call!" do
+      before {
+        psychic.available!
+        psychic.on_a_call!
+      }
+
+      it "makes the psychic unavailable" do
+        expect(psychic).to_not be_available
+      end
+
+      it "sets the status field" do
+        expect(psychic.status).to eql("on_a_call")
       end
     end
 
     describe "#unavailable!" do
       before {
+        psychic.available!
         psychic.unavailable!
       }
+
       it "makes the psychic unavailable" do
         expect(psychic).to_not be_available
       end
+
+      it "sets the status field" do
+        expect(psychic.status).to eql("unavailable")
+      end
+    end
+  end
+
+  describe "#status" do
+    let(:psychic) { create(:psychic) }
+    it "is unavailable by default" do
+      expect(psychic.status).to eql("unavailable")
     end
   end
 
