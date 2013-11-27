@@ -170,4 +170,71 @@ class Psychic < ActiveRecord::Base
   def sign
     Sign.by_date(date_of_birth)
   end
+
+  def total_calls_in_period
+    calls.uninvoiced.count
+  end
+
+  def total_minutes_in_period
+    calls.uninvoiced.sum(:duration)
+  end
+
+  def avg_minutes_in_period
+    calls.uninvoiced.average(:duration).to_i
+  end
+
+  def current_tier
+    Tier.for(total_minutes_in_period)
+  end
+
+  def current_tier_name
+    current_tier.try(:name)
+  end
+
+  def payout_percentage_in_period
+    current_tier.percent
+  end
+
+  def convert_to_enum(items, prefix)
+    results = []
+    items.each do |field|
+      tool_name = field.gsub(/^#{prefix}/, "").humanize
+      results << tool_name if send(field)
+    end
+    results
+  end
+
+  def tools_enum
+    items = %w(tools_tarot tools_oracle_cards tools_runes tools_crystals
+               tools_pendulum tools_numerology tools_astrology)
+    convert_to_enum(items, "tools_")
+  end
+
+  def specialties_enum
+    items = %w(specialties_love_and_relationships specialties_career_and_work
+               specialties_money_and_finance specialties_lost_objects
+               specialties_dream_interpretation specialties_pet_and_animals
+               specialties_past_lives specialties_deceased)
+    convert_to_enum(items, "specialties_")
+  end
+
+  def styles_enum
+    items = %w(style_compassionate style_inspirational style_straightforward)
+    convert_to_enum(items, "style_")
+  end
+
+  def abilities_enum
+    items = %w(ability_clairvoyance ability_clairaudient ability_clairsentient
+               ability_empathy ability_medium ability_channeler
+               ability_dream_analysis)
+    convert_to_enum(items, "ability_")
+  end
+
+  def pending_invoices
+    invoices.pending
+  end
+
+  def paid_invoices
+    invoices.paid
+  end
 end

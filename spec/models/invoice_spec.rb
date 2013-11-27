@@ -256,4 +256,12 @@ describe Invoice do
       end
     end
   end
+
+  describe "#period" do
+    let(:invoice) { create(:invoice, start_date: "2013-01-01", end_date: "2013-02-01") }
+
+    it "returns the period in dates" do
+      expect(invoice.period).to eql("Jan 01 to Feb 01")
+    end
+  end
 end

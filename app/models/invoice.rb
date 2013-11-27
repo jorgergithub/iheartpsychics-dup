@@ -83,4 +83,10 @@ class Invoice < ActiveRecord::Base
   def price_per_minute
     (tier.percent * psychic.price) / 100
   end
+
+  def period
+    start_s = start_date.strftime("%b %d")
+    end_s   = end_date.strftime("%b %d")
+    "#{start_s} to #{end_s}"
+  end
 end

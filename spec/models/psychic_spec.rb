@@ -143,4 +143,72 @@ describe Psychic do
       calls.should have_received(:create).with(from: "+17863295532", to: "+13054502995", url: "URL")
     end
   end
+
+  describe "#total_calls_in_period" do
+    let!(:psychic) { create(:psychic) }
+    let!(:call) { create(:call, psychic: psychic) }
+    let!(:invoice) { create(:invoice) }
+    let!(:invoiced_call) { create(:call, psychic: psychic, invoice: invoice) }
+
+    it "reports the number of uninvoiced calls" do
+      expect(psychic.total_calls_in_period).to eql(1)
+    end
+  end
+
+  describe "#total_minutes_in_period" do
+    let!(:psychic) { create(:psychic) }
+    let!(:call) { create(:call, psychic: psychic, original_duration: 10 * 60) }
+    let!(:call2) { create(:call, psychic: psychic, original_duration: 15 * 60) }
+    let!(:invoice) { create(:invoice) }
+    let!(:invoiced_call) { create(:call, psychic: psychic, invoice: invoice, original_duration: 25 * 60) }
+
+    it "reports the sum of the duration of uninvoiced calls" do
+      expect(psychic.total_minutes_in_period).to eql(25)
+    end
+  end
+
+  describe "#avg_minutes_per_call_in_period" do
+    let!(:psychic) { create(:psychic) }
+    let!(:call) { create(:call, psychic: psychic, original_duration: 10 * 60) }
+    let!(:call2) { create(:call, psychic: psychic, original_duration: 15 * 60) }
+    let!(:invoice) { create(:invoice) }
+    let!(:invoiced_call) { create(:call, psychic: psychic, invoice: invoice, original_duration: 25 * 60) }
+
+    it "reports the average minutes per call" do
+      expect(psychic.avg_minutes_in_period).to eql(12)
+    end
+  end
+
+  describe "#current_tier" do
+    let(:psychic) { build(:psychic) }
+    let(:tier) { double(:tier) }
+
+    before do
+      Tier.stub(for: tier)
+      psychic.stub(total_minutes_in_period: 38)
+      @tier = psychic.current_tier
+    end
+
+    it "returns the tier" do
+      expect(@tier).to eql(tier)
+    end
+
+    it "queries the tier for the current total minutes" do
+      expect(Tier).to have_received(:for).with(38)
+    end
+  end
+
+  describe "#payout_percentage_in_period" do
+    let(:psychic) { build(:psychic) }
+    let(:tier) { double(:tier) }
+
+    before do
+      tier.stub(percent: 21)
+      psychic.stub(current_tier: tier)
+    end
+
+    it "returns the tier's percentage" do
+      expect(psychic.payout_percentage_in_period).to eql(21)
+    end
+  end
 end

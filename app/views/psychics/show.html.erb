@@ -45,6 +45,8 @@
   </div>
 
   <div class="profile-current-rate profile-item">
+    <%= image_tag("psychic-tier-#{@psychic.current_tier_name.downcase}.png", class: "psychic-profile-tier-image") %>
+
     <p>
       Your Current Rate Per Min Is
       <span class="rate"><%= number_to_currency @psychic.price %></span>
@@ -60,7 +62,7 @@
     <h2>Total Calls This Paid Period</h2>
 
     <div class="total-calls-badge badge">
-      23
+      <%= @psychic.total_calls_in_period %>
     </div>
   </div>
 
@@ -68,7 +70,7 @@
     <h2>Total Minutes Talked</h2>
 
     <div class="psychic-badge badge">
-      982
+      <%= @psychic.total_minutes_in_period %>
     </div>
   </div>
 
@@ -76,7 +78,7 @@
     <h2>Average Minutes Per Call</h2>
 
     <div class="psychic-badge badge">
-      23
+      <%= @psychic.avg_minutes_in_period %>
     </div>
   </div>
 
@@ -84,7 +86,7 @@
     <h2>Total Pay Percentage</h2>
 
     <div class="psychic-badge badge">
-      38%
+      <%= @psychic.payout_percentage_in_period %>%
     </div>
   </div>
 </section>
@@ -94,7 +96,7 @@
     <h2>My Bio</h2>
 
     <p>
-      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolor
+      <%= @psychic.about %>
     </p>
   </div>
 
@@ -105,8 +107,9 @@
       <h3>Tools</h3>
 
       <ul>
-        <li>Tarot</li>
-        <li>Oracle Cards</li>
+        <% @psychic.tools_enum.each do |tool| %>
+          <li><%= tool %></li>
+        <% end %>
       </ul>
     </div>
 
@@ -114,7 +117,9 @@
       <h3>Specialties</h3>
 
       <ul>
-        <li class="highlighted">Money & Finance</li>
+        <% @psychic.specialties_enum.each do |specialty| %>
+          <li class="highlighted"><%= specialty %></li>
+        <% end %>
       </ul>
     </div>
 
@@ -122,7 +127,9 @@
       <h3>Style</h3>
 
       <ul>
-        <li>Compassionate</li>
+        <% @psychic.styles_enum.each do |style| %>
+          <li><%= style %></li>
+        <% end %>
       </ul>
     </div>
 
@@ -130,7 +137,9 @@
       <h3>Abilities</h3>
 
       <ul>
-        <li>Empathy</li>
+        <% @psychic.abilities_enum.each do |ability| %>
+          <li><%= ability %></li>
+        <% end %>
       </ul>
     </div>
   </div>
@@ -477,105 +486,65 @@
 <section class="psychic-invoices-container small_container">
   <h2 class="section-title">My Pending Invoices</h2>
 
-  <table class="records">
-    <thead>
-      <tr>
-        <th>Invoice ID</th>
-        <th>Period</th>
-        <th>Created</th>
-        <th>Total</th>
-      </tr>
-    </thead>
+  <% if @psychic.pending_invoices.any? %>
+    <table class="records">
+      <thead>
+        <tr>
+          <th>Invoice ID</th>
+          <th>Period</th>
+          <th>Created</th>
+          <th>Total</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr>
-        <td><%= link_to "0001772", "#" %></td>
-        <td>Oct 27 to Nov 4</td>
-        <td>11/10/2013 11:27</td>
-        <td>$1050.50</td>
-      </tr>
-
-      <tr>
-        <td><%= link_to "0002356", "#" %></td>
-        <td>Oct 27 to Nov 4</td>
-        <td>11/10/2013 11:27</td>
-        <td>$1220.00</td>
-      </tr>
-
-      <tr>
-        <td><%= link_to "0003267", "#" %></td>
-        <td>Oct 27 to Nov 4</td>
-        <td>11/10/2013 11:27</td>
-        <td>$1190.85</td>
-      </tr>
-
-      <tr>
-        <td><%= link_to "0004699", "#" %></td>
-        <td>Oct 27 to Nov 4</td>
-        <td>11/10/2013 11:27</td>
-        <td>$1330.55</td>
-      </tr>
-
-      <tr>
-        <td><%= link_to "0005352", "#" %></td>
-        <td>Oct 27 to Nov 4</td>
-        <td>11/10/2013 11:27</td>
-        <td>$1239</td>
-      </tr>
-    </tbody>
-  </table>
+      <tbody>
+        <% @psychic.pending_invoices.each do |inv| %>
+          <tr>
+            <td>#<%= inv.number %></td>
+            <td><%= inv.period %></td>
+            <td><%=l inv.created_at %></td>
+            <td><%= number_to_currency inv.total %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="psychic-blank">
+      No pending invoices.
+    </div>
+  <% end %>
 </section>
 
 <section class="psychic-invoices-container small_container">
   <h2 class="section-title">My Paid Invoices</h2>
 
-  <table class="records">
-    <thead>
-      <tr>
-        <th>Invoice ID</th>
-        <th>Period</th>
-        <th>Created</th>
-        <th>Total</th>
-      </tr>
-    </thead>
+  <% if @psychic.paid_invoices.any? %>
+    <table class="records">
+      <thead>
+        <tr>
+          <th>Invoice ID</th>
+          <th>Period</th>
+          <th>Created</th>
+          <th>Total</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr>
-        <td><%= link_to "0001772", "#" %></td>
-        <td>Oct 27 to Nov 4</td>
-        <td>11/10/2013 11:27</td>
-        <td>$1050.50</td>
-      </tr>
-
-      <tr>
-        <td><%= link_to "0002356", "#" %></td>
-        <td>Oct 27 to Nov 4</td>
-        <td>11/10/2013 11:27</td>
-        <td>$1220.00</td>
-      </tr>
-
-      <tr>
-        <td><%= link_to "0003267", "#" %></td>
-        <td>Oct 27 to Nov 4</td>
-        <td>11/10/2013 11:27</td>
-        <td>$1190.85</td>
-      </tr>
-
-      <tr>
-        <td><%= link_to "0004699", "#" %></td>
-        <td>Oct 27 to Nov 4</td>
-        <td>11/10/2013 11:27</td>
-        <td>$1330.55</td>
-      </tr>
-
-      <tr>
-        <td><%= link_to "0005352", "#" %></td>
-        <td>Oct 27 to Nov 4</td>
-        <td>11/10/2013 11:27</td>
-        <td>$1239</td>
-      </tr>
-    </tbody>
-  </table>
+      <tbody>
+        <% @psychic.paid_invoices.each do |inv| %>
+          <tr>
+            <td>#<%= inv.number %></td>
+            <td><%= inv.period %></td>
+            <td><%=l inv.created_at %></td>
+            <td><%= number_to_currency inv.total %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="psychic-blank">
+      No paid invoices.
+    </div>
+  <% end %>
 </section>
 
 <section class="psychic-reviews-container small_container">
@@ -583,99 +552,51 @@
     <h2 class="section-title">My Reviews:</h2>
 
     <div class="my-reviews-badge">
-      5
+      <%= @psychic.reviews.count %>
     </div>
   </div>
 
-  <table class="records">
-    <thead>
-      <tr>
-        <th style="width: 50px;"></th>
-        <th style="width: 50px;">ID</th>
-        <th>Client</th>
-        <th>Rating</th>
-        <th>Date & Time</th>
-        <th>Featured</th>
-      </tr>
-    </thead>
+  <% if @psychic.reviews.any? %>
+    <table class="records">
+      <thead>
+        <tr>
+          <th style="width: 50px;"></th>
+          <th style="width: 50px;">ID</th>
+          <th>Client</th>
+          <th>Rating</th>
+          <th>Date & Time</th>
+          <th>Featured</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr>
-        <td>
-          <%= link_to(image_tag("add-gray.png"), "#") %>
-        </td>
-        <td>31</td>
-        <td>Damon Huynh</td>
-        <td>
-          <i class="star star-1"></i>
-        </td>
-        <td>
-          <span class="review-date">July, 25 2013</span>
-        </td>
-        <td>&nbsp;</td>
-      </tr>
-
-      <tr>
-        <td>
-          <%= link_to(image_tag("add-gray.png"), "#") %>
-        </td>
-        <td>20</td>
-        <td>Sthephanie Bartholomew</td>
-        <td>
-          <i class="star star-2"></i>
-        </td>
-        <td>
-          <span class="review-date">July, 25 2013</span>
-        </td>
-        <td>&nbsp;</td>
-      </tr>
-
-      <tr>
-        <td>
-          <%= link_to(image_tag("add-gray.png"), "#") %>
-        </td>
-        <td>8</td>
-        <td>Jennifer Jones</td>
-        <td>
-          <i class="star star-3"></i>
-        </td>
-        <td>
-          <span class="review-date">July, 25 2013</span>
-        </td>
-        <td>
-          <%= image_tag "featured.png", alt: "Featured" %>
-        </td>
-      </tr>
-
-      <tr>
-        <td>
-          <%= link_to(image_tag("add-gray.png"), "#") %>
-        </td>
-        <td>13</td>
-        <td>Sterling Hawkins</td>
-        <td>
-          <i class="star star-4"></i>
-        </td>
-        <td>
-          <span class="review-date">July, 25 2013</span>
-        </td>
-        <td>&nbsp;</td>
-      </tr>
-
-      <tr>
-        <td>
-          <%= link_to(image_tag("add-gray.png"), "#") %>
-        </td>
-        <td>25</td>
-        <td>Jane Doe</td>
-        <td>
-          <i class="star star-5"></i>
-        </td>
-        <td>
-          <span class="review-date">July, 25 2013</span>
-        </td>
-        <td>&nbsp;</td>
-      </tr>
-    </tbody>
-  </table>
+      <tbody>
+        <% @psychic.reviews.each do |review| %>
+          <tr>
+            <td>
+              <%= link_to(image_tag("add-gray.png"), "#") %>
+            </td>
+            <td><%= review.id %></td>
+            <td><%= review.client.full_name %></td>
+            <td>
+              <i class="star star-<%= review.rating %>"></i>
+            </td>
+            <td>
+              <span class="review-date"><%=l review.created_at %></span>
+            </td>
+            <td>
+              <% if review.featured? %>
+                <%= image_tag "featured.png", alt: "Featured" %>
+              <% else %>
+                &nbsp;
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="psychic-blank">
+      No reviews yet.
+    </div>
+  <% end %>
 </section>

@@ -54,8 +54,8 @@
 }
 
 .profile-current-rate {
-  background: url(image_path('psychic-current-rate.png')) no-repeat center top;
-  padding-top: 200px;
+  background: url(image_path('psychic-current-tier-bg.png')) no-repeat center top;
+  // padding-top: 200px;
   width: 285px;
 
   p {
@@ -69,6 +69,13 @@
       display: block;
     }
   }
+}
+
+.psychic-profile-tier-image {
+  height: 72px;
+  width: 72px;
+  padding: 54px;
+  margin-bottom: 20px;
 }
 
 .psychic-action-item {
@@ -343,4 +350,10 @@ table.schedule:last-child {
 
 .review-date {
   display: block;
+}
+
+.psychic-blank {
+  padding: 80px;
+  color: #8590a1;
+  text-align: center;
 }
