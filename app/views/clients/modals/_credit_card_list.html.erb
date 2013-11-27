@@ -4,9 +4,11 @@
   </header>
 
   <div class="modal-body">
-    <ul class="credit_cards">
-      <%= render "clients/modals/credit_card", card: @client.cards.first, select: true %>
-    </ul>
+    <% if @client.cards.any? %>
+      <ul class="credit_cards">
+        <%= render "clients/modals/credit_card", card: @client.cards.first, select: true %>
+      </ul>
+    <% end %>
   </div>
 
   <footer>
