@@ -16,7 +16,7 @@ class Ability
     can [:create, :edit], :messages
     can [:create, :edit], :applications
     can [:index, :show], :faqs
-    can [:about], :psychics
+    can [:about, :search], :psychics
     can [:new, :create], :psychic_applications
 
     if user
