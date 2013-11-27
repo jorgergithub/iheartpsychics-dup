@@ -1,44 +1,27 @@
-// Module("IHP.Pages.HomeIndex", function(HomeIndex) {
-//   "use strict";
+Module("IHP.Pages.HomeIndex", function(HomeIndex) {
+  "use strict";
 
-//   HomeIndex.fn.initialize = function(el) {
-//     this.el = $(el);
-//     this.user = this.el.find(".user");
+  HomeIndex.fn.initialize = function(el) {
+    this.el = $(el);
+    this.specialtySearch = this.el.find(".specialty-search");
 
-//     this.signinEl = this.el.find(".user-signin-element");
-//     this.userLogin = this.el.find("#user_login");
+    this.addEventListeners();
+  };
 
-//     this.addEventListeners();
-//   };
+  HomeIndex.fn.addEventListeners = function() {
+    this.el.on("click", ".specialty-search-link", this.whenSpecialtySearchIsClicked.bind(this));
+    this.el.on("click", ".specialty-search-item", this.whenSpecialtyItemIsClicked.bind(this));
+  };
 
-//   HomeIndex.fn.addEventListeners = function() {
-//     this.el.on("click", ".signin", this.whenSignInIsClicked.bind(this));
-//     this.el.on("click", ".user-close", this.whenCloseIsClicked.bind(this));
-//   };
+  HomeIndex.fn.whenSpecialtySearchIsClicked = function(e) {
+    e.preventDefault();
+    this.specialtySearch.toggle();
+  };
 
-//   HomeIndex.fn.toggleSignInArea = function() {
-//     if (this.signinEl.is(":visible")) {
-//       this.signinEl.slideUp();
-//     }
-//     else {
-//       this.signinEl.slideDown(function() {
-//         this.userLogin.focus();
-//         this.userLogin.select();
-//       }.bind(this));
-//     }
-//   }
-
-//   HomeIndex.fn.whenSignInIsClicked = function(e) {
-//     e.preventDefault();
-//     e.stopPropagation();
-
-//     this.toggleSignInArea();
-//   };
-
-//   HomeIndex.fn.whenCloseIsClicked = function(e) {
-//     e.preventDefault();
-//     e.stopPropagation();
-
-//     this.toggleSignInArea();
-//   };
-// });
+  HomeIndex.fn.whenSpecialtyItemIsClicked = function(e) {
+    var target = $(e.target); // .closest(".specialty-search-item");
+    e.preventDefault();
+    this.specialtySearch.find(".specialty-search-selected").removeClass("specialty-search-selected");
+    target.addClass("specialty-search-selected");
+  }
+});

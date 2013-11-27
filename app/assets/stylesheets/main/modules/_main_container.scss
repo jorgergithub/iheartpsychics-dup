@@ -93,3 +93,95 @@
     outline: 0;
   }
 }
+
+.container-nav-specialty {
+  position: relative;
+}
+
+.specialty-search {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.specialty-search-selection {
+  margin-top: -25px;
+  margin-left: -10px;
+  padding-top: 25px;
+  padding-left: 10px;
+  width: 90px;
+  height: 50px;
+  background: #af00a5;
+  color: #fff;
+  border-radius: 40px;
+  display: block;
+}
+
+.specialty-search-selection:after {
+  display: block;
+  content: "";
+  background: url(image-path("specialty-search-separator.png")) no-repeat;
+  margin-top: 25px;
+  margin-left: 20px;
+  width: 40px;
+  height: 14px;
+}
+
+.specialty-search-items {
+  margin-top: 13px;
+  border-radius: 10px;
+  background: #af00a5;
+  width: 290px;
+}
+
+.specialty-search-item {
+  padding: 15px 0 15px 50px;
+  cursor: pointer;
+}
+
+.specialty-search-item-round-top {
+  border-radius: 10px 10px 0 0;
+}
+
+.specialty-search-item-round-bottom {
+  border-radius: 0 0 10px 10px;
+}
+
+.specialty-search-selected {
+  background: url(image-path("specialty-search-selected.png")) no-repeat 10px;
+  background-color: #8f0087;
+}
+
+.specialty-search-item i {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  float: right;
+  margin-right: 20px;
+}
+
+.specialty-search-love-and-relationships {
+  background: url(image-path("specialty-search-love-and-relationships.png"));
+}
+
+.specialty-search-money-and-finance {
+  background: url(image-path("specialty-search-money-and-finance.png"));
+}
+
+.specialty-search-career-and-work {
+  background: url(image-path("specialty-search-career-and-work.png"));
+}
+
+.specialty-search-pet-and-animals {
+  background: url(image-path("specialty-search-pet-and-animals.png"));
+}
+
+.specialty-search-lost-objects {
+  background: url(image-path("specialty-search-lost-objects.png"));
+}
+
+.specialty-search-past-lives {
+  background: url(image-path("specialty-search-past-lives.png"));
+}

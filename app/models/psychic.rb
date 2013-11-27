@@ -51,6 +51,10 @@ class Psychic < ActiveRecord::Base
     order("psychics.pseudonym, SUBSTR(users.last_name, 1, 1)")
   }
 
+  def self.available_count
+    Psychic.all.select { |p| p.available? }.size
+  end
+
   def current_state
     (events.last.try(:state) || STATES.first).inquiry
   end
