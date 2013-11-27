@@ -109,7 +109,7 @@
 
   i {
     position: absolute;
-    margin-top: -38px;
+    bottom: 0px;
     right: 17px;
   }
 }
@@ -128,7 +128,7 @@
   i.border {
     border-left: 2px solid #bec5d0;
     position: absolute;
-    margin-top: -50px;
+    bottom: 0px;
     right: 175px;
     padding-left: 10px;
     height: 40px;
@@ -211,6 +211,11 @@
   padding-left: 10px;
   height: 40px;
   padding-top: 10px;
+}
+
+.field div.field_with_errors {
+  display: inline-block;
+  vertical-align: top;
 }
 
 .overlay {

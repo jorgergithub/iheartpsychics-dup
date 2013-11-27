@@ -1,6 +1,4 @@
-$("#phone_modal form").remove();
-
-$("#phone_modal").append("<%= escape_javascript(render 'client_phones/modal_form', phone: @phone ) %>");
+$("#phone_modal form").replaceWith("<%= escape_javascript(render 'client_phones/modal_form', phone: @phone ) %>");
 $("p#client_phone").text("<%= @phone.number %>");
 
 closeModal();

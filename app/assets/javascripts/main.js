@@ -18,6 +18,7 @@
 //= require main/modules/client/show
 //= require main/modules/client/modals/pin
 //= require main/modules/client/modals/phone
+//= require main/modules/client/modals/password
 //= require main/modules/faqs/index
 //= require main/modules/home/careers
 //= require main/modules/home/index

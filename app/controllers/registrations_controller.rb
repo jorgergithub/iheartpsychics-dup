@@ -1,4 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
+  respond_to :html, :js
+
   def new
     @user = User.new
     @user.build_client
