@@ -1,12 +1,12 @@
 <%= form_for [:client, phone], remote: true do |f| %>
   <div class="modal-body">
-    <%= render "shared/form_validation_errors", model: phone %>
-    
     <div class="field full">
       <%= f.label :number, "My phone" %>
       <%= f.text_field :number %>
     </div>
   </div>
+
+  <%= render "shared/form_validation_errors", model: phone %>
 
   <footer>
     <%= image_submit_tag "modal/save_btn.png" %>

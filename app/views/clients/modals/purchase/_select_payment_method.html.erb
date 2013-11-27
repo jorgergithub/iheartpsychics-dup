@@ -62,15 +62,14 @@
 
             <div class="field medium">
               <%= f.label :card_cvc, "CVV / CVC" %>
-              <%= f.text_field :card_cvc, data: { stripe: "cvc" } %>
+              <%= f.text_field :card_cvc, maxlength: 3, data: { stripe: "cvc" } %>
             </div>
           </div>
-
-          <div id="card-number-validation-error" class="validation-error"></div>
-          <div id="card-exp-date-validation-error" class="validation-error"></div>
-          <div id="card-cvc-validation-error" class="validation-error"></div>
-          <div class="payment-errors"></div>
         </div>
+
+        <aside class="form_validation_errors">
+          <ul><li></li></ul>
+        </aside>
 
         <footer>
           <%= f.hidden_field :package_id %>

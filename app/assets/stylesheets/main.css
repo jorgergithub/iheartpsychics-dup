@@ -23,6 +23,7 @@
  *= require main/modules/modal/prices
  *= require main/modules/modal/callback
  *= require main/modules/modal/callback_confirmation
+ *= require main/modules/modal/_validation_errors
  *= require main/modules/_main_user
  *= require main/modules/_main_header
  *= require main/modules/_main_nav

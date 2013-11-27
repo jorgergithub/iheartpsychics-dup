@@ -5,11 +5,15 @@ Module("IHP.Modals.SelectPaymentMethodModal", function(SelectPaymentMethodModal)
     this.el = $("#select_payment_method_modal");
     this.package = attributes.package;
 
+    this.assign();
     this.setPackage();
     this.initNewCreditCardPayment();
-    this.onDismiss();
     this.bindNavigation();
     this.cardSelection();
+  };
+
+  SelectPaymentMethodModal.fn.assign = function() {
+    $(".new_credit_card_panel form", this.el)[0].reset();
   };
 
   SelectPaymentMethodModal.fn.setPackage = function() {
@@ -24,12 +28,6 @@ Module("IHP.Modals.SelectPaymentMethodModal", function(SelectPaymentMethodModal)
     Module.run("IHP.Main.Modal.Payment", form);
   };
 
-  SelectPaymentMethodModal.fn.onDismiss = function(attributes) {
-    this.el.off("dismiss").on("dismiss", function() {
-      $("#select_payment_method_modal .new_credit_card_panel form")[0].reset();
-    });
-  };
-
   SelectPaymentMethodModal.fn.bindNavigation = function(attributes) {
     this.el.off("click", "nav li").on("click", "nav li", function() {
       $(this).siblings().removeClass("tab_selected");
@@ -40,7 +38,6 @@ Module("IHP.Modals.SelectPaymentMethodModal", function(SelectPaymentMethodModal)
       var panel = $(this).data("panel");
       $(".modal_panel").hide();
       $(".modal_panel." + panel).show();
-      console.log("test");
     });
   };
 

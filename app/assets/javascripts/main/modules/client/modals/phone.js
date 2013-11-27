@@ -10,15 +10,10 @@ Module("IHP.Modals.PhoneModal", function(PhoneModal) {
 
   PhoneModal.fn.assign = function() {
     var phone = $("p#client_phone").text();
-    $("#phone_modal").find("input#client_phone_number").val(phone);
-    
+    $("input#client_phone_number", this.el).val(phone);
+    $("aside.form_validation_errors", this.el).remove();
+
     this.number.select();
     this.number.focus();
-  };
-
-  PhoneModal.fn.bindDismiss = function() {
-    this.el.on("dismiss", function() {
-      $("#phone_modal").find("div.form_validation_errors").remove();
-    });
   };
 });
