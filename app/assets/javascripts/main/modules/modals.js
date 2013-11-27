@@ -14,7 +14,7 @@ $(document).ready(function() {
     Module.run("IHP.Modals." + newModalId);
   };
 
-  $(".modal_link").on("click", function(e) {
+  $("body").on("click", ".modal_link", function(e) {
     e.preventDefault();
     var modalId = $(this).data("modal-id");
 
@@ -29,20 +29,26 @@ $(document).ready(function() {
     }
   });
 
-  $(".modal .close-button, .overlay").on("click", function(e) {
+  $(".modal").on("click", ".close-button", function(e) {
     e.preventDefault();
 
-    $(".modal").fadeOut(MODAL_FADE);
-    $(".overlay").fadeOut(MODAL_FADE);
+    closeModal();
   });
 
-  $(".modal .reset_form").on("click", function(e) {
+
+  $("body").on("click", ".overlay", function(e) {
+    e.preventDefault();
+
+    closeModal();
+  });
+
+  $(".modal").on("click", ".reset_form", function(e) {
     e.preventDefault();
 
     $(this).closest("form")[0].reset();
   });
 
-  $("a[data-close-modal]").on("click", function(e) {
+  $("a[data-close-modal]").on("click",  function(e) {
     e.preventDefault();
     var selector = $(this).attr("data-close-modal");
     var el = $(selector);
@@ -50,9 +56,9 @@ $(document).ready(function() {
     el.fadeOut();
     $(".overlay").fadeOut();
   });
-
-  $(".modal form").on("submit", function() {
-    $(".modal").fadeOut(MODAL_FADE);
-    $(".overlay").fadeOut(MODAL_FADE);
-  })
 });
+
+window.closeModal = function() {
+  $(".modal").fadeOut(MODAL_FADE);
+  $(".overlay").fadeOut(MODAL_FADE);
+}

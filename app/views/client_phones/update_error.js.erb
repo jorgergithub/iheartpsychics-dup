@@ -1,0 +1,3 @@
+$("#phone_modal form").remove();
+
+$("#phone_modal").append('<%= escape_javascript render("client_phones/modal_form", phone: @phone) %>');

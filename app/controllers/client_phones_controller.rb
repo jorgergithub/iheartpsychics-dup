@@ -13,18 +13,26 @@ class ClientPhonesController < AuthorizedController
       object.localized.assign_attributes(phone_params)
     end
 
-    if @phone.save
-      redirect_to client_path, notice: "New phone was successfully created."
-    else
-      render action: "new"
+    respond_to do |format|
+      if @phone.save
+        format.html { redirect_to client_path, notice: "New phone was successfully created." }
+        format.js { render :update }
+      else
+        format.html { render action: "new" }
+        format.js { render :update_error }
+      end
     end
   end
 
   def update
-    if @phone.localized.update_attributes(phone_params)
-      redirect_to client_path, notice: "Phone was successfully updated."
-    else
-      render action: "edit"
+    respond_to do |format|
+      if @phone.localized.update_attributes(phone_params)
+        format.html { redirect_to client_path, notice: "Phone was successfully updated." }
+        format.js
+      else
+        format.html { render action: "edit" }
+        format.js { render :update_error }
+      end
     end
   end
 

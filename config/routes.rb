@@ -96,7 +96,7 @@ IHeartPsychics::Application.routes.draw do
   end
 
   resource :client, :except => :create do
-    resources :client_phones, shallow: true
+    resources :client_phones
     member do
       get   'reset_pin'       , action: :reset_pin, as: :reset_pin
       patch 'reset_pin'       , action: :reset_pin

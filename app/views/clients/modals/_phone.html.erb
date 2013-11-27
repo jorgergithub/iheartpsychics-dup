@@ -1,19 +1,7 @@
 <div id="phone_modal" class="modal medium">
   <header>
-    <h1>My Pin</h1>
+    <h1>My Phone</h1>
   </header>
 
-  <div class="modal-body">
-    <%= form_for :phone do |f| %>
-      <div class="field full">
-        <%= f.label :number, "My phone" %>
-        <%= f.text_field :number %>
-      </div>
-    <% end %>
-  </div>
-
-  <footer>
-    <%= image_submit_tag "modal/save_btn.png" %>
-    <%= link_to image_tag("modal/cancel_btn.png"), "#", class: "close-button" %>
-  </footer>
+  <%= render "client_phones/modal_form", phone: @edit_phone %>
 </div>
