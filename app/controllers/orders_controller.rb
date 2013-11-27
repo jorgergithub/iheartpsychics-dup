@@ -10,16 +10,26 @@ class OrdersController < AuthorizedController
 
   def create
     @order = @client.orders.new(order_params.merge(payment_method: "credit_card"))
-    if @order.save
-      @order.pay
-      redirect_to client_path, notice: "Your order was successfully processed"
-    else
-      render action: "new"
+
+    respond_to do |format|
+      if @order.save
+        #@order.pay
+        format.html { redirect_to client_path, notice: "Your order was successfully processed" }
+        format.js
+      else
+        format.html { render action: "new" }
+        format.js
+      end
     end
   rescue Stripe::CardError
     logger.info "CardError: #{$!.message}"
     flash[:error] = $!.message
-    redirect_to :new_order
+
+        binding.pry
+    respond_to do |format|
+      format.html { redirect_to :new_order }
+      format.js
+    end
   end
 
   def paypal

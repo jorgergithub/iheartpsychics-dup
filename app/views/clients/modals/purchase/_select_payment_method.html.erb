@@ -15,21 +15,26 @@
   </header>
 
   <div class="modal_panel credit_cards_panel">
-    <ul class="credit_cards"></ul>
+
+    <%= form_for :order, url: orders_path, remote: true do |f| %>
     <ul class="credit_cards">
-      <%= render "clients/modals/credit_card", select: true %>
+      <%= render "clients/modals/credit_card", card: @client.cards.first, select: true %>
     </ul>
-    <ul class="credit_cards"></ul>
+
+    <div class="credit_card_payment_errors">
+    </div>
 
     <footer>
-      <%= link_to image_tag("modal/use_selected_cc_btn.png"), "#", class: "modal_link", "data-modal-id" => @thank_you_modal %>
-      <%= link_to image_tag("modal/use_new_cc_btn.png"), "#", class: "new_credit_card_link" %>
-    </footer>
+        <%= f.hidden_field :package_id %>
+        <%= image_submit_tag("modal/use_selected_cc_btn.png") %>
+        <%= link_to image_tag("modal/use_new_cc_btn.png"), "#", class: "new_credit_card_link" %>
+      </footer>
+    <% end %>
   </div>
 
   <div class="modal_panel paypal_panel">
     <footer>
-      <%= form_for :order, url: paypal_orders_path, remote: true, html: { id: "paypal_checkout" } do |f| %>
+      <%= form_for :order, url: paypal_orders_path, remote: true do |f| %>
         <%= f.hidden_field :package_id %>
         <%= image_submit_tag("modal/proceed_to_checkout_btn.png") %>
       <% end %>

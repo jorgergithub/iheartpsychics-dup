@@ -2,11 +2,10 @@
   <%= image_tag "modal/credit_card.png" %>
   <i><%= image_tag "modal/visa.png" %></i>
 
-  <h1>Card Ending in <b>2345</b></h1>
+  <h1>Card Ending in <b><%= card.last4 %></b></h1>
 
   <p>
-    2316 Malone Dr.
-    McKinney TX, 75070
+    <%= card.address_city %>
   </p>
 
   <div class="cc_actions">

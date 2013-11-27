@@ -56,4 +56,14 @@
   .new_credit_card_panel {
     display: none;
   }
+
+  .credit_card_payment_errors {
+    color: red;
+    text-align: center;
+
+    span {
+      display: inline-block;
+      margin-top: 40px;
+    }
+  }
 }

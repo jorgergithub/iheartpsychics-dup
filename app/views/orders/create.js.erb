@@ -1,0 +1,7 @@
+<% if @order.paid? %>
+  <% @thanks_modal = @client.favorite_psychics.any? ? "psychics_modal" : "thank_you_modal" %>
+  
+  showModal("<%= @thanks_modal %>");
+<% else %>
+  $("#select_payment_method_modal .credit_cards_panel .credit_card_payment_errors").html("<span>An error occured when trying to charge your Credit Card.</span>")
+<% end %>

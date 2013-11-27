@@ -16,6 +16,6 @@ Module("IHP.Modals.SelectPaymentMethodModal", function(SelectPaymentMethodModal)
 
     el.data("package-id", this.package.id);
 
-    el.find("#paypal_checkout input[type=hidden]").val(this.package.id)
+    el.find("form input[name='order[package_id]']").val(this.package.id)
   };
 });

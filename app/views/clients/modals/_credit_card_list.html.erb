@@ -5,9 +5,7 @@
 
   <div class="modal-body">
     <ul class="credit_cards">
-      <% 3.times do |index| %>
-        <%= render "clients/modals/credit_card", select: false %>
-      <% end %>
+      <%= render "clients/modals/credit_card", card: @client.cards.first, select: true %>
     </ul>
   </div>
 

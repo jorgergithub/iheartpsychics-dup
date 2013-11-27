@@ -1,33 +1,13 @@
 var MODAL_FADE = 400;
 
 $(document).ready(function() {
-
-  var executeModalComponent = function(modalId, modalAttributes) {
-    var parts = modalId.split("_");
-    var newModalId = "";
-    for (var i = 0; i < parts.length; i++) {
-      var string = parts[i];
-      newModalId += string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-    }
-
-    console.log("executeModalComponent", newModalId);
-    Module.run("IHP.Modals." + newModalId, [modalAttributes]);
-  };
-
   $("body").on("click", ".modal_link", function(e) {
     e.preventDefault();
+
     var modalId = $(this).data("modal-id");
     var modalAttributes = $(this).data("modal-attributes");
 
-    if ($(".modal").is(":visible")) {
-      $(".modal:visible").fadeOut(MODAL_FADE, function () {
-        $("#" + modalId).fadeIn(MODAL_FADE);
-      });
-    } else {
-      $("#" + modalId).fadeIn(MODAL_FADE);
-      $(".overlay").fadeIn(MODAL_FADE);
-    }
-    executeModalComponent(modalId, modalAttributes);
+    showModal(modalId, modalAttributes);
   });
 
   $(".modal").on("click", ".close-button", function(e) {
@@ -60,6 +40,30 @@ $(document).ready(function() {
     dismissModal();
   });
 });
+
+var executeModalComponent = function(modalId, modalAttributes) {
+  var parts = modalId.split("_");
+  var newModalId = "";
+  for (var i = 0; i < parts.length; i++) {
+    var string = parts[i];
+    newModalId += string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  }
+
+  console.log("executeModalComponent", newModalId);
+  Module.run("IHP.Modals." + newModalId, [modalAttributes]);
+};
+
+window.showModal = function(modalId, modalAttributes) {
+  if ($(".modal").is(":visible")) {
+    $(".modal:visible").fadeOut(MODAL_FADE, function () {
+      $("#" + modalId).fadeIn(MODAL_FADE);
+    });
+  } else {
+    $("#" + modalId).fadeIn(MODAL_FADE);
+    $(".overlay").fadeIn(MODAL_FADE);
+  }
+  executeModalComponent(modalId, modalAttributes);
+};
 
 window.closeModal = function() {
   $(".modal").fadeOut(MODAL_FADE);
