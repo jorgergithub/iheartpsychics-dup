@@ -33,6 +33,7 @@ $(document).ready(function() {
     e.preventDefault();
 
     closeModal();
+    dismissModal();
   });
 
 
@@ -40,6 +41,7 @@ $(document).ready(function() {
     e.preventDefault();
 
     closeModal();
+    dismissModal();
   });
 
   $(".modal").on("click", ".reset_form", function(e) {
@@ -54,11 +56,15 @@ $(document).ready(function() {
     var el = $(selector);
 
     el.fadeOut();
-    $(".overlay").fadeOut();
+    dismissModal();
   });
 });
 
 window.closeModal = function() {
   $(".modal").fadeOut(MODAL_FADE);
   $(".overlay").fadeOut(MODAL_FADE);
+}
+
+window.dismissModal = function() {
+  $(".modal:visible").trigger("dismiss");
 }
