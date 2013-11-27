@@ -60,10 +60,7 @@ class Psychic < ActiveRecord::Base
     where("CONCAT(psychics.pseudonym, ' ', SUBSTR(users.last_name, 1, 1)) LIKE ?", "%#{value}%").
     order("psychics.pseudonym, SUBSTR(users.last_name, 1, 1)")
   }
-
-  def self.available
-    self.select { |p| p.available? }
-  end
+  scope :available, -> { where("status = ?", "available") }
 
   def self.available_count
     available.size
