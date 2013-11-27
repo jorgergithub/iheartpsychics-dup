@@ -78,5 +78,28 @@ describe PsychicsController do
         expect(assigns(:psychics)).to_not include(psychic2)
       end
     end
+
+
+    context "searching by price range" do
+      let(:params) { {price_min: 5, price_max: 10} }
+      let!(:psychic1) { create(:psychic, price: 5) }
+      let!(:psychic2) { create(:psychic, price: 10) }
+      let!(:psychic3) { create(:psychic, price: 11) }
+      let!(:psychic4) { create(:psychic, price: 4) }
+
+      it "renders 200" do
+        expect(response.status).to eql(200)
+      end
+
+      it "includes the psychics within the range" do
+        expect(assigns(:psychics)).to include(psychic1)
+        expect(assigns(:psychics)).to include(psychic2)
+      end
+
+      it "excludes the psychics outside the range" do
+        expect(assigns(:psychics)).to_not include(psychic3)
+        expect(assigns(:psychics)).to_not include(psychic4)
+      end
+    end
   end
 end
