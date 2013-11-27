@@ -20,7 +20,7 @@
     font-size: 12px;
   }
 
-  input[type="checkbox"]:checked:before { 
+  input[type="checkbox"]:checked:before {
     background: url(image-path("modal/checked.png"));
   }​
 
@@ -33,7 +33,7 @@
     padding-bottom: 10px;
   }
 
-  input[type="checkbox"]:before { 
+  input[type="checkbox"]:before {
     content: "";
     display: inline-block;
     width: 26px;
@@ -45,5 +45,14 @@
   table td {
     padding-bottom: 15px;
     vertical-align: bottom;
+  }
+
+  select {
+    width: 260px;
+    height: 50px;
+    line-height: 50px;
+    border: 2px #bec5d0 solid;
+    font-size: 18px;
+    color: #8590a1;
   }
 }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131126044148) do
+ActiveRecord::Schema.define(version: 20131127004718) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -400,6 +400,7 @@ ActiveRecord::Schema.define(version: 20131126044148) do
     t.string   "pseudonym"
     t.string   "country"
     t.string   "avatar_id"
+    t.string   "top_speciality"
   end
 
   add_index "psychics", ["extension"], name: "index_psychics_on_extension", unique: true, using: :btree

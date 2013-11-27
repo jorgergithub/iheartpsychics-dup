@@ -76,7 +76,7 @@ class PsychicsController < AuthorizedController
       :specialties_money_and_finance, :specialties_lost_objects,
       :specialties_dream_interpretation, :specialties_pet_and_animals,
       :specialties_past_lives, :specialties_deceased, :style_compassionate,
-      :style_inspirational, :style_straightforward, :about, :price,
+      :style_inspirational, :style_straightforward, :about, :price, :top_speciality,
       schedules_attributes: [:id, :date, :start_time_string, :end_time_string, :_destroy])
   end
 

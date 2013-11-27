@@ -11,6 +11,8 @@ class Psychic < ActiveRecord::Base
 
   STATES = %w[unavailable available on_a_call]
 
+  has_enumeration_for :top_speciality, create_helpers: true
+
   belongs_to :user
 
   has_many :calls, -> { order(id: :desc) }

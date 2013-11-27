@@ -1,4 +1,8 @@
 module PsychicsHelper
+  def speciality_class(psychic, speciality)
+    psychic.send("#{speciality.split(" ").map(&:capitalize).join.underscore}?") ? "highlighted" : ""
+  end
+
   def psychic_state psychic
     case psychic.current_state.to_s
     when "available"

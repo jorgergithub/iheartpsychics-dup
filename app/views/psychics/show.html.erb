@@ -118,7 +118,7 @@
 
       <ul>
         <% @psychic.specialties_enum.each do |specialty| %>
-          <li class="highlighted"><%= specialty %></li>
+          <li class="<%= speciality_class(@psychic, specialty) %>"><%= specialty %></li>
         <% end %>
       </ul>
     </div>

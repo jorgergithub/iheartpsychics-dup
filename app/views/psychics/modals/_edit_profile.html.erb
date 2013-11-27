@@ -18,6 +18,11 @@
           <%= f.label :price, "Price (Per minute)" %>
           <%= f.number_field :price, min: 0, max: 99, step: 0.5 %>
         </div>
+
+        <div class="field medium">
+          <%= f.label :top_speciality, "Top Speciality" %>
+          <%= f.select :top_speciality, options_for_select(TopSpeciality.to_a, f.object.top_speciality) %>
+        </div>
       </div>
 
       <table>
