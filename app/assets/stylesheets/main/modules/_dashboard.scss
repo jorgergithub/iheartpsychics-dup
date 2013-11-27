@@ -139,25 +139,25 @@ div:hover.upload span {
     position: absolute;
     width: 160px;
   }
-}
 
-.action-item:first-child {
-  -webkit-border-top-left-radius: 15px;
-  -moz-border-radius-topleft: 15px;
-  border-top-left-radius: 15px;
-  -webkit-border-bottom-left-radius: 15px;
-  -moz-border-radius-bottomleft: 15px;
-  border-bottom-left-radius: 15px;
-}
+  &.first {
+    -webkit-border-top-left-radius: 15px;
+    -moz-border-radius-topleft: 15px;
+    border-top-left-radius: 15px;
+    -webkit-border-bottom-left-radius: 15px;
+    -moz-border-radius-bottomleft: 15px;
+    border-bottom-left-radius: 15px;
+  }
 
-.action-item:last-child {
-  border-right: 1px solid #c8c8c8;
-  -webkit-border-top-right-radius: 15px;
-  -moz-border-radius-topright: 15px;
-  border-top-right-radius: 15px;
-  -webkit-border-bottom-right-radius: 15px;
-  -moz-border-radius-bottomright: 15px;
-  border-bottom-right-radius: 15px;
+  &.last {
+    border-right: 1px solid #c8c8c8;
+    -webkit-border-top-right-radius: 15px;
+    -moz-border-radius-topright: 15px;
+    border-top-right-radius: 15px;
+    -webkit-border-bottom-right-radius: 15px;
+    -moz-border-radius-bottomright: 15px;
+    border-bottom-right-radius: 15px;
+  }
 }
 
 .action {
