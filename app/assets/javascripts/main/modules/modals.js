@@ -37,6 +37,7 @@ $(document).ready(function() {
     var el = $(selector);
 
     el.fadeOut();
+    $(".overlay").fadeOut();
     dismissModal();
   });
 });
