@@ -25,7 +25,6 @@ class OrdersController < AuthorizedController
     logger.info "CardError: #{$!.message}"
     flash[:error] = $!.message
 
-        binding.pry
     respond_to do |format|
       format.html { redirect_to :new_order }
       format.js

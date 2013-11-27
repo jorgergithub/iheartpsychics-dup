@@ -1,18 +1,6 @@
 <%= form_for :credit_card, html: { class: "credit_card_form" } do |f| %>
   <div class="row">
     <div class="field">
-      <%= f.label :name, "Name on card" %>
-      <%= f.text_field :name, placeholder: "John Doe" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :email, "Your email" %>
-      <%= f.text_field :email, placeholder: "johndoe@me.com" %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="field">
       <%= f.label :credit_card, "Credit Card#" %>
       <%= f.text_field :credit_card, placeholder: "1234 1324 1234 1234" %>
       <i><%= image_tag "modal/visa.png" %></i>

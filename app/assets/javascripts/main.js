@@ -28,6 +28,7 @@
 //= require main/modules/psychics/about
 //= require main/modules/psychic/show
 //= require main/modules/modal/credit_card_list
+//= require main/modules/modal/payment
 //= require main/modules/modals
 //
 // App Startup Code =======================================

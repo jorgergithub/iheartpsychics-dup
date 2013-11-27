@@ -5,7 +5,7 @@ Module("IHP.Modals.PinModal", function(PinModal) {
     this.el = $("#pin_modal", el);
     this.pin = $("#client_pin", el);
     this.assign();
-    this.bindDismiss();
+    this.onDismiss();
   };
 
   PinModal.fn.assign = function() {
@@ -14,8 +14,8 @@ Module("IHP.Modals.PinModal", function(PinModal) {
     this.pin.focus();
   };
 
-  PinModal.fn.bindDismiss = function() {
-    this.el.on("dismiss", function() {
+  PinModal.fn.onDismiss = function() {
+    this.el.off("dismiss").on("dismiss", function() {
       $("#pin_modal").find(".form_validation_errors").remove();
     });
   };

@@ -3,8 +3,8 @@
 <div id="select_payment_method_modal" class="modal large">
   <nav>
     <ul>
-      <li class="paypal_tab">Pay via Paypal</li>
-      <li class="credit_card_tab tab_selected">Pay via Credit Card</li>
+      <li data-panel="paypal_panel">Pay via Paypal</li>
+      <li data-panel="credit_cards_panel" class="tab_selected">Pay via Credit Card</li>
     </ul>
   </nav>
 
@@ -15,7 +15,6 @@
   </header>
 
   <div class="modal_panel credit_cards_panel">
-
     <%= form_for :order, url: orders_path, remote: true do |f| %>
 
     <% if @client.cards.any? %>
@@ -30,7 +29,7 @@
     <footer>
         <%= f.hidden_field :package_id %>
         <%= image_submit_tag("modal/use_selected_cc_btn.png") %>
-        <%= link_to image_tag("modal/use_new_cc_btn.png"), "#", class: "new_credit_card_link" %>
+        <%= link_to image_tag("modal/use_new_cc_btn.png"), "#", "data-panel" => "new_credit_card_panel" %>
       </footer>
     <% end %>
   </div>
@@ -46,12 +45,40 @@
 
   <div class="modal_panel new_credit_card_panel">
     <div class="modal-body">
-      <%= render "clients/modals/purchase/credit_card_form", new_card: true %>
+      <%= form_for :order, remote: true, url: orders_path, authenticity_token: true do |f| %>
+        <div class="row">
+          <div class="field">
+            <%= f.label :card_number, "Credit Card#" %>
+            <%= f.text_field :card_number, placeholder: "1234 1324 1234 1234", data: { stripe: "number" } %>
+            <i class="card_type"><%= image_tag "modal/visa.png" %></i>
+          </div>
+
+          <div class="field">
+            <div class="field small">
+              <%= f.label :card_exp_month, "Expires" %>
+              <%= f.text_field :card_exp_month, placeholder: "MM", data: { stripe:  "exp-month" } %>
+              <%= f.text_field :card_exp_year, placeholder: "YYYY", data: { stripe: "exp-year" } %>
+            </div>
+
+            <div class="field medium">
+              <%= f.label :card_cvc, "CVV / CVC" %>
+              <%= f.text_field :card_cvc, placeholder: "786", data: { stripe: "cvc" } %>
+            </div>
+          </div>
+
+          <div id="card-number-validation-error" class="validation-error"></div>
+          <div id="card-exp-date-validation-error" class="validation-error"></div>
+          <div id="card-cvc-validation-error" class="validation-error"></div>
+          <div class="payment-errors"></div>
+        </div>
+
+        <footer>
+          <%= f.hidden_field :package_id %>
+          <%= link_to image_tag("modal/use_card_on_file.png"), "#", "data-panel" => "credit_cards_panel"  %>
+          <%= image_submit_tag "modal/complete_transaction.png" %>
+        </footer>
+      <% end %>
     </div>
 
-    <footer>
-      <%= link_to image_tag("modal/use_card_on_file.png"), "#", class: "use_card_on_file_link"  %>
-      <%= link_to image_tag("modal/complete_transaction.png"), "#", class: "modal_link", "data-modal-id" => @thank_you_modal %>
-    </footer>
   </div>
 </div>
