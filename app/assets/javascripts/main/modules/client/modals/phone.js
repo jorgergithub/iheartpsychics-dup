@@ -9,14 +9,15 @@ Module("IHP.Modals.PhoneModal", function(PhoneModal) {
   };
 
   PhoneModal.fn.assign = function() {
+    var phone = $("p#client_phone").text();
+    $("#phone_modal").find("input#client_phone_number").val(phone);
+    
     this.number.select();
     this.number.focus();
   };
 
   PhoneModal.fn.bindDismiss = function() {
     this.el.on("dismiss", function() {
-      var phone = $("p#client_phone").text();
-      $("#phone_modal").find("input#client_phone_number").val(phone);
       $("#phone_modal").find("div.form_validation_errors").remove();
     });
   };
