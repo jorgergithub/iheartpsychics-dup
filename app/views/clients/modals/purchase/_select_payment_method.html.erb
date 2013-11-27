@@ -49,20 +49,20 @@
         <div class="row">
           <div class="field">
             <%= f.label :card_number, "Credit Card#" %>
-            <%= f.text_field :card_number, placeholder: "1234 1324 1234 1234", data: { stripe: "number" } %>
+            <%= f.text_field :card_number, placeholder: "1234 1324 1234 1234", maxlength: 16,data: { stripe: "number" } %>
             <i class="card_type"><%= image_tag "modal/visa.png" %></i>
           </div>
 
           <div class="field">
             <div class="field small">
               <%= f.label :card_exp_month, "Expires" %>
-              <%= f.text_field :card_exp_month, placeholder: "MM", data: { stripe:  "exp-month" } %>
-              <%= f.text_field :card_exp_year, placeholder: "YYYY", data: { stripe: "exp-year" } %>
+              <%= f.text_field :card_exp_month, placeholder: "MM", maxlength: 2, data: { stripe:  "exp-month" } %>
+              <%= f.text_field :card_exp_year, placeholder: "YYYY", maxlength: 4, data: { stripe: "exp-year" } %>
             </div>
 
             <div class="field medium">
               <%= f.label :card_cvc, "CVV / CVC" %>
-              <%= f.text_field :card_cvc, placeholder: "786", data: { stripe: "cvc" } %>
+              <%= f.text_field :card_cvc, data: { stripe: "cvc" } %>
             </div>
           </div>
 
