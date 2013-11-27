@@ -29,9 +29,14 @@
       <span>Alias:</span> <%= @psychic.alias_name %>
     </p>
 
-    <p class="status">
-      Status: Available
-    </p>
+    <div class="status status-<%= @psychic.current_state %>">
+      <% if @psychic.available? %>
+        <%= link_to "", unavailable_psychic_path, class: "status-toggle" %>
+      <% else %>
+        <%= link_to "", available_psychic_path, class: "status-toggle" %>
+      <% end %>
+      Status: <span><%= @psychic.current_state.capitalize %></span>
+    </div>
 
     <h3>Your Number</h3>
 

@@ -11,6 +11,41 @@
   text-align: center;
 }
 
+.profile-psychic .status {
+  width: 300px;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin-left: -10px;
+}
+
+.profile-psychic .status-available {
+  background: #6acd00;
+}
+
+.profile-psychic .status-available span {
+  color: #fff;
+  font-weight: normal;
+}
+
+.profile-psychic .status-unavailable {
+  background: #3f4955;
+}
+
+.profile-psychic .status-unavailable span {
+  color: #cecece;
+  font-weight: normal;
+}
+
+.profile-psychic .status-toggle {
+  margin-right: -10px;
+  background: url(image_path("psychic-status-toggle.png"));
+  float: right;
+  width: 23px;
+  height: 23px;
+  cursor: pointer;
+}
+
 .profile-avatar {
   width: 270px;
 
