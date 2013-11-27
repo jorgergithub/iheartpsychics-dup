@@ -19,4 +19,12 @@ class Credit < ActiveRecord::Base
       "N/A"
     end
   end
+
+  def amount
+    if target.respond_to?(:transactions)
+      target.transactions.first.amount
+    else
+      "N/A"
+    end
+  end
 end
