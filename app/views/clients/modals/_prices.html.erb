@@ -1,15 +1,15 @@
 <div id="prices_modal" class="modal large">
   <table>
     <tr>
-      <% [[40,70,40],[30,50,30],[55,60,60]].each_with_index do |price, index| %>
+      <% [[60,14,70],[80,16,95],[99,18,120]].each_with_index do |price, index| %>
         <td>
           <header>
             <h1><small>$</small><%= price[0] %></h1>
             <%= image_tag "modal/#{price[1]}_off.png" %>
           </header>
 
-          <% if index == 0%>
-            <div class="auto_renew">Auto Renew</div>
+          <% if index == 0 %>
+            <!--<div class="auto_renew">Auto Renew</div>-->
           <% end %>
 
           <h1>
@@ -17,7 +17,9 @@
           </h1>
 
           <% if index == 0%>
+            <!--
             <aside>Automatically reloaded to your account when you drop below 5 minutes.</aside>
+            -->
           <% end %>
 
           <footer>
