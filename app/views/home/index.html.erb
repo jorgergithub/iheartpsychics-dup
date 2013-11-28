@@ -68,9 +68,11 @@
     <% @psychics[0,10].each_with_index do |p, i| %>
       <%= render p, last: (i+1)%3 == 0 %>
     <% end %>
+    <a href="#" class="psychics-more">
+      <%= image_tag "psychics/more_psychics_btn.png" %>
+    </a>
   </div>
 
-  <a href="#" class="psychics-more">More Readers</a>
 </section>
 
 <section class="horoscope">
