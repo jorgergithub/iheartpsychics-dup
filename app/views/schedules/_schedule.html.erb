@@ -1,14 +1,17 @@
 <td>
   <%= f.hidden_field :date, class: "date" %>
-  <%= f.text_field :start_time_string,
-    data: { format: "HH:mm PP", mask: t("masks.time") }, class: "start_time" %>
+
+  <div class="upcoming-time">
+    <span class="time">01:00 AM</span>
+    <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+  </div>
 </td>
 <td>
-  <%= f.text_field :end_time_string,
-    data: { format: "HH:mm PP", mask: t("masks.time") }, class: "end_time" %>
+  <div class="upcoming-time">
+    <span class="time">01:00 AM</span>
+    <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+  </div>
 
-  <%#= link_to_remove_fields('<i class="icon-remove"></i>'.html_safe, f,
-    title: "Delete this entry.", function: "removeSchedule") %>
   <%= f.hidden_field(:_destroy, class: "delete") %>
-  <a href="#" class="remove_schedule"><i class="icon-remove"></i></a>
+  <%= link_to(image_tag("remove.png"), "#", class: "remove-schedule") %>
 </td>

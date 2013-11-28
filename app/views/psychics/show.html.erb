@@ -215,152 +215,38 @@
 <section class="psychic-schedule-container small_container">
   <h2 class="section-title">My Upcoming Weekly Schedule</span></h2>
 
-  <table class="records">
-    <thead>
-      <tr>
-        <th style="width: 250px;">Date</th>
-        <th>Start</th>
-        <th>End</th>
-      </tr>
-    </thead>
+  <%= form_for @psychic do |f| %>
+    <script type="text/html" id="new_schedule">
+      <%= template_for_field f, :schedules %>
+    </script>
 
-    <tbody>
-      <tr>
-        <td class="upcoming-date">
-          <%= link_to "Thu, 27 Sep", "#" %>
-        </td>
-        <td>
-          <div class="upcoming-time">
-            <span class="time">01:00 AM</span>
-            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
-            <div class="popover">
-              <%= image_tag "popover_up_arrow.png", class: "popover-arrow" %>
-              <div class="popover-content">
-                <input type="text" placeholder="HH">
-                <input type="text" placeholder="MM">
-                <input type="checkbox" name="toggle" id="toggle">
-                <label for="toggle">PM</label>
-              </div>
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="upcoming-time">
-            <span class="time">09:00 AM</span>
-            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
-          </div>
-        </td>
-      </tr>
+    <table class="schedules records">
+      <thead>
+        <tr>
+          <th style="width: 250px;">Date</th>
+          <th>Start</th>
+          <th>End</th>
+        </tr>
+      </thead>
 
-      <tr>
-        <td class="upcoming-date">
-          <%= link_to "Fri, 28 Sep", "#" %>
-        </td>
-        <td>
-          <div class="upcoming-time">
-            <span class="time">01:00 AM</span>
-            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
-          </div>
-        </td>
-        <td>
-          <div class="upcoming-time">
-            <span class="time">09:00 AM</span>
-            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
-          </div>
-        </td>
-      </tr>
-
-      <tr>
-        <td class="upcoming-date">
-          <%= link_to "Sat, 29 Sep", "#" %>
-        </td>
-        <td>
-          <div class="upcoming-time">
-            <span class="time">01:00 AM</span>
-            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
-          </div>
-        </td>
-        <td>
-          <div class="upcoming-time">
-            <span class="time">09:00 AM</span>
-            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
-          </div>
-        </td>
-      </tr>
-
-      <tr>
-        <td class="upcoming-date">
-          <%= link_to "Sun, 30 Sep", "#" %>
-        </td>
-        <td>
-          <div class="upcoming-time">
-            <span class="time">01:00 AM</span>
-            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
-          </div>
-        </td>
-        <td>
-          <div class="upcoming-time">
-            <span class="time">09:00 AM</span>
-            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
-          </div>
-        </td>
-      </tr>
-
-      <tr>
-        <td class="upcoming-date">
-          <%= link_to "Mon, 01 Oct", "#" %>
-        </td>
-        <td>
-          <div class="upcoming-time">
-            <span class="time">01:00 AM</span>
-            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
-          </div>
-        </td>
-        <td>
-          <div class="upcoming-time">
-            <span class="time">09:00 AM</span>
-            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
-          </div>
-        </td>
-      </tr>
-
-      <tr>
-        <td class="upcoming-date">
-          <%= link_to "Tue, 02 Oct", "#" %>
-        </td>
-        <td>
-          <div class="upcoming-time">
-            <span class="time">01:00 AM</span>
-            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
-          </div>
-        </td>
-        <td>
-          <div class="upcoming-time">
-            <span class="time">09:00 AM</span>
-            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
-          </div>
-        </td>
-      </tr>
-
-      <tr>
-        <td class="upcoming-date">
-          <%= link_to "Wed, 03 Oct", "#" %>
-        </td>
-        <td>
-          <div class="upcoming-time">
-            <span class="time">01:00 AM</span>
-            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
-          </div>
-        </td>
-        <td>
-          <div class="upcoming-time">
-            <span class="time">09:00 AM</span>
-            <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+      <tbody>
+        <% @schedules.each_pair do |date, schedules| %>
+          <tr data-date="<%=l date.in_time_zone.to_date, format: :date_only %>">
+            <td class="upcoming-date" rowspan="<%= schedules.size %>">
+              <%= link_to l(date.in_time_zone.to_date, format: :schedule), "#",
+                :class => "add-schedule",
+                :"data-date" => l(date.in_time_zone.to_date, format: :date_only) %>
+            </td>
+            <% schedules.each_with_index do |schedule, i| %>
+              <%= f.fields_for :schedules, schedule do |sf| %>
+                <%= render schedule, f: sf %>
+              <% end %>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 </section>
 
 <section class="psychic-invoices-container small_container">

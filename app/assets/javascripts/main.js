@@ -26,6 +26,7 @@
 //= require main/modules/horoscope/index
 //= require main/modules/psychic/about
 //= require main/modules/psychics/about
+//= require main/modules/psychic/schedule
 //= require main/modules/psychic/show
 //= require main/modules/modal/credit_card_list
 //= require main/modules/modal/payment

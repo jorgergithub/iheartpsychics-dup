@@ -16,6 +16,8 @@ class PsychicsController < AuthorizedController
 
   def show
     @table = ScheduleTable.new(@psychic.weekly_schedule)
+    @schedules = @psychic.next_week_schedules_by_date
+    @new_schedule = @psychic.schedules.new
   end
 
   def update

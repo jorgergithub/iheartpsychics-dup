@@ -16,7 +16,12 @@ Module("IHP.Pages.PsychicsShow", function(PsychicsShow) {
       height: 265
     };
 
+    this.initializeSchedule();
     this.addEventListeners();
+  };
+
+  PsychicsShow.fn.initializeSchedule = function() {
+    Module.run("IHP.Pages.Schedules", this.el);
   };
 
   PsychicsShow.fn.addEventListeners = function() {
