@@ -117,7 +117,12 @@
 
   i.card_type {
     position: absolute;
-    bottom: 12px;
+    bottom: 8px;
+    
+    img { display: none; }
+    img.generic_card {
+      display: inline-block;
+    }
   }
 }
 

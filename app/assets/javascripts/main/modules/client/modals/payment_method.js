@@ -14,6 +14,33 @@ Module("IHP.Modals.SelectPaymentMethodModal", function(SelectPaymentMethodModal)
     this.initNewCreditCardPayment();
     this.bindNavigation();
     this.cardSelection();
+    this.cardTypeFlagHandler();
+  };
+
+  SelectPaymentMethodModal.fn.cardTypeFlagHandler = function() {
+    var changeCreditCardIcon = function(el) {
+      var number = $(el).val();
+      var type = Stripe.card.cardType(number);
+      
+      if (type === "American Express") {
+        var cardType = "american_express"
+      } else if (type === "Visa") {
+        var cardType = "visa"
+      } else if (type === "MasterCard") {
+        var cardType = "master_card"
+      } else if (type === "Discover") {
+        var cardType = "discover"
+      } else {
+        var cardType = "generic_card"
+      }
+
+      $("i.card_type img", $(el).parent()).hide();
+      $("i.card_type img." + cardType, $(el).parent()).show();
+    }
+
+    $("input#order_card_number", this.newCreditCardPanel).off("input").on("input", function() {
+      changeCreditCardIcon(this)
+    });
   };
 
   SelectPaymentMethodModal.fn.assign = function() {

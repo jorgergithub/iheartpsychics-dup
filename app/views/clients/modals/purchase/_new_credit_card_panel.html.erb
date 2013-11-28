@@ -5,7 +5,13 @@
         <div class="field">
           <%= f.label :card_number, "Credit Card#" %>
           <%= f.text_field :card_number, placeholder: "1234 1324 1234 1234", maxlength: 16,data: { stripe: "number" } %>
-          <i class="card_type"><%= image_tag "modal/visa.png" %></i>
+          <i class="card_type">
+            <%= image_tag "credit_card_icons/generic_2.png", class: "generic_card" %>
+            <%= image_tag "credit_card_icons/visa.png", class: "visa" %>
+            <%= image_tag "credit_card_icons/american_express.png", class: "american_express" %>
+            <%= image_tag "credit_card_icons/master_card.png", class: "master_card" %>
+            <%= image_tag "credit_card_icons/discover.png", class: "discover" %>
+          </i>
         </div>
 
         <div class="field">
