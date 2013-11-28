@@ -1,8 +1,6 @@
 <% if @order.paid? %>
-  <% @thanks_modal = @client.favorite_psychics.any? ? "psychics_modal" : "thank_you_modal" %>
-  
   $("#client_balance").text("<%= number_to_currency @client.reload.balance %>");
-  showModal("<%= @thanks_modal %>");
+  showModal("thank_you_modal");
 
   $("#select_payment_method_modal .select_card_panel").replaceWith("<%= escape_javascript render('clients/modals/purchase/select_card_panel') %>");
 <% else %>

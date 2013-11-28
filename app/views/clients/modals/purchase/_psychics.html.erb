@@ -1,18 +1,16 @@
-<div id="psychics_modal" class="modal large">
+<div id="thank_you_modal" class="psychics modal large">
   <div>
     <h2>Your purchase is complete!</h2>
     <h1>Call Your Favorite Psychic?</h1>
 
     <p>A confirmation email has been sent to <b><%= @client.email %></b></p>
 
-    <% @favorite_psychics = @client.favorite_psychics %>
-
-    <% if @favorite_psychics.count > 3 %>
+    <% if @client.favorite_psychics.count > 3 %>
       <%= image_tag "modal/left_arrow.png", class: "modal_left_arrow" %>
     <% end %>
 
     <nav>
-      <%= @favorite_psychics.each_slice(3) do |psychic_group| %>
+      <%= @client.favorite_psychics.each_slice(3) do |psychic_group| %>
         <ul>
           <% psychic_group.each do |psychic| %>
             <li>
@@ -25,7 +23,7 @@
       <% end %>
     </nav>
 
-    <% if @favorite_psychics.count > 3 %>
+    <% if @client.favorite_psychics.count > 3 %>
       <%= image_tag "modal/right_arrow.png", class: "modal_right_arrow" %>
     <% end %>
   </div>

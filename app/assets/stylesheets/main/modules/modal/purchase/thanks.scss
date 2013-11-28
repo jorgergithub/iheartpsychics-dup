@@ -1,5 +1,4 @@
-#thank_you_modal,
-#psychics_modal {
+#thank_you_modal {
   padding-top: 100px;
 
   div {
@@ -32,7 +31,7 @@
   }
 }
 
-#thank_you_modal {
+#thank_you_modal.thanks {
   padding-top: 100px;
 
   div {
@@ -44,7 +43,7 @@
   }
 }
 
-#psychics_modal {
+#thank_you_modal.psychics {
   padding: 50px 30px 70px 30px;
 
   div {

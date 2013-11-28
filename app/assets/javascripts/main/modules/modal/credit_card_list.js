@@ -19,8 +19,8 @@ $(document).ready(function() {
     });
   });
 
-  $("#psychics_modal .modal_right_arrow").on("click", function() {
-    var selected = $("#psychics_modal nav ul.modal_selected");
+  $("#thank_you_modal .modal_right_arrow").on("click", function() {
+    var selected = $("#thank_you_modal nav ul.modal_selected");
 
     if (selected.next().length > 0) {
       selected.removeClass("modal_selected");
@@ -28,8 +28,8 @@ $(document).ready(function() {
     }
   });
 
-  $("#psychics_modal .modal_left_arrow").on("click", function() {
-    var selected = $("#psychics_modal nav ul.modal_selected");
+  $("#thank_you_modal .modal_left_arrow").on("click", function() {
+    var selected = $("#thank_you_modal nav ul.modal_selected");
 
     if (selected.prev().length > 0) {
       selected.removeClass("modal_selected");
@@ -37,5 +37,5 @@ $(document).ready(function() {
     }
   });
 
-  $("#psychics_modal nav ul").first().addClass("modal_selected");
+  $("#thank_you_modal nav ul").first().addClass("modal_selected");
 });
