@@ -361,6 +361,14 @@ table.schedule:last-child {
   position: relative;
 }
 
+.popover-arrow {
+  position: absolute;
+  margin-top: 3px;
+  margin-left: 45px;
+  z-index: 100;
+
+}
+
 .popover-content {
   background: #fff;
   border: 1px solid #e1e7ef;
@@ -369,27 +377,9 @@ table.schedule:last-child {
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
   position: absolute;
   width: 240px;
-  top: 15px;
+  top: 13px;
   left: -10px;
   z-index: 99;
-}
-
-.popover-content:after, .popover-content:before {
-  bottom: 100%;
-  left: 50%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-
-.popover-content:after {
-  border-color: rgba(255, 255, 255, 0);
-  border-bottom-color: #fff;
-  border-width: 10px;
-  margin-left: -10px;
 }
 
 .popover-content:before {
