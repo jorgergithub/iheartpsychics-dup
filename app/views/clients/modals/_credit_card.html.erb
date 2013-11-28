@@ -1,6 +1,6 @@
 <li class="credit_card <%= "cc_selected" if select %>">
   <%= image_tag "modal/credit_card.png" %>
-  <i><%= image_tag "modal/visa.png" %></i>
+  <i><%= image_tag "credit_card_icons/#{credit_card_icon(card)}.png" %></i>
 
   <h1>Card Ending in <b><%= card.last4 %></b></h1>
 
