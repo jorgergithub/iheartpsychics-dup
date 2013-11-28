@@ -61,6 +61,7 @@ class Psychic < ActiveRecord::Base
     order("psychics.pseudonym, SUBSTR(users.last_name, 1, 1)")
   }
   scope :available, -> { where("status = ?", "available") }
+  scope :featured,  -> { where("featured IS true") }
 
   def self.available_count
     available.size

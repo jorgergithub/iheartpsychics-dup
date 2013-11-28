@@ -53,6 +53,10 @@ class PsychicsController < AuthorizedController
     if params[:price_max]
       @psychics = @psychics.where("price <= ?", params[:price_max])
     end
+
+    if params[:featured]
+      @psychics = @psychics.featured
+    end
   end
 
   def about
