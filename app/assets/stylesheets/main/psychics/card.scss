@@ -27,28 +27,40 @@
     background-image: url(image-path("psychics/banner_love.png"));
   }
 
-  article > header.money {
+  article > header.money_and_finance {
     background-image: url(image-path("psychic-banner-money.png"));
   }
 
-  article > header.pet {
+  article > header.pet_and_animals {
     background-image: url(image-path("psychic-banner-pet.png"));
   }
 
-  article > header.past-lives {
+  article > header.past_lives {
     background-image: url(image-path("psychic-banner-pastlives.png"));
   }
 
-  article > header.love {
+  article > header.love_and_relationships {
     background-image: url(image-path("psychic-banner-love.png"));
   }
 
-  article > header.work {
+  article > header.career_and_work {
     background-image: url(image-path("psychic-banner-work.png"));
   }
 
   article > header.destiny {
     background-image: url(image-path("psychic-banner-destiny.png"));
+  }
+
+  article > header.deceased {
+    background-image: url(image-path("psychic-banner-destiny.png"));
+  }
+
+  article > header.lost_objects {
+
+  }
+
+  article > header.dream_interpretation {
+
   }
 
   article > header img {

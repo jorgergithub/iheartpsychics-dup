@@ -1,6 +1,6 @@
 <% last ||= false %>
 <article class="psychic<% if last %> last<% end %>" data-psychic-id="<%= psychic.id %>">
-  <header class="money">
+  <header class="<%= psychic.top_speciality %>">
     <%= avatar_image_tag(psychic.avatar_id, width: 150, height: 150) %>
   </header>
 
