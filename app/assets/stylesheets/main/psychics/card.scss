@@ -14,6 +14,7 @@
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
+    cursor: pointer;
   }
 
   article.last {
@@ -79,6 +80,10 @@
   div.content footer {
     background: no-repeat url(image_path("psychics/shadow.png"));
     padding: 20px 0px;
+  }
+
+  div.content .psychic-state-container {
+    height: 55px;
   }
 
   div.content header {

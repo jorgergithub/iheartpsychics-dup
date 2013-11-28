@@ -24,6 +24,7 @@ Module("IHP.Components.PsychicCards", function(PsychicCards) {
 
     this.el.on("click", ".psychic-card-reviews", this.whenReviewButtonIsClicked.bind(this));
     this.el.on("click", ".psychic-card-phone", this.whenCallbackButtonIsClicked.bind(this));
+    this.el.on("click", "article.psychic", this.whenCardIsClicked);
   };
 
   PsychicCards.fn.whenMouseEntersPsychic = function(e) {
@@ -39,6 +40,9 @@ Module("IHP.Components.PsychicCards", function(PsychicCards) {
   };
 
   PsychicCards.fn.whenPsychicIsMarkedAsFavorite = function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
     var psychicCard = getPsychicCard(e);
     var psychicId = getPsychicId(e);
 
@@ -56,6 +60,9 @@ Module("IHP.Components.PsychicCards", function(PsychicCards) {
   };
 
   PsychicCards.fn.whenPsychicIsRemovedAsFavorite = function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
     var psychicCard = getPsychicCard(e);
     var psychicId = getPsychicId(e);
 
@@ -73,6 +80,9 @@ Module("IHP.Components.PsychicCards", function(PsychicCards) {
   };
 
   PsychicCards.fn.whenCallbackButtonIsClicked = function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
     var psychicId = getPsychicId(e);
     Module.run("IHP.Components.Callbacks", [this.el, psychicId]);
   };
@@ -85,7 +95,18 @@ Module("IHP.Components.PsychicCards", function(PsychicCards) {
     }
   };
 
+  PsychicCards.fn.whenCardIsClicked = function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    var psychicId = getPsychicId(e);
+    location.href = "/psychic/" + psychicId + "/about";
+  };
+
   PsychicCards.fn.whenReviewButtonIsClicked = function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
     var psychicId = getPsychicId(e);
     location.href = "/psychic/" + psychicId + "/about#reviews";
   };
