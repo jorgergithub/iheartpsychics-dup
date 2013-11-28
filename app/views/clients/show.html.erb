@@ -68,7 +68,7 @@
       <h2>My Credits</h2>
 
       <div id="client_balance" class="client-badge badge">
-        <%= number_to_currency @client.balance %>
+        <%= number_to_currency @client.balance, precision: 0 %>
       </div>
 
       <div class="action">
