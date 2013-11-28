@@ -233,6 +233,14 @@
           <div class="upcoming-time">
             <span class="time">01:00 AM</span>
             <%= link_to(image_tag("timer.png", class: "edit-time"), "#") %>
+            <div class="popover">
+              <div class="popover-content">
+                <input type="text" placeholder="HH">
+                <input type="text" placeholder="MM">
+                <input type="checkbox" name="toggle" id="toggle">
+                <label for="toggle">PM</label>
+              </div>
+            </div>
           </div>
         </td>
         <td>
