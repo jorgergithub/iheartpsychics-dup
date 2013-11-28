@@ -28,20 +28,34 @@
 
 .header-nav-links {
   @extend %flat-list;
-  cursor: pointer;
+  color: #6c7c84;
 
-  .dashboard {
-    background: url(image-path("header-nav-dashboard.png")) no-repeat top right;
+  i {
+    float: right;
+    margin-left: 10px;
   }
 
-  .balance {
+  .dashboard i,
+  .signout i {
+    background: url(image-path("header-nav-dashboard.png")) no-repeat top right;
+    width: 30px;
+    height: 30px;
+  }
+
+  .balance i {
     background: url(image-path("header-nav-balance.png")) no-repeat top right;
+    width: 30px;
+    height: 31px;
   }
 
-  .signin,
-  .signout {
+  .signin {
     background: url(image-path("header-nav-dashboard.png")) no-repeat top right;
+    cursor: pointer;
   }
+}
+
+.nobg {
+  padding-right: 0px !important;
 }
 
 .header-nav-link {

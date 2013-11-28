@@ -72,20 +72,23 @@
       <nav class="header-nav">
         <ul class="header-nav-links">
           <% if current_user %>
-            <li class="dashboard header-nav-link">
-              <%= link_to "Dashboard", client_path %>
+            <li class="dashboard header-nav-link nobg">
+              <%= link_to content_tag(:i, "", class: "header-nav-link-arrow"), client_path %>
+              Dashboard
             </li>
             <% if current_user.client? %>
-              <li class="balance header-nav-link">
-                <a href="#">Balance <%= number_to_currency current_user.client.balance %></a>
+              <li class="balance header-nav-link nobg">
+                <%= link_to content_tag(:i, "", class: "header-nav-link-plus"), client_path %>
+                Balance <%= number_to_currency current_user.client.balance %>
               </li>
             <% end %>
-            <li class="signout header-nav-link">
-              <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+            <li class="signout header-nav-link nobg">
+              <%= link_to content_tag(:i, "", class: "header-nav-link-arrow"), destroy_user_session_path, :method => :delete %>
+              Sign out
             </li>
           <% else %>
             <li class="signin header-nav-link">
-              <a href="#">Sign In</a>
+              Sign In
             </li>
           <% end %>
         </ul>
