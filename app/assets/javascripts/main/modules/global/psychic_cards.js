@@ -28,12 +28,14 @@ Module("IHP.Components.PsychicCards", function(PsychicCards) {
 
   PsychicCards.fn.whenMouseEntersPsychic = function(e) {
     var psychicCard = getPsychicCard(e);
+    $(".psychic-state", psychicCard).animate({ opacity: 0 });
     $(".psychic-card-action", psychicCard).fadeIn();
   };
 
   PsychicCards.fn.whenMouseLeavesPsychic = function(e) {
     var psychicCard = getPsychicCard(e);
     $(".psychic-card-action", psychicCard).fadeOut();
+    $(".psychic-state", psychicCard).animate({ opacity: 1 });
   };
 
   PsychicCards.fn.whenPsychicIsMarkedAsFavorite = function(e) {
