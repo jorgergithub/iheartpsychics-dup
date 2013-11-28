@@ -1,57 +1,9 @@
-<div class="row-fluid">
-  <div class="span12">
-    <h3>Psychics</h3>
-
-    <% if @psychics.any? %>
-      <% if params[:q].present? %>
-        <div class="search-summary">
-          <%= @psychics.size %> psychic(s) matched <b><%= params[:q] %></b>.
-        </div>
-      <% end %>
-
-      <% @psychics.each_slice(3).each do |psychics| %>
-        <div class="row psychics">
-          <% psychics.each do |psychic| %>
-            <div class="span4 psychic">
-              <div class="extension pull-right">
-                Ext.<br>
-                <b><%= psychic.extension %></b>
-              </div>
-
-              <div class="name">
-                <a href="<%= about_psychic_path(psychic) %>" class="details">
-                  <%= psychic.alias_name %>
-                </a>
-              </div>
-
-              <div class="rating">
-                <% if psychic.rating %><%= rating_for psychic %><% end %>
-              </div>
-
-              <div class="about">
-                <%= psychic.about %>
-              </div>
-
-              <div class="actions">
-                <%= link_to '<i class="icon-comment reviews"></i>'.html_safe,
-                  about_psychic_path(psychic) %>
-
-                <% if @client.favorite?(psychic) %>
-                  <%= link_to '<i class="icon-heart favorited"></i>'.html_safe, remove_favorite_client_path(psychic_id: psychic.id) %>
-                <% else %>
-                  <%= link_to '<i class="icon-heart-empty favorite"></i>'.html_safe, make_favorite_client_path(psychic_id: psychic.id) %>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-    <% else %>
-      <div class="blank-state">
-        No psychics matched <b><%= params[:q] %></b>.
-      </div>
-    <% end %>
-
-    <%= link_to "Back", dashboard_path, class: "btn" %>
+<% if @psychics.any? %>
+  <% @psychics.each_with_index do |p, i| %>
+    <%= render p, last: (i+1)%3 == 0 %>
+  <% end %>
+<% else %>
+  <div class="container-psychics-no-results">
+    No psychics matched your criteria.
   </div>
-</div>
+<% end %>

@@ -21,8 +21,8 @@ describe PsychicsController do
       end
     end
 
-    context "searching by specialty" do
-      let(:params) { {specialty: "love_and_relationships"} }
+    context "searching by speciality" do
+      let(:params) { {speciality: "love_and_relationships"} }
       let!(:psychic1) { create(:psychic, specialties_love_and_relationships: true) }
       let!(:psychic2) { create(:psychic, specialties_love_and_relationships: false) }
 
@@ -105,6 +105,29 @@ describe PsychicsController do
       let(:params) { {featured: "true"} }
       let!(:psychic1) { create(:psychic, featured: true) }
       let!(:psychic2) { create(:psychic, featured: false) }
+
+      it "renders 200" do
+        expect(response.status).to eql(200)
+      end
+
+      it "includes the featured psychic" do
+        expect(assigns(:psychics)).to include(psychic1)
+      end
+
+      it "excludes the psychic not featured" do
+        expect(assigns(:psychics)).to_not include(psychic2)
+      end
+    end
+
+    context "searching by text" do
+      let(:params) { {text: "Alex"} }
+      let!(:psychic1) { create(:psychic, pseudonym: "Alex") }
+      let!(:psychic2) { create(:psychic, pseudonym: "Pedro") }
+
+      before {
+        psychic1.user.update_attributes first_name: "Pedro", last_name: "Richards"
+        psychic2.user.update_attributes first_name: "Alex", last_name: "Alcantara"
+      }
 
       it "renders 200" do
         expect(response.status).to eql(200)

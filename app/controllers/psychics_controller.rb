@@ -34,8 +34,8 @@ class PsychicsController < AuthorizedController
     @client = current_client
     @psychics = Psychic.all
 
-    if params[:specialty]
-      @psychics = @psychics.add_specialty_filter(params[:specialty])
+    if params[:speciality]
+      @psychics = @psychics.add_specialty_filter(params[:speciality])
     end
 
     if params[:tool]
@@ -57,6 +57,14 @@ class PsychicsController < AuthorizedController
     if params[:featured]
       @psychics = @psychics.featured
     end
+
+    if params[:text]
+      @psychics = @psychics.by_alias_name(params[:text])
+    end
+
+    @psychics = @psychics.page(params[:page]).per(9)
+
+    render :search, layout: false
   end
 
   def about
