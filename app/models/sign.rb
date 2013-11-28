@@ -21,17 +21,17 @@ class Sign
     horoscope.send(name.underscore)
   end
 
-  Aries       = Sign.new("Aries",       Date.new(BASIC_YEAR     ,3,21),  Date.new(BASIC_YEAR    , 4,20))
-  Taurus      = Sign.new("Taurus",      Date.new(BASIC_YEAR     ,4,21),  Date.new(BASIC_YEAR    , 5,21))
-  Gemini      = Sign.new("Gemini",      Date.new(BASIC_YEAR     ,5,22),  Date.new(BASIC_YEAR    , 6,21))
-  Cancer      = Sign.new("Cancer",      Date.new(BASIC_YEAR     ,6,22),  Date.new(BASIC_YEAR    , 7,23))
-  Leo         = Sign.new("Leo",         Date.new(BASIC_YEAR     ,7,24),  Date.new(BASIC_YEAR    , 8,23))
-  Virgo       = Sign.new("Virgo",       Date.new(BASIC_YEAR     ,8,24),  Date.new(BASIC_YEAR    , 9,23))
-  Libra       = Sign.new("Libra",       Date.new(BASIC_YEAR     ,9,24),  Date.new(BASIC_YEAR    , 10,23))
+  Aries       = Sign.new("Aries",       Date.new(BASIC_YEAR     ,3,21),  Date.new(BASIC_YEAR    , 4,19))
+  Taurus      = Sign.new("Taurus",      Date.new(BASIC_YEAR     ,4,20),  Date.new(BASIC_YEAR    , 5,20))
+  Gemini      = Sign.new("Gemini",      Date.new(BASIC_YEAR     ,5,21),  Date.new(BASIC_YEAR    , 6,20))
+  Cancer      = Sign.new("Cancer",      Date.new(BASIC_YEAR     ,6,21),  Date.new(BASIC_YEAR    , 7,22))
+  Leo         = Sign.new("Leo",         Date.new(BASIC_YEAR     ,7,23),  Date.new(BASIC_YEAR    , 8,22))
+  Virgo       = Sign.new("Virgo",       Date.new(BASIC_YEAR     ,8,23),  Date.new(BASIC_YEAR    , 9,22))
+  Libra       = Sign.new("Libra",       Date.new(BASIC_YEAR     ,9,23),  Date.new(BASIC_YEAR    , 10,23))
   Sagittarius = Sign.new("Sagittarius", Date.new(BASIC_YEAR     ,10,24), Date.new(BASIC_YEAR    , 11,22))
   Scorpio     = Sign.new("Scorpio",     Date.new(BASIC_YEAR     ,11,23), Date.new(BASIC_YEAR    , 12,21))
-  Capricorn   = Sign.new("Capricorn",   Date.new(BASIC_YEAR     ,12,22), Date.new(BASIC_YEAR + 1, 1,20))
-  Aquarius    = Sign.new("Aquarius",    Date.new(BASIC_YEAR + 1 ,1,21),  Date.new(BASIC_YEAR + 1, 2,19))
+  Capricorn   = Sign.new("Capricorn",   Date.new(BASIC_YEAR     ,12,22), Date.new(BASIC_YEAR + 1, 1,19))
+  Aquarius    = Sign.new("Aquarius",    Date.new(BASIC_YEAR + 1 ,1,20),  Date.new(BASIC_YEAR + 1, 2,19))
   Pisces      = Sign.new("Pisces",      Date.new(BASIC_YEAR + 1 ,2,20),  Date.new(BASIC_YEAR + 1, 3,20))
 
   private
