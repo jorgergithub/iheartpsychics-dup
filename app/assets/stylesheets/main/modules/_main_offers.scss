@@ -14,6 +14,11 @@
   background: url(image-path("offer-background.png"));
 }
 
+.container-offer.modal_link,
+.container-offer.sign_up_link {
+  cursor: pointer;
+}
+
 .container-offer + .container-offer {
   margin-left: 35px;
 }

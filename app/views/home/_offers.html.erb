@@ -1,43 +1,35 @@
 <div class="container-offers small_container">
-  <div class="container-offer">
-    <header class="container-offer-header">
-      <span>$</span>60
-    </header>
+  <% Package.all.each do |package| %>
+    <%= content_tag :div, 
+                    class: "container-offer #{container_offer_class}", 
+                    "data-modal-id" => "select_payment_method_modal", 
+                    data: { "modal-attributes" => { package: {  id: package.id, 
+                                                                price: package.price.to_i, 
+                                                                credits: package.credits.to_i } } } do %>
 
-    <div class="container-offer-body">
-      70
-      <span>Credits</span>
+      <header class="container-offer-header">
+        <span>$</span><%= package.price.to_i %>
+      </header>
+
+      <div class="container-offer-body">
+        <%= package.credits.to_i %>
+        <span>Credits</span>
+      </div>
+
+      <div class="container-offer-discount-bg"></div>
+      <div class="container-offer-discount-14"></div>
+    <% end %>
+  <% end %>
+
+  <% if @client %>
+    <div class="modal_list">
+      <% if @client.favorite_psychics.any? %>
+        <%= render "clients/modals/purchase/psychics" %>
+      <% else %>
+        <%= render "clients/modals/purchase/thank_you" %>
+      <% end %>
+      <%= render "clients/modals/prices" %>
+      <%= render "clients/modals/purchase/select_payment_method" %>
     </div>
-
-    <div class="container-offer-discount-bg"></div>
-    <div class="container-offer-discount-14"></div>
-  </div>
-
-  <div class="container-offer">
-    <header class="container-offer-header">
-      <span>$</span>80
-    </header>
-
-    <div class="container-offer-body">
-      95
-      <span>Credits</span>
-    </div>
-
-    <div class="container-offer-discount-bg"></div>
-    <div class="container-offer-discount-16"></div>
-  </div>
-
-  <div class="container-offer">
-    <header class="container-offer-header">
-      <span>$</span>99
-    </header>
-
-    <div class="container-offer-body">
-      120
-      <span>Credits</span>
-    </div>
-
-    <div class="container-offer-discount-bg"></div>
-    <div class="container-offer-discount-18"></div>
-  </div>
+  <% end %>
 </div>

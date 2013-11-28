@@ -9,6 +9,7 @@ class HomeController < AuthorizedController
     return if go_home
 
     @psychics = Psychic.all
+    @client = current_user.client if current_user
   end
 
   def apna
