@@ -1,48 +1,37 @@
 <section class="psychic-pricing">
-  <table>
-    <tr>
-      <td>
-        <h1>Per minute</h1>
-        <%= image_tag "psychics/price_icon.png" %>
-        <div class="label">
-          <span><%= number_to_currency @psychic.price, precision: 0 %></span>
-        </div>
-      </td>
+  <div class="about-action-items">
+    <div class="per-minute about-action-item action-item first">
+      <h2>Per minute</h2>
 
-      <% if @psychic.on_a_call? %>
-        <td>
-          <h1>Current Call</h1>
-          <%= image_tag "psychics/current_call_icon.png" %>
-          <div class="label">
-            <span><%= @psychic.calls.first.duration %><small>MIN</small></span>
-          </div>
-        </td>
-      <% end %>
+      <div class="about-psychic-badge badge">
+        <%= number_to_currency @psychic.price, precision: 0 %>
+      </div>
+    </div>
 
-      <td>
-        <h1>Est. Wait Time</h1>
-        <%= image_tag "psychics/clock_icon.png" %>
-        <div class="label">
-          <span>100 <small>MIN</small></span>
-        </div>
-      </td>
+    <% if @psychic.on_a_call? %>
+      <div class="current-call about-action-item action-item">
+        <h2>Current Call</h2>
 
-      <td>
-        <h1>People Waiting</h1>
-        <%= image_tag "psychics/waiting_icon.png" %>
-        <div class="label">
-          <span><%= @psychic.callbacks.active.count %></span>
+        <div class="about-psychic-badge badge">
+          <%= @psychic.calls.first.duration %><small>MIN</small>
         </div>
-      </td>
+      </div>
+    <% end %>
 
-      <td>
-        <h1>Call Back Time Set For</h1>
-        <%= image_tag "psychics/clock_icon.png" %>
-        <div class="label">
-          <span>4:30 <small>PM</small></span>
-        </div>
-      </td>
-    </tr>
-  </table>
-  <article>
+    <div class="est-wait-time about-action-item action-item">
+      <h2>Est. Wait Time</h2>
+
+      <div class="about-psychic-badge badge">
+        100 <small>MIN</small>
+      </div>
+    </div>
+
+    <div class="people-waiting about-action-item action-item last">
+      <h2>People Waiting</h2>
+
+      <div class="about-psychic-badge badge">
+        <%= @psychic.callbacks.active.count %>
+      </div>
+    </div>
+  <div>
 </section>
