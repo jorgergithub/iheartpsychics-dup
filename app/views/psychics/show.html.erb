@@ -226,23 +226,33 @@
           <th style="width: 250px;">Date</th>
           <th>Start</th>
           <th>End</th>
+          <th></th>
         </tr>
       </thead>
 
+      <tfoot>
+        <tr>
+          <td colspan="4"><%= f.submit %></td>
+        </tr>
+      </tfoot>
+
       <tbody>
         <% @schedules.each_pair do |date, schedules| %>
-          <tr data-date="<%=l date.in_time_zone.to_date, format: :date_only %>">
-            <td class="upcoming-date" rowspan="<%= schedules.size %>">
+          <tr class="date-row">
+            <td class="upcoming-date" rowspan="<%= schedules.size + 1 %>">
               <%= link_to l(date.in_time_zone.to_date, format: :schedule), "#",
                 :class => "add-schedule",
                 :"data-date" => l(date.in_time_zone.to_date, format: :date_only) %>
             </td>
-            <% schedules.each_with_index do |schedule, i| %>
-              <%= f.fields_for :schedules, schedule do |sf| %>
-                <%= render schedule, f: sf %>
-              <% end %>
-            <% end %>
           </tr>
+
+          <% schedules.each do |schedule| %>
+            <%= f.fields_for :schedules, schedule do |sf| %>
+              <tr class="fields-row" data-date="<%=l date.in_time_zone.to_date, format: :date_only %>">
+                <%= render schedule, f: sf, schedule: schedule %>
+              </tr>
+            <% end %>
+          <% end %>
         <% end %>
       </tbody>
     </table>

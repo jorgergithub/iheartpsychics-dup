@@ -6,6 +6,33 @@ class Schedule < ActiveRecord::Base
 
   scope :weekly, -> { where("date BETWEEN ? and ?", Date.today, Date.today + 7.days) }
 
+  attr_accessor :start_hour, :start_minute, :start_period
+  attr_accessor :end_hour, :end_minute, :end_period
+
+  def start_hour
+    start_time_string[0..1]
+  end
+
+  def start_minute
+    start_time_string[3..4]
+  end
+
+  def start_period
+    start_time_string[6..7]
+  end
+
+  def end_hour
+    end_time_string[0..1]
+  end
+
+  def end_minute
+    end_time_string[3..4]
+  end
+
+  def end_period
+    end_time_string[6..7]
+  end
+
   def start_time_string
     return "" unless start_time
     l(start_time.in_time_zone, format: :schedule)

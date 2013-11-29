@@ -27,6 +27,7 @@ class PsychicsController < AuthorizedController
       redirect_to path, notice: message
     else
       render action: "show"
+      binding.pry
     end
   end
 

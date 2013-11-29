@@ -300,7 +300,16 @@ table.records {
     border-radius: 0 0 9px 0;
   }
 
-  tr:nth-child(even) {
+  tr.date-row td.upcoming-date {
+    border-right: 1px solid #e0e0e0;
+    background: #eee;
+  }
+
+  tr.first-schedule {
+    border-top: 1px solid #e0e0e0;
+  }
+
+  tr.zebra {
     background: #f3f5f6;
   }
 }

@@ -4,11 +4,64 @@ Module("IHP.Pages.Schedules", function(Schedules) {
   Schedules.fn.initialize = function(el) {
     this.el = $($(el).find(".schedules"));
     this.addEventListeners();
-  };
 
+    this.zebrateTable();
+  };
+  
   Schedules.fn.addEventListeners = function() {
     this.el.on("click", ".add-schedule", this.addSchedule.bind(this));
     this.el.on("click", ".remove-schedule", this.removeSchedule.bind(this));
+    this.el.on("click", "div.upcoming-time", this.showPopover.bind(this));
+    this.el.on("click", this.dismissPopovers);
+    this.el.on("click", ".popover", this.stopPropagation.bind(this));
+  };
+
+  Schedules.fn.dismissPopovers = function() {
+    var $schedules = $("tr.fields-row");
+    $.each($schedules, function(index, $schedule) {
+      var $times = $(".upcoming-time", $schedule);
+      $.each($times, function(index, time) {
+        var $popover = $(time).siblings(".popover");
+        var $timeString = $("input.time_string", time);
+        var $span = $("span.time", time);
+        
+        var hour = $("input.hour", $popover).val();
+        var minute = $("input.minute", $popover).val();
+        var period = $("input.toggle", $popover).is(":checked") ? "PM" : "AM";
+
+        if (hour && minute) { 
+          var value = hour + ":" + minute + " " + period
+          $span.text(value);
+          $timeString.val(value);
+        } else {
+          $span.text("");
+          $timeString.val("");
+        }
+
+        $popover.hide();
+      });
+    });
+  };
+
+  Schedules.fn.stopPropagation = function(e) {
+    e.stopPropagation();
+  }
+
+  Schedules.fn.showPopover = function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    var $time = $(e.target);
+    var $popover = $time.siblings(".popover");
+  
+    if ($popover.is(":hidden")) {
+      this.dismissPopovers();
+      $popover.show();
+      $("input.hour", $popover).focus();
+      $("input.hour", $popover).select();
+    } else {
+      this.dismissPopovers();
+    }
   };
 
   Schedules.fn.addScheduleRow = function(date, el) {
@@ -20,80 +73,65 @@ Module("IHP.Pages.Schedules", function(Schedules) {
     content.attr("data-date", date);
     content.find("input[type=hidden].date").val(date);
     content.insertAfter(el);
+    this.zebrateTable();
 
     return content;
   };
 
   Schedules.fn.addSchedule = function(e) {
-    e.stopPropagation();
     e.preventDefault();
 
-    var link = $(e.target);
-    var date = link.data("date");
+    var $link = $(e.target);
+    var date = $link.data("date");
 
-    var tr = link.closest("tr");
-    var td = tr.children("td:first");
+    var $schedule = $link.closest("tr");
+    var $td = $schedule.children("td:first");
 
-    var rowspan = parseInt(td.attr("rowspan"), 10);
-
-    td.attr("rowspan", rowspan + 1);
-
-    if (rowspan <= 1) {
-      this.addScheduleRow(date, tr);
-    }
-    else {
-      var lastTr = tr.siblings("tr[data-date='" + date + "']:last");
-      this.addScheduleRow(date, lastTr);
-    };
+    this.changeRowspanBy($td, 1);
+    this.addScheduleRow(date, $schedule);
   };
 
   Schedules.fn.removeSchedule = function(e) {
-    e.stopPropagation();
     e.preventDefault();
 
-    var link = $(e.currentTarget);
-    console.log(link);
+    var $link = $(e.target);
+    var $schedule = $link.closest("tr.fields-row");
 
-    var tr = link.parents("tr");
-    console.log(tr);
+    var $dateRow = $schedule.prevAll("tr.date-row").first();
+    var $dateCell = $("td.upcoming-date", $dateRow);
 
-    var date = tr.data("date");
-    console.log(date);
-
-    var firstTr = tr.parent().find("tr[data-date='" + date + "']:first");
-    console.log(firstTr);
-
-    if (!firstTr.length) {
-      firstTr = tr;
-    }
-
-    var td = firstTr.children("td:first");
-    console.log(td);
-
-    var rowspan = parseInt(td.attr("rowspan"), 10);
-    console.log(rowspan);
-
-    td.attr("rowspan", rowspan - 1);
-    link.prev("input[type=hidden]").val("1");
-
-    if (tr.children("td").length == 3) {
-      var siblings = tr.siblings("tr[data-date='" + date + "']");
-      if (siblings.length > 0) {
-        var sourceTr = $(siblings[0]);
-        var targetTr = tr;
-        // targetTr.find("input.start_time").val(sourceTr.find("input.start_time").val());
-        // targetTr.find("input.end_time").val(sourceTr.find("input.end_time").val());
-        sourceTr.find("input[type=hidden].delete").val("1");
-        targetTr.find("input[type=hidden].delete").val("0");
-        sourceTr.hide();
-      }
-      else {
-        // tr.find("input.start_time").val("");
-        // tr.find("input.end_time").val("");
-      }
+    if (this.dateHasOneSchedule($dateRow)) { 
+      this.resetSchedule($schedule); 
     } else {
-      console.log("1");
-      tr.hide();
-    }
+      this.changeRowspanBy($dateCell, -1)
+      $schedule.hide();
+      this.zebrateTable();
+    } 
+
+    $("input.delete", $schedule).val(true);
   };
+
+  Schedules.fn.dateHasOneSchedule = function(dateRow) {
+    return $(dateRow).nextUntil("tr.date-row", ":visible").length === 1
+  }
+
+  Schedules.fn.resetSchedule = function(schedule) {
+    var $schedule = $(schedule);
+
+    $("span.time", $schedule).text("");
+    $("input.hour", $schedule).val("");
+    $("input.minute", $schedule).val("");
+    $("input.toggle", $schedule).attr("checked",false);
+  }
+
+  Schedules.fn.changeRowspanBy = function(td, amount) {
+    var rowspan = parseInt(td.attr("rowspan"), 10);
+    td.attr("rowspan", rowspan + amount);
+  }
+
+  Schedules.fn.zebrateTable = function() {
+    $("tbody tr.date-row + tr.fields-row", this.el).addClass("first-schedule");
+    $("tbody tr.fields-row:visible", this.el).removeClass("zebra");
+    $("tbody tr.fields-row:visible:even", this.el).addClass("zebra");
+  }
 });
