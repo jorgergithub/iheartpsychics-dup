@@ -282,13 +282,12 @@ table.schedule:last-child {
   border-radius: 5px;
   color: #fff;
   height: 40px;
-  display: table-cell;
   vertical-align: middle;
   width: 120px;
   position: relative;
-  left: 50%;
   padding-left: 30px;
   text-align: left;
+  display: inline-block;
   cursor: pointer;
 
   span.time {
@@ -371,7 +370,7 @@ table.schedule:last-child {
 .popover-arrow {
   position: absolute;
   margin-top: 5px;
-  margin-left: 65px;
+margin-left: 43px;
   z-index: 100;
 }
 

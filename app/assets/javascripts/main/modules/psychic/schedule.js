@@ -51,7 +51,7 @@ Module("IHP.Pages.Schedules", function(Schedules) {
     e.preventDefault();
     e.stopPropagation();
 
-    var $time = $(e.target);
+    var $time = $(e.target).closest(".upcoming-time");
     var $popover = $time.siblings(".popover");
   
     if ($popover.is(":hidden")) {

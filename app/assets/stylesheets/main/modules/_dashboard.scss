@@ -268,6 +268,7 @@ table.records {
   td {
     @include thin-font(20px);
     color: #8590a1;
+    text-align: center;
   }
 
   th, td {
