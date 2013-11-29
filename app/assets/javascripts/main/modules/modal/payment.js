@@ -26,7 +26,8 @@ Module("IHP.Main.Modal.Payment", function(Payment) {
     this.setValidationError("");
   }
 
-  Payment.fn.validate = function() {
+  Payment.fn.validate = function(e) {
+
     this.clearErrors();
 
     // missing card number
@@ -66,7 +67,7 @@ Module("IHP.Main.Modal.Payment", function(Payment) {
       return false;
     }
 
-    return this.charge();
+    return this.charge(e);
   };
 
   Payment.fn.stripeResponseHandler = function(status, response) {
@@ -86,9 +87,9 @@ Module("IHP.Main.Modal.Payment", function(Payment) {
     }
   };
 
-  Payment.fn.charge = function() {
+  Payment.fn.charge = function(e) {
     this.emit("paymentStarted");
-    console.log(this.el);
+    window.onModalFormSubmit(e);
     Stripe.createToken(this.form, this.stripeResponseHandler.bind(this));
     return false;
   };

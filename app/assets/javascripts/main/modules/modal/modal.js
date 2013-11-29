@@ -50,7 +50,10 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
     }
   };
 
-  Modal.fn.onFormSubmit = function(e) {
+  window.onModalFormSubmit = function(e) {
+    $("body").off("click", ".overlay");
+    $(".modal").off("click", ".close_button");
+    
     var $form = $(e.target);
     var $submitButtons = $("input[type='image']", $form);
     var $spinner = $(".spinner_overlay");
@@ -70,5 +73,9 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
 
       $(".spinner_overlay").fadeOut();
     });
+  }
+
+  Modal.fn.onFormSubmit = function(e) {
+    window.onModalFormSubmit(e);
   };
 });
