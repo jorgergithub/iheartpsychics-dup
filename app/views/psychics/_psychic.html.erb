@@ -15,7 +15,7 @@
       </div>
       <div class="psychic-right">
         <div class="psychic-price">
-          $<%= psychic.price %><small>Min</small>
+          <%= number_to_currency psychic.price, precision: 0 %><small>Min</small>
         </div>
         <div class="psychic-ext">
           Ext: <span><%= psychic.extension %></span>
