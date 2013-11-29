@@ -25,4 +25,24 @@ $(document).ready(function() {
 
     showPage(this, page);
   });
+
+  var calculateSchedualDisplay = function () {
+    var rows = $(".psychic-schedule table tbody tr");
+    $.each(rows, function(row_index, row) {
+      var $row = $(row);
+      $.each($("td", $row), function(cell_index, cell) {
+        var $cell = $(cell);
+        var $upCell = $row.prev().find("td:eq(" + cell_index + ")");
+
+        if ($upCell.hasClass("psychic-available") && $cell.hasClass("psychic-available")) {
+         $cell.addClass("middle");
+
+          var $downCell = $row.next().find("td:eq(" + cell_index + ")");
+          if (!$downCell.hasClass("psychic-available")) {
+            $cell.removeClass("middle");
+          }
+        }
+      });
+    });
+  }();
 });

@@ -87,6 +87,12 @@ article.psychic-schedule {
     padding: 5px 0px;
   }
 
+  table td.psychic-available div {
+    position: relative;
+    width: 120px;
+    height: 69px;
+  }
+
   table td.psychic-available span {
     padding: 16px;
     display: inline-block;
@@ -95,6 +101,19 @@ article.psychic-schedule {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
+    position: relative;
+    z-index: 1;
+    position: absolute;
+    left: 17px;
+  }
+  
+  table td.psychic-available.middle span {
+    padding: 35px 16px;
+    top: -17px;
+    border-radius: 0px;
+    border-top: 0px;
+    border-bottom: 0px;
+    z-index: 2;
   }
 
   table td.psychic-unavailable {

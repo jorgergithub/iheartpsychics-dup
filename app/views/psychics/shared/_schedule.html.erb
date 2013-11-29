@@ -16,13 +16,15 @@
           <tr>
             <td><%= hour %></td>
             <% @table.row_by_hour(index).each do |schedule| %>
-                <% if schedule %>
-                  <td class="psychic-available">
+              <% if schedule %>
+                <td class="psychic-available">
+                  <div>
                     <span>Avail.</span>
-                  </td>
-                <% else %>
-                  <td class="psychic-unavailable">N/A</td>
-                <% end %>
+                  </div>
+                </td>
+              <% else %>
+                <td class="psychic-unavailable">N/A</td>
+              <% end %>
             <% end %>
           </tr>
         <% end %>
