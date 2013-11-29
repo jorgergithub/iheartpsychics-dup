@@ -178,32 +178,38 @@
   margin-bottom: 50px;
 }
 
-table.schedule {
+table.schedules {
   border-collapse: collapse;
   border-spacing: 0;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
-  -webkit-box-shadow: 0 1px 1px #dce2e6;
-  -moz-box-shadow: 0 1px 1px #dce2e6;
-  box-shadow: 0 1px 1px #dce2e6;
+  -webkit-box-shadow: 0px 5px 5px #ccc;
+  -moz-box-shadow: 0px 5px 5px #ccc;
+  box-shadow: 0px 5px 5px #ccc;
   width: 100%;
 
   th {
-    @include regular-font(22px);
-    background: #92278f;
+    @include thin-font(22px);
+    background: #af00a5;
     color: #fff;
   }
 
   td {
     @include thin-font(20px);
     color: #8590a1;
+    text-align: center;
   }
 
   th, td {
     padding: 2%;
     text-align: center;
     vertical-align: middle;
+  }
+
+  td.schedule-time {
+    text-align: left;
+    width: 292px;
   }
 
   th:first-child {
@@ -230,34 +236,23 @@ table.schedule {
     border-radius: 0 0 9px 0;
   }
 
-  tr:nth-child(even) {
+  tr.date-row td.upcoming-date {
+    border-right: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    background: #eee;
+  }
+
+  tr.first-schedule {
+    border-top: 1px solid #ddd;
+  }
+
+  tr.zebra {
     background: #f3f5f6;
   }
 
-  td.time-odd {
-    background: #dbe2ed;
-    color: #fff;
+  tfoot {
+    border-top: 1px solid #ddd;
   }
-
-  td.time-even {
-    background: #bac4d2;
-    color: #fff;
-  }
-
-  .available {
-    background: #a8e782;
-    border: 1px solid #83c856;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    color: #fff;
-    padding: 15px 10px;
-    opacity: 0.9;
-  }
-}
-
-table.schedule:last-child {
-  padding-bottom: 50px;
 }
 
 .upcoming-date {
