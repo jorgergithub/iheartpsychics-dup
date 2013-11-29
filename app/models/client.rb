@@ -24,7 +24,7 @@ class Client < ActiveRecord::Base
 
   accepts_nested_attributes_for :phones, allow_destroy: true
 
-  validates :phones, :presence => true
+  validates :phones, :birthday, :presence => true
 
   delegate :username, :first_name, :last_name, :full_name, :email,
            to: :user, allow_nil: true

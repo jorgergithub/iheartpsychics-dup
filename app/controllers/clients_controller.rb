@@ -29,15 +29,19 @@ class ClientsController < AuthorizedController
   def update
     tmp_params = user_params
 
-    if tmp_params[:password].empty?
+    if tmp_params[:password].try(:empty?)
       tmp_params.delete('password')
       tmp_params.delete('password_confirmation')
     end
 
-    if @client.user.update_attributes(tmp_params)
-      redirect_to edit_client_path, notice: "Client was successfully updated."
-    else
-      render action: "edit"
+    respond_to do |format|
+      if @client.user.update_attributes(tmp_params)
+        format.html { redirect_to edit_client_path, notice: "Client was successfully updated." }
+        format.js
+      else
+        format.html { render action: "edit" }
+        format.js
+      end
     end
   end
 
@@ -123,7 +127,7 @@ class ClientsController < AuthorizedController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :username, :email,
-      :password, :password_confirmation, :time_zone, client_attributes: [:id, :receive_newsletters])
+      :password, :password_confirmation, :time_zone, client_attributes: [:id, :birthday, :receive_newsletters])
   end
 
   def find_client

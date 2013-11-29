@@ -26,8 +26,18 @@
   </div>
 
   <div class="control-group">
-    <%= f.fields_for :client do |fields_for_client| %>
-      <%= render "phone_number", :f => fields_for_client %>
+    <%= f.fields_for :client do |cf| %>
+      <div class="control-group">
+        <%= cf.label :birthday, "My birthday", :class => "control-label" %>
+        <div class="controls">
+          <%= cf.date_select :birthday, start_year: (Time.now.year - 100),
+                              end_year: Time.now.year,
+                              order: [:month, :day, :year],
+                              with_css_classes: true  %>
+        </div>
+      </div>
+
+      <%= render "phone_number", :f => cf %>
     <% end %>
   </div>
 

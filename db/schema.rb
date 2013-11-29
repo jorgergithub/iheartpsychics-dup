@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131127202612) do
+ActiveRecord::Schema.define(version: 20131128230815) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(version: 20131127202612) do
     t.boolean  "receive_newsletters",                         default: true
     t.string   "unsubscribe_key"
     t.string   "avatar_id"
+    t.date     "birthday"
   end
 
   create_table "clients_psychics", id: false, force: true do |t|
