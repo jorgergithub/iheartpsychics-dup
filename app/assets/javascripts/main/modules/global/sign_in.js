@@ -12,7 +12,7 @@ Module("IHP.Components.SignIn", function(SignIn) {
   };
 
   SignIn.fn.addEventListeners = function() {
-    this.el.on("click", ".signin", this.whenSignInIsClicked.bind(this));
+    this.el.on("click", "i.signin", this.whenSignInIsClicked.bind(this));
     this.el.on("click", ".user-close", this.whenCloseIsClicked.bind(this));
   };
 
