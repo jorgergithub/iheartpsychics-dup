@@ -12,35 +12,33 @@ Module("IHP.Pages.Schedules", function(Schedules) {
     this.el.on("click", ".add-schedule", this.addSchedule.bind(this));
     this.el.on("click", ".remove-schedule", this.removeSchedule.bind(this));
     this.el.on("click", "div.upcoming-time", this.showPopover.bind(this));
+    this.el.on("input", ".popover input", this.updateTimeDisplay);
+    this.el.on("change", ".popover input", this.updateTimeDisplay);
     this.el.on("click", this.dismissPopovers);
     this.el.on("click", ".popover", this.stopPropagation.bind(this));
   };
 
+  Schedules.fn.updateTimeDisplay = function(e) {
+    var $popover = $(this).closest(".popover");
+    var $time = $popover.siblings(".upcoming-time");
+  
+    var $timeString = $("input.time_string", $time);
+    var $span = $("span.time", $time);
+
+    var hour = $("input.hour", $popover).val();
+    var minute = $("input.minute", $popover).val();
+    var period = $("input.toggle", $popover).is(":checked") ? "PM" : "AM";
+
+    hour   = hour ? hour : "00"
+    minute = minute ? minute : "00"
+
+    var value = hour + ":" + minute + " " + period
+    $span.text(value);
+    $timeString.val(value);
+  }
+
   Schedules.fn.dismissPopovers = function() {
-    var $schedules = $("tr.fields-row");
-    $.each($schedules, function(index, $schedule) {
-      var $times = $(".upcoming-time", $schedule);
-      $.each($times, function(index, time) {
-        var $popover = $(time).siblings(".popover");
-        var $timeString = $("input.time_string", time);
-        var $span = $("span.time", time);
-        
-        var hour = $("input.hour", $popover).val();
-        var minute = $("input.minute", $popover).val();
-        var period = $("input.toggle", $popover).is(":checked") ? "PM" : "AM";
-
-        if (hour && minute) { 
-          var value = hour + ":" + minute + " " + period
-          $span.text(value);
-          $timeString.val(value);
-        } else {
-          $span.text("");
-          $timeString.val("");
-        }
-
-        $popover.hide();
-      });
-    });
+    $(".popover").hide();
   };
 
   Schedules.fn.stopPropagation = function(e) {
