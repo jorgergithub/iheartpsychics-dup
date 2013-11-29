@@ -1,68 +1,71 @@
-#psychic-details section.psychic-reviews .psychic-reviews-main {
-  background-color: #242d3c;
-  padding: 30px 20px;
-  text-align: center;
+#psychic-details section.psychic-reviews {
+  padding: 50px 0;
 
-  -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
-  border-radius: 7px;
-
-  font-size: 0;
-
-  article {
-    display: none;
-    &.psychic-selected { display: inline-block; }
-  }
-
-  div.psychic-reviews-review {
-    display: inline-block;
-    margin: 0px 16px;
-    vertical-align: middle;
-  }
-
-  aside {
-    display: block;
-    font-size: 18px;
+  .psychic-reviews-main {
+    background-color: #242d3c;
+    padding: 30px 20px;
     text-align: center;
-    margin-top: 30px;
 
-    & .stars {
-      margin-top: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+
+    font-size: 0;
+
+    article {
+      display: none;
+      &.psychic-selected { display: inline-block; }
     }
-  }
 
-  p {
-    font-size: 28px;
-    display: inline-block;
-    width: 720px;
-    margin: 0px 30px;
-    vertical-align: middle;
-    text-align: center;
-    color: white;
-    font-weight: 200;
-  }
+    div.psychic-reviews-review {
+      display: inline-block;
+      margin: 0px 16px;
+      vertical-align: middle;
+    }
 
-  .psychic-selected {
-    display: block;
-  }
+    aside {
+      display: block;
+      font-size: 18px;
+      text-align: center;
+      margin-top: 30px;
 
-  .psychic-open-quotes {
-    vertical-align: top;
-  }
+      & .stars {
+        margin-top: 7px;
+      }
+    }
 
-  .psychic-close-quotes {
-    vertical-align: bottom;
-  }
+    p {
+      font-size: 28px;
+      display: inline-block;
+      width: 720px;
+      margin: 0px 30px;
+      vertical-align: middle;
+      text-align: center;
+      color: white;
+      font-weight: 200;
+    }
 
-  .psychic-arrow {
-    vertical-align: middle;
-    cursor: pointer;
+    .psychic-selected {
+      display: block;
+    }
+
+    .psychic-open-quotes {
+      vertical-align: top;
+    }
+
+    .psychic-close-quotes {
+      vertical-align: bottom;
+    }
+
+    .psychic-arrow {
+      vertical-align: middle;
+      cursor: pointer;
+    }
   }
 }
 
 #psychic-details section.psychic_regular_reviews_group {
   display: inline-block;
-  margin-top: 50px;
 }
 
 #psychic-details article.psychic-review {
