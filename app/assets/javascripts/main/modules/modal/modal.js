@@ -40,6 +40,7 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
     $("body").off("click", ".overlay").on("click", ".overlay", closeModal);
     this.el.off("click", ".close-button").on("click", ".close-button", closeModal);
     this.el.off("submit", "form").on("submit", "form", this.onFormSubmit);
+    this.el.off("ajax:complete", "form").on("ajax:complete", "form", this.onAjaxComplete.bind(this));
   };
 
   Modal.fn.bindCloseModal = function() {
@@ -51,12 +52,13 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
   };
 
   window.onModalFormSubmit = function(e) {
-    $("body").off("click", ".overlay");
-    $(".modal").off("click", ".close_button");
-    
     var $form = $(e.target);
     var $submitButtons = $("input[type='image']", $form);
     var $spinner = $(".spinner_overlay");
+
+    $("body").off("click", ".overlay");
+    $(".modal").off("click", ".close_button");
+    
 
     $submitButtons.prop("disabled", true);
     var originalSrc = $submitButtons.attr("src");
@@ -64,18 +66,22 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
     $submitButtons.attr("src", newSrc);
 
     $spinner.fadeIn();
-  
-    $form.on('ajax:complete', function(xhr, status) {
-      $submitButtons.prop("disabled", false);
-      var originalSrc = $submitButtons.attr("src");
-      var newSrc = originalSrc.replace("_disabled.png",".png")
-      $submitButtons.attr("src", newSrc);
-
-      $(".spinner_overlay").fadeOut();
-    });
   }
 
   Modal.fn.onFormSubmit = function(e) {
     window.onModalFormSubmit(e);
+  };
+
+  Modal.fn.onAjaxComplete = function(e, xhr, status) {
+    var $form = $(e.target);
+    var $submitButtons = $("input[type='image']", $form);
+
+    this.addEventListeners();
+    $submitButtons.prop("disabled", false);
+    var originalSrc = $submitButtons.attr("src");
+    var newSrc = originalSrc.replace("_disabled.png",".png")
+    $submitButtons.attr("src", newSrc);
+
+    $(".spinner_overlay").fadeOut();
   };
 });

@@ -2,5 +2,6 @@
   $("#pin_modal").attr("data-pin", "<%= @client.pin %>");
   closeModal();
 <% else%>
+  $("#pin_modal form").trigger("ajax:complete");
   $("#pin_modal form").replaceWith("<%= escape_javascript(render 'clients/modals/pin_form', client: @client ) %>");
 <% end %>

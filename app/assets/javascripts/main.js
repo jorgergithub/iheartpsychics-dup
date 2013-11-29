@@ -10,6 +10,7 @@
 //= require vendor/module/module
 //= require vendor/emitter/emitter
 //= require vendor/clamp.js/clamp
+//= require vendor/jquery-mask-plugin/jquery.mask.min
 //
 // App Modules ============================================
 //= require main/modules/global/sign_in

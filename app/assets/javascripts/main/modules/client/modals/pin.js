@@ -10,6 +10,7 @@ Module("IHP.Modals.PinModal", function(PinModal) {
   PinModal.fn.assign = function() {
     this.pin.val(this.el.attr("data-pin"));
     $("aside.form_validation_errors", this.el).remove();
+    this.pin.mask("####");
     this.pin.select();
     this.pin.focus();
   };
