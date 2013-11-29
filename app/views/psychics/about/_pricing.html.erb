@@ -5,7 +5,7 @@
         <h1>Per minute</h1>
         <%= image_tag "psychics/price_icon.png" %>
         <div class="label">
-          <span>$<%= @psychic.price %></span>
+          <span><%= number_to_currency @psychic.price, precision: 0 %></span>
         </div>
       </td>
 
