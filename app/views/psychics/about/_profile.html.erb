@@ -32,7 +32,6 @@
         <%= image_tag("psychics/im_available.png") %>
       <% else %>
         <%= image_tag("psychics/im_on_a_call.png") if @psychic.on_a_call? %>
-        <%= link_to image_tag("psychics/call_me_back.png"), new_callbacks_path(psychic_id: @psychic.id), class: "psychics-call-back" %>
       <% end %>
     </div>
   </div>
