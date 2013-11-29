@@ -30,12 +30,10 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
   };
 
   PsychicSearch.fn.whenKeyPressedOnSearch = function(e) {
-    console.log("KEYDOWN");
     clearTimeout(this.typingTimer);
   };
 
   PsychicSearch.fn.whenKeyReleasedOnSearch = function(e) {
-    console.log("KEYUP");
     this.typingTimer = setTimeout(this.executeSearch.bind(this), this.doneTypingInterval);
   };
 
@@ -77,7 +75,7 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
   PsychicSearch.fn.whenMoreIsClicked = function(e) {
     e.preventDefault();
     this.page = this.page + 1;
-    this.executeSearch();
+    this.executeSearch(true);
   };
 
   PsychicSearch.fn.clearSelectedSpecialty = function() {
@@ -112,7 +110,7 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
     $(".container-psychics-loading").hide();
   };
 
-  PsychicSearch.fn.executeSearch = function() {
+  PsychicSearch.fn.executeSearch = function(append) {
     var data = {};
 
     var selectedSpecialty = this.selectedSpecialty();
@@ -136,6 +134,10 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
       }
     }
 
+    if (append) {
+      data.append = "true";
+    }
+
     data.page = this.page;
 
     this.showLoading();
@@ -144,7 +146,12 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
     var that = this;
     promise.done(function(data, textStatus, jqXHR) {
       that.hideLoading();
-      $(".container-search-result").html(data);
+      if (append) {
+        $(".container-search-result").append(data);
+      }
+      else {
+        $(".container-search-result").html(data);
+      }
     });
 
     promise.fail(function(data, textStatus, jqXHR) {
