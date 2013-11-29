@@ -1,5 +1,3 @@
-var MODAL_FADE = 400;
-
 $(document).ready(function() {
   $("body").on("click", ".modal_link", function(e) {
     e.preventDefault();
@@ -7,28 +5,7 @@ $(document).ready(function() {
     var modalId = $(this).data("modal-id");
     var modalAttributes = $(this).data("modal-attributes");
 
-    showModal(modalId, modalAttributes);
-  });
-
-  $(".modal").on("click", ".close-button", function(e) {
-    e.preventDefault();
-
-    closeModal();
-    dismissModal();
-  });
-
-
-  $("body").on("click", ".overlay", function(e) {
-    e.preventDefault();
-
-    closeModal();
-    dismissModal();
-  });
-
-  $(".modal").on("click", ".reset_form", function(e) {
-    e.preventDefault();
-
-    $(this).closest("form")[0].reset();
+    showModal(modalId, modalAttributes)
   });
 
   $("a[data-close-modal]").on("click",  function(e) {
@@ -36,41 +13,10 @@ $(document).ready(function() {
     var selector = $(this).attr("data-close-modal");
     var el = $(selector);
 
-    el.fadeOut();
     $(".overlay").fadeOut();
-    dismissModal();
   });
 });
 
-var executeModalComponent = function(modalId, modalAttributes) {
-  var parts = modalId.split("_");
-  var newModalId = "";
-  for (var i = 0; i < parts.length; i++) {
-    var string = parts[i];
-    newModalId += string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-  }
-
-  console.log("executeModalComponent", newModalId);
-  Module.run("IHP.Modals." + newModalId, [modalAttributes]);
-};
-
 window.showModal = function(modalId, modalAttributes) {
-  if ($(".modal").is(":visible")) {
-    $(".modal:visible").fadeOut(MODAL_FADE, function () {
-      $("#" + modalId).fadeIn(MODAL_FADE);
-    });
-  } else {
-    $("#" + modalId).fadeIn(MODAL_FADE);
-    $(".overlay").fadeIn(MODAL_FADE);
-  }
-  executeModalComponent(modalId, modalAttributes);
-};
-
-window.closeModal = function() {
-  $(".modal").fadeOut(MODAL_FADE);
-  $(".overlay").fadeOut(MODAL_FADE);
-}
-
-window.dismissModal = function() {
-  $(".modal:visible").trigger("dismiss");
+  Module.run("IHP.Main.Modal.Modal", [modalId, modalAttributes]);
 }

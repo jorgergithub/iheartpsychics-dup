@@ -5,7 +5,6 @@ Module("IHP.Modals.PhoneModal", function(PhoneModal) {
     this.el = $("#phone_modal", el);
     this.number = $("#client_phone_number", el);
     this.assign();
-    this.bindDismiss();
   };
 
   PhoneModal.fn.assign = function() {

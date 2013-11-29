@@ -3,6 +3,8 @@
     <h1>My Birthday &amp; Timezone</h1>
   </header>
 
+  <%= render "clients/modals/spinner" %>
+  
   <%= form_for @client.user, :url => client_path, remote: true do |f| %>
     <div class="modal-body">
       <%= f.fields_for :client do |cf| %>

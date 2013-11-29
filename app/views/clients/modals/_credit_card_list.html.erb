@@ -3,6 +3,8 @@
     <h1>My Cards On File</h1>
   </header>
 
+  <%= render "clients/modals/spinner" %>
+  
   <div class="modal-body">
     <% if @client.cards.any? %>
       <ul class="credit_cards">
