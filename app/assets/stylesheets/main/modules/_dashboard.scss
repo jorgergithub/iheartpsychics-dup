@@ -277,6 +277,11 @@ table.records {
     vertical-align: middle;
   }
 
+  td.schedule-time {
+    text-align: left;
+    width: 292px;
+  }
+
   th:first-child {
     -moz-border-radius: 9px 0 0 0;
     -webkit-border-radius: 9px 0 0 0;

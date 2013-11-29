@@ -289,6 +289,7 @@ table.schedule:last-child {
   text-align: left;
   display: inline-block;
   cursor: pointer;
+  margin-left: 70px;
 
   span.time {
     line-height: 40px;
@@ -370,7 +371,7 @@ table.schedule:last-child {
 .popover-arrow {
   position: absolute;
   margin-top: 5px;
-margin-left: 43px;
+  margin-left: 187px;
   z-index: 100;
 }
 
@@ -395,9 +396,7 @@ margin-left: 43px;
 }
 
 input.toggle {
-  max-height: 0;
-  max-width: 0;
-  opacity: 0;
+  display: none;
 }
 
 input.toggle + label {
@@ -409,6 +408,7 @@ input.toggle + label {
   width: 90px;
   border-radius: 50px;
   cursor: pointer;
+  margin-left: 15px;
 }
 
 input.toggle + label:before {
