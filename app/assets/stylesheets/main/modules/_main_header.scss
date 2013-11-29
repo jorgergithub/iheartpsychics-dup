@@ -48,8 +48,10 @@
     height: 31px;
   }
 
-  .signin {
+  .signin i {
     background: url(image-path("header-nav-dashboard.png")) no-repeat top right;
+    width: 30px;
+    height: 31px;
     cursor: pointer;
   }
 }
@@ -64,6 +66,10 @@
 
   a {
     text-decoration: none;
+  }
+
+  &.signin {
+    padding-right: 0;
   }
 }
 
