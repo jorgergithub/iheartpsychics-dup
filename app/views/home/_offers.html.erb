@@ -1,10 +1,10 @@
 <div class="container-offers small_container">
   <% Package.all.each do |package| %>
-    <%= content_tag :div, 
-                    class: "container-offer #{container_offer_class}", 
-                    "data-modal-id" => "select_payment_method_modal", 
-                    data: { "modal-attributes" => { package: {  id: package.id, 
-                                                                price: package.price.to_i, 
+    <%= content_tag :div,
+                    class: "container-offer #{container_offer_class}",
+                    "data-modal-id" => "select_payment_method_modal",
+                    data: { "modal-attributes" => { package: {  id: package.id,
+                                                                price: package.price.to_i,
                                                                 credits: package.credits.to_i } } } do %>
 
       <header class="container-offer-header">
@@ -17,7 +17,7 @@
       </div>
 
       <div class="container-offer-discount-bg"></div>
-      <div class="container-offer-discount-14"></div>
+      <div class="container-offer-discount-<%= package.discount %>"></div>
     <% end %>
   <% end %>
 
