@@ -72,10 +72,12 @@
       <nav class="header-nav">
         <ul class="header-nav-links">
           <% if current_user %>
-            <li class="dashboard header-nav-link nobg">
-              <%= link_to content_tag(:i, "", class: "header-nav-link-arrow"), client_path %>
-              Dashboard
-            </li>
+            <% unless current_user.psychic? %>
+              <li class="dashboard header-nav-link nobg">
+                <%= link_to content_tag(:i, "", class: "header-nav-link-arrow"), client_path %>
+                Dashboard
+              </li>
+            <% end %>
             <% if current_user.client? %>
               <li class="balance header-nav-link nobg">
                 <%= link_to content_tag(:i, "", class: "header-nav-link-plus"), client_path %>
