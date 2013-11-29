@@ -44,7 +44,7 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
 
   Modal.fn.bindCloseModal = function() {
     window.closeModal = function(e) {
-      e.preventDefault();
+      if (e) e.preventDefault();
       $(".modal").fadeOut(Modal.MODAL_FADE);
       $(".overlay").fadeOut(Modal.MODAL_FADE);
     }
@@ -68,7 +68,7 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
       var newSrc = originalSrc.replace("_disabled.png",".png")
       $submitButtons.attr("src", newSrc);
 
-      $spinner.fadeOut();
+      $(".spinner_overlay").fadeOut();
     });
   };
 });
