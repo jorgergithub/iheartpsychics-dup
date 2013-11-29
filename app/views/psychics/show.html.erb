@@ -232,7 +232,7 @@
 
       <tfoot>
         <tr>
-          <td colspan="4"><%= f.submit %></td>
+          <td colspan="4"><%= f.submit "Save Schedule" %></td>
         </tr>
       </tfoot>
 
@@ -247,11 +247,11 @@
           </tr>
 
           <% schedules.each do |schedule| %>
-            <%= f.fields_for :schedules, schedule do |sf| %>
-              <tr class="fields-row" data-date="<%=l date.in_time_zone.to_date, format: :date_only %>">
+            <tr class="fields-row" data-date="<%=l date.in_time_zone.to_date, format: :date_only %>">
+              <%= f.fields_for :schedules, schedule do |sf| %>
                 <%= render schedule, f: sf, schedule: schedule %>
-              </tr>
-            <% end %>
+              <% end %>
+            </tr>
           <% end %>
         <% end %>
       </tbody>

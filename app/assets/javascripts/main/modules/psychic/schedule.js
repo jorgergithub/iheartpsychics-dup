@@ -29,10 +29,14 @@ Module("IHP.Pages.Schedules", function(Schedules) {
     var minute = $("input.minute", $popover).val();
     var period = $("input.toggle", $popover).is(":checked") ? "PM" : "AM";
 
-    hour   = hour ? hour : "00"
-    minute = minute ? minute : "00"
+    var value = "";
+    if (hour || minute) {
+      hour   = hour ? hour : "00"
+      minute = minute ? minute : "00"
 
-    var value = hour + ":" + minute + " " + period
+      value = hour + ":" + minute + " " + period
+    }
+
     $span.text(value);
     $timeString.val(value);
   }
@@ -62,7 +66,7 @@ Module("IHP.Pages.Schedules", function(Schedules) {
     }
   };
 
-  Schedules.fn.addScheduleRow = function(date, el) {
+  Schedules.fn.addScheduleRow = function(date, schedule) {
     var template = $("#new_schedule").html();
     var newId = new Date().getTime();
     var regex = new RegExp("new_schedules", "g");
@@ -70,10 +74,8 @@ Module("IHP.Pages.Schedules", function(Schedules) {
 
     content.attr("data-date", date);
     content.find("input[type=hidden].date").val(date);
-    content.insertAfter(el);
+    content.insertAfter(schedule.nextUntil("tr.date-row").last());
     this.zebrateTable();
-
-    return content;
   };
 
   Schedules.fn.addSchedule = function(e) {
@@ -82,7 +84,7 @@ Module("IHP.Pages.Schedules", function(Schedules) {
     var $link = $(e.target);
     var date = $link.data("date");
 
-    var $schedule = $link.closest("tr");
+    var $schedule = $link.closest("tr.date-row");
     var $td = $schedule.children("td:first");
 
     this.changeRowspanBy($td, 1);
@@ -103,10 +105,10 @@ Module("IHP.Pages.Schedules", function(Schedules) {
     } else {
       this.changeRowspanBy($dateCell, -1)
       $schedule.hide();
-      this.zebrateTable();
     } 
 
     $("input.delete", $schedule).val(true);
+    this.zebrateTable();
   };
 
   Schedules.fn.dateHasOneSchedule = function(dateRow) {
@@ -128,7 +130,15 @@ Module("IHP.Pages.Schedules", function(Schedules) {
   }
 
   Schedules.fn.zebrateTable = function() {
-    $("tbody tr.date-row + tr.fields-row", this.el).addClass("first-schedule");
+    $.each($("tbody tr.date-row"),function(index, dateRow) {
+      var rows = $(dateRow).nextUntil("tr.date-row", "tr.fields-row:visible") 
+      $.each(rows,function(index, row) {
+        if (index == 0) {
+          $(row).addClass("first-schedule");
+        }
+      });
+    });
+
     $("tbody tr.fields-row:visible", this.el).removeClass("zebra");
     $("tbody tr.fields-row:visible:even", this.el).addClass("zebra");
   }

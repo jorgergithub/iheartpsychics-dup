@@ -302,16 +302,21 @@ table.records {
   }
 
   tr.date-row td.upcoming-date {
-    border-right: 1px solid #e0e0e0;
+    border-right: 1px solid #ddd;
+    border-top: 1px solid #ddd;
     background: #eee;
   }
 
   tr.first-schedule {
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid #ddd;
   }
 
   tr.zebra {
     background: #f3f5f6;
+  }
+
+  tfoot {
+    border-top: 1px solid #ddd;
   }
 }
 
