@@ -50,7 +50,7 @@ Module("IHP.Modals.SelectPaymentMethodModal", function(SelectPaymentMethodModal)
 
   SelectPaymentMethodModal.fn.assign = function() {
     $(".new_credit_card_panel form", this.el)[0].reset();
-    //$(".new_credit_card_panel #credit_card", this.el).mask("0000 0000 0000 0000")
+    $(".new_credit_card_panel #order_card_number", this.el).mask("0000 0000 0000 0000")
     this.setPackage();
     this.showFirstPanel();
   };
