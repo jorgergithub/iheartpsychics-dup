@@ -35,7 +35,7 @@ class ClientsController < AuthorizedController
     end
 
     respond_to do |format|
-      if @client.user.update_attributes(tmp_params)
+      if @client.user.update_attributes(tmp_params) && @client.reload
         format.html { redirect_to edit_client_path, notice: "Client was successfully updated." }
         format.js
       else

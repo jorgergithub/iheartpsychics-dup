@@ -17,6 +17,7 @@
 //= require main/modules/global/psychic_cards
 //= require main/modules/global/callbacks
 //= require main/modules/client/show
+//= require main/modules/client/modals/birthday
 //= require main/modules/client/modals/pin
 //= require main/modules/client/modals/phone
 //= require main/modules/client/modals/password

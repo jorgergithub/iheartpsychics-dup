@@ -26,7 +26,7 @@ class Client < ActiveRecord::Base
 
   validates :phones, :birthday, :presence => true
 
-  delegate :username, :first_name, :last_name, :full_name, :email,
+  delegate :username, :first_name, :last_name, :full_name, :email, :time_zone,
            to: :user, allow_nil: true
 
   before_save  :set_random_pin

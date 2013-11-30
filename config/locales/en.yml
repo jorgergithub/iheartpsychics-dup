@@ -5,6 +5,7 @@ en:
       normal: "%B %d"
       schedule: "%a, %b %d"
       date_only: "%Y-%m-%d"
+      birthday: "%B %d, %Y"
   time:
     formats:
       default: "%b %d, %Y %I:%M %p"

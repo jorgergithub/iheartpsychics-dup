@@ -119,7 +119,7 @@
     <div class="my-birthday-timezone client-action-item action-item last">
       <h2>My Birthday &<br/> Timezone</h2>
 
-      <p>March 1, 1982</p>
+      <p class="birthday"><%= I18n.l(@client.birthday, format: :birthday) %></p>
 
       <div class="action">
         <a href="#" class="modal_link" data-modal-id="birthday_modal">Edit</a>
