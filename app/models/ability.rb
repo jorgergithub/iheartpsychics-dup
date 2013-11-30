@@ -65,6 +65,7 @@ class Ability
       admin/orders
       admin/surveys
       admin/categories
+      admin/daily_fortunes
       admin/horoscopes
       admin/newsletters
       admin/subscribers

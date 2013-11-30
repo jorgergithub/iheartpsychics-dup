@@ -165,6 +165,10 @@ class Client < ActiveRecord::Base
     create_call(phone, call_url)
   end
 
+  def daily_fortune
+    DailyFortune.random
+  end
+
   private
 
   def set_unsubscribe_key

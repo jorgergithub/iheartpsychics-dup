@@ -32,6 +32,7 @@ gem 'omniauth-twitter'       , '~> 1.0.0'
 gem 'sidekiq'                , '~> 2.16.0'
 gem 'sinatra'                , '>= 1.3.0', :require => nil
 gem 'slim'                   , '>= 1.1.0'
+gem 'squeel'                 , '~> 1.1.1'
 gem 'stripe'                 , :git => 'https://github.com/stripe/stripe-ruby'
 gem 'twilio-ruby'            , '~> 3.10.0'
 gem 'unicorn'                , '~> 4.6.3'

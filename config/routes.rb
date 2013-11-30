@@ -24,6 +24,7 @@ IHeartPsychics::Application.routes.draw do
     resources :categories
     resources :clients
     resources :customer_service_representatives
+    resources :daily_fortunes, except: :show
     resources :horoscopes
 
     resources :invoices, only: :show do

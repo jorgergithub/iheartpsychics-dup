@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131128230815) do
+ActiveRecord::Schema.define(version: 20131130120129) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -168,6 +168,21 @@ ActiveRecord::Schema.define(version: 20131128230815) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "available"
+  end
+
+  create_table "daily_fortunes", force: true do |t|
+    t.date     "start_date", null: false
+    t.date     "end_date",   null: false
+    t.string   "sunday",     null: false
+    t.string   "monday",     null: false
+    t.string   "tuesday",    null: false
+    t.string   "wednesday",  null: false
+    t.string   "thursday",   null: false
+    t.string   "friday",     null: false
+    t.string   "saturday",   null: false
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "faqs", force: true do |t|
