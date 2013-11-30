@@ -97,6 +97,12 @@ class User < ActiveRecord::Base
     role == "website_admin"
   end
 
+  def sign
+    return psychic.sign if psychic
+    return client.sign if client
+    nil
+  end
+
   def accountant?
     role == "accountant"
   end

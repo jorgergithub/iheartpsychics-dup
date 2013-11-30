@@ -32,4 +32,30 @@ describe User do
       expect(user).to be_psychic
     end
   end
+
+  describe "#sign" do
+    context "when user is client" do
+      let(:subject) { create(:psychic, date_of_birth: Sign::Taurus.first_day).user }
+
+      it "delegates sign to client" do
+        expect(subject.sign).to be_eql Sign::Taurus
+      end
+    end
+    
+    context "when user is psychic" do
+      let(:subject) { create(:client, birthday: Sign::Gemini.first_day).user }
+
+      it "delegates sign to psychic" do
+        expect(subject.sign).to be_eql Sign::Gemini
+      end
+    end
+
+    context "when user isnt psychic or client" do
+      let(:subject) { build :user }
+
+      it "returns nil" do
+        expect(subject.sign).to be_nil
+      end
+    end
+  end
 end

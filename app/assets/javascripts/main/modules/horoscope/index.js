@@ -17,4 +17,22 @@ $(document).ready(function() {
     $(this).siblings("ul.horoscope_first").removeClass("horoscope_selected");
     $(this).siblings("ul.horoscope_last").addClass("horoscope_selected");
   });
+
+  $("section.horoscope-container ul li.horoscope_right_arrow").click(function() {
+    var selected = $(this).closest("nav").siblings("article.horoscope-selected");
+
+    if (selected.next("article").length > 0) {
+      selected.removeClass("horoscope-selected");
+      selected.next().addClass("horoscope-selected");
+    }
+  });
+
+  $("section.horoscope-container ul li.horoscope_left_arrow").click(function() {
+    var selected = $(this).closest("nav").siblings("article.horoscope-selected");
+
+    if (selected.prev("article").length > 0) {
+      selected.removeClass("horoscope-selected");
+      selected.prev().addClass("horoscope-selected");
+    }
+  });
 });

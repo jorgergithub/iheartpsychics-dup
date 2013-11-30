@@ -47,6 +47,10 @@ class Client < ActiveRecord::Base
     pin.present?
   end
 
+  def sign
+    Sign.by_date(birthday)
+  end
+
   def discount_credits(call)
     credits.create(
       credits: -call.cost,

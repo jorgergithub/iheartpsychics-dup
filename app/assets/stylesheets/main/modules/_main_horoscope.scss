@@ -48,3 +48,31 @@
 .horoscope-sign-image {
   margin-top: 55px;
 }
+
+section.horoscope-container nav {
+  position: relative;
+}
+
+section.horoscope-container ul {
+  position: absolute;
+  left: 50%;
+  margin-left: -75px;
+}
+
+section.horoscope-container ul li {
+  display: inline-block;
+  cursor: pointer;
+}
+
+section.horoscope-container ul li + li {
+  margin-left: 20px;
+}
+
+.horoscope-container article {
+  display: none;
+  margin-top: 35px;
+
+  &.horoscope-selected {
+    display: inline-block;
+  }
+}

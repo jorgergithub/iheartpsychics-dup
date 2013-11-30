@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_action :find_horoscope
   before_action :configure_permitted_parameters, if: :devise_controller?
   around_action :user_time_zone, if: :current_user
 
@@ -13,6 +14,10 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::Unauthorized, :with => :unauthorized
 
   protected
+
+  def find_horoscope
+    @horoscope = Horoscope.last_by_date
+  end
 
   def user_time_zone(&block)
     Time.use_zone(current_user.time_zone, &block)
