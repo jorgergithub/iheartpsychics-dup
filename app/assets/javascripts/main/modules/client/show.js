@@ -17,6 +17,7 @@ Module("IHP.Pages.ClientsShow", function(ClientsShow) {
     };
 
     this.addEventListeners();
+    $("#client_phone").mask("999-999-9999");
   };
 
   ClientsShow.fn.addEventListeners = function() {

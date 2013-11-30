@@ -8,6 +8,8 @@ Module("IHP.Pages.HomeCareers", function(HomeCareers) {
     this.tab = this.tab || "main";
     this.addEventListeners();
     this.displayProperTab();
+
+    $("#application_phone").mask("999-999-9999");
   };
 
   HomeCareers.fn.addEventListeners = function() {

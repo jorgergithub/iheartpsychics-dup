@@ -11,9 +11,10 @@ Module("IHP.Modals.PhoneModal", function(PhoneModal) {
 
   PhoneModal.fn.assign = function() {
     var phone = $("p#client_phone").text();
-    $("input#client_phone_number", this.el).val(phone);
+    $("input#client_phone_number", this.el).val(phone.replace("+1", ""));
     $("aside.form_validation_errors", this.el).remove();
 
+    this.number.mask("999-999-9999");
     this.number.select();
     this.number.focus();
   };
