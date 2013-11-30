@@ -16,8 +16,8 @@ Module("IHP.Components.PsychicCards", function(PsychicCards) {
   };
 
   PsychicCards.fn.addEventListeners = function() {
-    this.el.on("mouseenter", ".psychic", this.whenMouseEntersPsychic.bind(this));
-    this.el.on("mouseleave", ".psychic", this.whenMouseLeavesPsychic.bind(this));
+    // this.el.on("mouseenter", ".psychic", this.whenMouseEntersPsychic.bind(this));
+    // this.el.on("mouseleave", ".psychic", this.whenMouseLeavesPsychic.bind(this));
 
     this.el.on("click", ".psychic-card-favorite-off", this.whenPsychicIsMarkedAsFavorite.bind(this));
     this.el.on("click", ".psychic-card-favorite-on", this.whenPsychicIsRemovedAsFavorite.bind(this));
