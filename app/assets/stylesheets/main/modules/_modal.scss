@@ -83,15 +83,22 @@
 .modal form {
   text-align: left;
 
-  .field label,
-  .reset_field label {
+  table {
+    margin-top: 30px;
+  }
+
+  table th,
+  .field label {
     text-transform: uppercase;
     font-weight: bold;
     font-size: 18px;
-    display: block;
     text-align: left;
     margin-bottom: 5px;
     color: #242d3c;
+  }
+
+  .field label {
+    display: block;
   }
 
   label, p {
@@ -102,6 +109,11 @@
   input[type="checkbox"] {
     vertical-align: middle;
     margin-right: 20px;
+  }
+
+
+  label.label-checked {
+    color: #40b500;
   }
 
   p {
@@ -219,10 +231,6 @@
   .field.full textarea {
     width: 510px;
   }
-
-  .field.full textarea {
-    height: 100px;
-  }
 }
 
 .modal.large {
@@ -232,7 +240,11 @@
   }
 }
 
-.field.full i.border {
+.modal .field.full textarea {
+  height: 100px;
+}
+
+.modal .field.full i.border {
   border-left: 2px solid #bec5d0;
   position: absolute;
   margin-top: -50px;
@@ -242,7 +254,7 @@
   padding-top: 10px;
 }
 
-.field div.field_with_errors {
+.modal .field div.field_with_errors {
   display: inline-block;
   vertical-align: top;
 }

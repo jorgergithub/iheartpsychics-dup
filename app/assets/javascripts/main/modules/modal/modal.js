@@ -23,6 +23,8 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
       this.el.fadeIn(Modal.MODAL_FADE);
       $(".overlay").fadeIn(Modal.MODAL_FADE);
     }
+
+    $("input[type='checkbox']:checked + label", this.el).addClass("label-checked");
   };
 
   Modal.fn.camelizedModalId = function() {
@@ -41,6 +43,10 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
     this.el.off("click", ".close-button").on("click", ".close-button", closeModal);
     this.el.off("submit", "form").on("submit", "form", this.onFormSubmit);
     this.el.off("ajax:complete", "form").on("ajax:complete", "form", this.onAjaxComplete.bind(this));
+    this.el.on("change", "input[type='checkbox']", function() {
+      $(this).siblings("label").toggleClass("label-checked");
+    });
+    this.el.on("click", "a.reset_form", this.resetForm.bind(this));
   };
 
   Modal.fn.bindCloseModal = function() {
@@ -83,5 +89,11 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
     $submitButtons.attr("src", newSrc);
 
     $(".spinner_overlay").fadeOut();
+  };
+
+  Modal.fn.resetForm = function(e) {
+    e.preventDefault();
+    var button = $(e.target);
+    button.closest("form")[0].reset();
   };
 });
