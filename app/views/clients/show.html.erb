@@ -109,7 +109,7 @@
     <div class="my-phone client-action-item action-item">
       <h2>My Phone</h2>
 
-      <p id="client_phone"><%= @client.phones.first.number.gsub("+1", "") %></p>
+      <p id="client_phone"><%= @client.phones.first.number.try(:gsub, "+1", "") %></p>
 
       <div class="action">
         <a href="#" class="modal_link" data-modal-id="phone_modal">Edit</a>

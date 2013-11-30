@@ -66,6 +66,10 @@ describe Ability do
       subject.should be_able_to(:update, :clients)
     end
 
+    it "can delete card" do
+      subject.should be_able_to(:destroy_card, :clients)
+    end
+
     it "can edit profile" do
       subject.should be_able_to(:edit, :clients)
     end

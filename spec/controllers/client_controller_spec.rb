@@ -47,4 +47,20 @@ describe ClientsController do
       end
     end
   end
+
+  describe "POST destroy_card" do
+    before do
+      client.cards.create!
+      client.cards.create!  
+      delete :destroy_card, format: :js
+    end
+
+    it "deletes clients card" do
+      expect( client.reload.cards.count ).to be_eql 0
+    end
+
+    it "renders success" do
+      expect(response).to be_success
+    end
+  end
 end

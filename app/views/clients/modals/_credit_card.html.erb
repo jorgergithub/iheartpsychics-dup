@@ -9,7 +9,6 @@
   </p>
 
   <div class="cc_actions">
-    <%= link_to image_tag("modal/edit_icon.png"), "#", class: "modal_link", "data-modal-id" => :edit_credit_card_modal %>
-    <%= link_to image_tag("modal/delete_icon.png"), "#", class: "delete_card" %>
+    <%= link_to image_tag("modal/delete_icon.png"), destroy_card_client_path, remote: true, method: :delete, class: "delete_card" %>
   </div>
 </li>

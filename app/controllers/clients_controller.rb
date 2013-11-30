@@ -119,6 +119,14 @@ class ClientsController < AuthorizedController
     end
   end
 
+  def destroy_card
+    @client.cards.destroy_all
+
+    respond_to do |format|
+      format.js { render text: "" }
+    end
+  end
+
   protected
 
   def determine_layout

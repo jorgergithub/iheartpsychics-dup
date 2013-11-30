@@ -94,7 +94,7 @@ class Ability
   end
 
   def authorize_client
-    can [:update, :edit, :show, :reset_pin, :make_favorite, :remove_favorite, :avatar], :clients
+    can [:update, :edit, :show, :reset_pin, :make_favorite, :remove_favorite, :avatar, :destroy_card], :clients
     can [:show, :new, :create, :paypal], :orders
     can [:search, :about], :psychics
     can [:callback, :success, :cancel], :paypal

@@ -9,16 +9,6 @@ $(document).ready(function() {
     e.stopPropagation();
   });
 
-  $("#credit_card_list_modal ul.credit_cards li .cc_actions a.delete_card").on("click", function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    $(this).closest("li").fadeOut(function() {
-      // remove card from db
-      $(this).remove();
-    });
-  });
-
   $("#thank_you_modal .modal_right_arrow").on("click", function() {
     var selected = $("#thank_you_modal nav ul.modal_selected");
 

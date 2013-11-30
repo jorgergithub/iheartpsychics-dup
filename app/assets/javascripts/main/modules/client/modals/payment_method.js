@@ -15,6 +15,11 @@ Module("IHP.Modals.SelectPaymentMethodModal", function(SelectPaymentMethodModal)
     this.bindNavigation();
     this.cardSelection();
     this.cardTypeFlagHandler();
+    this.addEventListeners();
+  };
+
+  SelectPaymentMethodModal.fn.addEventListeners = function() {
+   $("ul.credit_cards li .cc_actions a.delete_card", this.el).on("ajax:send",this.deleteCard.bind(this));
   };
 
   SelectPaymentMethodModal.fn.cardTypeFlagHandler = function() {
@@ -45,6 +50,7 @@ Module("IHP.Modals.SelectPaymentMethodModal", function(SelectPaymentMethodModal)
 
   SelectPaymentMethodModal.fn.assign = function() {
     $(".new_credit_card_panel form", this.el)[0].reset();
+    //$(".new_credit_card_panel #credit_card", this.el).mask("0000 0000 0000 0000")
     this.setPackage();
     this.showFirstPanel();
   };
@@ -99,5 +105,15 @@ Module("IHP.Modals.SelectPaymentMethodModal", function(SelectPaymentMethodModal)
       $(this).siblings().removeClass("cc_selected");
       $(this).addClass("cc_selected");
     });
+  };
+
+  SelectPaymentMethodModal.fn.deleteCard = function(e) {
+    e.stopPropagation();
+
+    var $button = $(e.target);
+    $button.closest("li").fadeOut(function() {
+      $button.closest("li").remove();
+      this.showFirstPanel();
+    }.bind(this));
   };
 });

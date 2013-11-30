@@ -99,13 +99,14 @@ IHeartPsychics::Application.routes.draw do
   resource :client, :except => :create do
     resources :client_phones
     member do
-      get   'reset_pin'       , action: :reset_pin, as: :reset_pin
-      patch 'reset_pin'       , action: :reset_pin
-      get   'add_credits'     , action: :add_credits, as: :add_credits
-      patch 'add_credits'     , action: :add_credits
-      get   'make_favorite'   , action: :make_favorite, as: :make_favorite
-      get   'remove_favorite' , action: :remove_favorite, as: :remove_favorite
-      patch '/:id/avatar'     , action: :avatar, as: :avatar
+      get     'reset_pin'       , action: :reset_pin, as: :reset_pin
+      patch   'reset_pin'       , action: :reset_pin
+      get     'add_credits'     , action: :add_credits, as: :add_credits
+      patch   'add_credits'     , action: :add_credits
+      get     'make_favorite'   , action: :make_favorite, as: :make_favorite
+      get     'remove_favorite' , action: :remove_favorite, as: :remove_favorite
+      patch   '/:id/avatar'     , action: :avatar, as: :avatar
+      delete  'delete_card'     , action: :destroy_card, as: :destroy_card
     end
   end
 
