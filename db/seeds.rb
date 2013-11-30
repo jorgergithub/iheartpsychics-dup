@@ -232,6 +232,7 @@ user = User.create!(first_name: "Felipe",
                    confirmed_at: Time.now)
 client = user.client
 client.balance = 250
+client.birthday = Date.today
 client.phones.create(number: "+17863295532")
 
 100.times do
@@ -242,10 +243,12 @@ client.phones.create(number: "+17863295532")
                        last_name: last_name,
                        username: Faker::Internet.user_name,
                        email: Faker::Internet.email(name: "#{first_name} #{last_name}"),
-                       password: 'ipass123', create_as: 'client', confirmed_at: Time.now)
+                       password: 'ipass123', create_as: 'client', confirmed_at: Time.now,
+                       client_attributes: { birthday: Date.today })
 
     cli = user.client
     cli.balance = Random.rand(150)
+    cli.birthday = Date.today
     cli.save!
     # cli = user.client
     # p cli
