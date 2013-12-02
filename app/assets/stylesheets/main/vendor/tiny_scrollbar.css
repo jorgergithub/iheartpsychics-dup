@@ -1,8 +1,7 @@
 .scrollbar_table { 
   position: relative; 
   width: 100%; 
-  clear: both; 
-  margin: 20px 0 10px;
+  clear: both;
   -webkit-box-shadow: 0px 5px 5px #ccc;
   -moz-box-shadow: 0px 5px 5px #ccc;
   box-shadow: 0px 5px 5px #ccc;

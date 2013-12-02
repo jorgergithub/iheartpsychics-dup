@@ -249,6 +249,7 @@ div:hover.upload span {
 }
 
 table.records {
+  table-layout: fixed;
   border-collapse: collapse;
   border-spacing: 0;
   -moz-border-radius: 6px;
@@ -258,6 +259,12 @@ table.records {
   -moz-box-shadow: 0px 5px 5px #ccc;
   box-shadow: 0px 5px 5px #ccc;
   width: 100%;
+
+  &.header {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
 
   th {
     @include thin-font(22px);
