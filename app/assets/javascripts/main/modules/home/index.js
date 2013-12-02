@@ -17,18 +17,21 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
 
 
   PsychicSearch.fn.applySlider = function() {
-    var initialValue = 5; 
+    var that = this;
     $(".container-nav-price-slider").slider({
       range: "min",
       min: 1,
       max: 15,
-      value: initialValue,
-      slide: function( event, ui ) {
-        $("a.ui-slider-handle", this).text("$" + ui.value );
-        // search here....
+      value: that.maxPrice,
+      slide: function(event, ui) {
+        $("a.ui-slider-handle", this).text("$" + ui.value);
+      },
+      change: function(event, ui) {
+        that.maxPrice = ui.value;
+        that.executeSearch();
       }
     });
-    $("a.ui-slider-handle" ).text(initialValue);
+    $("a.ui-slider-handle").text("$" + that.maxPrice);
   };
 
   PsychicSearch.fn.addEventListeners = function() {
@@ -43,7 +46,7 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
 
     this.el.on("keydown", ".container-nav-search-input", this.whenKeyPressedOnSearch.bind(this));
     this.el.on("keyup", ".container-nav-search-input", this.whenKeyReleasedOnSearch.bind(this));
-  
+
     this.applySlider();
   };
 
@@ -108,8 +111,15 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
   PsychicSearch.fn.clearSearches = function() {
     this.status = "all";
     this.featured = false;
+    this.clearPrice();
     this.clearSelectedSpecialty();
     this.clearNameSearch();
+  };
+
+  PsychicSearch.fn.clearPrice = function() {
+    this.minPrice = 1;
+    this.maxPrice = 15;
+    this.applySlider();
   };
 
   PsychicSearch.fn.clearNameSearch = function() {
@@ -178,6 +188,14 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
       if (textSearchBox.val().length > 0) {
         data.text = textSearchBox.val();
       }
+    }
+
+    if (this.minPrice) {
+      data.price_min = this.minPrice;
+    }
+
+    if (this.maxPrice) {
+      data.price_max = this.maxPrice;
     }
 
     if (append) {
