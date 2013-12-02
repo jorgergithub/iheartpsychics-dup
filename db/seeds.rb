@@ -85,6 +85,19 @@ once?", answer: lorem)
 cat_general.faqs.create(question: "What if I forget my 10-digit account
 number or 4-digit PIN?", answer: lorem)
 
+TrainingItem.create(title: "Welcome Message and Preparation for Your Shift")
+TrainingItem.create(title: "Getting Setup")
+TrainingItem.create(title: "Important Startup Information")
+TrainingItem.create(title: "Disclaimer and Policies")
+TrainingItem.create(title: "Our Mission Statement and Impact")
+TrainingItem.create(title: "Meet our Customers")
+TrainingItem.create(title: "Do's and Don'ts")
+TrainingItem.create(title: "Types of Customers")
+TrainingItem.create(title: "How to Begin a Reading")
+TrainingItem.create(title: "Tips for Psychics")
+TrainingItem.create(title: "How We Differ from Other Networks")
+TrainingItem.create(title: "Contact and Emergency Numbers")
+
 admin = User.create!(first_name: 'Master', last_name: 'Admin',
                     username: 'admin', email: 'admin@iheartpsychics.co',
                     password: 'ipass123', create_as: 'admin', confirmed_at: Time.now)

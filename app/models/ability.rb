@@ -118,5 +118,6 @@ class Ability
   def authorize_psychic
     can :access, [:psychics, :schedules, :invoices, :reviews, :avatar]
     can [:mark_as_featured, :unmark_as_featured], :reviews
+    can [:index, :show], :training_items
   end
 end

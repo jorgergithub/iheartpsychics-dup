@@ -39,6 +39,7 @@
  *= require main/modules/_client_dashboard
  *= require main/modules/_psychic_dashboard
  *= require main/modules/_rating
+ *= require main/training_items
  *= require main/accessory
  *= require main/ethics
  *= require main/contact

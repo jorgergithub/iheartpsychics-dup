@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131130120129) do
+ActiveRecord::Schema.define(version: 20131202191415) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -350,7 +350,6 @@ ActiveRecord::Schema.define(version: 20131130120129) do
     t.datetime "updated_at"
   end
 
-  add_index "psychic_events", ["psychic_id"], name: "idx_psychic_events_psychic_id", using: :btree
   add_index "psychic_events", ["psychic_id"], name: "index_psychic_events_on_psychic_id", using: :btree
 
   create_table "psychics", force: true do |t|
@@ -438,10 +437,7 @@ ActiveRecord::Schema.define(version: 20131130120129) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "featured",   default: false
-    t.integer  "call_id"
   end
-
-  add_index "reviews", ["call_id"], name: "index_reviews_on_call_id", using: :btree
 
   create_table "schedule_jobs", force: true do |t|
     t.string   "description", null: false
@@ -483,6 +479,14 @@ ActiveRecord::Schema.define(version: 20131130120129) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "percent",    precision: 8, scale: 2
+  end
+
+  create_table "training_items", force: true do |t|
+    t.string   "title"
+    t.string   "file"
+    t.datetime "reviewed_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "transactions", force: true do |t|
