@@ -1,7 +1,7 @@
 @import "main/helpers";
 
 .horoscope {
-  background-color: #000;
+  background-color: #161d26;
 }
 
 .horoscope-container {
@@ -11,12 +11,19 @@
 
 .horoscope-title,
 .horoscope-sign-title,
-.horoscope-period {
+.horoscope-period,
+.horoscope-container h3 {
   font-weight: 100;
 }
 
 .horoscope-title {
   font-size: 25px;
+  color: white;
+}
+
+.horoscope-container h3 {
+  color: white; 
+  font-size: 24px;
 }
 
 .horoscope-sign-title {
@@ -42,6 +49,7 @@
   right: 100px;
   bottom: 0;
   background: url(image-path("horoscope-sign-bg.png"));
+  background-repeat: no-repeat;
   text-align: center;
 }
 
