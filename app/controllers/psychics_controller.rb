@@ -18,6 +18,7 @@ class PsychicsController < AuthorizedController
     @table = ScheduleTable.new(@psychic.weekly_schedule)
     @schedules = @psychic.next_week_schedules_by_date
     @new_schedule = @psychic.schedules.new
+    @calls = @psychic.calls
   end
 
   def update
@@ -27,7 +28,6 @@ class PsychicsController < AuthorizedController
       redirect_to path, notice: message
     else
       render action: "show"
-      binding.pry
     end
   end
 
