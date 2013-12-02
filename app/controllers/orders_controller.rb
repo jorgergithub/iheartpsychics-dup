@@ -14,6 +14,7 @@ class OrdersController < AuthorizedController
     respond_to do |format|
       if @order.save
         @order.pay
+        @credits = @client.credits.order('id desc').page(params[:page_credits]).per(params[:per])
         format.html { redirect_to client_path, notice: "Your order was successfully processed" }
         format.js
       else

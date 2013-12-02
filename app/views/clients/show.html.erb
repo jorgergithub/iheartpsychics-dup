@@ -165,42 +165,14 @@
 <section class="client-history-container small_container">
   <h2 class="section-title">My Purchase History</h2>
 
-  <div class="scrollbar_table_container">
-    <table class="records header">
-      <thead>
-        <tr>
-          <th>Payment</th>
-          <th>Amount</th>
-          <th>Date Used</th>
-          <th>Confirmation #</th>
-        </tr>
-      </thead>
-    </table>
-    <div class="scrollbar_table">
-      <div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
-      <div class="viewport">
-        <div class="overview">
-          <% if @credits.any? %>
-            <table class="records">
-              <tbody>
-                <% @credits.each do |credit| %>
-                  <tr>
-                    <td><%= credit.payment %></td>
-                    <td><%= number_to_currency credit.amount %></td>
-                    <td><%= credit.parsed_date_only %></td>
-                    <td>#<%= credit.id %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          <% else %>
-            <div class="client-blank">
-              No purchase history yet.
-            </div>
-          <% end %>
-        </div>
+  <div id="purchase_history_container">
+    <% if @credits.any? %>
+      <%= render "clients/purchase_history", credits: @credits %>
+    <% else %>
+      <div class="client-blank">
+        No purchase history yet.
       </div>
-    </div>
+    <% end %>
   </div>
 </section>
 
