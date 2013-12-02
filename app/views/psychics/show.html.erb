@@ -247,43 +247,7 @@
   </div>
 
   <% if @psychic.reviews.any? %>
-    <table class="records">
-      <thead>
-        <tr>
-          <th style="width: 50px;"></th>
-          <th style="width: 50px;">ID</th>
-          <th>Client</th>
-          <th>Rating</th>
-          <th>Date & Time</th>
-          <th>Featured</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @psychic.reviews.each do |review| %>
-          <tr>
-            <td>
-              <%= link_to(image_tag("add-gray.png"), "#") %>
-            </td>
-            <td><%= review.id %></td>
-            <td><%= review.client.full_name %></td>
-            <td>
-              <i class="star star-<%= review.rating %>"></i>
-            </td>
-            <td>
-              <span class="review-date"><%=l review.created_at %></span>
-            </td>
-            <td>
-              <% if review.featured? %>
-                <%= image_tag "featured.png", alt: "Featured" %>
-              <% else %>
-                &nbsp;
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <%= render "reviews_list" %>
   <% else %>
     <div class="psychic-blank">
       No reviews yet.
