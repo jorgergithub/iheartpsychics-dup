@@ -131,35 +131,15 @@
 <section class="client-history-container small_container">
   <h2 class="section-title">My Call History</h2>
 
-  <% if @processed_calls.any? %>
-    <table class="records">
-      <thead>
-        <tr>
-          <th style="width: 130px;">Call ID</th>
-          <th>Date & Time</th>
-          <th style="width: 155px;">Phone Number<br/>Dialed From</th>
-          <th>Reader Name</th>
-          <th style="width: 130px;">Call Duration</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @processed_calls.each do |call| %>
-          <tr>
-            <td><%= call.id %></td>
-            <td><%= call.created_at.strftime("%B, %d, %Y %I:%M%p") %></td>
-            <td><%= call.from %></td>
-            <td><%= call.psychic.alias_name %></td>
-            <td><%= call.duration %> Mins</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    <div class="client-blank">
-      No calls yet.
-    </div>
-  <% end %>
+  <div id="processed_calls_container">
+    <% if @processed_calls.any? %>
+      <%= render "processed_calls_history" %>
+    <% else %>
+      <div class="client-blank">
+        No calls yet.
+      </div>
+    <% end %>
+  </div>
 </section>
 
 <section class="client-history-container small_container">
@@ -167,7 +147,7 @@
 
   <div id="purchase_history_container">
     <% if @credits.any? %>
-      <%= render "clients/purchase_history", credits: @credits %>
+      <%= render "purchase_history", credits: @credits %>
     <% else %>
       <div class="client-blank">
         No purchase history yet.
