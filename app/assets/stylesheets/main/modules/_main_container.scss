@@ -17,7 +17,7 @@
 .container-nav-links {
   @extend %flat-list;
 
-  a, span {
+  a {
     color: #fff;
     text-decoration: none;
   }
