@@ -12,11 +12,13 @@
 //= require vendor/clamp.js/clamp
 //= require vendor/jquery-mask-plugin/jquery.mask.min
 //= require vendor/jquery_ui/slider.min
+//= require vendor/tiny_scrollbar/tiny_scrollbar.min
 //
 // App Modules ============================================
 //= require main/modules/global/sign_in
 //= require main/modules/global/psychic_cards
 //= require main/modules/global/callbacks
+//= require main/modules/global/scrollbar
 //= require main/modules/client/show
 //= require main/modules/client/modals/birthday
 //= require main/modules/client/modals/pin

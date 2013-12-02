@@ -18,6 +18,8 @@ Module("IHP.Pages.ClientsShow", function(ClientsShow) {
 
     this.addEventListeners();
     $("#client_phone").mask("999-999-9999");
+
+    Module.run("IHP.Components.Scrollbar");
   };
 
   ClientsShow.fn.addEventListeners = function() {
