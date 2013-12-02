@@ -3,6 +3,7 @@ Module("IHP.Pages.HomeCareers", function(HomeCareers) {
 
   HomeCareers.fn.initialize = function(el) {
     this.el = $($(el).find(".careers aside"));
+    this.articles = $($(el).find("article"));
     this.tab = $("section.careers").attr("data-selected-tab");
     this.tab = this.tab || this.extractTab(document.location.toString())
     this.tab = this.tab || "main";
@@ -14,6 +15,7 @@ Module("IHP.Pages.HomeCareers", function(HomeCareers) {
 
   HomeCareers.fn.addEventListeners = function() {
     this.el.on("click", "li", this.changeSelection.bind(this));
+    this.articles.on("click", ".inner-link", this.changeSelection.bind(this));
   };
 
   HomeCareers.fn.changeSelection = function(e) {
