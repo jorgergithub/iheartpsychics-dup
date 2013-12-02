@@ -5,6 +5,8 @@ Module("IHP.Pages.PsychicsAbout", function(PsychicsAbout) {
     console.log("PsychicsAbout initialized");
     this.el = el;
     this.addEventListeners();
+
+    Module.run("IHP.Components.Scrollbar");
   };
 
   PsychicsAbout.fn.addEventListeners = function() {

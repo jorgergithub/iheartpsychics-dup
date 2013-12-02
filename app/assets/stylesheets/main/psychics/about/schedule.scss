@@ -76,11 +76,12 @@ article.psychic-schedule {
     font-weight: 100;
     width: 115px;
     vertical-align: middle;
+    width: 113px;
   }
 
   table tr th:first-child,
   table tr td:first-child {
-    width: 190px;
+    width: 176px;
   }
 
   table td.psychic-available {
@@ -105,6 +106,7 @@ article.psychic-schedule {
     z-index: 1;
     position: absolute;
     left: 17px;
+    color: white;
   }
   
   table td.psychic-available.middle span {

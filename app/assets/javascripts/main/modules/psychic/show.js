@@ -22,6 +22,7 @@ Module("IHP.Pages.PsychicsShow", function(PsychicsShow) {
 
   PsychicsShow.fn.initializeSchedule = function() {
     Module.run("IHP.Pages.Schedules", this.el);
+    Module.run("IHP.Components.Scrollbar");
   };
 
   PsychicsShow.fn.addEventListeners = function() {
