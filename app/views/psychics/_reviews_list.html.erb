@@ -16,12 +16,16 @@
   <div class="viewport">
     <div class="overview">
 
-      <table class="records">
+      <table id="psychic_reviews" class="records">
         <tbody>
           <% @psychic.reviews.each do |review| %>
-            <tr>
+            <tr data-id="<%= review.id %>">
               <td style="width: 50px;">
-                <%= link_to(image_tag("add-gray.png"), "#") %>
+                <% if review.featured? %>
+                  <%= link_to(image_tag("add-gray.png"), unmark_as_featured_review_path(review), remote: true) %>
+                <% else %>
+                  <%= link_to(image_tag("add-gray.png"), mark_as_featured_review_path(review), remote: true) %>
+                <% end %>
               </td>
               <td style="width: 50px;"><%= review.id %></td>
               <td><%= review.client.full_name %></td>
@@ -31,7 +35,7 @@
               <td>
                 <span class="review-date"><%=l review.created_at %></span>
               </td>
-              <td>
+              <td class="featured">
                 <% if review.featured? %>
                   <%= image_tag "featured.png", alt: "Featured" %>
                 <% else %>
