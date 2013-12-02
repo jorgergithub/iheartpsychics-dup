@@ -15,6 +15,22 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
     this.addEventListeners();
   };
 
+
+  PsychicSearch.fn.applySlider = function() {
+    var initialValue = 5; 
+    $(".container-nav-price-slider").slider({
+      range: "min",
+      min: 1,
+      max: 15,
+      value: initialValue,
+      slide: function( event, ui ) {
+        $("a.ui-slider-handle", this).text("$" + ui.value );
+        // search here....
+      }
+    });
+    $("a.ui-slider-handle" ).text(initialValue);
+  };
+
   PsychicSearch.fn.addEventListeners = function() {
     this.el.on("click", ".specialty-search-link", this.whenSpecialtySearchIsClicked.bind(this));
     this.el.on("click", ".specialty-search-item", this.whenSpecialtyItemIsClicked.bind(this));
@@ -27,6 +43,8 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
 
     this.el.on("keydown", ".container-nav-search-input", this.whenKeyPressedOnSearch.bind(this));
     this.el.on("keyup", ".container-nav-search-input", this.whenKeyReleasedOnSearch.bind(this));
+  
+    this.applySlider();
   };
 
   PsychicSearch.fn.whenKeyPressedOnSearch = function(e) {

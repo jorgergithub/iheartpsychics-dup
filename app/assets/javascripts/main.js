@@ -11,6 +11,7 @@
 //= require vendor/emitter/emitter
 //= require vendor/clamp.js/clamp
 //= require vendor/jquery-mask-plugin/jquery.mask.min
+//= require vendor/jquery_ui/slider.min
 //
 // App Modules ============================================
 //= require main/modules/global/sign_in

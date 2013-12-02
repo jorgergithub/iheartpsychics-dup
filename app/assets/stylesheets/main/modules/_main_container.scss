@@ -17,7 +17,7 @@
 .container-nav-links {
   @extend %flat-list;
 
-  a {
+  a, span {
     color: #fff;
     text-decoration: none;
   }
@@ -64,8 +64,30 @@
   margin-top: 2px;
   height: 20px;
   width: 150px;
+  background-color: #4f5762;
+  border-radius: 10px;
+  position: relative;
+}
+
+.ui-slider-range-min {
+  height: 20px;
   background-color: #6acd00;
   border-radius: 10px;
+}
+
+.ui-slider-handle {
+  height: 46px;
+  background: url(image-path("slider_handler.png"));
+  position: absolute;
+  display: inline-block;
+  width: 55px;
+  margin-top: -83px;
+  outline: none;
+  text-align: center;
+  padding-top: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: -27px;
 }
 
 .container-nav-search {
