@@ -80,7 +80,7 @@
             <% end %>
             <% if current_user.client? %>
               <li class="balance header-nav-link nobg">
-                <%= link_to content_tag(:i, "", class: "header-nav-link-plus"), client_path %>
+                <%= link_to content_tag(:i, "", class: "header-nav-link-plus"), "#", class: "modal_link", "data-modal-id" => "prices_modal" %>
                 Balance <%= number_to_currency current_user.client.balance %>
               </li>
             <% end %>
