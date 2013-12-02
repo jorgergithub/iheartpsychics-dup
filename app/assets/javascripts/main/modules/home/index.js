@@ -61,14 +61,19 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
   PsychicSearch.fn.whenAvailableIsClicked = function(e) {
     e.preventDefault();
     this.page = 1;
-    this.status = "available";
+    if (this.status == "available") {
+      this.status = "all";
+    }
+    else {
+      this.status = "available";
+    }
     this.executeSearch();
   };
 
   PsychicSearch.fn.whenFeaturedIsClicked = function(e) {
     e.preventDefault();
     this.page = 1;
-    this.featured = true;
+    this.featured = !this.featured;
     this.executeSearch();
   };
 
@@ -86,6 +91,12 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
     this.status = "all";
     this.featured = false;
     this.clearSelectedSpecialty();
+    this.clearNameSearch();
+  };
+
+  PsychicSearch.fn.clearNameSearch = function() {
+    var textSearchBox = $(".container-nav-search-input", this.el);
+    textSearchBox.val("");
   };
 
   PsychicSearch.fn.selectedSpecialty = function() {
@@ -110,7 +121,24 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
     $(".container-psychics-loading").hide();
   };
 
+  PsychicSearch.fn.markSelected = function(selector, condition) {
+    if (condition) {
+      $(selector).addClass("search-selected");
+    }
+    else {
+      $(selector).removeClass("search-selected");
+    }
+  }
+
+  PsychicSearch.fn.updateSearchDisplay = function() {
+    this.markSelected(".search-status-available", this.status == "available");
+    this.markSelected(".search-featured", this.featured);
+    this.markSelected(".specialty-search-link", this.selectedSpecialty());
+  };
+
   PsychicSearch.fn.executeSearch = function(append) {
+    this.updateSearchDisplay();
+
     var data = {};
 
     var selectedSpecialty = this.selectedSpecialty();
