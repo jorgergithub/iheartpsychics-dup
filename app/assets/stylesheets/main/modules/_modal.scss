@@ -147,7 +147,7 @@
   i.card_type {
     position: absolute;
     bottom: 8px;
-    
+
     img { display: none; }
     img.generic_card {
       display: inline-block;
@@ -271,4 +271,22 @@
   left: 0;
   height: 100%;
   width: 100%;
+}
+
+.modal-paragraph {
+  line-height: 1.5em;
+}
+
+.modal-close-button {
+  display: block;
+  border-radius: 4px;
+  width: 170px;
+  padding: 18px 0;
+  background-color: #6acd00;
+  font-size: 20px;
+  color: #fff;
+  display: block;
+  margin: 0 auto;
+  margin-top: 50px;
+  text-decoration: none;
 }
