@@ -2,7 +2,7 @@ Module("IHP.Components.Scrollbar", function(Scrollbar) {
   "use strict";
 
   Scrollbar.fn.MAX_TABLE_HEIGHT = function() { return 450 };
-  Scrollbar.fn.MAX_MODAL_HEIGHT = function() { return $(window).height() * 0.7 };
+  Scrollbar.fn.MAX_MODAL_HEIGHT = function() { return $(window).height() * 0.75 };
 
   Scrollbar.fn.initialize = function() {
     this.tables = $(".scrollbar_table");
@@ -23,11 +23,14 @@ Module("IHP.Components.Scrollbar", function(Scrollbar) {
       $(table).tinyscrollbar(options);
     }.bind(this));
 
-
     $.each(this.modals, function(index, modal) {
       var viewport = $(".viewport", modal);
 
-      var height = $(".modal-body", modal).height();
+      var bodyHeight = $(".modal-body", modal).height();
+      var footerHeight = $("footer", modal).height()
+      var marginHeight = 40 * 3;
+      var height = bodyHeight + footerHeight + marginHeight;
+
       var options = {}
 
       this.setHeight(this.MAX_MODAL_HEIGHT(), height, viewport, options)
@@ -37,15 +40,12 @@ Module("IHP.Components.Scrollbar", function(Scrollbar) {
   };
 
   Scrollbar.fn.setHeight = function(maxHeight, height, viewport, options) {
-    console.log(maxHeight);
-    console.log(height);
     if (height > maxHeight) {
-      console.log("com scroll");
       viewport.css("height", maxHeight + "px");
-      options["size"] = maxHeight - 50
+      options["size"] = maxHeight - 50;
     } else {
-      console.log("sem scroll");
-      options["size"] = 0
+      viewport.css("height", height + "px");
+      options["size"] = 0;
     };
   }
 
