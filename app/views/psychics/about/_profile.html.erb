@@ -2,13 +2,17 @@
   <div class="psychic-details-avatar">
     <%= cl_image_tag(@psychic.avatar_id, :width => 270, :height => 270, :crop => :thumb, :gravity => 'faces:center', :radius => :max) %>
 
-    <% if current_user and current_user.client %>
-      <% if current_user.client.favorite?(@psychic) %>
-        <%= link_to image_tag("psychic-card-favorite-on.png"), remove_favorite_client_path(psychic_id: @psychic.id), class: "fav_button" %>
-      <% else %>
-        <%= link_to image_tag("psychic-card-favorite-off.png"), make_favorite_client_path(psychic_id: @psychic.id), class: "fav_button" %>
+    <div class="favorite_button">
+      <% if current_user and current_user.client %>
+        <% if current_user.client.favorite?(@psychic) %>
+          <span>Remove from Favorites</span>
+          <%= link_to image_tag("psychic-card-favorite-on.png"), remove_favorite_client_path(psychic_id: @psychic.id), class: "fav_button" %>
+        <% else %>
+          <span>Add to Favorites</span>
+          <%= link_to image_tag("psychic-card-favorite-off.png"), make_favorite_client_path(psychic_id: @psychic.id), class: "fav_button" %>
+        <% end %>
       <% end %>
-    <% end %>
+      </div>
   </div>
 
   <div class="psychic-profile">
