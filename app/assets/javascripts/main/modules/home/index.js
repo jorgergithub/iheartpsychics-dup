@@ -216,6 +216,8 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
       else {
         $(".container-search-result").html(data);
       }
+
+      Module.run("IHP.Components.PsychicCardsTitle");
     });
 
     promise.fail(function(data, textStatus, jqXHR) {

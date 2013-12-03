@@ -77,6 +77,12 @@
     color: #606d82;
     font-weight: 300;
     text-decoration: none;
+
+    &.small1   { font-size: 22px; }
+    &.small2   { font-size: 20px; }
+    &.small3   { font-size: 18px; }
+    &.small4   { font-size: 16px; }
+    &.small5   { font-size: 14px; }
   }
 
   div.content header > div {

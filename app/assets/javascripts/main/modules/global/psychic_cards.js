@@ -13,6 +13,8 @@ Module("IHP.Components.PsychicCards", function(PsychicCards) {
   PsychicCards.fn.initialize = function(el) {
     this.el = el;
     this.addEventListeners();
+    
+    Module.run("IHP.Components.PsychicCardsTitle");
   };
 
   PsychicCards.fn.addEventListeners = function() {
@@ -110,4 +112,32 @@ Module("IHP.Components.PsychicCards", function(PsychicCards) {
     var psychicId = getPsychicId(e);
     location.href = "/psychic/" + psychicId + "/about#reviews";
   };
-})
+});
+
+Module("IHP.Components.PsychicCardsTitle", function(PsychicCards) {
+  "use strict";
+
+  PsychicCards.fn.initialize = function() {
+    this.resizeLargeTitles();
+  };
+
+  PsychicCards.fn.resizeLargeTitles = function () {
+    var $psychics = $("article.psychic", this.el);
+
+    $.each($psychics, function(index, psychic) {
+      var $title = $("div.content header h1 a" , psychic);
+
+      if ($title.text().length >= 17) {
+        $title.addClass("small5");
+      } else if ($title.text().length >= 15) {
+        $title.addClass("small4");
+      } else if ($title.text().length >= 14) {
+        $title.addClass("small3");
+      } else if ($title.text().length >= 12) {
+        $title.addClass("small2");
+      } else if ($title.text().length >= 11) {
+        $title.addClass("small1");
+      }
+    });
+  };
+});
