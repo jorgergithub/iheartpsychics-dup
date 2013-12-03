@@ -5,10 +5,10 @@ class ClientsController < AuthorizedController
   layout :determine_layout
 
   def show
-    unless @client.balance?
-      redirect_to :new_order
-      return
-    end
+    # unless @client.balance?
+    #   redirect_to :new_order
+    #   return
+    # end
 
     unless @client.pin?
       @pin = @client.set_random_pin
