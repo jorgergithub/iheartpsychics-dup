@@ -1,0 +1,75 @@
+<%= form_for(user, as: :user, remote: true, url: registration_path(:user), html: { autocomplete: 'off' }) do |f| %>
+    <%= f.fields_for :client do |cf| %>
+  <div class="modal-body">
+    <div class="row">
+      <div class="field">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, placeholder: "First name", autofocus: true, autocomplete: 'on' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, placeholder: "Last name", autocomplete: 'on' %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <%= f.label :username %>
+        <%= f.text_field :username, placeholder: "Username", autocomplete: 'on' %>
+      </div>
+
+      <div class="field date">
+        <%= cf.label :birthday, "Birth Date", :class => "control-label" %>
+        <%= cf.date_select :birthday, start_year: (Time.now.year - 100),
+                              end_year: Time.now.year,
+                              order: [:month, :day, :year],
+                              with_css_classes: true  %>
+      </div>
+    </div>
+
+      <div class="row">
+        <div class="field">
+          <%= f.label :email %>
+          <%= f.email_field :email, placeholder: "email@mail.com", autocomplete: 'on' %>
+        </div>
+
+        <div class="field">
+          <%= cf.label :timezone, "Timezone" %>
+          <%= cf.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {}, class: 'timezone' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <%= cf.fields_for :phones do |fp| %>
+            <%= fp.label :number, "Phone number", class: "control-label" %>
+            <div class="controls">
+              <%= fp.hidden_field :desc, value: "Main" %>
+              <%= fp.text_field :number%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <%= f.label :password %>
+          <%= f.password_field :password %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation %>
+        </div>
+      </div>
+    </div>
+
+    <%= render "shared/form_validation_errors", model: user %>
+
+    <footer>
+      <%= link_to image_tag("modal/large_cancel_btn.png"), "#", class: "close-button" %>
+      <%= image_submit_tag "modal/sign_up_btn.png" %>
+    </footer>
+  <% end %>
+<% end %>

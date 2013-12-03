@@ -1,0 +1,1 @@
+showModal("sign_up_success_modal");

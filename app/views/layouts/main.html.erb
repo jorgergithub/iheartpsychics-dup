@@ -90,7 +90,7 @@
             </li>
           <% else %>
             <li class="signin header-nav-link">
-              <%= content_tag(:i, "", class: "signup header-nav-link-arrow") %>
+              <%= content_tag(:i, "", class: "signup header-nav-link-arrow modal_link", data: { "modal-id" => "sign_up_modal" }) %>
               Sign Up
             </li>
             <li class="signin header-nav-link">
