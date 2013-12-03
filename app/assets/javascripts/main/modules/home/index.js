@@ -3,9 +3,7 @@ Module("IHP.Pages.HomeIndex", function(HomeIndex) {
 
   HomeIndex.fn.initialize = function(el) {
     this.el = $(el);
-    this.search = el.find(".container-nav");
-
-    Module.run("IHP.Components.PsychicSearch", [this.el]);
+    this.search = Module.run("IHP.Components.PsychicSearch", [this.el]);
 
     this.addEventListeners();
   };

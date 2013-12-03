@@ -11,10 +11,23 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
     this.doneTypingInterval = 1000;
 
     this.clearSearches();
+    this.applySearches();
     this.executeSearch();
     this.addEventListeners();
   };
 
+  PsychicSearch.fn.applySearches = function() {
+    var featured = getParameterByName("featured");
+    var status = getParameterByName("status");
+
+    if (featured === "true") {
+      this.featured = true;
+    }
+
+    if (status) {
+      this.status = status;
+    }
+  };
 
   PsychicSearch.fn.applySlider = function() {
     var that = this;
@@ -229,5 +242,14 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
     promise.fail(function(data, textStatus, jqXHR) {
       that.hideLoading();
     });
+  };
+
+  // ---- private methods
+
+  var getParameterByName = function(name) {
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
   };
 });
