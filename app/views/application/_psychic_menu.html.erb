@@ -1,6 +1,5 @@
-<ul class="nav">
-  <%= dashboard_link %>
-  <%= link 'Profile', edit_psychic_path, 'psychic' %>
-  <%= link 'Schedule', psychic_schedules_path, 'schedules' %>
-  <%= link 'Invoices', psychic_invoices_path, 'invoices' %>
-</ul>
+<%= nav_link "Home", root_path, "psychics" %>
+<%= nav_link "Training", training_items_path, "training_items" %>
+<%= nav_link "FAQs", faqs_path, "faqs" %>
+<%= nav_link "Blog", "#" %>
+<%= nav_link "Contact Us", contact_path, "/contact" %>

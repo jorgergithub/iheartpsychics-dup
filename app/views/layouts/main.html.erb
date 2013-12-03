@@ -101,22 +101,9 @@
 
   <nav class="nav">
     <div class="nav-container small_container">
+      <% role = current_user ? current_user.role : "client" %>
       <ul class="nav-links">
-        <li class="nav-link <%= "active" if controller_name == "home" %>">
-          <a href="#"><%= link_to "Home", root_path %></a>
-        </li>
-        <li class="nav-link">
-          <a href="#offers">Special Offers</a>
-        </li>
-        <li class="nav-link">
-          <a href="#search">Find a Psychic</a>
-        </li>
-        <li class="nav-link <%= "active" if controller_name == "horoscopes" %>">
-          <%= link_to "Horoscopes", horoscopes_path %>
-        </li>
-        <li class="nav-link">
-          <a href="#">Blog</a>
-        </li>
+        <%= render "#{role}_menu" %>
       </ul>
 
       <aside class="nav-info">
