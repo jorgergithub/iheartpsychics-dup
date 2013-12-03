@@ -66,12 +66,7 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
     $("body").off("click", ".overlay");
     $(".modal").off("click", ".close_button");
     
-
     $submitButtons.prop("disabled", true);
-    var originalSrc = $submitButtons.attr("src");
-    var newSrc = originalSrc.replace(".png","_disabled.png")
-    $submitButtons.attr("src", newSrc);
-
     $spinner.fadeIn();
   }
 
@@ -85,10 +80,6 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
 
     this.addEventListeners();
     $submitButtons.prop("disabled", false);
-    var originalSrc = $submitButtons.attr("src");
-    var newSrc = originalSrc.replace("_disabled.png",".png")
-    $submitButtons.attr("src", newSrc);
-
     $(".spinner_overlay").fadeOut();
   };
 
