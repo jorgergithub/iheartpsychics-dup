@@ -156,6 +156,32 @@
   </div>
 </section>
 
+<% if @client.favorite_psychics.any? %>
+  <section class="favorite-psychics-container container-psychics small_container">
+    <header>
+      <h2 class="section-title">My Favorite Psychics:</h2>
+      <div class="amount_badge"><%= @client.favorite_psychics.count%></div>
+
+      <% if @client.favorite_psychics.count > 3 %>
+        <nav>
+          <ul>
+            <li class="favorite-left-arrow"><%= image_tag "signs/left_arrow.png" %></li>
+            <li class="favorite-right-arrow"><%= image_tag "signs/right_arrow.png" %></li>
+          </ul>
+        </nav>
+      <% end %>
+    </header>
+
+    <% @client.favorite_psychics.each_slice(3).each_with_index do |psychics_group, index| %>
+      <section class="psychic_group <%= "psychic_group_selected" if index == 0 %>">
+        <% psychics_group.each_with_index do |psychic, index|%>
+          <%= render psychic, last: (true if (index + 1) % 3 == 0) %>
+        <% end %>
+      </section>
+    <% end %>
+  </section>
+<% end %>
+
 <% if params[:thanks] %>
 <% @thank_you_modal = @client.favorite_psychics.any? ? "psychics_modal" : "thank_you_modal" %>
 <script>

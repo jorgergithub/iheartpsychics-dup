@@ -10,6 +10,7 @@
  *= require main/typography
  *= require main/main
  *= require main/vendor/tiny_scrollbar
+ *= require main/clients/favorite_psychics
  *= require main/psychics/about/about
  *= require main/psychics/about/profile
  *= require main/psychics/about/pricing

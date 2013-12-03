@@ -80,11 +80,11 @@ class ClientsController < AuthorizedController
       if @client.save
         format.html { redirect_to :back, notice: "#{psychic.alias_name} marked as favorite." }
         format.json { render json: @client, status: :created, location: @client }
-        format.js
+        format.js { render text: "" }
       else
         format.html { redirect_to :back, error: "Could not mark as favorite." }
         format.json { render json: @subscriber.errors, status: :unprocessable_entity }
-        format.js
+        format.js { render text: "" }
       end
     end
   end
@@ -96,11 +96,11 @@ class ClientsController < AuthorizedController
       if @client.save
         format.html { redirect_to :back, notice: "#{psychic.alias_name} removed from favorites." }
         format.json { render json: @client, status: :created, location: @client }
-        format.js
+        format.js { render text: "" }
       else
         format.html { redirect_to :back, error: "Could not remove from favorites." }
         format.json { render json: @subscriber.errors, status: :unprocessable_entity }
-        format.js
+        format.js { render text: "" }
       end
     end
   end
