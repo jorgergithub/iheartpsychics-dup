@@ -6,6 +6,12 @@
 #   cities = City.create!([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create!(name: 'Emanuel', city: cities.first)
 
+class RandomHelper
+  def self.phone
+  "+1#{Faker::Base.regexify(/\d{10}/)}"
+  end
+end
+
 ScheduleJob.create!(description: 'Client Weekly Usage Report',
                     week_day: 'monday',
                     at: '1AM',
@@ -193,7 +199,7 @@ csr.rep.update_attributes phone: "+13054502995"
                                country: "United States",
                                postal_code: Faker::Address.zip_code,
                                password: 'ipass123',
-                               phone: "+1#{Faker::Base.regexify(/\d{10}/)}",
+                               phone: RandomHelper.phone,
                                cellular_number: "+1#{Faker::Base.regexify(/\d{10}/)}",
                                date_of_birth: "1985-01-01",
                                emergency_contact: Faker::Name.name,
@@ -236,51 +242,45 @@ Psychic.all.each do |p|
   end
 end
 
-user = User.create!(first_name: "Felipe",
+user = User.new(first_name: "Felipe",
                    last_name: "Coury",
                    username: "fcoury",
                    email: "felipe.coury@gmail.com",
                    password: "ipass123",
-                   create_as: "client",
+                   role: "client",
                    confirmed_at: Time.now)
-client = user.client
+client = user.build_client
 client.balance = 250
 client.birthday = Date.today
-client.phones.create(number: "+17863295532")
+phone = client.phones.new
+phone.number = "+17863295532"
+user.save!
 
 100.times do
-  first_name = Faker::Name.first_name
-  last_name = Faker::Name.last_name
   begin
-    user = User.create!(first_name: first_name,
+    first_name = Faker::Name.first_name
+    last_name = Faker::Name.last_name
+    user = User.new(first_name: first_name,
                        last_name: last_name,
                        username: Faker::Internet.user_name,
                        email: Faker::Internet.email(name: "#{first_name} #{last_name}"),
-                       password: 'ipass123', create_as: 'client', confirmed_at: Time.now,
+                       password: 'ipass123', confirmed_at: Time.now,
+                       role: "client",
                        client_attributes: { birthday: Date.today })
 
-    cli = user.client
+    cli = user.build_client
+    phone = cli.phones.new
+    phone.number = RandomHelper.phone
     cli.balance = Random.rand(150)
     cli.birthday = Date.today
-    cli.save!
+    user.save!
     # cli = user.client
     # p cli
     # cli.phones.create phone: Faker::PhoneNumber.phone_number
   rescue ActiveRecord::RecordInvalid
     p $!.class
     p $!
-    # raise $!
   end
-end
-
-psychic = User.find_by_username('tmegan').psychic
-psychic.reviews.create(client: Client.first(offset: rand(Client.count)), rating: 5, text: "Amazing experience")
-psychic.reviews.create(client: Client.first(offset: rand(Client.count)), rating: 4, text: "Super nice, recommended")
-
-300.times do
-  psychic = Psychic.first(offset: rand(Psychic.count))
-  psychic.reviews.create(client: Client.first(offset: rand(Client.count)),
-                         rating: 4, text: Faker::Lorem.words(10).join)
 end
 
 now = DateTime.now
@@ -303,4 +303,15 @@ period_end = period_start - 7.days
               cost_per_minute: psychic.price,
               from: client.phones.first.try(:number),
               processed: true)
+end
+
+psychic = User.find_by_username('tmegan').psychic
+psychic.reviews.create(client: Client.first(offset: rand(Client.count)), rating: 5, text: "Amazing experience")
+psychic.reviews.create(client: Client.first(offset: rand(Client.count)), rating: 4, text: "Super nice, recommended")
+
+300.times do
+  psychic = Psychic.first(offset: rand(Psychic.count))
+  call = psychic.calls.all.sample
+  psychic.reviews.create(call: call, client: call.client,
+                         rating: 4, text: Faker::Lorem.words(10).join)
 end

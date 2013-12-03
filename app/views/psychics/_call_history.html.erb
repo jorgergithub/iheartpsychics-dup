@@ -23,9 +23,9 @@
             <tr>
               <td><%= call.id %></td>
               <td><%= call.created_at.strftime("%B, %d, %Y %I:%M%p") %></td>
-              <td><%= call.to %></td>
+              <td><%= call.client.try(:full_name) %></td>
               <td><%= call.duration %> Mins</td>
-              <td>!FIX ME!</td>
+              <td><%= call.reviews.any? ? "Yes" : "No" %></td>
             </tr>
           <% end %>
         </tbody>
