@@ -24,15 +24,15 @@
 
         <ul class="signup-links">
           <li class="signup-link">
-            <%= link_to(image_tag("twitter.png", alt: "Twitter"), "#") %>
+            <%= link_to(image_tag("twitter.png", alt: "Twitter"), omniauth_authorize_path(:user, :twitter)) %>
           </li>
 
           <li class="signup-link">
-            <%= link_to(image_tag("facebook.png", alt: "Facebook"), "#") %>
+            <%= link_to(image_tag("facebook.png", alt: "Facebook"), omniauth_authorize_path(:user, :facebook)) %>
           </li>
 
           <li class="signup-link">
-            <%= link_to(image_tag("google+.png", alt: "Google+"), "#") %>
+            <%= link_to(image_tag("google+.png", alt: "Google+"), omniauth_authorize_path(:user, :google_oauth2)) %>
           </li>
         </ul>
       </div>
