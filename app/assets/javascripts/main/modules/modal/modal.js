@@ -25,6 +25,7 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
     }
 
     $("input[type='checkbox']:checked + label", this.el).addClass("label-checked");
+    Module.run("IHP.Components.Scrollbar");
   };
 
   Modal.fn.camelizedModalId = function() {
