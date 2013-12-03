@@ -1,5 +1,8 @@
 <%= form_for(user, as: :user, remote: true, url: registration_path(:user), html: { autocomplete: 'off' }) do |f| %>
     <%= f.fields_for :client do |cf| %>
+
+  <%= render "shared/form_validation_errors", model: user %>
+
   <div class="modal-body">
     <div class="row">
       <div class="field">
@@ -64,8 +67,6 @@
         </div>
       </div>
     </div>
-
-    <%= render "shared/form_validation_errors", model: user %>
 
     <footer>
       <%= link_to image_tag("modal/large_cancel_btn.png"), "#", class: "close-button" %>

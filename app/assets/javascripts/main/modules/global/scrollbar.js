@@ -1,8 +1,8 @@
 Module("IHP.Components.Scrollbar", function(Scrollbar) {
   "use strict";
 
-  Scrollbar.fn.MAX_TABLE_HEIGHT = 450;
-  Scrollbar.fn.MAX_MODAL_HEIGHT = 450;
+  Scrollbar.fn.MAX_TABLE_HEIGHT = function() { return 450 };
+  Scrollbar.fn.MAX_MODAL_HEIGHT = function() { return $(window).height() * 0.7 };
 
   Scrollbar.fn.initialize = function() {
     this.tables = $(".scrollbar_table");
@@ -18,7 +18,7 @@ Module("IHP.Components.Scrollbar", function(Scrollbar) {
       var height = $("table", table).height();
       var options = {}
 
-      this.setHeight(this.MAX_TABLE_HEIGHT, height, viewport, options)
+      this.setHeight(this.MAX_TABLE_HEIGHT(), height, viewport, options)
 
       $(table).tinyscrollbar(options);
     }.bind(this));
@@ -30,25 +30,21 @@ Module("IHP.Components.Scrollbar", function(Scrollbar) {
       var height = $(".modal-body", modal).height();
       var options = {}
 
-      this.setHeight(this.MAX_MODAL_HEIGHT, height, viewport, options)
+      this.setHeight(this.MAX_MODAL_HEIGHT(), height, viewport, options)
 
       $(modal).tinyscrollbar(options);
     }.bind(this));
   };
 
   Scrollbar.fn.setHeight = function(maxHeight, height, viewport, options) {
+    console.log(maxHeight);
+    console.log(height);
     if (height > maxHeight) {
-      if (maxHeight === 200) {
-        console.log("grande");
-        viewport.css("height", height + "px");
-      }
+      console.log("com scroll");
       viewport.css("height", maxHeight + "px");
       options["size"] = maxHeight - 50
     } else {
-      if (maxHeight === 200) {
-        console.log("pikeno");
-        viewport.css("height", height + "px");
-      }
+      console.log("sem scroll");
       options["size"] = 0
     };
   }
