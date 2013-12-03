@@ -23,7 +23,10 @@
               <td><%= call.created_at.strftime("%B, %d, %Y %I:%M%p") %></td>
               <td><%= call.from %></td>
               <td><%= call.psychic.alias_name %></td>
-              <td><%= call.duration %> Mins</td>
+              <td>
+                <%= call.duration %>
+                <%= call.duration > 1 ? "Mins" : "Min" %>
+              </td>
             </tr>
           <% end %>
         </tbody>
