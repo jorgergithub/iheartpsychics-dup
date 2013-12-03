@@ -1,6 +1,8 @@
 @import "main/helpers";
 
 .hero {
-  height: 550px;
-  background: #b1cad5;
+  height: 700px;
+  background: #b1cad5 url(image-path("hero.png"));
+  background-position: center center;
+  cursor: pointer;
 }
