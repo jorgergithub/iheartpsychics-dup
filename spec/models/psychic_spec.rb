@@ -288,4 +288,99 @@ describe Psychic do
       end
     end
   end
+
+  describe "#estimated_wait" do
+    let(:psychic) { create(:psychic) }
+
+    context "when psychic is available" do
+      context "with no callback queue" do
+        it "returns 0" do
+          expect(psychic.estimated_wait).to eql(0)
+        end
+      end
+
+      context "when psychic has a callback queue of 2 people" do
+        let(:client1) { create(:client) }
+        let(:client2) { create(:client) }
+
+        before {
+          psychic.callbacks.create(client: client1)
+          psychic.callbacks.create(client: client2)
+        }
+
+        it "returns 30 minutes" do
+          expect(psychic.estimated_wait).to eql(30)
+        end
+      end
+    end
+
+    context "when psychic is on a call" do
+      before {
+        Timecop.freeze(Time.zone.parse("2013-09-28 00:00"))
+        psychic.on_a_call!
+      }
+
+      after { Timecop.return }
+
+      context "for 3 minutes and 1 second and with 3 callbacks" do
+        let(:client1) { create(:client) }
+        let(:client2) { create(:client) }
+        let(:client3) { create(:client) }
+
+        before {
+          psychic.callbacks.create(client: client1)
+          psychic.callbacks.create(client: client2)
+          psychic.callbacks.create(client: client3)
+        }
+
+        it "returns 57 minutes" do
+          Timecop.freeze(Time.zone.parse("2013-09-28 00:03:01"))
+          expect(psychic.estimated_wait).to eql(57)
+        end
+      end
+
+      context "for 1 minute and 10 seconds" do
+        it "returns 14 minutes" do
+          Timecop.freeze(Time.zone.parse("2013-09-28 00:01:10"))
+          expect(psychic.estimated_wait).to eql(14)
+        end
+      end
+
+      context "for 18 minute and 50 seconds" do
+        it "returns 12 minutes" do
+          Timecop.freeze(Time.zone.parse("2013-09-28 00:18:50"))
+          expect(psychic.estimated_wait).to eql(12)
+        end
+      end
+    end
+  end
+
+  describe "#current_call_length" do
+    let(:psychic) { create(:psychic) }
+
+    context "when psychic is available" do
+      it "returns 0" do
+        expect(psychic.current_call_length).to eql(0)
+      end
+    end
+
+    context "when psychic is on a call" do
+      before {
+        Timecop.freeze(Time.zone.parse("2013-09-28 00:00"))
+        psychic.on_a_call!
+      }
+
+      after { Timecop.return }
+
+      context "when on a call for 3 minutes and 15 seconds" do
+        before {
+          Timecop.freeze(Time.zone.parse("2013-09-28 00:03"))
+        }
+
+        it "returns 3 minutes" do
+          expect(psychic.current_call_length).to eql(3)
+        end
+      end
+    end
+  end
 end

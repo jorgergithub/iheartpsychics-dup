@@ -155,28 +155,22 @@ class Psychic < ActiveRecord::Base
   end
 
   def available!
-    if unavailable?
-      events.create! state: "available"
-      hours.create! action: "start"
-      update_attributes status: "available"
-    end
+    events.create! state: "available"
+    hours.create! action: "start"
+    update_attributes status: "available"
     CallbackWorker.perform_async(self.id)
   end
 
   def unavailable!
-    if available?
-      events.create! state: "unavailable"
-      hours.create! action: "finish"
-      update_attributes status: "unavailable"
-    end
+    events.create! state: "unavailable"
+    hours.create! action: "finish"
+    update_attributes status: "unavailable"
   end
 
   def on_a_call!
-    if available?
-      events.create! state: "on_a_call"
-      hours.create! action: "call_start"
-      update_attributes status: "on_a_call"
-    end
+    events.create! state: "on_a_call"
+    hours.create! action: "call_start"
+    update_attributes status: "on_a_call"
   end
 
   def cancel_call!(call)
@@ -272,5 +266,40 @@ class Psychic < ActiveRecord::Base
 
   def paid_invoices
     invoices.paid
+  end
+
+  def callbacks?
+    callbacks.any?
+  end
+
+  def no_callbacks?
+    !callbacks?
+  end
+
+  def estimated_wait
+    return 0 if available? and no_callbacks?
+
+    wait_time = 0
+
+    unless available?
+      if events.any?
+        current_call_length = ((Time.zone.now - events.last.created_at) / 60).to_i
+        fifteen_minutes_slots = (current_call_length / 15).to_i
+        time_to_next_slot = current_call_length - (15 * (fifteen_minutes_slots))
+
+        wait_time += (15 - time_to_next_slot)
+      end
+    end
+
+    if callbacks?
+      wait_time += callbacks.count * 15
+    end
+
+    return wait_time
+  end
+
+  def current_call_length
+    return 0 unless on_a_call?
+    ((Time.zone.now - events.last.created_at) / 60).to_i
   end
 end

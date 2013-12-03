@@ -13,7 +13,7 @@
         <h2>Current Call</h2>
 
         <div class="about-psychic-badge badge">
-          <%= @psychic.calls.first.duration %><small>MIN</small>
+          <%= @psychic.current_call_length %><small>MIN</small>
         </div>
       </div>
     <% end %>
@@ -22,7 +22,7 @@
       <h2>Est. Wait Time</h2>
 
       <div class="about-psychic-badge badge">
-        100 <small>MIN</small>
+        <%= @psychic.estimated_wait %> <small>MIN</small>
       </div>
     </div>
 

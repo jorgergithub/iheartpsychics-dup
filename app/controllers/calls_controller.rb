@@ -189,7 +189,11 @@ class CallsController < ApplicationController
 
   def record_call(sid, psychic_id)
     return unless @client
-    call = @client.calls.create(sid: sid, psychic_id: psychic_id)
+
+    psychic = Psychic.find(psychic_id)
+    psychic.available!
+
+    call = @client.calls.create(sid: sid, psychic: psychic)
     call.process
   end
 
