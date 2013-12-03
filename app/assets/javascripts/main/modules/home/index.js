@@ -20,8 +20,8 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
     var that = this;
     $(".container-nav-price-slider").slider({
       range: "min",
-      min: 1,
-      max: 15,
+      min: 3,
+      max: 9,
       value: that.maxPrice,
       slide: function(event, ui) {
         $("a.ui-slider-handle", this).text("$" + ui.value);
@@ -117,8 +117,8 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
   };
 
   PsychicSearch.fn.clearPrice = function() {
-    this.minPrice = 1;
-    this.maxPrice = 15;
+    this.minPrice = 3;
+    this.maxPrice = 9;
     this.applySlider();
   };
 
