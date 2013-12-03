@@ -27,7 +27,9 @@
         <%= cf.date_select :birthday, start_year: (Time.now.year - 100),
                               end_year: Time.now.year,
                               order: [:month, :day, :year],
-                              with_css_classes: true  %>
+                              with_css_classes: true,
+                              include_blank: true, 
+                              default: nil  %>
       </div>
     </div>
 
@@ -39,7 +41,7 @@
 
         <div class="field">
           <%= cf.label :timezone, "Timezone" %>
-          <%= cf.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {}, class: 'timezone' %>
+          <%= cf.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, { include_blank: true, default: nil }, class: 'timezone' %>
         </div>
       </div>
 

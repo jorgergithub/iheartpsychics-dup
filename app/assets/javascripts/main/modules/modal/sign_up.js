@@ -11,6 +11,8 @@ Module("IHP.Modals.SignUpModal", function(SignUpModal) {
 
   SignUpModal.fn.assign = function() {
     $("form", this.el)[0].reset();
+    $("form input[type='text']", this.el).val("");
+    $("form select option", this.el).attr("selected", false)
     this.first_name.focus();
     this.errors.remove();
     this.phone.mask("999-999-9999");
