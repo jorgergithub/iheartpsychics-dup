@@ -32,7 +32,9 @@
             <tr>
               <td class="admin-actions">
                 <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_admin_psychic_path(p) %>
+                <!--
                 <%= link_to '<i class="icon-remove"></i>'.html_safe, [:admin, p], data: {confirm: "Are you sure?" }, :method => "delete" %>
+                -->
               </td>
               <td><%= link_to p.username, edit_admin_psychic_path(p) %></td>
               <td><%= p.full_name %></td>
