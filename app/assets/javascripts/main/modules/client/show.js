@@ -31,7 +31,6 @@ Module("IHP.Pages.ClientsShow", function(ClientsShow) {
 
   ClientsShow.fn.paginateFavoritePsychicsLeft = function() {
     var selectedPsychics = $(".favorite-psychics-container .psychic_group_selected").first();
-    console.log("left");
 
     if (selectedPsychics.prev("section").length > 0) {
       selectedPsychics.removeClass("psychic_group_selected");
@@ -42,9 +41,6 @@ Module("IHP.Pages.ClientsShow", function(ClientsShow) {
   ClientsShow.fn.paginateFavoritePsychicsRight = function() {
     var selectedPsychics = $(".favorite-psychics-container .psychic_group_selected");
     
-    console.log("right");
-    console.log(selectedPsychics);
-    console.log(selectedPsychics.next("section"));
     if (selectedPsychics.next("section").length > 0) {
       selectedPsychics.removeClass("psychic_group_selected");
       selectedPsychics.next("section").addClass("psychic_group_selected");
