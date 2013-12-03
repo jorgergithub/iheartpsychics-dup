@@ -15,7 +15,7 @@ module PsychicsHelper
   end
 
   def psychic_prices
-    values = Array(3.step(9, 2))
+    values = Array(3.upto(9))
 
     values.inject([]) do |h, v|
       h << [number_to_currency(v), number_with_precision(v)]
