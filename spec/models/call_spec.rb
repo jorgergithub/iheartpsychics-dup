@@ -9,6 +9,7 @@ describe Call do
   it { should have_one(:survey).through(:call_survey) }
 
   it { should have_many :credits }
+  it { should have_many :reviews }
 
   it { should delegate(:alias_name).to(:psychic).allowing_nil(true).prefix(true) }
   it { should delegate(:full_name).to(:psychic).allowing_nil(true).prefix(true) }

@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20131202191415) do
+=======
+ActiveRecord::Schema.define(version: 20131022143313) do
+>>>>>>> eac_59320678_add_relation_between_review_and_call
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -437,7 +441,10 @@ ActiveRecord::Schema.define(version: 20131202191415) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "featured",   default: false
+    t.integer  "call_id"
   end
+
+  add_index "reviews", ["call_id"], name: "index_reviews_on_call_id", using: :btree
 
   create_table "schedule_jobs", force: true do |t|
     t.string   "description", null: false

@@ -1,11 +1,12 @@
 class Review < ActiveRecord::Base
+  belongs_to :call
   belongs_to :client
   belongs_to :psychic
 
   delegate :full_name, to: :client, allow_nil: true, prefix: true
   delegate :reviews, to: :psychic, allow_nil: true, prefix: true
 
-  validates :client, :psychic, :rating, :text, presence: true
+  validates :client, :psychic, :call, :rating, :text, presence: true
 
   scope :featured, -> { where(featured: true) }
   scope :regular, -> { where(featured: false) }
