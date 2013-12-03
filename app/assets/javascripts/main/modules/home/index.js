@@ -66,8 +66,14 @@ Module("IHP.Components.PsychicSearch", function(PsychicSearch) {
   PsychicSearch.fn.whenSpecialtyItemIsClicked = function(e) {
     e.preventDefault();
     var target = $(e.target);
+    var wasSelected = target.is(".specialty-search-selected");
+
     this.clearSelectedSpecialty();
-    target.addClass("specialty-search-selected");
+
+    if (!wasSelected) {
+      target.addClass("specialty-search-selected");
+    }
+
     this.executeSearch();
   };
 
