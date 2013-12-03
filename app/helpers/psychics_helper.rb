@@ -15,11 +15,10 @@ module PsychicsHelper
   end
 
   def psychic_prices
-    values = Array(4.upto(7))
+    values = Array(3.step(9, 2))
 
     values.inject([]) do |h, v|
       h << [number_to_currency(v), number_with_precision(v)]
-      h << [number_to_currency(v + 0.5), number_with_precision(v + 0.5)]
       h
     end
   end
