@@ -94,6 +94,11 @@
             <li class="signin header-nav-link">
               <%= content_tag(:i, "", class: "signup header-nav-link-arrow modal_link", data: { "modal-id" => "sign_up_modal" }) %>
               Sign Up
+
+              <div class="modal_list">
+                <%= render "modals/sign_up" %>
+                <%= render "modals/sign_up_success" %>
+              </div>
             </li>
             <li class="signin header-nav-link">
               <%= content_tag(:i, "", class: "signin header-nav-link-arrow") %>

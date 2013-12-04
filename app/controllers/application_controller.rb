@@ -55,6 +55,13 @@ class ApplicationController < ActionController::Base
     Rails.logger.info "SEO: #{@page_seo.inspect}"
   end
 
+  def build_new_user
+    @new_user = User.new
+    @new_user.build_client
+    @new_user.client.phones.build
+    @new_user
+  end
+
   # Overwriting the sign_out redirect path method
   # def after_sign_out_path_for(resource_or_scope)
   #   new_user_session_path

@@ -1,6 +1,6 @@
 <%= render "nav" %>
 
-<section id="details" class="container_12">
+<section id="details" class="small_container">
   <div class="horoscopes_row">
     <% @horoscope.signs.each_with_index do |sign, index| %>
       <%= render "sign",  sign: sign, 

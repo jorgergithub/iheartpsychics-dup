@@ -5,11 +5,12 @@ class HomeController < AuthorizedController
   skip_filter :authenticate_user!
   layout :select_layout
 
+  before_action :build_new_user
+
   def index
     return if go_home
 
     @psychics = Psychic.all
-    @new_user = build_new_user
     @client = current_user.client if current_user
   end
 
@@ -81,12 +82,5 @@ class HomeController < AuthorizedController
     else
       return "main"
     end
-  end
-
-  def build_new_user
-    user = User.new
-    user.build_client
-    user.client.phones.build
-    user
   end
 end
