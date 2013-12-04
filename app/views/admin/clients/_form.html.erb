@@ -46,6 +46,13 @@
         <% end %>
 
         <div class="control-group">
+          <%= fields_for_client.label :birthday, "Birthday", :class => 'control-label' %>
+          <div class="controls">
+            <%= fields_for_client.text_field :birthday, class: "datepicker" %>
+          </div>
+        </div>
+
+        <div class="control-group">
           <%= fields_for_client.label :balance, "Balance", :class => 'control-label' %>
           <div class="controls">
             <%= fields_for_client.text_field :balance %>
