@@ -26,4 +26,18 @@ $(document).ready(function() {
 
     $("form").submit();
   });
+
+  $(".countdown-link").click(function() {
+    $(".countdown").show();
+    $(".splash-video").hide();
+    $(this).siblings().removeClass("splash-selected");
+    $(this).addClass("splash-selected");
+  });
+
+  $(".video-link").click(function() {
+    $(".countdown").hide();
+    $(".splash-video").show();
+    $(this).siblings().removeClass("splash-selected");
+    $(this).addClass("splash-selected");
+  });
 });

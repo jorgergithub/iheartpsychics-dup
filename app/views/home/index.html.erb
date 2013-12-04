@@ -19,6 +19,42 @@
   </div>
 </section>
 
+<section class="splash-video container_12">
+  <%= image_tag "splash-video.png" %>
+</section>
+
+<nav class="container_12">
+  <ul>
+    <li class="countdown-link splash-selected">
+      <%= image_tag "splash_pagination_selected.png", class: "splash-selected" %>
+      <%= image_tag "splash_pagination.png", class: "splash-unselected" %>
+    </li>
+    <li class="video-link">
+      <%= image_tag "splash_pagination_selected.png", class: "splash-selected" %>
+      <%= image_tag "splash_pagination.png", class: "splash-unselected" %>
+    </li>
+  <ul>
+</nav>
+
+<section class="main container_12">
+  <h1>Coming Soon in December</h1>
+
+  <p class="grid_6">
+    Call.  Connect.  Communicate.
+    <br><br>
+    IHP has created a simple, yet innovative premier platform and network of spiritual advisors while also featuring original astrological, metaphysical, and spiritual content.  There are no hidden costs just straightforward connections to highly talented, specialized psychics and a team of customer care specialists waiting to assist you with any questions or concerns.
+    <br><br>
+    We understand that there are times in our lives where we need reassurance about the road we are traveling upon and dark periods where we need a light to follow to get us back on track.  
+    I Heart Psychics dedication is to you, the customers, and helping you reach your full potential.
+  </p>
+
+  <p class="grid_6">
+    With today’s personal and professional demands it can be difficult silencing the noise of life and centering on what really matters.  We become not only complacent but unconscious of our day to day actions, our relationships, and our careers.  The time is now.  Remember who you are, who you’ve always been.  Remember your deepest desires.  Remember what made you feel most alive.  
+    <br><br>
+    We all carry the answers deep within us and those answers can become covered over time.  Let I Heart Psychics be that guiding light in your life that reconnects you to what you’ve lost along the way and what you’ve always wanted.  Let us shorten the distance between who you are now and who you wish to become.  
+  </p>
+</section>
+
 <section class="main container_12">
   <h1>Become an I Heart Psychics Advisor</h1>
 
@@ -34,6 +70,7 @@
 </section>
 
 <section class="actions">
+  <%= link_to "CEO Message", "#", id: "ceo-button" %>
   <%= link_to "FAQs", "#", id: "faq-button" %>
   <%= link_to "Apply Now!", new_psychic_application_path, class: "last" %>
 </section>

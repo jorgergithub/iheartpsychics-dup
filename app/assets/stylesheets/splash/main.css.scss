@@ -2,6 +2,47 @@
 
 body.home {
   height: 100%;
+  background: white url(image-path("splash_bg.png"));
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 1800px) {
+  body.home {
+    margin-left: 400px;
+    padding-right: 40px;
+  }
+}
+
+nav {
+  margin-top: 20px;
+  margin-bottom: 60px;
+  text-align: center;
+
+  ul, li {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    display: inline-block;
+  }
+
+  li + li {
+    margin-left: 5px;
+  }
+
+  li {
+    img.splash-selected { display: none; }
+    img.splash-unselected { display: inline-block; }
+  }
+
+  li.splash-selected {
+    img.splash-selected { display: inline-block; }
+    img.splash-unselected { display: none; }
+  }
+}
+
+section.splash-video {
+  text-align: center;
+  display: none;
 }
 
 .wrapper {
@@ -25,10 +66,11 @@ body.home header {
 .container {
   text-align: center;
   padding: 55px 0;
-  border-bottom: 2px #e1e7eb solid;
 }
 
 .countdown {
+  height: 364px;
+  padding-top: 100px; /* height + padding-top == section.splash-video */
   width: (6 * $digit-width) + (3 * $digit-spacing) + (2 * $pair-spacing);
   margin: 0 auto;
 
@@ -81,7 +123,6 @@ body.home header {
   @include thin-font($main-text-font-size);
 
   clear: left;
-  border-top: 2px #e1e7eb solid;
   padding-top: $main-header-spacing;
   margin-bottom: $main-header-spacing;
 
@@ -118,7 +159,7 @@ body.home header {
 
 .actions {
   margin: 0 auto;
-  width: (2 * $button-width) + $button-spacing;
+  width: (3 * $button-width) + (2 * $button-spacing);
   height: $button-area-height;
 
   a {
