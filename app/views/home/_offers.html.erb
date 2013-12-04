@@ -2,8 +2,8 @@
 <div class="container-offers small_container">
   <% Package.all.each do |package| %>
     <%= content_tag :div,
-                    class: "container-offer #{container_offer_class}",
-                    "data-modal-id" => "select_payment_method_modal",
+                    class: "container-offer modal_link",
+                    "data-modal-id" => container_offer_modal_id,
                     data: { "modal-attributes" => { package: {  id: package.id,
                                                                 price: package.price.to_i,
                                                                 credits: package.credits.to_i } } } do %>

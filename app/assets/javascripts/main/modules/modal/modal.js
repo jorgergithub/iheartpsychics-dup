@@ -64,7 +64,6 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
     var $spinner = $(".spinner_overlay");
 
     $("body").off("click", ".overlay");
-    $(".modal").off("click", ".close_button");
     
     $submitButtons.prop("disabled", true);
     $spinner.fadeIn();

@@ -1,8 +1,8 @@
 Module("IHP.Modals.SignUpModal", function(SignUpModal) {
   "use strict";
 
-  SignUpModal.fn.initialize = function(el) {
-    this.el = $("#sign_up_modal", el);
+  SignUpModal.fn.initialize = function(attributes) {
+    this.el = $("#sign_up_modal", "body");
     this.first_name = $("#user_first_name", this.el);
     this.phone = $("#user_client_attributes_phones_attributes_0_number");
     this.errors = $(".form_validation_errors", this.el);
