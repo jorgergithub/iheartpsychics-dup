@@ -258,4 +258,12 @@ FactoryGirl.define do
     title "Some Training"
     file "some_training.pdf"
   end
+
+  factory :page_seo do
+    page "My Page"
+    url "/my_page"
+    title "My Title"
+    description "My Description"
+    keywords "My Keywords"
+  end
 end

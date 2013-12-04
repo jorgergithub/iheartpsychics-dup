@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_action :find_page_seo
   before_action :find_horoscope
   before_action :configure_permitted_parameters, if: :devise_controller?
   around_action :user_time_zone, if: :current_user
@@ -12,6 +13,10 @@ class ApplicationController < ActionController::Base
   enable_authorization
 
   rescue_from CanCan::Unauthorized, :with => :unauthorized
+
+  def page_seo
+    @page_seo
+  end
 
   protected
 
@@ -45,7 +50,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  private
+  def find_page_seo
+    @page_seo = PageSeo.for(request.path)
+    Rails.logger.info "SEO: #{@page_seo.inspect}"
+  end
 
   # Overwriting the sign_out redirect path method
   # def after_sign_out_path_for(resource_or_scope)

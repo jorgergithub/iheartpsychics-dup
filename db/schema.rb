@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131204142257) do
+ActiveRecord::Schema.define(version: 20131204152755) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -292,6 +292,18 @@ ActiveRecord::Schema.define(version: 20131204142257) do
     t.datetime "updated_at"
     t.boolean  "phone"
   end
+
+  create_table "page_seos", force: true do |t|
+    t.string   "page"
+    t.string   "url"
+    t.string   "title"
+    t.text     "description"
+    t.text     "keywords"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "page_seos", ["url"], name: "index_page_seos_on_url", using: :btree
 
   create_table "payments", force: true do |t|
     t.integer  "invoice_id"

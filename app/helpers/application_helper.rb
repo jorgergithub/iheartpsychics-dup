@@ -1,4 +1,28 @@
 module ApplicationHelper
+  def page_title
+    if @page_seo
+      @page_seo.title
+    else
+      "I Heart Psychics"
+    end
+  end
+
+  def page_description
+    if @page_seo
+      @page_seo.description
+    else
+      ""
+    end
+  end
+
+  def page_keywords
+    if @page_seo
+      @page_seo.keywords
+    else
+      ""
+    end
+  end
+
   def nav_link(name, link, controllers=[])
     active = controllers.include?(controller_name)
 
