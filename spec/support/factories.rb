@@ -222,6 +222,7 @@ FactoryGirl.define do
     psychic
     client
     wait_for 30
+    status "active"
   end
 
   factory :horoscope do

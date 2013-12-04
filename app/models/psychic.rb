@@ -269,7 +269,7 @@ class Psychic < ActiveRecord::Base
   end
 
   def callbacks?
-    callbacks.any?
+    callbacks.current.any?
   end
 
   def no_callbacks?
@@ -281,7 +281,7 @@ class Psychic < ActiveRecord::Base
 
     wait_time = 0
 
-    unless available?
+    if on_a_call?
       if events.any?
         current_call_length = ((Time.zone.now - events.last.created_at) / 60).to_i
         fifteen_minutes_slots = (current_call_length / 15).to_i
@@ -292,7 +292,7 @@ class Psychic < ActiveRecord::Base
     end
 
     if callbacks?
-      wait_time += callbacks.count * 15
+      wait_time += callbacks.current.count * 15
     end
 
     return wait_time

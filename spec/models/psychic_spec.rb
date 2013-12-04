@@ -304,12 +304,50 @@ describe Psychic do
         let(:client2) { create(:client) }
 
         before {
-          psychic.callbacks.create(client: client1)
-          psychic.callbacks.create(client: client2)
+          create(:callback, psychic: psychic, client: client1)
+          create(:callback, psychic: psychic, client: client2)
         }
 
         it "returns 30 minutes" do
           expect(psychic.estimated_wait).to eql(30)
+        end
+      end
+
+      context "when psychic has a completed callback" do
+        let(:client1) { create(:client) }
+        let(:client2) { create(:client) }
+        let(:client3) { create(:client) }
+        let!(:callback1) { create(:callback, psychic: psychic, client: client1, status: "active") }
+        let!(:callback2) { create(:callback, psychic: psychic, client: client2, status: "active", expires_at: Time.now - 1.day) }
+        let!(:callback3) { create(:callback, psychic: psychic, client: client3, status: "completed") }
+
+        it "disregards completed and expired callbacks" do
+          expect(psychic.estimated_wait).to eql(15)
+        end
+      end
+    end
+
+    context "when psychic is unavailable" do
+      context "when psychic has been on calls and has a callback queue of 3 people" do
+        let(:client1) { create(:client) }
+        let(:client2) { create(:client) }
+        let(:client3) { create(:client) }
+
+        before {
+          Timecop.freeze(Time.zone.parse("2013-09-28 00:00"))
+          psychic.on_a_call!
+          Timecop.freeze(Time.zone.parse("2013-09-28 00:12"))
+          psychic.unavailable!
+
+          create(:callback, client: client1, psychic: psychic)
+          create(:callback, client: client2, psychic: psychic)
+          create(:callback, client: client3, psychic: psychic)
+        }
+
+        after { Timecop.return }
+
+        it "returns 45 minutes" do
+          expect(psychic.estimated_wait).to eql(45)
         end
       end
     end
@@ -328,9 +366,9 @@ describe Psychic do
         let(:client3) { create(:client) }
 
         before {
-          psychic.callbacks.create(client: client1)
-          psychic.callbacks.create(client: client2)
-          psychic.callbacks.create(client: client3)
+          create(:callback, psychic: psychic, client: client1)
+          create(:callback, psychic: psychic, client: client2)
+          create(:callback, psychic: psychic, client: client3)
         }
 
         it "returns 57 minutes" do
