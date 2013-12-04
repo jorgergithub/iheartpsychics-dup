@@ -12,8 +12,12 @@
     <tbody>
       <% @training_items.each do |t| %>
         <tr>
-          <td><%= link_to t.title, t, target: "_training_item" %></td>
-          <td><%= t.reviewed? ? "Yes" : "No" %></td>
+          <td>
+            <%= link_to t.title, t, target: "_training_item" %>
+          </td>
+          <td>
+            <%= @psychic.training_reviewed?(t) ? "Yes" : "No" %>
+          </td>
         </tr>
       <% end %>
     </tbody>

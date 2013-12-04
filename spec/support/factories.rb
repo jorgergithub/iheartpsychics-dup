@@ -253,4 +253,9 @@ FactoryGirl.define do
     first_date Date.new(2014,3,21)
     last_date Date.new(2014,4,19)
   end
+
+  factory :training_item do
+    title "Some Training"
+    file "some_training.pdf"
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131202191415) do
+ActiveRecord::Schema.define(version: 20131204142257) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -352,6 +352,16 @@ ActiveRecord::Schema.define(version: 20131202191415) do
 
   add_index "psychic_events", ["psychic_id"], name: "index_psychic_events_on_psychic_id", using: :btree
 
+  create_table "psychic_training_items", force: true do |t|
+    t.integer  "psychic_id"
+    t.integer  "training_item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "psychic_training_items", ["psychic_id"], name: "index_psychic_training_items_on_psychic_id", using: :btree
+  add_index "psychic_training_items", ["training_item_id"], name: "index_psychic_training_items_on_training_item_id", using: :btree
+
   create_table "psychics", force: true do |t|
     t.integer  "user_id"
     t.string   "phone"
@@ -487,7 +497,6 @@ ActiveRecord::Schema.define(version: 20131202191415) do
   create_table "training_items", force: true do |t|
     t.string   "title"
     t.string   "file"
-    t.datetime "reviewed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

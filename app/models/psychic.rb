@@ -32,6 +32,8 @@ class Psychic < ActiveRecord::Base
   has_many :reviews
   has_many :schedules
   has_many :callbacks
+  has_many :psychic_training_items
+  has_many :training_items, through: :psychic_training_items
 
   has_and_belongs_to_many :favorited_by_clients, class_name: "Client"
 
@@ -301,5 +303,14 @@ class Psychic < ActiveRecord::Base
   def current_call_length
     return 0 unless on_a_call?
     ((Time.zone.now - events.last.created_at) / 60).to_i
+  end
+
+  def review_training!(training_item)
+    training_items << training_item
+    save
+  end
+
+  def training_reviewed?(training_item)
+    psychic_training_items.where(training_item: training_item).any?
   end
 end

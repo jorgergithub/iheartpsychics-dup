@@ -421,4 +421,32 @@ describe Psychic do
       end
     end
   end
+
+  describe "review_training!" do
+    let(:psychic) { create(:psychic) }
+    let(:training_item) { create(:training_item) }
+
+    it "creates a new entry for the training" do
+      expect { psychic.review_training!(training_item) }.to change { psychic.training_items.count }.by(1)
+    end
+  end
+
+  describe "#reviewed_training?" do
+    let(:psychic) { create(:psychic) }
+    let(:training_item) { create(:training_item) }
+
+    context "when psychic didn't review the training" do
+      it "returns false" do
+        expect(psychic.training_reviewed?(training_item)).to be_false
+      end
+    end
+
+    context "when psychic reviewed the training" do
+      before { psychic.review_training!(training_item) }
+
+      it "returns true" do
+        expect(psychic.training_reviewed?(training_item)).to be_true
+      end
+    end
+  end
 end
