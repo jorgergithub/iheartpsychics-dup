@@ -11,10 +11,11 @@ xml.Response do
   else
     xml.Gather(action: calls_url_for("user", phone_number)) do
       xml.Say <<-EOS.strip_heredoc, voice: "woman"
-        Please enter your phone number associated with your
-        I Heart Psychics account and press pound.
-        Otherwise press Zero to be connected to the
-        Customer Care Department.
+        Welcome to I Heart Psychics.
+        We don't recognize the number you are calling from.
+        Please enter your ten digit account and pound or
+        press zero and pound to be connected with a
+        customer service representative.
       EOS
     end
   end
