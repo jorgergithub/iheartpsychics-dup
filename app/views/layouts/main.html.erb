@@ -77,7 +77,7 @@
             <% unless current_user.psychic? %>
               <li class="dashboard header-nav-link nobg">
                 <%= link_to content_tag(:i, "", class: "header-nav-link-arrow"), client_path %>
-                Dashboard
+                My Account
               </li>
             <% end %>
             <% if current_user.client? %>
