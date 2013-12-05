@@ -18,14 +18,15 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
     if ($(".modal").is(":visible")) {
       $(".modal:visible").fadeOut(Modal.MODAL_FADE, function () {
         modal.fadeIn(Modal.MODAL_FADE);
+        Module.run("IHP.Components.Scrollbar");
       });
     } else {
       this.el.fadeIn(Modal.MODAL_FADE);
       $(".overlay").fadeIn(Modal.MODAL_FADE);
     }
 
-    $("input[type='checkbox']:checked + label", this.el).addClass("label-checked");
     Module.run("IHP.Components.Scrollbar");
+    $("input[type='checkbox']:checked + label", this.el).addClass("label-checked");
   };
 
   Modal.fn.camelizedModalId = function() {

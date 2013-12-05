@@ -30,7 +30,6 @@ Module("IHP.Components.Scrollbar", function(Scrollbar) {
       var footerHeight = $("footer", modal).height()
       var marginHeight = 40 * 3;
       var height = bodyHeight + footerHeight + marginHeight;
-
       var options = {}
 
       this.setHeight(this.MAX_MODAL_HEIGHT(), height, viewport, options)

@@ -23,11 +23,15 @@
 
     label {
       color: #8590a1;
-      text-transform: uppercase;
+      text-transform: none;
       font-size: 18px;
+      font-weight: normal;
+
+      &.label-checked {
+        color: #40b500;
+      }
     }
   }
-
 
   .field.field-link a {
     font-size: 18px;
@@ -35,7 +39,29 @@
     margin-left: 20px;
   }
 
-  label.checkbox input {
+  input[type="checkbox"] {
     width: auto;
+  }
+
+  footer {
+    margin-top: 20px;
+  }
+
+  footer.footer_links {
+    margin-top: 80px;
+    font-size: 18px;
+    color: #8e8e8e;
+
+    div {
+      display: inline-block;
+    }
+
+    div + div{
+      margin-left: 20px;
+    }
+
+    &.footer_links a {
+      margin-left: 10px;
+    }
   }
 }

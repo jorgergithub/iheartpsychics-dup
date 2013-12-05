@@ -75,7 +75,6 @@
     display: inline-block;
   }
 
-
   input + input,
   input + a,
   a + a,
@@ -114,7 +113,6 @@
     vertical-align: middle;
     margin-right: 20px;
   }
-
 
   label.label-checked {
     color: #40b500;
@@ -261,6 +259,10 @@
   line-height: 1.5em;
 }
 
+.modal input[type="checkbox"]:checked:before {
+  background: url(image-path("modal/checked.png"));
+}​
+
 .modal-close-button {
   display: block;
   border-radius: 4px;
@@ -273,4 +275,17 @@
   margin: 0 auto;
   margin-top: 50px;
   text-decoration: none;
+}
+
+.modal input[type="checkbox"]:before {
+  content: "";
+  display: inline-block;
+  width: 26px;
+  height: 22px;
+  margin-top: -5px;
+  background: url(image-path("modal/unchecked.png"));
+}
+
+.modal input[type="checkbox"] + label {
+  display: inline-block;
 }
