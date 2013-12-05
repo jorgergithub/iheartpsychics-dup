@@ -4,7 +4,7 @@ xml.Response do
     i = 1
     @packages.each do |pkg|
       xml.Say <<-EOS.strip_heredoc, voice: "woman"
-        Press #{i} to add #{pkg.credits} credits to your account
+        Press #{i} to add #{pkg.credits} dollars to your account
         for #{price_to_phrase(pkg.price)}.
       EOS
       i += 1
