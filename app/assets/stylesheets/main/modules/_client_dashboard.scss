@@ -27,6 +27,12 @@
 
   .text {
     @include thin-font(32px);
+    word-wrap: break-word;
+    width: 370px;
+
+    &.small  { font-size: 22px; }
+    &.x-small  { font-size: 20px; }
+    &.xx-small  { font-size: 18px; }
   }
 }
 

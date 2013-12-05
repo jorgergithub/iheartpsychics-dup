@@ -25,7 +25,7 @@
               <td><%= call.psychic.alias_name %></td>
               <td>
                 <%= call.duration %>
-                <%= call.duration > 1 ? "Mins" : "Min" %>
+                <%= call.duration.present? && call.duration > 1 ? "Mins" : "Min" %>
               </td>
             </tr>
           <% end %>

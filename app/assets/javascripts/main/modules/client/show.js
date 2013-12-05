@@ -17,6 +17,8 @@ Module("IHP.Pages.ClientsShow", function(ClientsShow) {
     };
 
     this.addEventListeners();
+    this.resizeLargeDailyFortunes();
+
     $("#client_phone").mask("999-999-9999");
 
     Module.run("IHP.Components.Scrollbar");
@@ -40,7 +42,7 @@ Module("IHP.Pages.ClientsShow", function(ClientsShow) {
 
   ClientsShow.fn.paginateFavoritePsychicsRight = function() {
     var selectedPsychics = $(".favorite-psychics-container .psychic_group_selected");
-    
+
     if (selectedPsychics.next("section").length > 0) {
       selectedPsychics.removeClass("psychic_group_selected");
       selectedPsychics.next("section").addClass("psychic_group_selected");
@@ -58,5 +60,17 @@ Module("IHP.Pages.ClientsShow", function(ClientsShow) {
     this.avatar.html(
       $.cloudinary.image(this.publicId, this.params)
     );
+  };
+
+  ClientsShow.fn.resizeLargeDailyFortunes = function () {
+    var dailyFortune = $(".profile-daily-fortune .text", this.el);
+
+    if (dailyFortune.text().length > 210) {
+      dailyFortune.addClass("xx-small");
+    } else if (dailyFortune.text().length > 156) {
+      dailyFortune.addClass("x-small");
+    } else if (dailyFortune.text().length > 72) {
+      dailyFortune.addClass("small");
+    }
   };
 });
