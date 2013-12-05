@@ -183,11 +183,9 @@
 <% end %>
 
 <% if params[:thanks] %>
-<% @thank_you_modal = @client.favorite_psychics.any? ? "psychics_modal" : "thank_you_modal" %>
 <script>
 $(document).ready(function() {
-  $(".overlay").fadeIn();
-  $("#<%= @thank_you_modal %>").fadeIn();
+  showModal("thank_you_modal");
 });
 </script>
 <% end %>
