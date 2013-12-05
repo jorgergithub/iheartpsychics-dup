@@ -1,5 +1,6 @@
 .ethics,
 .contact,
+.confirmation,
 .dictionary,
 .privacy,
 .terms {
@@ -25,6 +26,7 @@
   }
 }
 
+.confirmation h1,
 .dictionary h1,
 .privacy h1,
 .terms h1 {
@@ -38,6 +40,7 @@
   margin-top: 40px;
 }
 
+.confirmation p,
 .dictionary p,
 .privacy p,
 .terms p {
@@ -48,9 +51,15 @@
   }
 }
 
+.confirmation p,
 .privacy p,
 .terms p {
   color: #8590a1;
+}
+
+.confirmation a {
+  color: #8590a1;
+  font-weight: bold;
 }
 
 .privacy ul,
