@@ -450,4 +450,37 @@ describe Psychic do
       end
     end
   end
+
+  describe "#training_complete?" do
+    let(:psychic) { create(:psychic) }
+    let!(:training_item1) { create(:training_item) }
+    let!(:training_item2) { create(:training_item) }
+
+    context "when no items are reviewed" do
+      it "returns false" do
+        expect(psychic.training_complete?).to be_false
+      end
+    end
+
+    context "when one item isn't reviewed" do
+      before {
+        psychic.review_training!(training_item1)
+      }
+
+      it "returns false" do
+        expect(psychic.training_complete?).to be_false
+      end
+    end
+
+    context "when all the training items are reviewed" do
+      before {
+        psychic.review_training!(training_item1)
+        psychic.review_training!(training_item2)
+      }
+
+      it "returns true" do
+        expect(psychic.training_complete?).to be_true
+      end
+    end
+  end
 end

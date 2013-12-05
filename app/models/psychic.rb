@@ -312,4 +312,11 @@ class Psychic < ActiveRecord::Base
   def training_reviewed?(training_item)
     psychic_training_items.where(training_item: training_item).any?
   end
+
+  def training_complete?
+    TrainingItem.where(
+      "id not in (" +
+      "select training_item_id from psychic_training_items " +
+      "where psychic_id=?)", id).count == 0
+  end
 end
