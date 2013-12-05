@@ -38,7 +38,7 @@ class HomeController < AuthorizedController
   end
 
   def show
-    go_home
+    go_home(true)
   end
 
   def confirmation
@@ -46,14 +46,13 @@ class HomeController < AuthorizedController
 
   protected
 
-  def go_home
+  def go_home(dashboard=false)
     return false unless current_user
 
-    # if current_user.client?
-    #   redirect_to client_path
-    #   return true
-    # els
-    if current_user.psychic?
+    if dashboard and current_user.client?
+      redirect_to client_path
+      return true
+    elsif current_user.psychic?
       redirect_to psychic_path
       return true
     elsif current_user.rep?
