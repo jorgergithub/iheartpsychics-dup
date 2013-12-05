@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131204152755) do
+ActiveRecord::Schema.define(version: 20131205030535) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -362,7 +362,25 @@ ActiveRecord::Schema.define(version: 20131204152755) do
     t.datetime "updated_at"
   end
 
+  add_index "psychic_events", ["psychic_id"], name: "idx_psychic_events_psychic_id", using: :btree
   add_index "psychic_events", ["psychic_id"], name: "index_psychic_events_on_psychic_id", using: :btree
+
+  create_table "psychic_faq_categories", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "psychic_faqs", force: true do |t|
+    t.integer  "psychic_faq_category_id"
+    t.text     "question",                null: false
+    t.text     "answer",                  null: false
+    t.integer  "order"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "psychic_faqs", ["psychic_faq_category_id"], name: "index_psychic_faqs_on_psychic_faq_category_id", using: :btree
 
   create_table "psychic_training_items", force: true do |t|
     t.integer  "psychic_id"
@@ -557,5 +575,7 @@ ActiveRecord::Schema.define(version: 20131204152755) do
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   add_foreign_key "faqs", "categories", name: "faqs_category_id_fk"
+
+  add_foreign_key "psychic_faqs", "psychic_faq_categories", name: "psychic_faqs_psychic_faq_category_id_fk"
 
 end

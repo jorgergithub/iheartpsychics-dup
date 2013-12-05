@@ -1,5 +1,5 @@
-class Category < ActiveRecord::Base
-  has_many :faqs, dependent: :destroy
+class PsychicFaqCategory < ActiveRecord::Base
+  has_many :faqs, class_name: PsychicFaq, dependent: :destroy
 
   validates :name, :presence => true
 

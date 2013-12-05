@@ -2,62 +2,53 @@ Module("IHP.Pages.FaqsIndex", function(FaqsIndex) {
   "use strict";
 
   FaqsIndex.fn.initialize = function(el) {
-    this.el = $($(el).find("section.faqs aside"));
+    this.el = $(el);
+    this.categories = this.el.find(".categories");
+    this.faqs = this.el.find(".faqs");
 
-    this.tab = $("section.faqs").attr("data-selected-tab");
-    this.tab = this.tab || this.extractTab(document.location.toString())
-    this.tab = this.tab || this.extractTab($("section.faqs ul li:first").attr("href"));
-
-    this.questionEls = $(".faq", el);
-
-    this.selectedEntry = $(".faqs-entry:first");
-    this.selectedEntry.addClass("active");
+    this.category = this.el.attr("data-selected-category");
+    this.category = this.category || this.extractSlug(document.location.toString());
+    this.category = this.category || this.extractSlug(this.categories.find(".category:first").attr("href"));
 
     this.addEventListeners();
-    this.displayProperTab();
+    this.showCategory();
   };
 
   FaqsIndex.fn.addEventListeners = function() {
-    this.el.on("click", "li", this.changeSelection.bind(this));
-    this.questionEls.on("click", ".faqs-entry", this.changeQuestion.bind(this));
+    this.categories.on("click", ".category", this.changeCategory.bind(this));
+    this.faqs.on("click", ".faqs-entry", this.changeFaq.bind(this));
   };
 
-  FaqsIndex.fn.changeQuestion = function(e) {
-    var faqEntry = $(e.target);
-    $(".faqs-entry.active").removeClass("active");
-    faqEntry.closest("section").addClass("active");
+  FaqsIndex.fn.changeFaq = function(e) {
+    this.faqs.find(".faqs-entry.active").removeClass("active");
+    this.faqs.find(e.target).closest("section").addClass("active");
   };
 
-  FaqsIndex.fn.changeSelection = function(e) {
-    var link = this.extractTab($(e.target).attr("href"));
+  FaqsIndex.fn.changeCategory = function(e) {
+    var url = this.categories.find(e.target).attr("href"),
+        slug = this.extractSlug(url);
 
-    $("section.faqs aside ul li.selected").removeClass("selected");
-    $(".faqs-link-" + link).addClass("selected");
-    $("section.faqs article.selected").removeClass("selected");
-    $("section.faqs article.faqs-" + link).addClass("selected");
+    location.hash = this.category = slug;
 
-    $(".faqs-entry.active").removeClass("active");
-    $(".faqs-entry:visible:first").closest("section").addClass("active");
-
-    location.hash = link;
-
-    return false;
+    this.showCategory();
   };
 
-  FaqsIndex.fn.displayProperTab = function() {
-    var liEl = $(".faqs-link-" + this.tab);
-    var articleEl = $(".faqs-" + this.tab);
+  FaqsIndex.fn.showCategory = function() {
+    this.categories.find(".category.selected").removeClass("selected");
+    this.categories.find(".faqs-link-" + this.category).addClass("selected");
 
-    liEl.addClass("selected");
-    articleEl.addClass("selected");
+    this.faqs.find(".faq.selected").removeClass("selected");
+    this.faqs.find(".faqs-" + this.category).addClass("selected");;
+    this.faqs.find(".faqs-entry.active").removeClass("active");
+    this.faqs.find(".faqs-entry:visible:first").closest("section").addClass("active");
   };
 
-  FaqsIndex.fn.extractTab = function(s) {
-    var parts = s.split("#");
+  FaqsIndex.fn.extractSlug = function(url) {
+    var parts = url.split("#");
+
     if (parts.length > 1) {
       return parts[1];
-    }
-    else {
+    } else {
       return null;
     }
   };

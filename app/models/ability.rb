@@ -65,6 +65,7 @@ class Ability
       admin/orders
       admin/surveys
       admin/categories
+      admin/psychic_faq_categories
       admin/daily_fortunes
       admin/horoscopes
       admin/newsletters
@@ -119,5 +120,6 @@ class Ability
     can :access, [:psychics, :schedules, :invoices, :reviews, :avatar]
     can [:mark_as_featured, :unmark_as_featured], :reviews
     can [:index, :show], :training_items
+    can [:index, :show], :psychic_faqs
   end
 end

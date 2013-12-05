@@ -25,6 +25,7 @@ IHeartPsychics::Application.routes.draw do
     end
 
     resources :categories
+    resources :psychic_faq_categories
     resources :clients
     resources :customer_service_representatives
     resources :daily_fortunes, except: :show
@@ -160,9 +161,11 @@ IHeartPsychics::Application.routes.draw do
   resources :subscribers
   resources :messages
   resources :applications
-  resources :faqs
   resources :horoscopes, only: :index
   resources :training_items
+
+  get "/psychics/faqs", to: "psychic_faqs#index", as: "psychic_faqs"
+  resources :faqs
 
   post "/paypal/callback" , to: "paypal#callback" , as: "paypal_callback"
   post "/paypal/success"  , to: "paypal#success"  , as: "paypal_success"

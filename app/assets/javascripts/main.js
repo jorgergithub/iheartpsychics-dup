@@ -26,6 +26,7 @@
 //= require main/modules/client/modals/password
 //= require main/modules/client/modals/payment_method
 //= require main/modules/faqs/index
+//= require main/modules/psychic_faqs/index
 //= require main/modules/home/psychic_search
 //= require main/modules/home/careers
 //= require main/modules/home/index
