@@ -101,6 +101,27 @@
                 <%= render "modals/sign_in/sign_in_error" %>
                 <%= render "modals/password/forgot_password" %>
                 <%= render "modals/password/forgot_password_email_sent" %>
+                <% if defined? resource %>
+                  <%= render "modals/password/reset_password" %>
+                <% end %>
+                <%= render "modals/password/reset_password_success" %>
+
+
+                <% if params[:reset_password_token] %>
+                  <script>
+                    $(document).ready(function() {
+                      showModal("reset_password_modal");
+                    });
+                  </script>
+                <% end %>
+
+                <% if params[:reset_password_success] %>
+                  <script>
+                    $(document).ready(function() {
+                      showModal("reset_password_success_modal");
+                    });
+                  </script>
+                <% end %>
               </div>
             </li>
             <li class="signin header-nav-link">
