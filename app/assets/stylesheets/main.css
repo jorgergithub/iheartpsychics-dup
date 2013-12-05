@@ -19,6 +19,7 @@
  *= require main/psychics/card
  *= require main/modules/_modal
  *= require main/modules/modal/_sign_up
+ *= require main/modules/modal/_sign_in_error
  *= require main/modules/modal/credit_card_list
  *= require main/modules/modal/purchase/select_payment_method
  *= require main/modules/modal/purchase/thanks

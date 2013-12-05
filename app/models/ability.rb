@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     can :access, :home
     can :access, :horoscopes
-    can :create, "devise/sessions"
+    can :create, :sessions
     can [:callback, :success, :cancel], :paypal
     can [:create], "calls/psychic_callbacks"
     can [:create], "calls/client_callbacks"
@@ -12,7 +12,7 @@ class Ability
     can [:twitter, :facebook, :google_oauth2, :all], :omniauth_callbacks
     can [:create, :confirmation], :registrations
     can [:new, :edit, :show, :create, :update], "devise/confirmations"
-    can [:new, :edit, :show, :create, :update], "devise/passwords"
+    can [:new, :edit, :show, :create, :update], :passwords
     can [:create, :edit], :messages
     can [:create, :edit], :applications
     can [:index, :show], :faqs
@@ -29,7 +29,7 @@ class Ability
   private
 
   def authorize_user(user)
-    can :destroy, "devise/sessions"
+    can :destroy, :sessions
     can :update, :registrations
 
     if user.role

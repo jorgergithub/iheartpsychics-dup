@@ -14,6 +14,11 @@ Module("IHP.Components.SignIn", function(SignIn) {
   SignIn.fn.addEventListeners = function() {
     this.el.on("click", "i.signin", this.whenSignInIsClicked.bind(this));
     this.el.on("click", ".user-close", this.whenCloseIsClicked.bind(this));
+    $("body").off("ajax:error").on("ajax:error", "form.signin-form", this.onSubmitError);
+  };
+
+  SignIn.fn.onSubmitError = function(e) {
+    showModal("sign_in_error_modal", { withErrors: true });
   };
 
   SignIn.fn.toggleSignInArea = function() {

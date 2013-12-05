@@ -40,7 +40,7 @@
       <div class="user-signin">
         <h1>Sign Up or Connect With</h1>
 
-        <%= form_for("user", url: user_session_path, html: { class: "signin-form" }) do |f| %>
+        <%= form_for("user", url: user_session_path, remote: true, authenticity_token: true, html: { class: "signin-form" }) do |f| %>
           <div class="signin-inputs">
             <div class="signin-input">
               <%= f.text_field :login, placeholder: "Username" %>
@@ -54,7 +54,7 @@
           </div>
 
           <p class="signin-actions">
-            <a href="#" class="signin-actions-forgot">Forgot Username or Password?</a>
+            <a href="#" class="signin-actions-forgot modal_link" data-modal-id="forgot_password_modal">Forgot Username or Password?</a>
             <%= f.check_box :remember_me %>
             <label for="user_remember_me" class="signin-actions-remember">Remember Me</label>
           </p>
@@ -98,6 +98,9 @@
               <div class="modal_list">
                 <%= render "modals/sign_up" %>
                 <%= render "modals/sign_up_success" %>
+                <%= render "modals/sign_in/sign_in_error" %>
+                <%= render "modals/password/forgot_password" %>
+                <%= render "modals/password/forgot_password_email_sent" %>
               </div>
             </li>
             <li class="signin header-nav-link">
