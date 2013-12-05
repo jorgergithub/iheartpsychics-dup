@@ -10,10 +10,6 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
-  enable_authorization
-
-  rescue_from CanCan::Unauthorized, :with => :unauthorized
-
   def page_seo
     @page_seo
   end
@@ -70,9 +66,9 @@ class ApplicationController < ActionController::Base
       psychic_path
     else
       root_path
-    end 
+    end
   end
-  
+
   # Overwriting the sign_out redirect path method
   # def after_sign_out_path_for(resource_or_scope)
   #   new_user_session_path

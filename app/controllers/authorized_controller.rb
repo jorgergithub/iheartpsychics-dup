@@ -1,6 +1,10 @@
 class AuthorizedController < ApplicationController
   before_filter :authenticate_user!
 
+  enable_authorization
+
+  rescue_from CanCan::Unauthorized, :with => :unauthorized
+
   def current_client
     return unless current_user and current_user.client?
     current_user.client
