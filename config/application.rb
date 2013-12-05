@@ -20,6 +20,7 @@ module IHeartPsychics
     config.assets.precompile += Ckeditor.assets
     config.assets.precompile += %w(ckeditor/*)
     config.time_zone = 'Eastern Time (US & Canada)'
+    config.i18n.enforce_available_locales = true
 
     # config.eager_load_paths += ["#{Rails.root}/lib}"]
     # Settings in config/environments/* take precedence over those specified here.
