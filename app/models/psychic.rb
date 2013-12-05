@@ -175,7 +175,7 @@ class Psychic < ActiveRecord::Base
     update_attributes status: "on_a_call"
   end
 
-  def cancel_call!(call)
+  def cancel_call!
     if on_a_call?
       events.create! state: "available"
       hours.last.destroy
