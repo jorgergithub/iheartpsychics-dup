@@ -71,7 +71,7 @@ class CallsController < ApplicationController
       return
     end
 
-    @caller_id = incoming_number || "+1-866-866-8288"
+    @caller_id = ENV["CALLER_ID"] || "+1-7863295532"
   end
 
   def do_transfer
@@ -88,6 +88,7 @@ class CallsController < ApplicationController
       return
     end
 
+    @caller_id = ENV["CALLER_ID"] || "+1-7863295532"
     @psychic.on_a_call!
   end
 
