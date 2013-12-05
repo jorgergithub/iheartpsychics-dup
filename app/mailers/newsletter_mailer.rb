@@ -1,5 +1,5 @@
 class NewsletterMailer < ActionMailer::Base
-  default from: "newsletters@iheartpsychics.co"
+  default from: "newsletters@iheartpsychics.com"
 
   def send_newsletter(newsletter, client)
     @newsletter = newsletter

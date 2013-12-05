@@ -1,5 +1,5 @@
 class InvoiceMailer < ActionMailer::Base
-  default from: "noreply@iheartpsychics.co"
+  default from: "noreply@iheartpsychics.com"
 
   def notify(invoice_id)
     Rails.logger.info "Delivering invoice notification for invoice id #{invoice_id}"

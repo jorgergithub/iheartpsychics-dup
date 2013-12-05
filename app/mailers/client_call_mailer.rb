@@ -1,5 +1,5 @@
 class ClientCallMailer < ActionMailer::Base
-  default from: "noreply@iheartpsychics.co"
+  default from: "noreply@iheartpsychics.com"
 
   def client_call_statistics(call)
     @call = call

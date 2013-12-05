@@ -1,9 +1,9 @@
 class PsychicMailer < ActionMailer::Base
-  default from: "noreply@iheartpsychics.co"
+  default from: "noreply@iheartpsychics.com"
 
   def confirmation_email(psychic)
     @psychic = psychic
-    mail(to: "recruiting@iheartpsychics.co",
+    mail(to: "recruiting@iheartpsychics.com",
          subject: "I Heart Psychics - New Psychic Application")
   end
 

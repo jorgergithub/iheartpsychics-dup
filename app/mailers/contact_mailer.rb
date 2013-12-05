@@ -1,8 +1,8 @@
 class ContactMailer < ActionMailer::Base
-  default from: "noreply@iheartpsychics.co"
+  default from: "noreply@iheartpsychics.com"
 
   def new_message(message)
     @message = message
-    mail(to: "info@iheartpsychics.co", subject: "I Heart Psychics - New Contact Us message")
+    mail(to: "info@iheartpsychics.com", subject: "I Heart Psychics - New Contact Us message")
   end
 end

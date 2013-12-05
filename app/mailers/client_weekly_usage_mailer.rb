@@ -1,5 +1,5 @@
 class ClientWeeklyUsageMailer < ActionMailer::Base
-  default from: "noreply@iheartpsychics.co"
+  default from: "noreply@iheartpsychics.com"
 
   def weekly_usage(start_date, client, calls, cost, duration, hearts)
     @client = client

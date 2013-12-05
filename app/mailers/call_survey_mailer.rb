@@ -1,5 +1,5 @@
 class CallSurveyMailer < ActionMailer::Base
-  default from: "noreply@iheartpsychics.co"
+  default from: "noreply@iheartpsychics.com"
 
   def notify(user, call_survey, review)
     @user = user
