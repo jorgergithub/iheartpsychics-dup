@@ -68,7 +68,7 @@
       <h2>My Dollars</h2>
 
       <div id="client_balance" class="client-badge badge">
-        <%= number_to_currency @client.balance || 0, precision: 0 %>
+        <%= number_to_currency @client.formatted_balance, precision: 0 %>
       </div>
 
       <div class="action">

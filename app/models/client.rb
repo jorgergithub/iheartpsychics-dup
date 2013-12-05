@@ -173,6 +173,10 @@ class Client < ActiveRecord::Base
     DailyFortune.random
   end
 
+  def formatted_balance
+    self.balance || 0
+  end
+
   private
 
   def set_unsubscribe_key

@@ -492,4 +492,22 @@ describe Client do
       expect(client).to have_received(:create_call).with("12345", "URL")
     end
   end
+
+  describe "#formatted_balance" do
+    context "when user has credit" do
+      let(:client) { create(:client, balance: 150) }
+
+      it "returns the credit" do
+        expect(client.formatted_balance).to eql(150)
+      end
+    end
+
+    context "when user has no credit" do
+      let(:client) { create(:client, balance: nil) }
+
+      it "returns 0" do
+        expect(client.formatted_balance).to eql(0)
+      end
+    end
+  end
 end
