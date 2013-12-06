@@ -510,4 +510,22 @@ describe Client do
       end
     end
   end
+
+  describe "#new_client" do
+    let(:client) { create(:client) }
+
+    context "when user has no calls" do
+      it "returns true" do
+        expect(client.new_client?).to be_true
+      end
+    end
+
+    context "when user has calls" do
+      let!(:call) { create(:call, client: client) }
+
+      it "returns true" do
+        expect(client.new_client?).to be_false
+      end
+    end
+  end
 end

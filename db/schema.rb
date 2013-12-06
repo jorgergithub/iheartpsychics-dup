@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131206015636) do
+ActiveRecord::Schema.define(version: 20131206142512) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -86,6 +86,10 @@ ActiveRecord::Schema.define(version: 20131206015636) do
     t.datetime "started_at"
     t.datetime "ended_at"
   end
+
+  add_index "calls", ["client_id"], name: "index_calls_on_client_id", using: :btree
+  add_index "calls", ["psychic_id"], name: "index_calls_on_psychic_id", using: :btree
+  add_index "calls", ["sid"], name: "index_calls_on_sid", using: :btree
 
   create_table "cards", force: true do |t|
     t.integer  "client_id"
@@ -363,7 +367,6 @@ ActiveRecord::Schema.define(version: 20131206015636) do
     t.datetime "updated_at"
   end
 
-  add_index "psychic_events", ["psychic_id"], name: "idx_psychic_events_psychic_id", using: :btree
   add_index "psychic_events", ["psychic_id"], name: "index_psychic_events_on_psychic_id", using: :btree
 
   create_table "psychic_faq_categories", force: true do |t|
