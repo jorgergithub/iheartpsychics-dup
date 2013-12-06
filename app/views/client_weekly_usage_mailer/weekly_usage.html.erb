@@ -10,7 +10,7 @@
 <p>
   Calls: <%= @calls.size %>
   Minutes: <%= @duration %>
-  Balance Used: <%= @client.balance %>
+  Balance Used: <%= @calls.sum(&:price) %>
   Current Balance: <%= @client.balance %>
 </p>
 
