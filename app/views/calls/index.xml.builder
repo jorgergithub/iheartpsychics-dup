@@ -1,7 +1,7 @@
 xml.instruct!
 xml.Response do
   if @client
-    xml.Gather(action: calls_url_for("pin", phone_number)) do
+    xml.Gather(action: calls_url_for("pin", phone_number), timeout: 15) do
       xml.Say <<-EOS.strip_heredoc, voice: "woman"
         Welcome back to I Heart Psychics #{@client.first_name}.
         Please enter your PIN number to validate your account
@@ -9,7 +9,7 @@ xml.Response do
       EOS
     end
   else
-    xml.Gather(action: calls_url_for("user", phone_number)) do
+    xml.Gather(action: calls_url_for("user", phone_number), timeout: 15) do
       xml.Say <<-EOS.strip_heredoc, voice: "woman"
         Welcome to I Heart Psychics.
         We don't recognize the number you are calling from.

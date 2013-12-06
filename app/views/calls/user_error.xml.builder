@@ -1,6 +1,6 @@
 xml.instruct!
 xml.Response do
-  xml.Gather do
+  xml.Gather(timeout: 15) do
     xml.Say <<-EOS.strip_heredoc, voice: "woman"
       We're sorry, the number you have provided is not
       in our system.

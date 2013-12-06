@@ -1,6 +1,6 @@
 xml.instruct!
 xml.Response do
-  xml.Gather(action: calls_url_for("buy_credits", phone_number)) do
+  xml.Gather(action: calls_url_for("buy_credits", phone_number), timeout: 15) do
     i = 1
     @packages.each do |pkg|
       xml.Say <<-EOS.strip_heredoc, voice: "woman"
