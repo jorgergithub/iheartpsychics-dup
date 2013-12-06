@@ -277,6 +277,20 @@
   text-decoration: none;
 }
 
+.modal-pretty-close-button {
+  display: block;
+  border-radius: 4px;
+  width: 170px;
+  padding: 18px 0;
+  background-color: #6acd00;
+  font-size: 20px;
+  color: #fff;
+  display: block;
+  margin: 0 auto;
+  margin-top: 50px;
+  text-decoration: none;
+}
+
 .modal input[type="checkbox"]:before {
   content: "";
   display: inline-block;
