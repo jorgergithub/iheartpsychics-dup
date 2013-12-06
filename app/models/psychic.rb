@@ -20,7 +20,6 @@ class Psychic < ActiveRecord::Base
   TOOLS = %w(tools_tarot tools_oracle_cards tools_runes tools_crystals
              tools_pendulum tools_numerology tools_astrology)
 
-
   has_enumeration_for :top_speciality, create_helpers: true
 
   belongs_to :user
@@ -48,7 +47,7 @@ class Psychic < ActiveRecord::Base
   delegate :unavailable?, :available?, :on_a_call?, to: :current_state
 
   validates :extension, uniqueness: true
-  validates :phone, :pseudonym, presence: true
+  validates :phone, :price, :pseudonym, presence: true
   validates :phone, as_phone_number: true, if: ->(p) { p.phone.present? }
 
   localize :phone, :cellular_number, :emergency_contact_number, using: PhoneParser

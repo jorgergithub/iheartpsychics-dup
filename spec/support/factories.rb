@@ -87,6 +87,7 @@ FactoryGirl.define do
     how_did_you_hear 'Other'
     other { Faker::Lorem.paragraph }
     resume { File.open("#{Rails.root}/spec/fixtures/example_resume.pdf") }
+    price { 2 }
   end
 
   factory :review do

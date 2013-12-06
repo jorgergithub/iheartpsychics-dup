@@ -34,6 +34,22 @@ describe PsychicApplication do
 
     it { should allow_value(true).for(:has_experience) }
     it { should allow_value(false).for(:has_experience) }
+
+    context "when persisted" do
+      before do
+        subject.stub(:persisted? => true)
+      end
+
+      it { should validate_presence_of(:price) }
+    end
+
+    context "when is a new record" do
+      before do
+        subject.stub(:persisted? => false)
+      end
+
+      it { should_not validate_presence_of(:price) }
+    end
   end
 
   describe "#alias_name" do

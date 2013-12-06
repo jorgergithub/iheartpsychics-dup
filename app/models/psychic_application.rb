@@ -6,7 +6,8 @@ class PsychicApplication < ActiveRecord::Base
             :experience, :gift, :explain_gift, :age_discovered, :reading_style,
             :why_work, :friends_describe, :strongest_weakest_attributes,
             :how_to_deal_challenging_client, :tools, :specialties, :professional_goals,
-            :how_did_you_hear, :presence => true
+            :how_did_you_hear, presence: true
+  validates :price, presence: true, if: :persisted?
   validates :us_citizen, inclusion: { in: [true, false], message: "can't be blank" }
   validates :has_experience, inclusion: { in: [true, false], message: "can't be blank" }
   validates :phone, as_phone_number: true, if: ->(pa) { pa.phone.present? }
@@ -80,7 +81,7 @@ class PsychicApplication < ActiveRecord::Base
   end
 
   def update_psychic_attributes!(psychic)
-    fields = %w[pseudonym address city country state postal_code phone
+    fields = %w[pseudonym price address city country state postal_code phone
                 cellular_number date_of_birth emergency_contact
                 emergency_contact_number us_citizen resume has_experience
                 experience gift explain_gift age_discovered

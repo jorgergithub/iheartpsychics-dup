@@ -17,6 +17,15 @@
     </div>
   </div>
 
+  <% if f.object.persisted? %>
+    <div class="control-group">
+      <%= f.label :price, "Price (Per minute)", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :price, min: 3, max: 9, step: 1 %>
+      </div>
+    </div>
+  <% end %>
+
   <%= add_text_field f, :username %>
   <%= add_text_field f, :email %>
   <%= add_password_field f, :password %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131205030535) do
+ActiveRecord::Schema.define(version: 20131206015636) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -353,6 +353,7 @@ ActiveRecord::Schema.define(version: 20131205030535) do
     t.boolean  "terms"
     t.string   "pseudonym"
     t.string   "country"
+    t.decimal  "price",                          precision: 8, scale: 2
   end
 
   create_table "psychic_events", force: true do |t|

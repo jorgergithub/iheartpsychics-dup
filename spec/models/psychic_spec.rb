@@ -15,6 +15,7 @@ describe Psychic do
 
   describe "validations" do
     it { should validate_presence_of(:pseudonym) }
+    it { should validate_presence_of(:price) }
     it { should validate_presence_of(:phone) }
     it { should validate_as_phone_number(:phone) }
     it { should validate_uniqueness_of(:extension) }

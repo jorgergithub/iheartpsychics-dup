@@ -39,6 +39,7 @@ describe PsychicApplication do
       expect(psychic.how_did_you_hear).to eq psychic_application.how_did_you_hear
       expect(psychic.other).to eq psychic_application.other
       expect(psychic.resume.file.filename).to eq psychic_application.resume.file.filename
+      expect(psychic.price).to eq psychic_application.price
     end
   end
 end

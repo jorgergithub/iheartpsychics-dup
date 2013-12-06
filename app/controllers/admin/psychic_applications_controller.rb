@@ -12,7 +12,7 @@ class Admin::PsychicApplicationsController < AuthorizedController
   end
 
   def update
-    update_psychic_application_phone
+    @psychic_application.localized.assign_attributes(psychic_application_params)
 
     if params[:commit] == "Approve"
       @psychic_application.approve!
@@ -34,14 +34,8 @@ class Admin::PsychicApplicationsController < AuthorizedController
 
   private
 
-  def update_psychic_application_phone
-    if @psychic_application.phone.empty?
-      @psychic_application.phone = psychic_application_params[:phone]
-    end
-  end
-
   def psychic_application_params
-    params.require(:psychic_application).permit(:phone)
+    params.require(:psychic_application).permit(:phone, :price)
   end
 
   def format_record_invalid_message(message)
