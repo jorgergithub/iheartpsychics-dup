@@ -44,7 +44,7 @@ class CallScript < ActiveRecord::Base
     else
       options = { numDigits: num_digits }
     end
-    options.merge! { timeout: "15" }
+    options.merge!({ timeout: "15" })
 
     Twilio::TwiML::Response.new do |r|
       r.Gather(gather_options) { |g| g.Say greet }
