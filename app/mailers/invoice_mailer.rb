@@ -6,7 +6,7 @@ class InvoiceMailer < ActionMailer::Base
     @invoice = Invoice.find(invoice_id)
     @psychic = @invoice.psychic
 
-    mail(to: @psychic.email, subject: "I Heart Psychics - Your Weekly Invoice Report")
+    mail(to: @psychic.email, subject: "I Heart Psychics - Your Weekly Utilization Report for the Week of #{I18n.l(@invoice.start_date)}")
   end
 
   def notify_payment(invoice_id)

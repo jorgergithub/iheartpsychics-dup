@@ -17,7 +17,7 @@
   <tr><td><b>Time:</b></td><td><%= @call.time %></td></tr>
   <tr><td><b>Psychic:</b></td><td><%= @psychic.alias_name %></td></tr>
   <tr><td><b>Call Duration:</b></td><td><%= @call.duration_str %></td></tr>
-  <tr><td><b>Current Balance:</b></td><td><%= @client.balance %></td></tr>
+  <tr><td><b>Current Balance:</b></td><td><%= @client.balance %> Dollars</td></tr>
   </tr>
 </table>
 
@@ -29,11 +29,6 @@
 
 <p>
   Your unique survey is <%= link_to "here", survey_url(@call) %>.
-</p>
-
-<p>
-  For your time and in appreciation, we will give you an account reward of 100
-  hearts for each completed and returned survey.
 </p>
 
 <p>

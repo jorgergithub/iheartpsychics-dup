@@ -8,6 +8,6 @@ class CallSurveyMailer < ActionMailer::Base
     @call = @call_survey.call
     @client = @call.client
     @psychic = @call.psychic
-    mail(to: user.email, subject: "I Heart Psychics - New Customer Survey Response")
+    mail(to: "contact@iheartpsychics.com", subject: "I Heart Psychics - New Customer Survey Response")
   end
 end
