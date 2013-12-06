@@ -483,4 +483,42 @@ describe Psychic do
       end
     end
   end
+
+  describe "#disabled?" do
+    context "when disabled is true" do
+      let(:psychic) { create(:psychic, disabled: true) }
+
+      it "is true" do
+        expect(psychic).to be_disabled
+      end
+    end
+
+    context "when disabled is false" do
+      let(:psychic) { create(:psychic, disabled: false) }
+
+      it "is false" do
+        expect(psychic).to_not be_disabled
+      end
+    end
+  end
+
+  describe "#toggle_disabled!" do
+    before { psychic.toggle_disabled! }
+
+    context "when psychic is disabled" do
+      let(:psychic) { create(:psychic, disabled: true) }
+
+      it "enables it" do
+        expect(psychic).not_to be_disabled
+      end
+    end
+
+    context "when psychic is enabled" do
+      let(:psychic) { create(:psychic, disabled: false) }
+
+      it "disables it" do
+        expect(psychic).to be_disabled
+      end
+    end
+  end
 end

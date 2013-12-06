@@ -25,13 +25,15 @@
             <th>State, Country</th>
             <th>Created</th>
             <th>Featured?</th>
+            <th>Disabled?</th>
           </tr>
         </thead>
         <tbody>
           <% @psychics.each do |p| %>
             <tr>
-              <td class="admin-actions">
+              <td class="admin-actions nowrap">
                 <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_admin_psychic_path(p) %>
+                <%= link_to '<i class="icon-off"></i>'.html_safe, disable_admin_psychic_path(p) %>
                 <!--
                 <%= link_to '<i class="icon-remove"></i>'.html_safe, [:admin, p], data: {confirm: "Are you sure?" }, :method => "delete" %>
                 -->
@@ -42,9 +44,14 @@
               <td><%= p.email %></td>
               <td><%= p.extension %></td>
               <td><%= p.state %>, <%= p.country %></td>
-              <td><%=l p.created_at, format: :short %></td>
+              <td><%= p.created_at.strftime("%b %d") %></td>
               <td>
                 <% if p.featured? %>
+                  <i class="icon-ok"></i>
+                <% end %>
+              </td>
+              <td>
+                <% if p.disabled? %>
                   <i class="icon-ok"></i>
                 <% end %>
               </td>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131206142512) do
+ActiveRecord::Schema.define(version: 20131206205535) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -461,6 +461,7 @@ ActiveRecord::Schema.define(version: 20131206142512) do
     t.string   "avatar_id"
     t.string   "top_speciality"
     t.string   "status",                                                     default: "unavailable", null: false
+    t.boolean  "disabled"
   end
 
   add_index "psychics", ["extension"], name: "index_psychics_on_extension", unique: true, using: :btree

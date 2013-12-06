@@ -30,6 +30,12 @@ class Admin::PsychicsController < AuthorizedController
   def edit
   end
 
+  def disable
+    @psychic.toggle_disabled!
+    message = @psychic.disabled? ? "disabled" : "enabled"
+    redirect_to admin_psychics_path, notice: "Psychic was successfully #{message}."
+  end
+
   def create
     @user = User.new(user_params).tap do |object|
       object.localized.assign_attributes(user_params)

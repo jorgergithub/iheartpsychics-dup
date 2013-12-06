@@ -61,7 +61,12 @@ IHeartPsychics::Application.routes.draw do
 
     resources :packages
     resources :psychic_applications
-    resources :psychics
+
+    resources :psychics do
+      member do
+        get 'disable', action: :disable, as: :disable
+      end
+    end
 
     resources :reviews, :shallow => true do
       member do

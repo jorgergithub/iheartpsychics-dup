@@ -61,8 +61,9 @@ class Psychic < ActiveRecord::Base
     where("CONCAT(psychics.pseudonym, ' ', SUBSTR(users.last_name, 1, 1)) LIKE ?", "%#{value}%").
     order("psychics.pseudonym, SUBSTR(users.last_name, 1, 1)")
   }
-  scope :available, -> { where("status = ?", "available") }
-  scope :featured,  -> { where("featured IS true") }
+  scope :enabled,   -> { where("disabled IS NOT true")}
+  scope :available, -> { enabled.where("status = ?", "available") }
+  scope :featured,  -> { enabled.where("featured IS true") }
 
   def self.available_count
     available.size
@@ -318,5 +319,9 @@ class Psychic < ActiveRecord::Base
       "id not in (" +
       "select training_item_id from psychic_training_items " +
       "where psychic_id=?)", id).count == 0
+  end
+
+  def toggle_disabled!
+    update_attributes disabled: !self.disabled
   end
 end
