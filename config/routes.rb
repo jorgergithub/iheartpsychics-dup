@@ -2,10 +2,10 @@ require 'sidekiq/web'
 
 IHeartPsychics::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
-  devise_for :users, controllers: { 
+  devise_for :users, controllers: {
                         omniauth_callbacks: 'omniauth_callbacks',
-                        registrations: "registrations", 
-                        sessions: "sessions", 
+                        registrations: "registrations",
+                        sessions: "sessions",
                         passwords: "passwords" }
 
   authenticate :user, lambda { |u| u.admin? } do
@@ -26,7 +26,13 @@ IHeartPsychics::Application.routes.draw do
 
     resources :categories
     resources :psychic_faq_categories
-    resources :clients
+
+    resources :clients do
+      member do
+        get :resend_confirmation
+      end
+    end
+
     resources :customer_service_representatives
     resources :daily_fortunes, except: :show
     resources :horoscopes

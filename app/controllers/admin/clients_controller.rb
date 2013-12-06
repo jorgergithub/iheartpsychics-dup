@@ -21,6 +21,11 @@ class Admin::ClientsController < AuthorizedController
   def edit
   end
 
+  def resend_confirmation
+    @user.resend_confirmation_token
+    redirect_to admin_clients_path, notice: "Confirmation successfully resent."
+  end
+
   def create
     random_password = Devise.friendly_token[0,8]
 
