@@ -520,10 +520,18 @@ describe Client do
       end
     end
 
-    context "when user has calls" do
-      let!(:call) { create(:call, client: client) }
+    context "when user has only an incomplete call" do
+      let!(:call) { create(:call, client: client, status: nil) }
 
       it "returns true" do
+        expect(client.new_client?).to be_true
+      end
+    end
+
+    context "when user has complete calls" do
+      let!(:call) { create(:call, client: client, status: "completed") }
+
+      it "returns false" do
         expect(client.new_client?).to be_false
       end
     end

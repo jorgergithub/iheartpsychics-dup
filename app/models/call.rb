@@ -22,6 +22,7 @@ class Call < ActiveRecord::Base
   scope :processed, -> { where("processed IS NOT NULL") }
   scope :uninvoiced, -> { where("invoice_id IS NULL") }
   scope :period, -> (from, to) { where("started_at BETWEEN ? AND ?", from, to) }
+  scope :completed, -> { where("status = ?", "completed") }
 
   def formatted_duration
     return "-" unless duration

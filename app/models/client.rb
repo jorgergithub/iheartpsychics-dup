@@ -178,7 +178,7 @@ class Client < ActiveRecord::Base
   end
 
   def new_client?
-    calls.count == 0
+    calls.completed.count == 0
   end
 
   private
