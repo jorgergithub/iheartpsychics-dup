@@ -101,7 +101,7 @@
                 <%= render "modals/sign_in/sign_in_error" %>
                 <%= render "modals/password/forgot_password" %>
                 <%= render "modals/password/forgot_password_email_sent" %>
-                <% if defined? resource %>
+                <% if defined?(resource) and resource %>
                   <%= render "modals/password/reset_password" %>
                 <% end %>
                 <%= render "modals/password/reset_password_success" %>

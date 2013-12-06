@@ -3,6 +3,8 @@ class PsychicsController < AuthorizedController
   before_filter :find_psychic, except: [:new, :search, :about]
   layout :resolve_layout
 
+  before_action :build_new_user
+
   attr_accessor :resource, :resource_name
   helper_method :resource, :resource_name
 
