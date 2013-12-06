@@ -4,7 +4,19 @@
       <h2>Per minute</h2>
 
       <div class="about-psychic-badge badge">
-        <%= number_to_currency @psychic.price, precision: 0 %>
+        <div class="about-psychic-price">
+          <% if current_client.new_client? %>
+            <div class="about-psychic-price-promo">
+              $1
+            </div>
+            <div class="about-psychic-price-detail">
+              <%= number_to_currency @psychic.price, precision: 0 %>
+            </div>
+            <%= image_tag "psychic-about-price-crossed-out.png", class: "about-psychic-price-crossed-out" %>
+          <% else %>
+            <%= number_to_currency @psychic.price, precision: 0 %>
+          <% end %>
+        </div>
       </div>
     </div>
 

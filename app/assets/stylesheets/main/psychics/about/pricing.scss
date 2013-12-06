@@ -31,6 +31,31 @@
     right: 30px;
   }
 
+  .about-psychic-price {
+    position: relative;
+  }
+
+  .about-psychic-price-promo {
+    position: absolute;
+    left: 17px;
+    top: -9px;
+    color: #f00;
+  }
+
+  .about-psychic-price-detail {
+    position: absolute;
+    left: 17px;
+    top: 9px;
+  }
+
+  .about-psychic-price-crossed-out {
+    position: absolute;
+    top: 33px;
+    left: 10px;
+    width: 30px;
+    height: 2px;
+  }
+
   small {
     font-size: 60%;
   }
