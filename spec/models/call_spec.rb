@@ -138,4 +138,45 @@ describe Call do
       end
     end
   end
+
+  describe "#process" do
+    let(:client) { create(:client) }
+    let(:psychic) { create(:psychic, price: 5) }
+    let(:call) { build(:call, client: client, psychic: psychic) }
+    let(:twilio_call) { double(:twilio_call).as_null_object }
+
+    before {
+      call.stub(twilio_call: twilio_call, duration: 5)
+      call.stub(:save)
+      call.stub(:send_statistics)
+      client.stub(:discount_credits)
+    }
+
+    context "when client isn't new" do
+      before {
+        create(:call, client: client)
+        call.process
+      }
+
+      it "charges normal psychic price per minute" do
+        expect(call.cost.to_f).to eql(25.to_f)
+      end
+
+      it "saves the psychic price per minute" do
+        expect(call.cost_per_minute.to_f).to eql(5.to_f)
+      end
+    end
+
+    context "when client is new" do
+      before { call.process }
+
+      it "charges $1 per minute" do
+        expect(call.cost.to_f).to eql(5.to_f)
+      end
+
+      it "saves the psychic price per minute" do
+        expect(call.cost_per_minute.to_f).to eql(1.to_f)
+      end
+    end
+  end
 end

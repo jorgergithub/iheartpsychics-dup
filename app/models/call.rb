@@ -93,16 +93,16 @@ class Call < ActiveRecord::Base
                     to from phone_number_sid status start_time end_time
                     price price_unit direction answered_by caller_name uri)
 
-    attributes.each { |a| self.send("#{a}=", twilio_call.send(a)) }
+    attributes.each { |a| self.send("#{a}=", self.twilio_call.send(a)) }
 
     transaction do
-      Rails.logger.info "[Call.process] #{twilio_call.inspect}"
+      Rails.logger.info "[Call.process] #{self.twilio_call.inspect}"
       self.started_at = self.start_time
       self.ended_at = self.end_time
 
       self.duration = CallDurationRounder.new(twilio_call.duration).round
-      self.cost = self.duration * self.psychic.price
-      self.cost_per_minute = self.psychic.price
+      self.calculate_cost_per_minute
+      self.cost = self.duration * self.cost_per_minute
       self.client.discount_credits(self)
 
       self.original_duration = twilio_call.duration
@@ -112,6 +112,14 @@ class Call < ActiveRecord::Base
     end
 
     psychic.finish_call!(self)
+  end
+
+  def calculate_cost_per_minute
+    if self.client.new_client?
+      self.cost_per_minute = 1
+    else
+      self.cost_per_minute = self.psychic.price
+    end
   end
 
   def send_statistics
