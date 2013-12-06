@@ -3,6 +3,7 @@ class Credit < ActiveRecord::Base
   belongs_to :target, polymorphic: true
 
   scope :by_date, -> { order("created_at") }
+  scope :from_orders, -> { where("target_type = ?", "Order") }
 
   def parsed_time_only
     created_at.strftime("%I:%M %p")

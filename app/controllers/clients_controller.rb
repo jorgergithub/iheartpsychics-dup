@@ -15,7 +15,7 @@ class ClientsController < AuthorizedController
       ClientMailer.delay.pin_email(@client, @pin)
     end
 
-    @credits = @client.credits.order('id desc').page(params[:page_credits]).per(params[:per])
+    @credits = @client.credits.from_orders.order('id desc').page(params[:page_credits]).per(params[:per])
     @phones = @client.phones.order(:id).page(params[:page_phones]).per(params[:per])
     @edit_phone = @client.phones.any? ? @client.phones.first : @client.phones.build
     @psychics = @client.psychics.order(:id).page(params[:page_psychics]).per(params[:per])
