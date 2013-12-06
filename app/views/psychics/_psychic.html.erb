@@ -14,8 +14,16 @@
         <span class="psychics_reviews_amount">(<%= psychic.reviews.count %>)</span>
       </div>
       <div class="psychic-right">
+        <% if current_client and current_client.new_client? %>
+          <div class="psychic-price-promo">
+            $1<span>*</span><small>Min</small>
+          </div>
+        <% end %>
         <div class="psychic-price">
           <%= number_to_currency psychic.price, precision: 0 %><small>Min</small>
+          <% if current_client and current_client.new_client? %>
+            <%= image_tag "psychic-card-price-crossed-out.png", class: "psychic-price-crossed-out" %>
+          <% end %>
         </div>
         <div class="psychic-ext">
           Ext: <span><%= psychic.extension %></span>
@@ -35,6 +43,11 @@
         <%= psychic.specialties %>
       </p>
 
+      <% if current_client and current_client.new_client? %>
+        <span class="psychic-promo-info">
+          * Special for new customers
+        </span>
+      <% end %>
       <%= link_to "Read more", about_psychic_path(psychic) %>
     </div>
 

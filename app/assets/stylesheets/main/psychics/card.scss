@@ -129,7 +129,9 @@
     text-align: center;
   }
 
-  div.content header div.psychic-right .psychic-price {
+  div.content header div.psychic-right .psychic-price,
+  div.content header div.psychic-right .psychic-price-promo {
+    position: relative;
     color: #606d82;
     font-size: 24px;
     font-weight: 400;
@@ -139,6 +141,27 @@
       font-size: 20px;
       font-weight: 100;
     }
+  }
+
+  div.content header div.psychic-right .psychic-price-promo {
+    color: #fd3d39;
+
+    & span {
+      position: absolute;
+      margin-left: -1px;
+      margin-top: 3px;
+      font-size: 14px;
+    }
+
+    & small {
+      margin-left: 6px;
+    }
+  }
+
+  div.content header div.psychic-right .psychic-price-crossed-out {
+    position: absolute;
+    left: 0px;
+    top: 15px;
   }
 
   div.content header div.psychic-right .psychic-ext {
@@ -170,6 +193,13 @@
     color: #17aeff;
     font-size: 14px;
     text-decoration: none;
+  }
+
+  div.content div.body .psychic-promo-info {
+    float: right;
+    font-size: 14px;
+    color: #fd3d39;
+    margin-top: 7px;
   }
 
   div.content footer {

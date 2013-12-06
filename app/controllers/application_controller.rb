@@ -14,6 +14,12 @@ class ApplicationController < ActionController::Base
     @page_seo
   end
 
+  def current_client
+    return unless current_user and current_user.client?
+    current_user.client
+  end
+  helper_method :current_client
+
   protected
 
   def find_horoscope

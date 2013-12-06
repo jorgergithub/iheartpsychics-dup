@@ -177,6 +177,10 @@ class Client < ActiveRecord::Base
     self.balance || 0
   end
 
+  def new_client?
+    true
+  end
+
   private
 
   def set_unsubscribe_key
