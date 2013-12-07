@@ -1,5 +1,6 @@
 <% if @client.errors.blank? %>
   $("#pin_modal").attr("data-pin", "<%= @client.pin %>");
+  $(".my-pin #client_pin").html("<%= @client.pin %>");
   closeModal();
 <% else%>
   $("#pin_modal form").trigger("ajax:complete");

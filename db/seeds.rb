@@ -164,7 +164,8 @@ app1 = PsychicApplication.create!(first_name: 'Unfortunate', last_name: 'Teller'
                    specialties: Faker::Lorem.paragraph,
                    tools: Faker::Lorem.paragraph,
                    professional_goals: Faker::Lorem.paragraph,
-                   how_did_you_hear: 'Friend')
+                   how_did_you_hear: 'Friend',
+                   price: (3..9).to_a.sample)
 
 app2 = PsychicApplication.create!(first_name: 'Trinity', last_name: 'Megan', pseudonym: 'Magus',
                    username: 'tmegan', email: 'trinity@iheartpsychics.co',
@@ -188,7 +189,8 @@ app2 = PsychicApplication.create!(first_name: 'Trinity', last_name: 'Megan', pse
                    specialties: Faker::Lorem.paragraph,
                    tools: Faker::Lorem.paragraph,
                    professional_goals: Faker::Lorem.paragraph,
-                   how_did_you_hear: 'Friend')
+                   how_did_you_hear: 'Friend',
+                   price: (3..9).to_a.sample)
 
 app1.approve!
 app2.approve!
@@ -236,7 +238,8 @@ csr.rep.update_attributes phone: "+13054502995"
                                specialties: Faker::Lorem.paragraph,
                                tools: Faker::Lorem.paragraph,
                                professional_goals: Faker::Lorem.paragraph,
-                               how_did_you_hear: 'Friend')
+                               how_did_you_hear: 'Friend',
+                               price: (3..9).to_a.sample)
     app.approve!
   rescue ActiveRecord::RecordInvalid
     p $!.class
@@ -246,8 +249,7 @@ csr.rep.update_attributes phone: "+13054502995"
 end
 
 Psychic.all.each do |p|
-  p.update_attributes price: [4.5, 5.0, 5.5, 6.0, 6.5].sample,
-    about: Faker::Lorem.paragraphs(3).join("\n")
+  p.update_attributes about: Faker::Lorem.paragraphs(3).join("\n")
 
   (0..(Random.rand(15))).each do |i|
     start_hour = (0..11).to_a.sample
