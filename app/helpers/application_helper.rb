@@ -100,6 +100,10 @@ module ApplicationHelper
     provider.to_s.titleize
   end
 
+  def ihp_url
+    "http://www.iheartpsychics.com"
+  end
+
   def avatar_image_tag(image_id, overrides={})
     options = {
       width: 265,
