@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   scope :accountants,       -> { where("role = ?", "accountant") }
 
   def self.from_omniauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_create do |user|
+    where(auth.slice(:provider, :uid)).first_or_initialize do |user|
       user.assign_attributes(auth)
     end
   end
