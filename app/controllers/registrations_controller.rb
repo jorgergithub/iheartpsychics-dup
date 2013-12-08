@@ -2,9 +2,11 @@ class RegistrationsController < Devise::RegistrationsController
   respond_to :html, :js
 
   def new
-    @user = User.new
-    @user.build_client
-    @user.client.phones.build
+    build_resource({})
+    self.resource.build_client
+    self.resource.client.phones.build
+
+    respond_with self.resource
   end
 
   def create
@@ -22,15 +24,10 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def update
-    super
-  end
-
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :username,
-      :email, :password, :password_confirmation,
+    params.require(:user).permit(:uid, :provider, :first_name, :last_name, :username, :email, :password, :password_confirmation,
       client_attributes: [:id, :birthday, phones_attributes: [:id, :desc, :number]])
   end
 end
