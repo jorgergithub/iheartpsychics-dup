@@ -13,74 +13,76 @@ IHeartPsychics::Application.routes.draw do
   end
 
   namespace :admin do
-    resource :admin
-    resource :dashboard
-    resources :accountants
-    resources :call_surveys
+    constraints subdomain: "admin" do
+      resource :admin
+      resource :dashboard
+      resources :accountants
+      resources :call_surveys
 
-    resources :calls do
-      member do
-        post :refund
+      resources :calls do
+        member do
+          post :refund
+        end
       end
-    end
 
-    resources :categories
-    resources :psychic_faq_categories
+      resources :categories
+      resources :psychic_faq_categories
 
-    resources :clients do
-      member do
-        get :resend_confirmation
+      resources :clients do
+        member do
+          get :resend_confirmation
+        end
       end
-    end
 
-    resources :customer_service_representatives
-    resources :daily_fortunes, except: :show
-    resources :horoscopes
+      resources :customer_service_representatives
+      resources :daily_fortunes, except: :show
+      resources :horoscopes
 
-    resources :invoices, only: :show do
-      resources :payments
+      resources :invoices, only: :show do
+        resources :payments
 
-      collection do
-        get 'paid', action: :paid, as: :paid
-        get 'pending', action: :pending, as: :pending
+        collection do
+          get 'paid', action: :paid, as: :paid
+          get 'pending', action: :pending, as: :pending
+        end
       end
-    end
 
-    resources :manager_directors
+      resources :manager_directors
 
-    resources :newsletters do
-      member do
-        get 'deliver', action: :deliver, as: :deliver
-        get 'reset'  , action: :reset  , as: :reset
+      resources :newsletters do
+        member do
+          get 'deliver', action: :deliver, as: :deliver
+          get 'reset'  , action: :reset  , as: :reset
+        end
       end
-    end
 
-    resources :orders, :except => [:edit, :update, :destroy] do
-      resource :refunds, :only => :create
-    end
-
-    resources :packages
-    resources :psychic_applications
-
-    resources :psychics do
-      member do
-        get 'disable', action: :disable, as: :disable
+      resources :orders, :except => [:edit, :update, :destroy] do
+        resource :refunds, :only => :create
       end
-    end
 
-    resources :reviews, :shallow => true do
-      member do
-        get 'mark_as_featured', action: :mark_as_featured, as: :mark_as_featured
-        get 'unmark_as_featured', action: :unmark_as_featured, as: :unmark_as_featured
+      resources :packages
+      resources :psychic_applications
+
+      resources :psychics do
+        member do
+          get 'disable', action: :disable, as: :disable
+        end
       end
+
+      resources :reviews, :shallow => true do
+        member do
+          get 'mark_as_featured', action: :mark_as_featured, as: :mark_as_featured
+          get 'unmark_as_featured', action: :unmark_as_featured, as: :unmark_as_featured
+        end
+      end
+
+      resources :schedule_jobs, :only => [:index, :edit, :update]
+      resources :surveys
+      resources :subscribers
+      resources :website_admins
+
+      get "/debug", to: "debug#index"
     end
-
-    resources :schedule_jobs, :only => [:index, :edit, :update]
-    resources :surveys
-    resources :subscribers
-    resources :website_admins
-
-    get "/debug", to: "debug#index"
   end
 
   namespace :calls do
@@ -194,5 +196,7 @@ IHeartPsychics::Application.routes.draw do
   get "/privacy", to: "home#privacy", as: "privacy"
   get "/terms", to: "home#terms", as: "terms"
 
+  get "/" => "home#staff", constraints: { subdomain: "admin" }
+  get "/" => "home#staff", constraints: { subdomain: "staff" }
   root to: 'home#index'
 end

@@ -14,6 +14,10 @@ class HomeController < AuthorizedController
     @client = current_user.client if current_user
   end
 
+  def staff
+    go_home(true) if current_user
+  end
+
   def apna
   end
 

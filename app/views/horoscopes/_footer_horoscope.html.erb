@@ -13,14 +13,14 @@
       </nav>
     <% end %>
 
-    <% selected_sign_index = current_user ? current_user.sign.index : 0 %>
+    <% selected_sign_index = current_user.try(:sign).try(:index) || 0 %>
 
     <% @horoscope.signs.each_with_index do |sign, index| %>
       <article class="<%= "horoscope-selected" if selected_sign_index == index %>">
         <h2 class="horoscope-title">Your Daily Horoscope</h2>
         <h1 class="horoscope-sign-title"><%= sign.name %></h1>
         <h3>
-          <%= sign.first_day.strftime("%B %d") %> - 
+          <%= sign.first_day.strftime("%B %d") %> -
           <%= sign.last_day.strftime("%B %d")%>
         </h3>
 

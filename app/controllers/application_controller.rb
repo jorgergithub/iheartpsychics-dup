@@ -14,6 +14,21 @@ class ApplicationController < ActionController::Base
     @page_seo
   end
 
+  def admin?
+    request.subdomain == "admin"
+  end
+  helper_method :admin?
+
+  def staff?
+    request.subdomain == "staff"
+  end
+  helper_method :staff?
+
+  def consumer?
+    !staff? and !admin?
+  end
+  helper_method :consumer?
+
   def current_client
     return unless current_user and current_user.client?
     current_user.client

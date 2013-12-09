@@ -20,21 +20,23 @@
   <section class="user user-signin-element">
     <div class="user-container container_12">
       <div class="user-signup">
-        <h1>Sign Up Using:</h1>
+        <% if consumer? %>
+          <h1>Sign Up Using:</h1>
 
-        <ul class="signup-links">
-          <li class="signup-link">
-            <%= link_to(image_tag("twitter.png", alt: "Twitter"), omniauth_authorize_path(:user, :twitter)) %>
-          </li>
+          <ul class="signup-links">
+            <li class="signup-link">
+              <%= link_to(image_tag("twitter.png", alt: "Twitter"), omniauth_authorize_path(:user, :twitter)) %>
+            </li>
 
-          <li class="signup-link">
-            <%= link_to(image_tag("facebook.png", alt: "Facebook"), omniauth_authorize_path(:user, :facebook)) %>
-          </li>
+            <li class="signup-link">
+              <%= link_to(image_tag("facebook.png", alt: "Facebook"), omniauth_authorize_path(:user, :facebook)) %>
+            </li>
 
-          <li class="signup-link">
-            <%= link_to(image_tag("google+.png", alt: "Google+"), omniauth_authorize_path(:user, :google_oauth2)) %>
-          </li>
-        </ul>
+            <li class="signup-link">
+              <%= link_to(image_tag("google+.png", alt: "Google+"), omniauth_authorize_path(:user, :google_oauth2)) %>
+            </li>
+          </ul>
+        <% end %>
       </div>
 
       <div class="user-signin">
@@ -91,39 +93,41 @@
               Sign out
             </li>
           <% else %>
-            <li class="signin header-nav-link">
-              <%= content_tag(:i, "", class: "signup header-nav-link-arrow modal_link", data: { "modal-id" => "sign_up_modal" }) %>
-              Sign Up
+            <% if consumer? %>
+              <li class="signin header-nav-link">
+                <%= content_tag(:i, "", class: "signup header-nav-link-arrow modal_link", data: { "modal-id" => "sign_up_modal" }) %>
+                Sign Up
 
-              <div class="modal_list">
-                <%= render "modals/sign_up" %>
-                <%= render "modals/sign_up_success" %>
-                <%= render "modals/sign_in/sign_in_error" %>
-                <%= render "modals/password/forgot_password" %>
-                <%= render "modals/password/forgot_password_email_sent" %>
-                <% if defined?(resource) and resource %>
-                  <%= render "modals/password/reset_password" %>
-                <% end %>
-                <%= render "modals/password/reset_password_success" %>
+                <div class="modal_list">
+                  <%= render "modals/sign_up" %>
+                  <%= render "modals/sign_up_success" %>
+                  <%= render "modals/sign_in/sign_in_error" %>
+                  <%= render "modals/password/forgot_password" %>
+                  <%= render "modals/password/forgot_password_email_sent" %>
+                  <% if defined?(resource) and resource %>
+                    <%= render "modals/password/reset_password" %>
+                  <% end %>
+                  <%= render "modals/password/reset_password_success" %>
 
 
-                <% if params[:reset_password_token] %>
-                  <script>
-                    $(document).ready(function() {
-                      showModal("reset_password_modal");
-                    });
-                  </script>
-                <% end %>
+                  <% if params[:reset_password_token] %>
+                    <script>
+                      $(document).ready(function() {
+                        showModal("reset_password_modal");
+                      });
+                    </script>
+                  <% end %>
 
-                <% if params[:reset_password_success] %>
-                  <script>
-                    $(document).ready(function() {
-                      showModal("reset_password_success_modal");
-                    });
-                  </script>
-                <% end %>
-              </div>
-            </li>
+                  <% if params[:reset_password_success] %>
+                    <script>
+                      $(document).ready(function() {
+                        showModal("reset_password_success_modal");
+                      });
+                    </script>
+                  <% end %>
+                </div>
+              </li>
+            <% end %>
             <li class="signin header-nav-link">
               <%= content_tag(:i, "", class: "signin header-nav-link-arrow") %>
               Sign In
@@ -136,14 +140,18 @@
 
   <nav class="nav">
     <div class="nav-container small_container">
-      <% role = current_user ? current_user.role : "client" %>
-      <ul class="nav-links">
-        <%= render "#{role}_menu" %>
-      </ul>
+      <% if consumer? %>
+        <% role = current_user ? current_user.role : "client" %>
+        <ul class="nav-links">
+          <%= render "#{role}_menu" %>
+        </ul>
 
-      <aside class="nav-info">
-        Call Today: <span>888-635-2045</span>
-      </aside>
+        <aside class="nav-info">
+          Call Today: <span>888-635-2045</span>
+        </aside>
+      <% else %>
+        <h1>Employee Dashboard Login</h1>
+      <% end %>
     </div>
   </nav>
 
