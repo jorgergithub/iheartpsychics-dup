@@ -521,4 +521,33 @@ describe Psychic do
       end
     end
   end
+
+  describe "#price_for" do
+    let(:psychic) { create(:psychic, price: 6) }
+    let(:client) { double(:client) }
+
+    context "new client" do
+      before { client.stub(new_client?: true) }
+
+      it "is $1" do
+        expect(psychic.price_for(client)).to eql(1)
+      end
+    end
+
+    context "existing client" do
+      before { client.stub(new_client?: false) }
+
+      it "is regular psychic price" do
+        expect(psychic.price_for(client)).to eql(6)
+      end
+    end
+
+    context "with no client" do
+      let(:client) { nil }
+
+      it "is regular psychic price" do
+        expect(psychic.price_for(client)).to eql(6)
+      end
+    end
+  end
 end

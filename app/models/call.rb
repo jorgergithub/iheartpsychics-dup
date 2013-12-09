@@ -116,11 +116,7 @@ class Call < ActiveRecord::Base
   end
 
   def calculate_cost_per_minute
-    if self.client.new_client?
-      self.cost_per_minute = 1
-    else
-      self.cost_per_minute = self.psychic.price
-    end
+    self.cost_per_minute = self.psychic.price_for(client)
   end
 
   def send_statistics

@@ -324,4 +324,9 @@ class Psychic < ActiveRecord::Base
   def toggle_disabled!
     update_attributes disabled: !self.disabled
   end
+
+  def price_for(client)
+    return self.price unless client and client.new_client?
+    1
+  end
 end
