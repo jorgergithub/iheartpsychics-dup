@@ -1,10 +1,10 @@
 xml.instruct!
 xml.Response do
-  xml.Gather(action: calls_url_for("buy_credits", phone_number), timeout: 15) do
+  xml.Gather(action: calls_url_for("buy_credits", phone_number), timeout: 15, numDigits: 1) do
     i = 1
     @packages.each do |pkg|
       xml.Say <<-EOS.strip_heredoc, voice: "woman"
-        Press #{i} to add #{pkg.credits} dollars to your account
+        Press #{i} to add #{price_to_phrase pkg.credits} to your account
         for #{price_to_phrase(pkg.price)}.
       EOS
       i += 1
