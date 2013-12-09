@@ -13,76 +13,74 @@ IHeartPsychics::Application.routes.draw do
   end
 
   namespace :admin do
-    constraints subdomain: "admin" do
-      resource :admin
-      resource :dashboard
-      resources :accountants
-      resources :call_surveys
+    resource :admin
+    resource :dashboard
+    resources :accountants
+    resources :call_surveys
 
-      resources :calls do
-        member do
-          post :refund
-        end
+    resources :calls do
+      member do
+        post :refund
       end
-
-      resources :categories
-      resources :psychic_faq_categories
-
-      resources :clients do
-        member do
-          get :resend_confirmation
-        end
-      end
-
-      resources :customer_service_representatives
-      resources :daily_fortunes, except: :show
-      resources :horoscopes
-
-      resources :invoices, only: :show do
-        resources :payments
-
-        collection do
-          get 'paid', action: :paid, as: :paid
-          get 'pending', action: :pending, as: :pending
-        end
-      end
-
-      resources :manager_directors
-
-      resources :newsletters do
-        member do
-          get 'deliver', action: :deliver, as: :deliver
-          get 'reset'  , action: :reset  , as: :reset
-        end
-      end
-
-      resources :orders, :except => [:edit, :update, :destroy] do
-        resource :refunds, :only => :create
-      end
-
-      resources :packages
-      resources :psychic_applications
-
-      resources :psychics do
-        member do
-          get 'disable', action: :disable, as: :disable
-        end
-      end
-
-      resources :reviews, :shallow => true do
-        member do
-          get 'mark_as_featured', action: :mark_as_featured, as: :mark_as_featured
-          get 'unmark_as_featured', action: :unmark_as_featured, as: :unmark_as_featured
-        end
-      end
-
-      resources :schedule_jobs, :only => [:index, :edit, :update]
-      resources :surveys
-      resources :subscribers
-      resources :website_admins
-
-      get "/debug", to: "debug#index"
     end
+
+    resources :categories
+    resources :psychic_faq_categories
+
+    resources :clients do
+      member do
+        get :resend_confirmation
+      end
+    end
+
+    resources :customer_service_representatives
+    resources :daily_fortunes, except: :show
+    resources :horoscopes
+
+    resources :invoices, only: :show do
+      resources :payments
+
+      collection do
+        get 'paid', action: :paid, as: :paid
+        get 'pending', action: :pending, as: :pending
+      end
+    end
+
+    resources :manager_directors
+
+    resources :newsletters do
+      member do
+        get 'deliver', action: :deliver, as: :deliver
+        get 'reset'  , action: :reset  , as: :reset
+      end
+    end
+
+    resources :orders, :except => [:edit, :update, :destroy] do
+      resource :refunds, :only => :create
+    end
+
+    resources :packages
+    resources :psychic_applications
+
+    resources :psychics do
+      member do
+        get 'disable', action: :disable, as: :disable
+      end
+    end
+
+    resources :reviews, :shallow => true do
+      member do
+        get 'mark_as_featured', action: :mark_as_featured, as: :mark_as_featured
+        get 'unmark_as_featured', action: :unmark_as_featured, as: :unmark_as_featured
+      end
+    end
+
+    resources :schedule_jobs, :only => [:index, :edit, :update]
+    resources :surveys
+    resources :subscribers
+    resources :website_admins
+
+    get "/debug", to: "debug#index"
   end
 
   namespace :calls do
