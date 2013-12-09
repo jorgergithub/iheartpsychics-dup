@@ -22,6 +22,10 @@ module IHeartPsychics
     config.time_zone = 'Eastern Time (US & Canada)'
     config.i18n.enforce_available_locales = true
 
+    config.to_prepare do
+      ActionMailer::Base.helper "application"
+    end
+
     # config.eager_load_paths += ["#{Rails.root}/lib}"]
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
