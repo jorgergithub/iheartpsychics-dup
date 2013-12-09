@@ -42,6 +42,7 @@
 //= require main/modules/modal/payment
 //= require main/modules/modal/modal
 //= require main/modules/modals
+//= require main/modules/nav
 //
 // App Startup Code =======================================
 //= require clamp
