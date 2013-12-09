@@ -80,7 +80,7 @@ class Client < ActiveRecord::Base
 
   def seconds(psychic)
     return 0 unless balance and psychic.price
-    ((balance.to_f / psychic.price.to_f) * 60).floor
+    minutes_with(psychic) * 60
   end
 
   def psychics
@@ -161,7 +161,7 @@ class Client < ActiveRecord::Base
   end
 
   def minutes_with(psychic)
-    (balance / psychic.price).floor
+    (balance / psychic.price_for(self)).floor
   end
 
   def call(call_url)

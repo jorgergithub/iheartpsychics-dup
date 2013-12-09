@@ -200,17 +200,12 @@ describe Client do
     let(:psychic) { build(:psychic, price: 4.50) }
 
     context "when client has a balance and psychic has a price" do
-      it "is the number credits in seconds" do
-        expect(Client.new(balance: 9).seconds(psychic)).to eql(120)
-        expect(Client.new(balance: 10).seconds(psychic)).to eql(133)
-        expect(Client.new(balance: 25).seconds(psychic)).to eql(333)
-      end
-    end
+      let(:client) { build(:client) }
 
-    context "when psychic don't have a price" do
-      let(:psychic) { build(:psychic, price: nil) }
-      it "is zero" do
-        expect(Client.new(balance: 9).seconds(psychic)).to eql(0)
+      before { client.stub(minutes_with: 3) }
+
+      it "is the seconds representation of number of minutes the client can talk to the psychic" do
+        expect(client.seconds(psychic)).to eql(3 * 60)
       end
     end
 
@@ -472,8 +467,20 @@ describe Client do
     let(:psychic) { create(:psychic, price: 6.50) }
     let(:client)  { create(:client, balance: 81.25)}
 
-    it "calculates number of minutes you can talk with a psychic" do
-      expect(client.minutes_with(psychic)).to eql(12)
+    context "when client is not new" do
+      before { client.stub(:new_client? => false) }
+
+      it "calculates number of minutes you can talk with a psychic" do
+        expect(client.minutes_with(psychic)).to eql(12)
+      end
+    end
+
+    context "when client is new" do
+      before { client.stub(:new_client? => true) }
+
+      it "considers the special offer" do
+        expect(client.minutes_with(psychic)).to eql(81)
+      end
     end
   end
 

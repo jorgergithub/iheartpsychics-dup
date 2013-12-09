@@ -143,6 +143,7 @@ class CallsController < ApplicationController
       raise "order didn't save"
     end
 
+    @client.reload
     render :pin
   rescue Stripe::CardError
     logger.info "CardError: #{$!.message}"
@@ -158,7 +159,9 @@ class CallsController < ApplicationController
 
     case status
     when "completed"
-      record_call(sid, psychic_id)
+      record_call(sid, psychic_id) # TODO make this an offline task
+      check_credits
+
     when "busy", "no-answer", "failed", "canceled"
       @psychic.cancel_call!
 
@@ -196,6 +199,14 @@ class CallsController < ApplicationController
 
     call = @client.calls.create(sid: sid, psychic: psychic)
     call.process
+
+    @client.reload
+  end
+
+  def check_credits
+    return if @client.balance?
+
+    render :no_balance_menu
   end
 
   def incoming_number
