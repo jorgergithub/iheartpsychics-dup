@@ -140,7 +140,9 @@
 
   <nav class="nav">
     <div class="nav-container small_container">
-      <% if consumer? %>
+      <% if !current_user and !consumer? %>
+        <h1>Employee Dashboard Login</h1>
+      <% else %>
         <% role = current_user ? current_user.role : "client" %>
         <ul class="nav-links">
           <%= render "#{role}_menu" %>
@@ -149,8 +151,6 @@
         <aside class="nav-info">
           Call Today: <span>888-635-2045</span>
         </aside>
-      <% else %>
-        <h1>Employee Dashboard Login</h1>
       <% end %>
     </div>
   </nav>
