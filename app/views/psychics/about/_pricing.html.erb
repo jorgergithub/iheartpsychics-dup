@@ -5,7 +5,7 @@
 
       <div class="about-psychic-badge badge">
         <div class="about-psychic-price">
-          <% if current_client.new_client? %>
+          <% if current_client and current_client.new_client? %>
             <div class="about-psychic-price-promo">
               $1
             </div>
