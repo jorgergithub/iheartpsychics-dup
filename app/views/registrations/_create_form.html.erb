@@ -40,8 +40,8 @@
         </div>
 
         <div class="field">
-          <%= cf.label :timezone, "Timezone" %>
-          <%= cf.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, { include_blank: true, default: nil }, class: 'timezone' %>
+          <%= f.label :timezone, "Timezone" %>
+          <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, { include_blank: true, default: f.object.time_zone }, class: 'timezone' %>
         </div>
       </div>
 

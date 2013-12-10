@@ -27,7 +27,7 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def user_params
-    params.require(:user).permit(:uid, :provider, :first_name, :last_name, :username, :email, :password, :password_confirmation,
+    params.require(:user).permit(:uid, :provider, :first_name, :last_name, :username, :email, :time_zone, :password, :password_confirmation,
       client_attributes: [:id, :birthday, :pin, phones_attributes: [:id, :desc, :number]])
   end
 end
