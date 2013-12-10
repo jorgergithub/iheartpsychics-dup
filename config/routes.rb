@@ -64,7 +64,9 @@ IHeartPsychics::Application.routes.draw do
 
     resources :psychics do
       member do
-        get 'disable', action: :disable, as: :disable
+        get 'available'  , action: :available  , as: :available
+        get 'disable'    , action: :disable    , as: :disable
+        get 'unavailable', action: :unavailable, as: :unavailable
       end
     end
 

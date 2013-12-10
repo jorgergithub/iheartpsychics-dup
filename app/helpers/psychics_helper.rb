@@ -3,6 +3,14 @@ module PsychicsHelper
     psychic.send("#{speciality.split(" ").map(&:capitalize).join.underscore}?") ? "highlighted" : ""
   end
 
+  def turn_psychic_availability_link(psychic)
+    if psychic.available?
+      link_to '<i class="icon-pause"></i>'.html_safe, unavailable_admin_psychic_path(psychic)
+    else
+      link_to '<i class="icon-play"></i>'.html_safe, available_admin_psychic_path(psychic)
+    end
+  end
+
   def psychic_state psychic
     case psychic.current_state.to_s
     when "available"

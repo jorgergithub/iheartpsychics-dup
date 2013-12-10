@@ -36,6 +36,16 @@ class Admin::PsychicsController < AuthorizedController
     redirect_to admin_psychics_path, notice: "Psychic was successfully #{message}."
   end
 
+  def available
+    @psychic.available!
+    redirect_to admin_psychics_path, notice: "Psychic was now available"
+  end
+
+  def unavailable
+    @psychic.unavailable!
+    redirect_to admin_psychics_path, notice: "Psychic was now unavailable"
+  end
+
   def create
     @user = User.new(user_params).tap do |object|
       object.localized.assign_attributes(user_params)
