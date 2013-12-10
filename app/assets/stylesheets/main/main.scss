@@ -31,3 +31,10 @@ body {
 .empty-body-content {
   height: 100px;
 }
+
+.position-fixed{
+  position: fixed;
+  top: 0px;
+  z-index: 9999;
+  width: 100%;
+}
