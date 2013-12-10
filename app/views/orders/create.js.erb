@@ -1,5 +1,5 @@
 <% if @order.paid? %>
-  $("#client_balance").text("<%= number_to_currency @client.balance, precision: 0 %>");
+  $("#client_balance").text("<%= number_to_currency @client.reload.balance, precision: 0 %>");
   showModal("thank_you_modal");
   
   $("#purchase_history_container").html("<%= escape_javascript render('clients/purchase_history', credits: @credits) %>");
