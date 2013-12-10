@@ -7,6 +7,7 @@
 
   $("#select_payment_method_modal .select_card_panel").replaceWith("<%= escape_javascript render('clients/modals/purchase/select_card_panel') %>");
   
+  $("#purchase_pixel_conversion").remove()
   var marinConversionPixel = "<%= escape_javascript render('orders/marin_conversion_pixel') %>";
   $(marinConversionPixel).insertAfter($("#thank_you_modal"));
 <% else %>
