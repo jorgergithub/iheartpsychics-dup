@@ -18,6 +18,10 @@
           <% end %>
         </div>
       </div>
+
+      <% if current_client and current_client.new_client? %>
+        <aside class="new-customers-label">* Special for new customers<aside>
+      <% end %>
     </div>
 
     <% if @psychic.on_a_call? %>

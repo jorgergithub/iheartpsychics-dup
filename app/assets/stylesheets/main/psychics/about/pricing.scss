@@ -59,4 +59,13 @@
   small {
     font-size: 60%;
   }
+
+  aside.new-customers-label {
+    color: red;
+    position: absolute;
+    bottom: 10px;
+    font-size: 15px;
+    left: 0px;
+    right: 0px;
+  }
 }
