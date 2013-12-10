@@ -29,7 +29,7 @@ class Client < ActiveRecord::Base
   validates :pin, numericality: { only_integer: true }
 
   delegate :username, :first_name, :last_name, :full_name, :email, :time_zone,
-           to: :user, allow_nil: true
+           :confirmed?, to: :user, allow_nil: true
 
   before_save  :set_random_pin
   before_save  :set_unsubscribe_key

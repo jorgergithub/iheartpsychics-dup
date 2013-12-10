@@ -30,9 +30,11 @@
           <% @clients.each do |client| %>
             <tr>
               <td class="admin-actions">
-                <%= link_to '<i class="icon-share"></i>'.html_safe, resend_confirmation_admin_client_path(client), title: "Resend confirmation", data: {confirm: "Do you want to resend account confirmation email to #{client.full_name}?" } %>
                 <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_admin_client_path(client) %>
                 <%= link_to '<i class="icon-remove"></i>'.html_safe, [:admin, client], data: {confirm: "Are you sure?" }, :method => "delete" %>
+                <% unless client.confirmed? %>
+                  <%= link_to '<i class="icon-share"></i>'.html_safe, resend_confirmation_admin_client_path(client), title: "Resend confirmation", data: {confirm: "Do you want to resend account confirmation email to #{client.full_name}?" } %>
+                <% end %>
               </td>
               <td><%= link_to client.username, edit_admin_client_path(client) %></td>
               <td><%= client.full_name %></td>
