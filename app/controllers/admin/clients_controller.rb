@@ -1,12 +1,22 @@
 class Admin::ClientsController < AuthorizedController
-  before_filter :find_client
+  before_filter :find_client, except: :index
 
   def index
     respond_to do |format|
-      format.html { @clients = Client.order(:id).page(params[:page]).per(params[:per]) }
-      format.csv { send_data Client.to_csv }
-    end
+      format.html {
+        @clients = Client.includes(:user)
 
+        if query = params[:q]
+          @clients = @clients.where(<<-EOQ, query: "%#{query}%")
+            CONCAT(users.first_name, ' ', users.last_name) LIKE :query OR
+            users.username LIKE :query
+          EOQ
+        end
+
+        @clients = @clients.order("users.first_name, users.last_name")
+          .page(params[:page]).per(params[:per])
+      }
+    end
   end
 
   def show
