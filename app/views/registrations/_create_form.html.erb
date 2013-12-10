@@ -28,7 +28,7 @@
                               end_year: Time.now.year,
                               order: [:month, :day, :year],
                               with_css_classes: true,
-                              include_blank: true, 
+                              include_blank: true,
                               default: nil  %>
       </div>
     </div>
@@ -54,6 +54,11 @@
               <%= fp.text_field :number%>
             </div>
           <% end %>
+        </div>
+
+        <div class="field">
+          <%= cf.label :pin, "My pin" %>
+          <%= cf.text_field :pin, maxlength: 4 %>
         </div>
       </div>
 

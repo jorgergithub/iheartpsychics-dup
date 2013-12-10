@@ -44,6 +44,13 @@
         </div>
       </div>
 
+      <div class="control-group">
+        <%= cf.label :pin, "My pin", :class => "control-label" %>
+        <div class="controls">
+          <%= cf.text_field :pin, maxlength: 4 %>
+        </div>
+      </div>
+
       <%= render "phone_number", :f => cf %>
     <% end %>
   </div>
