@@ -40,6 +40,7 @@ describe PsychicApplication do
       expect(psychic.other).to eq psychic_application.other
       expect(psychic.resume.file.filename).to eq psychic_application.resume.file.filename
       expect(psychic.price).to eq psychic_application.price
+      expect(psychic.user.time_zone).to eq psychic_application.time_zone
     end
   end
 end
