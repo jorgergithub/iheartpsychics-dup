@@ -60,6 +60,11 @@ describe Client do
       client.save
       expect(client.valid_pin?("1232")).to be_true
     end
+
+    it "allows 2 clients with same pin" do
+      create(:client, pin: "1234")
+      create(:client, pin: "1234")
+    end
   end
 
   describe "#set_random_pin" do
