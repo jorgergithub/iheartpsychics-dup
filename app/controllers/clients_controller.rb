@@ -1,6 +1,5 @@
 class ClientsController < AuthorizedController
   before_action :find_client
-  before_action :update_time_zone
 
   layout :determine_layout
 
@@ -141,11 +140,5 @@ class ClientsController < AuthorizedController
   def find_client
     redirect_to :root unless current_user.client?
     @client = current_client
-  end
-
-  def update_time_zone
-    if current_user.time_zone.blank? && cookies.has_key?("jstz_time_zone")
-      current_user.update_attribute(:time_zone, cookies["jstz_time_zone"])
-    end
   end
 end

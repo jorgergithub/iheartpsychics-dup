@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :rep
   accepts_nested_attributes_for :admin
 
-  validates :username, presence: true
+  validates :username, :time_zone, presence: true
   validates :username, uniqueness: true
   validates :time_zone, :inclusion => { in: ActiveSupport::TimeZone.zones_map(&:name), allow_blank: true }
 

@@ -88,6 +88,7 @@ FactoryGirl.define do
     other { Faker::Lorem.paragraph }
     resume { File.open("#{Rails.root}/spec/fixtures/example_resume.pdf") }
     price { 2 }
+    time_zone { "Eastern Time (US & Canada)" }
   end
 
   factory :review do

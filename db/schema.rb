@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131206205535) do
+ActiveRecord::Schema.define(version: 20131210021116) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -358,6 +358,7 @@ ActiveRecord::Schema.define(version: 20131206205535) do
     t.string   "pseudonym"
     t.string   "country"
     t.decimal  "price",                          precision: 8, scale: 2
+    t.string   "time_zone",                                              null: false
   end
 
   create_table "psychic_events", force: true do |t|
@@ -572,7 +573,7 @@ ActiveRecord::Schema.define(version: 20131206205535) do
     t.string   "role"
     t.string   "provider"
     t.string   "uid"
-    t.string   "time_zone"
+    t.string   "time_zone",                           null: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

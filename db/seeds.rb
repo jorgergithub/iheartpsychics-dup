@@ -125,22 +125,23 @@ PageSeo.create(url: "", page: "All other pages", title: "High Quality Live Phone
 
 admin = User.create!(first_name: 'Master', last_name: 'Admin',
                     username: 'admin', email: 'admin@iheartpsychics.co',
-                    password: 'ipass123', create_as: 'admin', confirmed_at: Time.now)
+                    password: 'ipass123', time_zone: "Eastern Time (US & Canada)",
+                    create_as: 'admin', confirmed_at: Time.now)
 
 wadmin = User.create!(first_name: 'Website', last_name: 'Admin',
                      username: 'wadmin', email: 'wadmin@iheartpsychics.co',
                      password: 'ipass123', create_as: 'website_admin',
-                     confirmed_at: Time.now)
+                     time_zone: "Eastern Time (US & Canada)", confirmed_at: Time.now)
 
 mdirector = User.create!(first_name: 'Manager', last_name: 'Director',
                         username: 'mdir', email: 'mdir@iheartpsychics.co',
                         password: 'ipass123', create_as: 'manager_director',
-                        confirmed_at: Time.now)
+                        time_zone: "Eastern Time (US & Canada)", confirmed_at: Time.now)
 
 accountant = User.create!(first_name: 'Accountant', last_name: '',
                          username: 'accountant', email: 'accountant@iheartpsychics.co',
                          password: 'ipass123', create_as: 'accountant',
-                         confirmed_at: Time.now)
+                         time_zone: "Eastern Time (US & Canada)", confirmed_at: Time.now)
 
 app1 = PsychicApplication.create!(first_name: 'Unfortunate', last_name: 'Teller', pseudonym: 'Ruffus',
                    username: 'ufteller', email: 'ufteller@iheartpsychics.co',
@@ -165,7 +166,8 @@ app1 = PsychicApplication.create!(first_name: 'Unfortunate', last_name: 'Teller'
                    tools: Faker::Lorem.paragraph,
                    professional_goals: Faker::Lorem.paragraph,
                    how_did_you_hear: 'Friend',
-                   price: (3..9).to_a.sample)
+                   price: (3..9).to_a.sample,
+                   time_zone: "Eastern Time (US & Canada)")
 
 app2 = PsychicApplication.create!(first_name: 'Trinity', last_name: 'Megan', pseudonym: 'Magus',
                    username: 'tmegan', email: 'trinity@iheartpsychics.co',
@@ -190,7 +192,8 @@ app2 = PsychicApplication.create!(first_name: 'Trinity', last_name: 'Megan', pse
                    tools: Faker::Lorem.paragraph,
                    professional_goals: Faker::Lorem.paragraph,
                    how_did_you_hear: 'Friend',
-                   price: (3..9).to_a.sample)
+                   price: (3..9).to_a.sample,
+                   time_zone: "Eastern Time (US & Canada)")
 
 app1.approve!
 app2.approve!
@@ -201,7 +204,9 @@ app2.approve!
 
 csr = User.create!(first_name: 'Carlos', last_name: 'Taborda',
                   username: 'csr', email: 'carlos@carlos.is',
-                  password: 'ipass123', create_as: 'csr', confirmed_at: Time.now)
+                  password: 'ipass123', create_as: 'csr',
+                  time_zone: "Eastern Time (US & Canada)",
+                  confirmed_at: Time.now)
 
 csr.rep.update_attributes phone: "+13054502995"
 
@@ -239,7 +244,8 @@ csr.rep.update_attributes phone: "+13054502995"
                                tools: Faker::Lorem.paragraph,
                                professional_goals: Faker::Lorem.paragraph,
                                how_did_you_hear: 'Friend',
-                               price: (3..9).to_a.sample)
+                               price: (3..9).to_a.sample,
+                               time_zone: "Eastern Time (US & Canada)")
     app.approve!
   rescue ActiveRecord::RecordInvalid
     p $!.class
@@ -269,6 +275,7 @@ user = User.new(first_name: "Felipe",
                    email: "felipe.coury@gmail.com",
                    password: "ipass123",
                    role: "client",
+                   time_zone: "Eastern Time (US & Canada)",
                    confirmed_at: Time.now)
 client = user.build_client
 client.balance = 250
@@ -285,7 +292,9 @@ user.save!
                        last_name: last_name,
                        username: Faker::Internet.user_name,
                        email: Faker::Internet.email(name: "#{first_name} #{last_name}"),
-                       password: 'ipass123', confirmed_at: Time.now,
+                       password: 'ipass123',
+                       time_zone: "Eastern Time (US & Canada)",
+                       confirmed_at: Time.now,
                        role: "client",
                        client_attributes: { birthday: Date.today })
 

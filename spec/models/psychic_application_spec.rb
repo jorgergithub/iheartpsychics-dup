@@ -22,6 +22,7 @@ describe PsychicApplication do
     it { should validate_presence_of(:specialties) }
     it { should validate_presence_of(:state) }
     it { should validate_presence_of(:strongest_weakest_attributes) }
+    it { should validate_presence_of(:time_zone) }
     it { should validate_presence_of(:tools) }
     it { should validate_presence_of(:username) }
     it { should validate_presence_of(:why_work) }

@@ -26,7 +26,7 @@ class PsychicApplicationsController < ApplicationController
 
   def application_params
     params.require(:psychic_application).permit(:first_name, :last_name,
-      :email, :pseudonym, :username, :password, :address, :city, :country,
+      :email, :pseudonym, :username, :password, :time_zone, :address, :city, :country,
       :state, :postal_code, :phone, :cellular_number, :date_of_birth,
       :emergency_contact, :emergency_contact_number, :us_citizen, :resume,
       :has_experience, :experience, :gift, :explain_gift, :age_discovered,

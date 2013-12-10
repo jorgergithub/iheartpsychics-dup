@@ -1,7 +1,7 @@
 class PsychicApplication < ActiveRecord::Base
   include I18n::Alchemy
 
-  validates :first_name, :last_name, :pseudonym, :username, :password, :email,
+  validates :first_name, :last_name, :pseudonym, :username, :password, :email, :time_zone,
             :address, :city, :country, :state, :postal_code, :date_of_birth,
             :experience, :gift, :explain_gift, :age_discovered, :reading_style,
             :why_work, :friends_describe, :strongest_weakest_attributes,
@@ -68,7 +68,7 @@ class PsychicApplication < ActiveRecord::Base
   def create_user_as_psychic!
     user = User.new(create_as: "psychic")
 
-    %w[first_name last_name username password email].each do |f|
+    %w[first_name last_name username password email time_zone].each do |f|
       user.send("#{f}=", send(f))
     end
 

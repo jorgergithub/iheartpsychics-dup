@@ -31,6 +31,13 @@
   <%= add_password_field f, :password %>
   <%= add_password_field f, :password_confirmation %>
 
+  <div class="control-group">
+    <%= f.label :timezone, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, { include_blank: true, default: nil }, class: 'timezone' %>
+    </div>
+  </div>
+
   <legend>Address and Contact Information</legend>
 
   <%= add_text_field f, :address, "Street Address", class: "input-xxlarge" %>
