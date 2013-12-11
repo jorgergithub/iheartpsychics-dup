@@ -29,6 +29,10 @@
   </p>
 <% end %>
 
+<p>
+  Your PIN <%= @resource.try(:client).try(:pin) %>
+</p>
+
 Please confirm your account email through the link below to get started:
 
 <p>
