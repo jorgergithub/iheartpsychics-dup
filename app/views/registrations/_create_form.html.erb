@@ -57,7 +57,8 @@
         </div>
 
         <div class="field">
-          <%= cf.label :pin, "My pin" %>
+          <%= cf.label :pin, "PIN", class: "before-label-hint" %>
+          <span class="label-hint">(your pin is required to connect with a Psychic)</span><br />
           <%= cf.text_field :pin, maxlength: 4 %>
         </div>
       </div>

@@ -38,3 +38,14 @@ body {
   z-index: 9999;
   width: 100%;
 }
+
+.before-label-hint {
+  display: inline-block !important;
+}
+
+.label-hint{
+  color: red !important;
+  display: inline-block !important;
+  font-size: 12px !important;
+  overflow: overlay;
+}
