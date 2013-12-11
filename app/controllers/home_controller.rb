@@ -35,6 +35,9 @@ class HomeController < AuthorizedController
   def dictionary
   end
 
+  def how_it_works
+  end
+
   def privacy
   end
 
