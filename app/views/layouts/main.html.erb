@@ -141,7 +141,7 @@
   <nav class="nav">
     <div class="nav-container small_container">
       <% if !current_user and !consumer? %>
-        <h1>Employee Dashboard Login</h1>
+        <h1>Admin Dashboard Login</h1>
       <% else %>
         <% role = current_user ? current_user.role : "client" %>
         <ul class="nav-links">
