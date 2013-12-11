@@ -92,7 +92,8 @@ Module("IHP.Modals.SelectPaymentMethodModal", function(SelectPaymentMethodModal)
       $(".modal_panel." + panel).show();
     });
 
-    this.el.off("click", "a[data-sub-panel]").on("click", "a[data-sub-panel]", function() {
+    this.el.off("click", "a[data-sub-panel]").on("click", "a[data-sub-panel]", function(e) {
+      e.preventDefault();
       var panel = $(this).data("sub-panel");
       $(".sub_modal_panel").hide();
       $(".sub_modal_panel." + panel).show();
