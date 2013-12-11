@@ -3,11 +3,11 @@ Module("IHP.Modals.SelectPaymentMethodModal", function(SelectPaymentMethodModal)
 
   SelectPaymentMethodModal.fn.initialize = function(attributes) {
     this.el = $("#select_payment_method_modal");
-    
     this.selectCardPanel    = $(".select_card_panel", this.el);
     this.creditCardsPanel   = $(".credit_cards_panel", this.el);
     this.paypalPanel        = $(".paypal_panel", this.el);
     this.newCreditCardPanel = $(".new_credit_card_panel", this.el);
+
     this.package            = attributes.package;
 
     this.assign();
@@ -19,14 +19,14 @@ Module("IHP.Modals.SelectPaymentMethodModal", function(SelectPaymentMethodModal)
   };
 
   SelectPaymentMethodModal.fn.addEventListeners = function() {
-   $("ul.credit_cards li .cc_actions a.delete_card", this.el).on("ajax:send",this.deleteCard.bind(this));
+    $("ul.credit_cards li .cc_actions a.delete_card", this.el).on("ajax:send",this.deleteCard.bind(this));
   };
 
   SelectPaymentMethodModal.fn.cardTypeFlagHandler = function() {
     var changeCreditCardIcon = function(el) {
       var number = $(el).val();
       var type = Stripe.card.cardType(number);
-      
+
       if (type === "American Express") {
         var cardType = "american_express"
       } else if (type === "Visa") {
@@ -51,16 +51,18 @@ Module("IHP.Modals.SelectPaymentMethodModal", function(SelectPaymentMethodModal)
   SelectPaymentMethodModal.fn.assign = function() {
     $(".new_credit_card_panel form", this.el)[0].reset();
     $(".new_credit_card_panel #order_card_number", this.el).mask("0000 0000 0000 0000")
+
     this.setPackage();
     this.showFirstPanel();
   };
 
   SelectPaymentMethodModal.fn.showFirstPanel = function() {
     var cards = $("ul.credit_cards li", this.selectCardPanel);
+
     if (cards.length > 0) {
       $("a[data-sub-panel='select_card_panel']", this.newCreditCardPanel).show();
       this.selectCardPanel.show();
-      this.newCreditCardPanel.hide();    
+      this.newCreditCardPanel.hide();
     } else {
       $("a[data-sub-panel='select_card_panel']", this.newCreditCardPanel).hide();
       this.selectCardPanel.hide();
@@ -71,6 +73,7 @@ Module("IHP.Modals.SelectPaymentMethodModal", function(SelectPaymentMethodModal)
   SelectPaymentMethodModal.fn.setPackage = function() {
     $(".package-credits", this.el).html(this.package.credits);
     $(".package-price", this.el).html(this.package.price);
+
     this.el.data("package-id", this.package.id);
     this.el.find("form input[name='order[package_id]']").val(this.package.id)
   };
@@ -103,6 +106,7 @@ Module("IHP.Modals.SelectPaymentMethodModal", function(SelectPaymentMethodModal)
   SelectPaymentMethodModal.fn.cardSelection = function(attributes) {
     this.el.off("click", "ul.credit_cards li").on("click", "ul.credit_cards li", function(e) {
       e.preventDefault();
+
       $(this).siblings().removeClass("cc_selected");
       $(this).addClass("cc_selected");
     });
