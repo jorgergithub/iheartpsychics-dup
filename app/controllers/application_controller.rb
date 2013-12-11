@@ -78,20 +78,4 @@ class ApplicationController < ActionController::Base
     @new_user.client.phones.build
     @new_user
   end
-
-  def after_sign_in_path_for(resource)
-    case resource.role
-    when "client"
-      client_path
-    when "psychic"
-      psychic_path
-    else
-      root_path
-    end
-  end
-
-  # Overwriting the sign_out redirect path method
-  # def after_sign_out_path_for(resource_or_scope)
-  #   new_user_session_path
-  # end
 end

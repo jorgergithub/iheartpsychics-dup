@@ -15,7 +15,10 @@ Bundler.require(:default, Rails.env)
 module IHeartPsychics
   class Application < Rails::Application
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
-    config.eager_load_paths  += %W(#{config.root}/app/models/ckeditor)
+    config.eager_load_paths  += %W(
+        #{config.root}/app/models/ckeditor
+        #{config.root}/lib
+    )
     config.assets.enabled = true
     config.assets.precompile += Ckeditor.assets
     config.assets.precompile += %w(ckeditor/*)
