@@ -71,8 +71,8 @@ class Admin::ClientsController < AuthorizedController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :username, :email,
-      client_attributes: [:id, :balance, :birthday, :receive_newsletters,
+    params.require(:user).permit(:first_name, :last_name, :username, :email, :time_zone,
+      client_attributes: [:id, :balance, :birthday, :pin, :receive_newsletters,
       phones_attributes: [:id, :number, :desc, :_destroy]])
   end
 end
