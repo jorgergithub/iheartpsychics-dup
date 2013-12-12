@@ -41,6 +41,7 @@
 //= require main/modules/modal/credit_card_list
 //= require main/modules/modal/payment
 //= require main/modules/modal/modal
+//= require main/modules/modal/hero
 //= require main/modules/modals
 //= require main/modules/nav
 //

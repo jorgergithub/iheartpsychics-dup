@@ -54,7 +54,9 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
   Modal.fn.bindCloseModal = function() {
     window.closeModal = function(e) {
       if (e) e.preventDefault();
-      $(".modal").fadeOut(Modal.MODAL_FADE);
+      $(".modal").fadeOut(Modal.MODAL_FADE, function() {
+        $(".modal").trigger("dismiss");
+      });
       $(".overlay").fadeOut(Modal.MODAL_FADE);
     }
   };
