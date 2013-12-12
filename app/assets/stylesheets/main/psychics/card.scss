@@ -182,11 +182,13 @@
     font-weight: bold;
   }
 
-  div.content div.body p {
+
+  div.content div.body div.specialties {
     color: #8590a1;
     font-size: 18px;
     font-weight: 100;
-    height: 70px;
+    height: 71px;
+    overflow: hidden;
   }
 
   div.content div.body a {

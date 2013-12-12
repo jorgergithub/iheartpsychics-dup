@@ -15,6 +15,14 @@ module ApplicationHelper
     end
   end
 
+  def limited_text(text, amount)
+    if text.size > amount
+      text[0..69] + "..."
+    else
+      text
+    end
+  end
+
   def page_keywords
     if @page_seo
       @page_seo.keywords

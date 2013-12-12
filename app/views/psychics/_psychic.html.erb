@@ -39,9 +39,9 @@
         I Specialize in:
       </h1>
 
-      <p>
-        <%= psychic.specialties %>
-      </p>
+      <div class="specialties">
+        <%= limited_text(psychic.specialties, 80) %>
+      </div>
 
       <% if current_client and current_client.new_client? %>
         <span class="psychic-promo-info">
