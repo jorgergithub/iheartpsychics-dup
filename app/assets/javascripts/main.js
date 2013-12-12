@@ -35,6 +35,7 @@
 //= require main/modules/psychic/schedule
 //= require main/modules/psychic/show
 //= require main/modules/modal/forgot_password
+//= require main/modules/modal/thank_you
 //= require main/modules/modal/reset_password
 //= require main/modules/modal/sign_in_error
 //= require main/modules/modal/sign_up
