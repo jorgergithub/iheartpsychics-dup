@@ -193,6 +193,7 @@ IHeartPsychics::Application.routes.draw do
   get "/dictionary", to: "home#dictionary", as: "dictionary"
   get "/email_confirmation", to: "home#confirmation", as: "email_confirmation"
   get "/ethics", to: "home#ethics", as: "ethics"
+  get "/how_it_works", to: "home#how_it_works", as: "how_it_works"
   get "/privacy", to: "home#privacy", as: "privacy"
   get "/terms", to: "home#terms", as: "terms"
 
