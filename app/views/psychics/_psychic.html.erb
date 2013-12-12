@@ -19,12 +19,19 @@
             $1<span>*</span><small>&nbsp;Min</small>
           </div>
         <% end %>
+
         <div class="psychic-price">
           <%= number_to_currency psychic.price, precision: 0 %><small>&nbsp;Min</small>
           <% if psychic.special_price?(current_client) %>
             <%= image_tag "psychic-card-price-crossed-out.png", class: "psychic-price-crossed-out" %>
           <% end %>
         </div>
+
+        <% if current_client && !psychic.special_price?(current_client) && current_client.new_client? %>
+          <div class="psychic-empty-price-promo">
+          </div>
+        <% end %>
+
         <div class="psychic-ext">
           Ext: <span><%= psychic.extension %></span>
         </div>
