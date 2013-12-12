@@ -38,6 +38,13 @@
         </div>
       </div>
 
+      <div class="control-group">
+        <%= f.label :timezone, "Timezone", :class => 'control-label' %>
+        <div class="controls">
+          <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, { include_blank: true, default: f.object.time_zone }, class: 'timezone' %>
+        </div>
+      </div>
+
       <%= f.fields_for :client do |fields_for_client| %>
         <% unless f.object.persisted? %>
           <div class="control-group">
@@ -49,6 +56,13 @@
           <%= fields_for_client.label :birthday, "Birthday", :class => 'control-label' %>
           <div class="controls">
             <%= fields_for_client.text_field :birthday, class: "datepicker" %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= fields_for_client.label :pin, "My pin", :class => 'control-label' %>
+          <div class="controls">
+            <%= fields_for_client.text_field :pin, maxlength: 4 %>
           </div>
         </div>
 
