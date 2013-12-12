@@ -1,4 +1,11 @@
 module ApplicationHelper
+  def subdomain_title
+    subdomain = "Admin" if admin?
+    subdomain = "Psychic" if staff?
+
+    "#{subdomain} Dashboard Login"
+  end
+
   def page_title
     if @page_seo
       @page_seo.title
