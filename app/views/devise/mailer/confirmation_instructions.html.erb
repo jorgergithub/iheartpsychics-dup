@@ -29,6 +29,11 @@
   </p>
 <% end %>
 
+<p>
+  In order to speak with a psychic over the phone, you'll have to use
+  the PIN number you selected while signing up: <%= @resource.try(:client).try(:pin) %>.
+</p>
+
 Please confirm your account email through the link below to get started:
 
 <p>
