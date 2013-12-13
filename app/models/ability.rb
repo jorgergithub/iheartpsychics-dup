@@ -57,6 +57,7 @@ class Ability
       admin/packages
       admin/reviews
       admin/refunds
+      admin/call_surveys
     )
   end
 
