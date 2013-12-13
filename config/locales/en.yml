@@ -20,3 +20,7 @@ en:
     phone: "999-999-9999"
     ssn: "999-99-9999"
     time: "99:99 aa"
+
+  devise:
+    sessions:
+      signed_out: ''
