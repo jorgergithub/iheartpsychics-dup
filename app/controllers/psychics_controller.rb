@@ -24,12 +24,17 @@ class PsychicsController < AuthorizedController
   end
 
   def update
-    if @psychic.localized.update_attributes(psychic_params)
-      path = params[:redirect_to] || dashboard_path
-      message = params[:redirect_message] || "Psychic was successfully updated."
-      redirect_to path, notice: message
-    else
-      render action: "show"
+    respond_to do |format|
+      if @psychic.localized.update_attributes(psychic_params)
+        path = params[:redirect_to] || dashboard_path
+        message = params[:redirect_message] || "Psychic was successfully updated."
+
+        format.html { redirect_to path, notice: message }
+        format.js
+      else
+        format.html { render action: "show" }
+        format.js { render :update }
+      end
     end
   end
 
