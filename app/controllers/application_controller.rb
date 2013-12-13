@@ -69,7 +69,6 @@ class ApplicationController < ActionController::Base
 
   def find_page_seo
     @page_seo = PageSeo.for(request.path)
-    Rails.logger.info "SEO: #{@page_seo.inspect}"
   end
 
   def build_new_user
