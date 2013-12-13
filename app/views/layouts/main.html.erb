@@ -164,6 +164,16 @@
 
   <%= render "modals/callback" %>
   <%= render "modals/callback_confirmation" %>
+  <% if flash[:error] %>
+    <%= render "modals/message", message: flash[:error] %>
+    <script>showModal("message-modal");</script>
+  <% elsif flash[:alert] %>
+    <%= render "modals/message", message: flash[:alert] %>
+    <script>showModal("message-modal");</script>
+  <% elsif flash[:notice] %>
+    <%= render "modals/message", message: flash[:notice] %>
+    <script>showModal("message-modal");</script>
+  <% end %>
 
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
