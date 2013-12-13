@@ -215,6 +215,26 @@
     .on_a_call    { color: #ff5622; }
     .available    { color: #4bcf00; }
     .unavailable  { color: #d7dae0; }
+
+    div.psychic-state {
+      height: 53px;
+      overflow: hidden;
+    }
+
+    span.psychic-call-now  {
+      display: none;
+      font-size: 30px;
+      color: #ff8f00;
+
+      position: absolute;
+      right: 0px;
+      left: 0px;
+    }
+
+    &:hover  {
+      div.psychic-state.available span.psychic-state { display: none; }
+      span.psychic-call-now { display: block; }
+    }
   }
 }
 

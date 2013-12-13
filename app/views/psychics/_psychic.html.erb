@@ -59,9 +59,16 @@
     </div>
 
     <footer>
-      <span class="psychic-state <%= psychic.current_state %>">
-        <%= psychic_state(psychic) %>
-      </span>
+      <div class="psychic-state <%= psychic.current_state %>">
+        <span class="psychic-state"><%= psychic_state(psychic) %></span>
+        <% if psychic.available? %>
+          <span class="psychic-call-now">
+            Call Now!<br />
+            <span class="psychic-phone"><%= psychic.phone.gsub("+","") %></span>
+          </span>
+          <script>$("span.psychic-call-now .psychic-phone").mask("9-999-9999")</script>
+        <% end %>
+      </div>
     </footer>
 
     <% if current_user and current_user.client and current_user.client.favorite?(psychic) %>
