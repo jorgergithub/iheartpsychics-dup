@@ -37,6 +37,7 @@ FactoryGirl.define do
     association :user
     balance 60
     birthday Date.today
+    pin "1234"
     phones { [FactoryGirl.create(:client_phone)] }
   end
 

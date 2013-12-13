@@ -5,6 +5,8 @@ describe CallRefund do
   let!(:client)  { FactoryGirl.create(:client, ) }
   let!(:call)    { FactoryGirl.create(:call, client: client, psychic: psychic) }
 
+  let(:credit) { Credit.where(description: "Refunded call \##{call.id} with #{call.psychic_alias_name}").first }
+
   describe "refund call" do
     before do
       Rails.configuration.twilio = {account_sid: "account", auth_token: "token"}
@@ -24,13 +26,15 @@ describe CallRefund do
     end
 
     it "credits" do
-      credit = Credit.where(description: "Refunded call \##{call.id} with #{call.psychic_alias_name}").first
-
       expect(credit.credits).to eql(10)
     end
 
     it "refunded" do
       expect(call.status).to eql("refunded")
+    end
+
+    it "marks the credit entry as a refunded" do
+      expect(credit).to be_refunded
     end
   end
 end

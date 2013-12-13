@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131210021116) do
+ActiveRecord::Schema.define(version: 20131213004521) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -164,6 +164,7 @@ ActiveRecord::Schema.define(version: 20131210021116) do
     t.datetime "updated_at"
     t.integer  "target_id"
     t.string   "target_type"
+    t.boolean  "refunded"
   end
 
   create_table "customer_service_representatives", force: true do |t|
@@ -368,7 +369,6 @@ ActiveRecord::Schema.define(version: 20131210021116) do
     t.datetime "updated_at"
   end
 
-  add_index "psychic_events", ["psychic_id"], name: "idx_psychic_events_psychic_id", using: :btree
   add_index "psychic_events", ["psychic_id"], name: "index_psychic_events_on_psychic_id", using: :btree
 
   create_table "psychic_faq_categories", force: true do |t|
