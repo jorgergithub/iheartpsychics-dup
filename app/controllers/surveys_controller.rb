@@ -1,5 +1,6 @@
 class SurveysController < AuthorizedController
   prepend_before_action :store_location
+  layout "main"
 
   def show
     @call = Call.find(params[:id])
