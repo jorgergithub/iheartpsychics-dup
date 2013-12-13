@@ -223,12 +223,17 @@
 
     span.psychic-call-now  {
       display: none;
-      font-size: 30px;
+      font-size: 35px;
       color: #ff8f00;
+      line-height: 1;
 
       position: absolute;
       right: 0px;
       left: 0px;
+
+      .psychic-phone {
+        font-size: 25px;
+      }
     }
 
     &:hover  {
