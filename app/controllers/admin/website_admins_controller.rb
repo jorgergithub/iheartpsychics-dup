@@ -20,7 +20,7 @@ class Admin::WebsiteAdminsController < AuthorizedController
     @website_admin.skip_confirmation!
     if @website_admin.save
       redirect_to admin_website_admins_path,
-        notice: "New website admin was successfully created."
+        notice: "New Content Manager was successfully created."
     else
       render action: "edit"
     end
@@ -29,7 +29,7 @@ class Admin::WebsiteAdminsController < AuthorizedController
   def destroy
     @website_admin.destroy
     redirect_to admin_website_admins_path,
-      notice: 'Website Admin was successfully deleted.'
+      notice: 'Content Manager was successfully deleted.'
   end
 
   protected
@@ -40,6 +40,6 @@ class Admin::WebsiteAdminsController < AuthorizedController
 
   def website_admin_params
     params.require(:website_admin).permit(:first_name, :last_name, :username,
-                                             :email, :password)
+                                          :email, :password, :time_zone)
   end
 end

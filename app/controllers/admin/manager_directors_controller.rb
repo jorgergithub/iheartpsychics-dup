@@ -20,7 +20,7 @@ class Admin::ManagerDirectorsController < AuthorizedController
     @manager_director.skip_confirmation!
     if @manager_director.save
       redirect_to admin_manager_directors_path,
-        notice: "New manager director was successfully created."
+        notice: "New Managing Director was successfully created."
     else
       render action: "edit"
     end
@@ -34,6 +34,6 @@ class Admin::ManagerDirectorsController < AuthorizedController
 
   def manager_director_params
     params.require(:manager_director).permit(:first_name, :last_name, :username,
-                                             :email, :password)
+                                             :email, :password, :time_zone)
   end
 end

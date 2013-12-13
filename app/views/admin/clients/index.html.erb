@@ -10,7 +10,7 @@
       <% end %>
     </div>
 
-    <h3>Clients</h3>
+    <h3>Customers</h3>
 
     <% if @clients.any? %>
       <table class="table table-hover">
@@ -52,11 +52,11 @@
 
     <% else %>
       <div class="blank-state">
-        No clients added yet.
+        No customers added yet.
         <%= link_to "Add one now.", new_admin_client_path %>
       </div>
     <% end %>
-    <%= link_to "Add new client", new_admin_client_path, class: "btn btn-small" %>
+    <%= link_to "Add new customer", new_admin_client_path, class: "btn btn-small" %>
     <%= link_to "Download as CSV", admin_clients_path(format: "csv"), class: "btn btn-small" %>
   </div>
 </div>
