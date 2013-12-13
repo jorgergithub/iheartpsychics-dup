@@ -91,11 +91,7 @@ class Psychic < ActiveRecord::Base
   end
 
   def current_state
-    "available"
-  end
-
-  def available?
-    true
+    (events.last.try(:state) || STATES.first).inquiry
   end
 
   def featured_reviews
