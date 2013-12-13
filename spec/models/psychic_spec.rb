@@ -523,30 +523,115 @@ describe Psychic do
   end
 
   describe "#price_for" do
-    let(:psychic) { create(:psychic, price: 6) }
+    let(:psychic) { create(:psychic, price: price) }
     let(:client) { double(:client) }
 
-    context "new client" do
-      before { client.stub(new_client?: true) }
+    context "psychic with a price less than or equal to $4" do
+      let(:price) { 3 }
 
-      it "is $1" do
-        expect(psychic.price_for(client)).to eql(1)
+      context "new client" do
+        before { client.stub(new_client?: true) }
+
+        it "is $1" do
+          expect(psychic.price_for(client)).to eql(1)
+        end
+      end
+
+      context "existing client" do
+        before { client.stub(new_client?: false) }
+
+        it "is regular psychic price" do
+          expect(psychic.price_for(client)).to eql(3)
+        end
+      end
+
+      context "with no client" do
+        let(:client) { nil }
+
+        it "is regular psychic price" do
+          expect(psychic.price_for(client)).to eql(3)
+        end
       end
     end
 
-    context "existing client" do
-      before { client.stub(new_client?: false) }
+    context "psychic with a price more than $4" do
+      let(:price) { 4.5 }
 
-      it "is regular psychic price" do
-        expect(psychic.price_for(client)).to eql(6)
+      context "new client" do
+        before { client.stub(new_client?: true) }
+
+        it "is the regular psychic price" do
+          expect(psychic.price_for(client)).to eql(4.5)
+        end
+      end
+
+      context "existing client" do
+        before { client.stub(new_client?: false) }
+
+        it "is regular psychic price" do
+          expect(psychic.price_for(client)).to eql(4.5)
+        end
+      end
+
+      context "with no client" do
+        let(:client) { nil }
+
+        it "is regular psychic price" do
+          expect(psychic.price_for(client)).to eql(4.5)
+        end
+      end
+    end
+  end
+
+  describe "#special_price?" do
+    let(:psychic) { create(:psychic, price: price) }
+    let(:client) { double(:client) }
+
+    context "when client is nil" do
+      let(:price) { 4.5 }
+
+      it "returns false" do
+        expect(psychic.special_price?(nil)).to be_false
       end
     end
 
-    context "with no client" do
-      let(:client) { nil }
+    context "when client is new" do
+      before { client.stub(:new_client? => true) }
 
-      it "is regular psychic price" do
-        expect(psychic.price_for(client)).to eql(6)
+      context "when psychic price is $4 or less" do
+        let(:price) { 4 }
+
+        it "returns true" do
+          expect(psychic.special_price?(client)).to be_true
+        end
+      end
+
+      context "when psychic price is more than $4" do
+        let(:price) { 4.5 }
+
+        it "returns false" do
+          expect(psychic.special_price?(nil)).to be_false
+        end
+      end
+    end
+
+    context "when client isn't new" do
+      before { client.stub(:new_client? => false) }
+
+      context "when psychic price is $4 or less" do
+        let(:price) { 4 }
+
+        it "returns false" do
+          expect(psychic.special_price?(client)).to be_false
+        end
+      end
+
+      context "when psychic price is more than $4" do
+        let(:price) { 4.5 }
+
+        it "returns false" do
+          expect(psychic.special_price?(nil)).to be_false
+        end
       end
     end
   end

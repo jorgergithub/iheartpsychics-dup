@@ -325,8 +325,15 @@ class Psychic < ActiveRecord::Base
     update_attributes disabled: !self.disabled
   end
 
+  def special_price?(client)
+    return false unless client
+    return false unless client.new_client?
+    return false if self.price > 4
+    true
+  end
+
   def price_for(client)
-    return self.price unless client and client.new_client?
-    1
+    return 1 if special_price?(client)
+    self.price
   end
 end
