@@ -45,7 +45,7 @@ class Admin::ClientsController < AuthorizedController
       password_confirmation: random_password}))
 
     if @user.save
-      redirect_to admin_clients_path, notice: "New client was successfully created."
+      redirect_to admin_clients_path, notice: "New Customer was successfully created."
     else
       @client = @user.client
       @phones = @client.phones
@@ -56,7 +56,7 @@ class Admin::ClientsController < AuthorizedController
   def update
     if @user.localized.update_attributes(user_params)
       redirect_to edit_admin_client_path(@client, anchor: params[:anchor]),
-        notice: "Client was successfully updated."
+        notice: "Customer was successfully updated."
     else
       render action: "edit"
     end

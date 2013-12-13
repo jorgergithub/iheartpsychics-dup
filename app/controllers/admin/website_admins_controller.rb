@@ -14,13 +14,22 @@ class Admin::WebsiteAdminsController < AuthorizedController
   def edit
   end
 
+  def update
+    if @website_admin.update_attributes(website_admin_params)
+      redirect_to edit_admin_website_admin_path(@website_admin),
+        notice: "Content Manager was successfully updated."
+    else
+      render action: "edit"
+    end
+  end
+
   def create
     params = website_admin_params.merge(create_as: "website_admin")
     @website_admin = WebsiteAdmin.new(params)
     @website_admin.skip_confirmation!
     if @website_admin.save
       redirect_to admin_website_admins_path,
-        notice: "New website admin was successfully created."
+        notice: "New Content Manager was successfully created."
     else
       render action: "edit"
     end
@@ -29,7 +38,7 @@ class Admin::WebsiteAdminsController < AuthorizedController
   def destroy
     @website_admin.destroy
     redirect_to admin_website_admins_path,
-      notice: 'Website Admin was successfully deleted.'
+      notice: 'Content Manager was successfully deleted.'
   end
 
   protected
@@ -40,6 +49,6 @@ class Admin::WebsiteAdminsController < AuthorizedController
 
   def website_admin_params
     params.require(:website_admin).permit(:first_name, :last_name, :username,
-                                             :email, :password)
+                                          :email, :password, :time_zone)
   end
 end

@@ -21,8 +21,17 @@
   </div>
 
   <%= add_text_field f, :username %>
+
   <%= add_text_field f, :email %>
+
   <%= add_password_field f, :password %>
+
+  <div class="control-group">
+    <%= f.label :timezone, "Timezone", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, { include_blank: true, default: f.object.time_zone }, class: 'timezone' %>
+    </div>
+  </div>
 
   <%= f.submit "Save", class: "btn" %>
   <%= link_to "Cancel", admin_manager_directors_path, class: "btn" %>

@@ -1,6 +1,6 @@
 <div class="row-fluid">
   <div class="span8">
-    <h3>Website Admins</h3>
+    <h3>Content Managers</h3>
 
     <% if @website_admins.any? %>
       <table class="table table-hover">
@@ -33,10 +33,10 @@
 
     <% else %>
       <div class="blank-state">
-        No website admins added yet.
+        No content managers added yet.
         <%= link_to "Add one now.", new_admin_website_admin_path %>
       </div>
     <% end %>
-    <%= link_to "Add new website admin", new_admin_website_admin_path, class: "btn btn-small" %>
+    <%= link_to "Add new content manager", new_admin_website_admin_path, class: "btn btn-small" %>
   </div>
 </div>

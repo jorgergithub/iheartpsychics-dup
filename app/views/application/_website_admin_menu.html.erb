@@ -1,15 +1,7 @@
 <ul class="nav">
   <%= dashboard_link %>
-  <%= admin_link 'Psychics', admin_psychics_path %>
-  <%= admin_link 'Clients', admin_clients_path %>
-  <%= admin_link 'Calls', admin_calls_path %>
-  <%= admin_link 'Orders', admin_orders_path %>
-  <%= admin_link 'Packages', admin_packages_path %>
-  <%= admin_link 'Surveys', admin_surveys_path %>
   <%= admin_link 'FAQs', admin_categories_path, :resource => :categories %>
   <%= admin_link 'Psychic FAQs', admin_psychic_faq_categories_path, :resource => :psychic_faq_categories %>
   <%= admin_link 'Daily Fortunes', admin_daily_fortunes_path, :resource => :daily_fortunes %>
   <%= admin_link 'Horoscopes', admin_horoscopes_path %>
-  <%= admin_link 'Newsletters', admin_newsletters_path %>
-  <%= admin_link 'Subscribers', admin_subscribers_path %>
 </ul>

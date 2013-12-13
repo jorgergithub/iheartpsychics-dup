@@ -39,47 +39,48 @@ class Ability
 
   def admin_roles
     %w(
-      admin/customer_service_representatives
-      admin/manager_directors
-      admin/website_admins
       admin/accountants
-      admin/schedule_jobs
-      admin/debug
-    )
-  end
-
-  def admin_and_website_admin_roles
-    %w(
-      admin/dashboards
-      admin/psychics
-      admin/clients
       admin/calls
+      admin/categories
+      admin/clients
+      admin/customer_service_representatives
+      admin/daily_fortunes
+      admin/dashboards
+      admin/debug
+      admin/horoscopes
+      admin/manager_directors
+      admin/newsletters
+      admin/orders
       admin/packages
-      admin/reviews
+      admin/psychic_faq_categories
+      admin/psychics
       admin/refunds
       admin/call_surveys
+      admin/reviews
+      admin/schedule_jobs
+      admin/subscribers
+      admin/surveys
+      admin/website_admins
     )
   end
 
   def website_admin_roles
     %w(
-      admin/orders
-      admin/surveys
       admin/categories
-      admin/psychic_faq_categories
       admin/daily_fortunes
+      admin/dashboards
       admin/horoscopes
-      admin/newsletters
-      admin/subscribers
+      admin/psychic_faq_categories
     )
   end
 
   def csr_roles
     %w(
       customer_service_representatives
-      admin/clients
       admin/calls
+      admin/clients
       admin/orders
+      admin/psychics
     )
   end
 
@@ -88,11 +89,11 @@ class Ability
   end
 
   def authorize_admin
-    can :access, admin_and_website_admin_roles + admin_roles
+    can :access, admin_roles
   end
 
   def authorize_website_admin
-    can :access, admin_and_website_admin_roles + website_admin_roles
+    can :access, website_admin_roles
   end
 
   def authorize_client
