@@ -3,10 +3,7 @@ class Credit < ActiveRecord::Base
   belongs_to :target, polymorphic: true
 
   scope :by_date, -> { order("created_at") }
-  scope :from_orders_and_refunds, -> {
-    where("target_type = ? OR (target_type = ? AND refunded)",
-    "Order", "Call")
-  }
+  scope :from_orders, -> { where("target_type = ?", "Order") }
 
   def parsed_time_only
     created_at.strftime("%I:%M %p")
@@ -28,7 +25,7 @@ class Credit < ActiveRecord::Base
     if target.respond_to?(:transactions)
       target.transactions.first.amount
     else
-      -credits
+      "N/A"
     end
   end
 end

@@ -26,8 +26,7 @@ class CallRefund
     client.credits.create(
       credits: @call.cost,
       description: "Refunded call \##{@call.id} with #{@call.psychic_alias_name}",
-      target: @call,
-      refunded: true
+      target: @call
     )
 
     client.balance ||= 0
