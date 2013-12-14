@@ -61,6 +61,7 @@ class Ability
       admin/subscribers
       admin/surveys
       admin/website_admins
+      admin/invoices
     )
   end
 
