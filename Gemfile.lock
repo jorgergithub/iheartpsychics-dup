@@ -69,6 +69,9 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
+    airbrake (3.1.14)
+      builder
+      json
     arel (4.0.1)
     atomic (1.1.14)
     awesome_print (1.2.0)
@@ -351,6 +354,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  airbrake (~> 3.1.14)
   bootstrap-sass (~> 2.3.2.0)
   cancan!
   carrierwave (~> 0.9.0)
