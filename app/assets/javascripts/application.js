@@ -52,3 +52,4 @@
 //= require splash
 //= require tabs
 //= require svg
+//= require call_summary
