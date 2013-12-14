@@ -1,10 +1,6 @@
 xml.instruct!
 xml.Response do
   xml.Gather(timeout: 15) do
-    xml.Say <<-EOS.strip_heredoc, voice: "woman"
-      We're sorry, the number you have provided is not
-      in our system.
-      Please re-enter your 10 digit account number and press pound.
-    EOS
+    xml.Play "/prompts/002-user-number-not-found.mp3"
   end
 end

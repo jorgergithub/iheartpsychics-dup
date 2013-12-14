@@ -167,7 +167,7 @@ class CallsController < ApplicationController
       @psychic.cancel_call!
 
       response = Twilio::TwiML::Response.new do |r|
-        r.Say "The psychic is not available", :voice => 'woman'
+        r.Play "/prompts/psychic-unavailable-sorry.mp3"
       end
 
       render text: response.text

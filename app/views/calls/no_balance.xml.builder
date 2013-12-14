@@ -1,18 +1,10 @@
 xml.instruct!
 xml.Response do
   xml.Gather(action: calls_url_for("topup", phone_number), numDigits: 1, timeout: 15) do
-    xml.Say <<-EOS.strip_heredoc, voice: "woman"
-      Thank you for validating your account #{@client.first_name}.
-      Your account is out of dollars.
-    EOS
-    if @client.cards.try(:any?)
-      xml.Say <<-EOS.strip_heredoc, voice: "woman"
-        Please press 1 to purchase more dollars.
-      EOS
-    end
-    xml.Say <<-EOS.strip_heredoc, voice: "woman"
-      Press 2 to speak to a customer service representative.
-      Press 3 to disconnect.
-    EOS
+    xml.Play "/prompts/no-balance-1-thank-you.mp3"
+    xml.Say @client.first_name, voice: "woman"
+    xml.Play "/prompts/no-balance-2-out-of-credits.mp3"
+    xml.Say "1", voice: "woman"
+    xml.Play "/prompts/no-balance-3-other-options.mp3"
   end
 end

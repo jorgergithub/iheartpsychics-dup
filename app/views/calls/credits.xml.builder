@@ -3,17 +3,12 @@ xml.Response do
   xml.Gather(action: calls_url_for("buy_credits", phone_number), timeout: 15, numDigits: 1) do
     i = 1
     @packages.each do |pkg|
-      xml.Say <<-EOS.strip_heredoc, voice: "woman"
-        Press #{i} to add #{price_to_phrase pkg.credits} to your account
-        for #{price_to_phrase(pkg.price)}.
-      EOS
+      xml.Play "/prompts/credits-#{i}-press-#{i}.mp3"
+      xml.Say pkg.credits.to_i, voice: "woman"
+      xml.Play "/prompts/credits-5-dollars-to-your-account.mp3"
+      xml.Say price_to_phrase(pkg.price), voice: "woman"
       i += 1
     end
-    xml.Say <<-EOS.strip_heredoc, voice: "woman"
-      Press #{i} to speak to a customer service representative.
-    EOS
-    xml.Say <<-EOS.strip_heredoc, voice: "woman"
-      Press #{i+1} to disconnect.
-    EOS
+    xml.Play "/prompts/credits-4-press-4.mp3"
   end
 end

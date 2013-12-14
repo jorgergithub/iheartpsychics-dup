@@ -1,10 +1,8 @@
 xml.instruct!
 xml.Response do
   xml.Gather(timeout: 15) do
-    xml.Say <<-EOS.strip_heredoc, voice: "woman"
-      We're sorry #{@client.first_name},
-      that is the incorrect PIN number for your account.
-      Please re-enter your PIN number
-    EOS
+    xml.Play "/prompts/pin-error-1-sorry.mp3"
+    xml.Say @client.first_name, voice: "woman"
+    xml.Play "/prompts/pin-error-2-incorrect.mp3"
   end
 end
