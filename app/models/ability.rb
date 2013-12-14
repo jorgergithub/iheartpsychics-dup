@@ -81,6 +81,7 @@ class Ability
       admin/clients
       admin/orders
       admin/psychics
+      admin/refunds
     )
   end
 
