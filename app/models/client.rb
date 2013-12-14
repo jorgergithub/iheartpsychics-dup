@@ -183,6 +183,10 @@ class Client < ActiveRecord::Base
     calls.completed.count == 0
   end
 
+  def enough_balance_for(psychic)
+    balance >= psychic.price
+  end
+
   private
 
   def set_unsubscribe_key

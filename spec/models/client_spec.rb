@@ -548,4 +548,25 @@ describe Client do
       end
     end
   end
+
+  describe "#enough_balance_for" do
+    let(:client) { create(:client) }
+    let(:psychic) { create(:psychic, price: 6) }
+
+    context "when client's balance is enough for one minute with the psychic" do
+      before { client.stub(balance: 6) }
+
+      it "is true" do
+        expect(client.enough_balance_for(psychic)).to be_true
+      end
+    end
+
+    context "when client's balance is not enough for one minute with the psychic" do
+      before { client.stub(balance: 5.9) }
+
+      it "is false" do
+        expect(client.enough_balance_for(psychic)).to be_false
+      end
+    end
+  end
 end

@@ -204,7 +204,7 @@ class CallsController < ApplicationController
   end
 
   def check_credits
-    return if @client.balance?
+    return if @client.enough_balance_for(@psychic)
 
     render :no_balance_menu
   end
