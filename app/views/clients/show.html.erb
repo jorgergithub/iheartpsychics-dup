@@ -148,8 +148,8 @@
   <h2 class="section-title">My Purchase History</h2>
 
   <div id="purchase_history_container">
-    <% if @credits.any? %>
-      <%= render "purchase_history", credits: @credits %>
+    <% if @transactions.any? %>
+      <%= render "purchase_history", transactions: @transactions %>
     <% else %>
       <div class="client-blank">
         No purchase history yet.<br>

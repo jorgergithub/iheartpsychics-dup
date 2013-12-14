@@ -16,13 +16,13 @@
 
       <table class="records">
         <tbody>
-          <% @credits.each do |credit| %>
+          <% @transactions.each do |transaction| %>
             <tr>
-              <td><%= credit.payment %></td>
-              <td><%= number_to_currency credit.amount %></td>
-              <td><%= credit.parsed_date_only %></td>
-              <td>#<%= credit.id %></td>
-            </tr>                  
+              <td><%= transaction.card %></td>
+              <td><%= number_to_currency transaction.amount %></td>
+              <td><%= transaction.parsed_date_only %></td>
+              <td>#<%= transaction.order.id %></td>
+            </tr>
           <% end %>
         </tbody>
       </table>
