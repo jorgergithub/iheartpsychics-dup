@@ -12,11 +12,11 @@ class Review < ActiveRecord::Base
   scope :regular, -> { where(featured: false) }
 
   Ratings = {
-    5 => "I'm in love",
-    4 => "I have a crush",
-    3 => "I'm a fan",
-    2 => "I've had better",
-    1 => "I want to breakup"
+    5 => "Woohoo! As good as it gets!",
+    4 => "Yay! I'm a fan.",
+    3 => "Not bad, not great. Average.",
+    2 => "Meh. I've had better.",
+    1 => "Eek! I think not."
   }
 
   def mark_as_featured!
