@@ -116,6 +116,7 @@ class CallsController < ApplicationController
     disconnect = csr_choice + 1
 
     if choice == csr_choice
+      @csr = CustomerServiceRepresentative.next_available
       render :csr
       return
     end
