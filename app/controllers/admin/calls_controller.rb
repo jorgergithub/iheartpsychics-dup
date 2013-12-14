@@ -22,6 +22,10 @@ class Admin::CallsController < ApplicationController
     end
   end
 
+  def summary
+    @calls = Call.all.page(params[:page]).per(params[:per])
+  end
+
   private
 
   def find_client
