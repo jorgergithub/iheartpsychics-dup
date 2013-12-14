@@ -40,6 +40,9 @@ gem 'twilio-ruby'            , '~> 3.10.0'
 gem 'unicorn'                , '~> 4.6.3'
 gem 'whenever'               , '~> 0.8.4'
 
+gem "capistrano"             , "~> 3.0.1"
+gem 'capistrano-bundler'
+
 group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_girl_rails'   , '~> 4.2.1'
@@ -51,6 +54,8 @@ group :development, :test do
   gem 'quiet_assets'         , '~> 1.0.2'
   gem 'rspec-rails'          , '~> 2.0'
   gem 'timecop'              , '~> 0.6.3'
+  
+  gem "capistrano-rails"     , "~> 1.1.0"
 end
 
 group :test do
