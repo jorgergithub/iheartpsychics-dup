@@ -19,13 +19,12 @@ class Admin::CustomerServiceRepresentativesController < AuthorizedController
   def create
     ActiveRecord::Base.transaction do
       @user = User.new(user_params.merge({ create_as: "csr" }))
+      @user.skip_confirmation!
       @user.localized.update_attributes(user_params)
 
       @csr = @user.build_rep(csr_params)
       @csr.localized.update_attributes(csr_params)
       @csr.user = @user
-
-      @user.skip_confirmation!
 
       if @user.save #and @csr.save
         redirect_to admin_customer_service_representatives_path,
@@ -55,6 +54,14 @@ class Admin::CustomerServiceRepresentativesController < AuthorizedController
     end
   end
 
+  def destroy
+    @user = @csr.user
+    @csr.destroy
+    @user.destroy
+    redirect_to admin_customer_service_representatives_path,
+      notice: "CSR was successfully deleted."
+  end
+
   protected
 
   def find_csr
@@ -62,7 +69,7 @@ class Admin::CustomerServiceRepresentativesController < AuthorizedController
   end
 
   def user_params
-    params.require(:customer_service_representative).permit(:first_name, :last_name, :username, :email, :password)
+    params.require(:customer_service_representative).permit(:first_name, :last_name, :username, :email, :password, :time_zone)
   end
 
   def csr_params

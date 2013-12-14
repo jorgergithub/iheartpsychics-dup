@@ -6,7 +6,7 @@ class CustomerServiceRepresentative < ActiveRecord::Base
 
   belongs_to :user
 
-  delegate :username, :first_name, :last_name, :full_name, :email,
+  delegate :username, :first_name, :last_name, :full_name, :email, :time_zone,
            to: :user, allow_nil: true
 
   validates :phone, presence: true
