@@ -17,8 +17,8 @@ class OrdersController < AuthorizedController
         Rails.logger.info "[OrdersController#create] Order saved: #{@order.inspect}"
         @order.pay
         Rails.logger.info "[OrdersController#create] Order paid: #{@order.inspect}"
-        @credits = @client.credits.order('id desc').page(params[:page_credits]).per(params[:per])
-        Rails.logger.info "[OrdersController#create] Credits loaded: #{@credits.inspect}"
+        @transactions = @client.transactions.order('id desc').page(params[:page_credits]).per(params[:per])
+        Rails.logger.info "[OrdersController#create] Transactions loaded: #{@transactions.inspect}"
         format.html { redirect_to client_path, notice: "Your order was successfully processed" }
         format.js
       else
