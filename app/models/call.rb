@@ -157,6 +157,14 @@ class Call < ActiveRecord::Base
     status == "refunded"
   end
 
+  def price_f
+    self.price.to_f
+  end
+
+  def profit
+    self.cost - self.price_f
+  end
+
   private
 
   def calculate_duration
