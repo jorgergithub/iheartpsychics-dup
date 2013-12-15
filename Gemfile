@@ -19,6 +19,7 @@ gem 'ckeditor'               , :git => 'https://github.com/gistia/ckeditor'
 gem 'cloudinary'             , '~> 1.0.66'
 gem 'country_select'         , '~> 1.2.0'
 gem 'devise'                 , '~> 3.0.1'
+gem 'dotenv-rails'           , '~> 0.9.0'
 gem 'enumerate_it'           , '~> 1.2.0'
 gem 'faker'                  , '~> 1.2.0'
 gem 'foreigner'              , '~> 1.5.0'
@@ -44,7 +45,6 @@ gem "capistrano"             , "~> 3.0.1"
 gem 'capistrano-bundler'
 
 group :development, :test do
-  gem 'dotenv-rails'
   gem 'factory_girl_rails'   , '~> 4.2.1'
   gem 'growl'                , '~> 1.0.3'
   gem 'guard'                , '~> 1.8.2'
@@ -54,7 +54,7 @@ group :development, :test do
   gem 'quiet_assets'         , '~> 1.0.2'
   gem 'rspec-rails'          , '~> 2.0'
   gem 'timecop'              , '~> 0.6.3'
-  
+
   gem "capistrano-rails"     , "~> 1.1.0"
 end
 
