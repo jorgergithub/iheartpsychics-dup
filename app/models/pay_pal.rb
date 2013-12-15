@@ -8,7 +8,7 @@ class PayPal
 
   def form(*args)
     form = <<-EOS.strip_heredoc
-    <form accept-charset="UTF-8" action="https://www.sandbox.paypal.com/cgi-bin/webscr" id="paypal_form" method="post">
+    <form accept-charset="UTF-8" action="#{ENV['PAYPAL_URL']}" id="paypal_form" method="post">
       <input type="hidden" name="cmd" value="_s-xclick">
       <input type="hidden" name="encrypted" value="#{encrypted}">
     </form>
