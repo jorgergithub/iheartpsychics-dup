@@ -16,10 +16,12 @@ set :log_level, :debug
 set :linked_files, %w{config/database.yml}
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+#set :default_env, { path: "/opt/ruby/bin:$PATH" }
 set :keep_releases, 3
 
 namespace :deploy do
+
+  before :compile_assets, 'deploy:symlink:shared'
 
   desc 'Restart application'
   task :restart do
@@ -40,4 +42,14 @@ namespace :deploy do
 
   after :finishing, 'deploy:cleanup'
 
+end
+
+namespace :shared_config do
+  
+  desc "Uploads local shared configs to remote servers"
+  task :upload do
+    on roles(:all) do
+      upload! "config/database.yml", "#{fetch(:deploy_to)}/shared/config"
+    end
+  end
 end

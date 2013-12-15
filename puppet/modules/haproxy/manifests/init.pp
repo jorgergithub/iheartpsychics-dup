@@ -182,10 +182,6 @@ class haproxy (
     source  => 'puppet:///modules/haproxy/haproxy-default',
   }
   
-  file { [ $deploy_to, "${deploy_to}/current", "${deploy_to}/current/public" ]:
-    ensure  => directory,
-  }
-  
   file { '/etc/apache2/sites-available/maintenance':
     ensure  => present,
     mode    => '0644',

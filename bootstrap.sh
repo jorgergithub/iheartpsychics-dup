@@ -32,6 +32,7 @@ fi
 # Install Puppet gem
 sudo gem update --system
 sudo gem install puppet --no-ri --no-rdoc
+sudo gem install bundler --no-ri --no-rdoc
 
 # Some post install configuring for Puppet
 sudo puppet resource group puppet ensure=present

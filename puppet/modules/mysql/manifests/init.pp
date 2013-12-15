@@ -8,6 +8,10 @@ class mysql (
   $db_password                = hiera("mysql::db_password", undef),
   ){
   
+  package { 'libmysqlclient-dev':
+    ensure => installed,
+  }
+  
   package { 'mysql-server':
     ensure  => installed,
   }

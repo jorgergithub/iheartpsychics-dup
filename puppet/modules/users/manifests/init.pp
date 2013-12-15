@@ -1,6 +1,8 @@
 class users (
-  $active    = hiera("users::active"),
-  $disabled  = hiera("users::disabled"),
+  $active     = hiera("users::active"),
+  $disabled   = hiera("users::disabled"),
+  $deploy_to  = hiera("deploy_to", undef),
+  $user       = hiera("user", undef),
   ) {
     
   setup_users { $active: }
@@ -48,5 +50,11 @@ class users (
       ensure  => absent,
       shell   => '/bin/nologin',
     }
+  }
+  
+  file { $deploy_to:
+    ensure  => directory,
+    owner   => $user,
+    mode    => '0775',
   }
 }
