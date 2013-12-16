@@ -32,6 +32,7 @@ gem 'newrelic_rpm'           , '~> 3.7.0.177'
 gem 'omniauth-facebook'      , '~> 1.4.1'
 gem 'omniauth-google-oauth2' , '~> 0.2.1'
 gem 'omniauth-twitter'       , '~> 1.0.0'
+gem 'rails-pulse'            , :git => "https://github.com/gistia/pulse.git"
 gem 'sidekiq'                , '~> 2.16.0'
 gem 'sinatra'                , '>= 1.3.0', :require => nil
 gem 'slim'                   , '>= 1.1.0'

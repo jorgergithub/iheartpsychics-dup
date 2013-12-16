@@ -197,6 +197,8 @@ IHeartPsychics::Application.routes.draw do
   get "/privacy", to: "home#privacy", as: "privacy"
   get "/terms", to: "home#terms", as: "terms"
 
+  pulse "/pulse"
+
   get "/" => "home#staff", constraints: { subdomain: "admin" }
   get "/" => "home#staff", constraints: { subdomain: "staff" }
   root to: 'home#index'
