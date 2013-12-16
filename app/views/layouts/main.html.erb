@@ -112,41 +112,42 @@
               Sign out
             </li>
           <% else %>
+            <div class="modal_list">
+              <%= render "modals/sign_up" %>
+              <%= render "modals/sign_up_success" %>
+              <%= render "modals/sign_in/sign_in_error" %>
+              <%= render "modals/password/forgot_password" %>
+              <%= render "modals/password/forgot_password_email_sent" %>
+
+              <% if defined?(resource) and resource %>
+                <%= render "modals/password/reset_password" %>
+              <% end %>
+              <%= render "modals/password/reset_password_success" %>
+
+              <% if params[:reset_password_token] %>
+                <script>
+                  $(document).ready(function() {
+                    showModal("reset_password_modal");
+                  });
+                </script>
+              <% end %>
+
+              <% if params[:reset_password_success] %>
+                <script>
+                  $(document).ready(function() {
+                    showModal("reset_password_success_modal");
+                  });
+                </script>
+              <% end %>
+            </div>
+
             <% if consumer? %>
               <li class="signin header-nav-link">
                 <%= content_tag(:i, "", class: "signup header-nav-link-arrow modal_link", data: { "modal-id" => "sign_up_modal" }) %>
                 Sign Up
-
-                <div class="modal_list">
-                  <%= render "modals/sign_up" %>
-                  <%= render "modals/sign_up_success" %>
-                  <%= render "modals/sign_in/sign_in_error" %>
-                  <%= render "modals/password/forgot_password" %>
-                  <%= render "modals/password/forgot_password_email_sent" %>
-                  <% if defined?(resource) and resource %>
-                    <%= render "modals/password/reset_password" %>
-                  <% end %>
-                  <%= render "modals/password/reset_password_success" %>
-
-
-                  <% if params[:reset_password_token] %>
-                    <script>
-                      $(document).ready(function() {
-                        showModal("reset_password_modal");
-                      });
-                    </script>
-                  <% end %>
-
-                  <% if params[:reset_password_success] %>
-                    <script>
-                      $(document).ready(function() {
-                        showModal("reset_password_success_modal");
-                      });
-                    </script>
-                  <% end %>
-                </div>
               </li>
             <% end %>
+
             <li class="signin header-nav-link">
               <%= content_tag(:i, "", class: "signin header-nav-link-arrow") %>
               Sign In
