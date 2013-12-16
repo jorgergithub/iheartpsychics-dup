@@ -61,6 +61,7 @@ class Admin::PsychicsController < AuthorizedController
   end
 
   def update
+    @user.skip_reconfirmation!
     if @user.localized.update_attributes(user_params)
       redirect_to edit_admin_psychic_path(@user.psychic.localized), notice: "Psychic was successfully updated."
     else
@@ -78,7 +79,7 @@ class Admin::PsychicsController < AuthorizedController
   end
 
   def user_params
-    ret = params.require(:user).permit(
+    ret = params.require(:user).permit(:id,
       :first_name, :last_name, :username, :email, :password, :password_confirmation,
       psychic_attributes: [ :id, :pseudonym, :ability_clairvoyance, :ability_clairaudient,
       :ability_clairsentient, :ability_empathy, :ability_medium,
