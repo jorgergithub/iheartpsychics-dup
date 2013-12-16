@@ -1,5 +1,5 @@
 class Package < ActiveRecord::Base
-  scope :active, -> { where("active").order("credits") }
+  scope :active, -> { where("active").order("credits DESC") }
   scope :phone_offers, -> { active.where("phone").order("credits DESC") }
   has_many :order_items, dependent: :restrict
 
