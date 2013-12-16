@@ -29,6 +29,16 @@ class Admin::PackagesController < AuthorizedController
     end
   end
 
+  def destroy
+    begin
+      @package.destroy
+      redirect_to admin_packages_path, notice: "Package was successfully deleted."
+    rescue ActiveRecord::DeleteRestrictionError => e
+      flash[:error] = "Can't delete package with orders"
+      redirect_to admin_packages_path
+    end
+  end
+
   protected
 
   def find_package
