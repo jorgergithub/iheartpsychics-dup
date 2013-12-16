@@ -1,8 +1,8 @@
 <a name="offers"></a>
 <div class="container-offers small_container">
-  <% Package.active.each do |package| %>
+  <% Package.active.each_with_index do |package, i| %>
     <%= content_tag :div,
-                    class: "container-offer modal_link",
+                    class: "container-offer modal_link#{i%3 == 0 ? " first" : ""}",
                     "data-modal-id" => container_offer_modal_id,
                     data: { "modal-attributes" => { package: {  id: package.id,
                                                                 price: package.price.to_i,
@@ -17,8 +17,10 @@
         <span>Dollars</span>
       </div>
 
-      <div class="container-offer-discount-bg"></div>
-      <div class="container-offer-discount-<%= package.discount %>"></div>
+      <% if package.discount > 0 %>
+        <div class="container-offer-discount-bg"></div>
+        <div class="container-offer-discount-<%= package.discount %>"></div>
+      <% end %>
     <% end %>
   <% end %>
 

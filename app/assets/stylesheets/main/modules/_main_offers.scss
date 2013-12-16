@@ -3,7 +3,7 @@
 .container-offers {
   @extend %clearfix;
   margin-top: 80px;
-  margin-bottom: 110px;
+  margin-bottom: 60px;
 }
 
 .container-offer {
@@ -12,6 +12,8 @@
   height: 421px;
   float: left;
   background: url(image-path("offer-background.png"));
+  margin-left: 35px;
+  margin-bottom: 50px;
 }
 
 .container-offer.modal_link,
@@ -19,8 +21,8 @@
   cursor: pointer;
 }
 
-.container-offer + .container-offer {
-  margin-left: 35px;
+.container-offer.first {
+  margin-left: 0;
 }
 
 .container-offer-header {
@@ -61,6 +63,8 @@
   left: -30px;
 }
 
+.container-offer-discount-9,
+.container-offer-discount-11,
 .container-offer-discount-14,
 .container-offer-discount-16,
 .container-offer-discount-18 {
@@ -69,6 +73,14 @@
   height: 100px;
   top: -30px;
   left: -30px;
+}
+
+.container-offer-discount-9 {
+  background: url(image-path("offer-discount-9.png"));
+}
+
+.container-offer-discount-11 {
+  background: url(image-path("offer-discount-11.png"));
 }
 
 .container-offer-discount-14 {
