@@ -1,6 +1,6 @@
 <a name="offers"></a>
 <div class="container-offers small_container">
-  <% Package.all.each do |package| %>
+  <% Package.active.each do |package| %>
     <%= content_tag :div,
                     class: "container-offer modal_link",
                     "data-modal-id" => container_offer_modal_id,
