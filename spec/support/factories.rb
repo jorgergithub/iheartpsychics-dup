@@ -38,6 +38,7 @@ FactoryGirl.define do
     balance 60
     birthday Date.today
     phones { [FactoryGirl.create(:client_phone)] }
+    pin { "1234" }
   end
 
   factory :psychic do
