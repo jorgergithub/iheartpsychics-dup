@@ -7,6 +7,7 @@ class PsychicApplication < ActiveRecord::Base
             :why_work, :friends_describe, :strongest_weakest_attributes,
             :how_to_deal_challenging_client, :tools, :specialties, :professional_goals,
             :how_did_you_hear, presence: true
+  validates :password, length: { minimum: 8 }, allow_blank: true
   validates :price, presence: true, if: :persisted?
   validates :us_citizen, inclusion: { in: [true, false], message: "can't be blank" }
   validates :has_experience, inclusion: { in: [true, false], message: "can't be blank" }
