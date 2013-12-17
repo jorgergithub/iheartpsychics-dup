@@ -326,8 +326,7 @@ class Psychic < ActiveRecord::Base
   end
 
   def special_price?(client)
-    return false unless client
-    return false unless client.new_client?
+    return false if client && !client.new_client?
     return false if self.price > 4
     true
   end
