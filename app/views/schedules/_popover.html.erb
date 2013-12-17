@@ -7,6 +7,6 @@
     <% toggle_id = "toggle_#{(rand*10000000).to_i}" %>
     <%= f.check_box "#{type}_period", id: toggle_id, class: "toggle", checked: schedule.send("#{type}_period") == "PM" %>
 
-    <label for="<%= toggle_id %>">PM</label>
+    <label for="<%= toggle_id %>" class="toggle_label">PM</label>
   </div>
 </div>

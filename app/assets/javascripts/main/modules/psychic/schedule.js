@@ -72,11 +72,27 @@ Module("IHP.Pages.Schedules", function(Schedules) {
     var regex = new RegExp("new_schedules", "g");
     var content = $(template.replace(regex, newId));
 
+    content = adaptToggleIds(content);
+
     content.attr("data-date", date);
     content.find("input[type=hidden].date").val(date);
     content.insertAfter(schedule.nextUntil("tr.date-row").last());
     this.zebrateTable();
   };
+
+  var adaptToggleIds = function(schedule) {
+    var newSchedule = schedule.clone();
+
+    var startTimeToggleId = "toggle_" + Math.floor((Math.random() * 10000000));
+    newSchedule.find("input.toggle").first().attr("id", startTimeToggleId)
+    newSchedule.find("label.toggle_label").first().attr("for", startTimeToggleId)
+
+    var endTimeToggleId = "toggle_" + Math.floor((Math.random() * 10000000));
+    newSchedule.find("input.toggle").last().attr("id", endTimeToggleId)
+    newSchedule.find("label.toggle_label").last().attr("for", endTimeToggleId)
+
+    return newSchedule
+  }
 
   Schedules.fn.addSchedule = function(e) {
     e.preventDefault();
