@@ -1,4 +1,6 @@
 class Admin::CallsController < ApplicationController
+  include CallsHelper
+
   def index
     @client = Client.find(chosen_client) if chosen_client
     find_calls
@@ -24,6 +26,18 @@ class Admin::CallsController < ApplicationController
 
   def summary
     @calls = Call.all.page(params[:page]).per(params[:per])
+    @start_date = params[:start_date]
+    @end_date = params[:end_date]
+
+    if @start_date.present? && @end_date.present?
+      @calls = @calls.period(Date.strptime(params[:start_date], "%d-%m-%Y"),Date.strptime(params[:end_date], "%d-%m-%Y"))
+    end
+
+    @all_calls = Call.all
+
+    @total_cost_of_calls = total_cost_of_calls(@all_calls)
+    @total_price_of_calls = total_price_of_calls(@all_calls)
+    @total_revenue_of_calls = total_revenue_of_calls(@all_calls)
   end
 
   private

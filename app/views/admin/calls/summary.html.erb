@@ -1,18 +1,19 @@
-<table>
-  <tr>
-    <td>Start date</td>
-    <td><%= text_field_tag :start_date, @start_date, class: "call_summary_date" %></td>
-  </tr>
-  <tr>
-    <td>End date</td>
-    <td><%= text_field_tag :end_date, @end_date, class: "call_summary_date" %></td>
-  </tr>
-  <tr>
-    <td colspan="2">
-      <%#= submit  %>
-    </td>
-  </tr>
-</table>
+<div class="row-fluid">
+  <div class="span8">
+    <h3>Calls Summary</h3>
+
+    <%= form_tag(summary_admin_calls_path, method: "get") do %>
+      <label>Start date</label>
+      <%= text_field_tag :start_date, @start_date, class: "call_summary_date" %>
+
+      <label>End date</label>
+      <%= text_field_tag :end_date, @end_date, class: "call_summary_date" %>
+
+      <br>
+      <%= submit_tag "Search", class: "btn" %>
+    <% end %>
+  </div>
+</div>
 
 <div class="control-group">
   <div class="controls">
@@ -60,12 +61,21 @@
             </tr>
           <% end %>
         </tbody>
+
+        <tfoot>
+          <tr>
+            <td colspan="7"><strong>Total</strong></td>
+            <td class="right"><%= number_to_currency @total_cost_of_calls %></td>
+            <td class="right"><%= number_to_currency @total_price_of_calls %></td>
+            <td class="right"><%= number_to_currency @total_revenue_of_calls %></td>
+          </tr>
+        </tfoot>
       </table>
 
       <%= paginate @calls %>
     <% else %>
       <div class="blank-state">
-        No calls logged yet.
+        No calls logged yet for the specified period.
       </div>
     <% end %>
   </div>
