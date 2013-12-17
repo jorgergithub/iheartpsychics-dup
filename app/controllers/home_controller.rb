@@ -54,7 +54,10 @@ class HomeController < AuthorizedController
   protected
 
   def go_home(dashboard=false)
-    return false unless current_user
+    unless current_user
+      redirect_to root_path if dashboard
+      return false
+    end
 
     if dashboard and current_user.client?
       redirect_to client_path

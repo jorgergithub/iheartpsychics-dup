@@ -15,31 +15,33 @@
   <div class="navbar">
     <div class="navbar-inner">
       <a class="brand" href="/">IHeartPsychics</a>
-      <% if current_user.admin? %>
-        <%= render "admin_menu" %>
-      <% elsif current_user.manager_director? %>
-        <%= render "manager_director_menu" %>
-      <% elsif current_user.website_admin? %>
-        <%= render "website_admin_menu" %>
-      <% elsif current_user.accountant? %>
-        <%= render "accountant_menu" %>
-      <% elsif current_user.psychic? %>
-        <%= render "psychic_menu" %>
-      <% elsif current_user.client? %>
-        <%= render "client_menu" %>
-      <% elsif current_user.rep? %>
-        <%= render "rep_menu" %>
-      <% else %>
-        <ul class="nav">
-          <li><%= link_to 'Dashboard', dashboard_path %></li>
+      <% if current_user %>
+        <% if current_user.admin? %>
+          <%= render "admin_menu" %>
+        <% elsif current_user.manager_director? %>
+          <%= render "manager_director_menu" %>
+        <% elsif current_user.website_admin? %>
+          <%= render "website_admin_menu" %>
+        <% elsif current_user.accountant? %>
+          <%= render "accountant_menu" %>
+        <% elsif current_user.psychic? %>
+          <%= render "psychic_menu" %>
+        <% elsif current_user.client? %>
+          <%= render "client_menu" %>
+        <% elsif current_user.rep? %>
+          <%= render "rep_menu" %>
+        <% else %>
+          <ul class="nav">
+            <li><%= link_to 'Dashboard', dashboard_path %></li>
+          </ul>
+        <% end %>
+        <ul class="nav pull-right">
+          <li>
+            <%= link_to current_user.full_name, dashboard_path %>
+          </li>
+          <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
         </ul>
       <% end %>
-      <ul class="nav pull-right">
-        <li>
-          <%= link_to current_user.full_name, dashboard_path %>
-        </li>
-        <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
-      </ul>
     </div>
   </div>
 
