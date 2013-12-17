@@ -16,6 +16,8 @@ class Admin::ClientsController < AuthorizedController
         @clients = @clients.order("users.first_name, users.last_name")
           .page(params[:page]).per(params[:per])
       }
+
+      format.csv { send_data Client.to_csv }
     end
   end
 
