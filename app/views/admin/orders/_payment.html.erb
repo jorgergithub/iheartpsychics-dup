@@ -20,7 +20,7 @@
       <div class="control-group">
         <%= label_tag :order_card_number, nil, class: 'control-label' %>
         <div class="controls">
-          <%= text_field_tag :order_card_number, nil, name: 'order[card_number]', maxlength: 16, data: { stripe: "number", mask: "9999 9999 9999 9999" } %>
+          <%= text_field_tag :order_card_number, nil, name: 'order[card_number]', maxlength: 16, data: { stripe: "number" } %>
           <span id="card-number-validation-error" class="validation-error"></span>
         </div>
       </div>
