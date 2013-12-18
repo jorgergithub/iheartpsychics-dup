@@ -369,6 +369,7 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.datetime "updated_at"
   end
 
+  add_index "psychic_events", ["psychic_id"], name: "idx_psychic_events_psychic_id", using: :btree
   add_index "psychic_events", ["psychic_id"], name: "index_psychic_events_on_psychic_id", using: :btree
 
   create_table "psychic_faq_categories", force: true do |t|
