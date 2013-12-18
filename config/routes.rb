@@ -22,6 +22,10 @@ IHeartPsychics::Application.routes.draw do
       member do
         post :refund
       end
+
+      collection do
+        get :summary
+      end
     end
 
     resources :categories

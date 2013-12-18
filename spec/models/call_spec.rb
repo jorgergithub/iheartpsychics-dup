@@ -179,4 +179,12 @@ describe Call do
       end
     end
   end
+
+  describe "#profit" do
+    let(:call) { create(:call, cost: 30, price: "2") }
+
+    it "is the cost minus the price" do
+      expect(call.profit).to eql(28)
+    end
+  end
 end
