@@ -33,6 +33,12 @@ class Admin::ClientsController < AuthorizedController
   def edit
   end
 
+  def disable
+    @client.toggle_disabled!
+    message = @client.disabled? ? "disabled" : "enabled"
+    redirect_to admin_clients_path, notice: "Client was successfully #{message}."
+  end
+
   def resend_confirmation
     @user.resend_confirmation_token
     redirect_to admin_clients_path, notice: "Confirmation successfully resent."

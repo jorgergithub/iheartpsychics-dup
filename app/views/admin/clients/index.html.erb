@@ -24,6 +24,7 @@
             <th>Phone</th>
             <th>Balance</th>
             <th>Created</th>
+            <th>Disabled?</th>
           </tr>
         </thead>
         <tbody>
@@ -35,6 +36,7 @@
                 <% unless client.confirmed? %>
                   <%= link_to '<i class="icon-share"></i>'.html_safe, resend_confirmation_admin_client_path(client), title: "Resend confirmation", data: {confirm: "Do you want to resend account confirmation email to #{client.full_name}?" } %>
                 <% end %>
+                <%= link_to '<i class="icon-off"></i>'.html_safe, disable_admin_client_path(client) %>
               </td>
               <td><%= link_to client.username, edit_admin_client_path(client) %></td>
               <td><%= client.full_name %></td>
@@ -43,6 +45,11 @@
               <td><%= client.phones.first.number %></td>
               <td class="right"><%= number_to_currency client.balance %></td>
               <td><%=l client.created_at, format: :short %></td>
+              <td>
+                <% if client.disabled? %>
+                  <i class="icon-ok"></i>
+                <% end %>
+              </td>
             </tr>
           <% end %>
         </tbody>

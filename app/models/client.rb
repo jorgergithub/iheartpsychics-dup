@@ -187,6 +187,10 @@ class Client < ActiveRecord::Base
     balance >= psychic.price
   end
 
+  def toggle_disabled!
+    update_attributes disabled: !self.disabled
+  end
+
   private
 
   def set_unsubscribe_key

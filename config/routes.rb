@@ -33,6 +33,7 @@ IHeartPsychics::Application.routes.draw do
 
     resources :clients do
       member do
+        get 'disable', action: :disable, as: :disable
         get :resend_confirmation
       end
     end
