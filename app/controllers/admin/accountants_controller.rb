@@ -34,6 +34,6 @@ class Admin::AccountantsController < AuthorizedController
 
   def accountant_params
     params.require(:accountant).permit(:first_name, :last_name, :username,
-                                       :email, :password)
+                                       :email, :password, :time_zone)
   end
 end

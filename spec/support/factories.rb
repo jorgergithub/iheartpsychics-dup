@@ -39,6 +39,7 @@ FactoryGirl.define do
     birthday Date.today
     pin "1234"
     phones { [FactoryGirl.create(:client_phone)] }
+    pin { "1234" }
   end
 
   factory :psychic do
