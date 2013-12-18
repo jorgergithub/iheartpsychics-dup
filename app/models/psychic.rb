@@ -335,4 +335,8 @@ class Psychic < ActiveRecord::Base
     return 1 if special_price?(client)
     self.price
   end
+
+  def self.additional_csv_columns
+    ['email']
+  end
 end
