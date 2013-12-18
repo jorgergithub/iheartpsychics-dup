@@ -17,8 +17,8 @@ Module("IHP.Components.SignIn", function(SignIn) {
     $("body").off("ajax:error").on("ajax:error", "form.signin-form", this.onSubmitError);
   };
 
-  SignIn.fn.onSubmitError = function(e) {
-    showModal("sign_in_error_modal", { withErrors: true });
+  SignIn.fn.onSubmitError = function(e, data, status, xhr) {
+    showModal("sign_in_error_modal", { message: data.responseText, withErrors: true });
   };
 
   SignIn.fn.toggleSignInArea = function() {

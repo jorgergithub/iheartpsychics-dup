@@ -27,14 +27,12 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :rep
   accepts_nested_attributes_for :admin
 
+  delegate :disabled?, to: :client, allow_nil: true, prefix: true
+
   validates :username, :time_zone, presence: true
   validates :username, uniqueness: true
-  validate  :username_length
   validates :time_zone, :inclusion => { in: ActiveSupport::TimeZone.zones_map(&:name), allow_blank: true }
-
-  def username_length
-    errors.add(:username, "must have at least 6 characters") if username.size < 6
-  end
+  validate  :username_length
 
   before_create :build_relation
 
@@ -102,14 +100,26 @@ class User < ActiveRecord::Base
     role == "website_admin"
   end
 
+  def accountant?
+    role == "accountant"
+  end
+
+  def active_for_authentication?
+    if client_disabled?
+      false
+    else
+      super
+    end
+  end
+
+  def inactive_message
+    client_disabled? ? :client_disabled : super
+  end
+
   def sign
     return psychic.sign if psychic
     return client.sign if client
     nil
-  end
-
-  def accountant?
-    role == "accountant"
   end
 
   def full_name
@@ -129,6 +139,10 @@ class User < ActiveRecord::Base
   end
 
   protected
+
+  def username_length
+    errors.add(:username, "must have at least 6 characters") if username.size < 6
+  end
 
   def build_relation
     if create_as == "client"
