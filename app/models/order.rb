@@ -21,6 +21,10 @@ class Order < ActiveRecord::Base
     items.first.package
   end
 
+  def date_of_order
+    Time.parse(created_at.to_s).in_time_zone.strftime("%d-%m-%Y")
+  end
+
   def to_paypal
     PayPal.new(id, item.package_name, total.to_f)
   end

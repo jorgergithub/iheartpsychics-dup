@@ -3,7 +3,11 @@ Hello <%= @client.first_name %>,
 <% if @order.refunded? %>
 Dolar has been successfully refunded to your account!
 <% else %>
-You have successfully added more dollars to your account!
+You have successfully added more dollars to your account! Below is a summary of your recent order:
+
+  Date: <%= @order.date_of_order %>
+  Dollars Purchased: <%= number_to_currency @order.total %>
+  Account Balance: <%= number_to_currency @order.client.balance %>
 <% end %>
 
 Do you wonder what the future may hold for you?  Is there a big decision
