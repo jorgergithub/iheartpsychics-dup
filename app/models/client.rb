@@ -19,10 +19,12 @@ class Client < ActiveRecord::Base
   has_many :reviews
   has_many :call_surveys, through: :calls
   has_many :callbacks
+  has_many :notes, class_name: "ClientNote", dependent: :destroy, order: 'created_at DESC'
 
   has_and_belongs_to_many :favorite_psychics, class_name: "Psychic"
 
   accepts_nested_attributes_for :phones, allow_destroy: true
+  accepts_nested_attributes_for :notes, allow_destroy: true
 
   validates :birthday, :pin, :phones, :presence => true
   validates :pin, length: { is: 4 }, allow_blank: true

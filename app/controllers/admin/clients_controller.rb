@@ -28,6 +28,7 @@ class Admin::ClientsController < AuthorizedController
     @user = User.new
     @client = @user.build_client if @user
     @phones = @client.phones.build if @client
+    @notes = @client.notes.build if @client
   end
 
   def edit
@@ -51,6 +52,7 @@ class Admin::ClientsController < AuthorizedController
     else
       @client = @user.client
       @phones = @client.phones
+      @notes = @client.notes
       render action: "new"
     end
   end
@@ -70,11 +72,13 @@ class Admin::ClientsController < AuthorizedController
     @client = Client.find(params[:id]) if params[:id]
     @user = @client.user if @client
     @phones = @client.phones if @client
+    @notes = @client.notes if @client
   end
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :username, :email, :time_zone,
       client_attributes: [:id, :balance, :birthday, :pin, :receive_newsletters,
-      phones_attributes: [:id, :number, :desc, :_destroy]])
+      phones_attributes: [:id, :number, :desc, :_destroy],
+      notes_attributes: [:id, :description, :_destroy]])
   end
 end

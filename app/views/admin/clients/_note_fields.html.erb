@@ -1,0 +1,13 @@
+<div class="fields">
+  <% if f.object.persisted? %>
+    <%= f.text_field :created_at, class: "input-small", style: "vertical-align: top;width: 150px", readonly: true %>
+  <% end %>
+
+  <%= f.text_area :description, class: "input-small", style: "height: 70px; resize: none; width: 600px;", placeholder: "Note" %>
+
+  <%= f.hidden_field :_destroy%>
+
+  <%= link_to_remove_fields('<i class="icon-remove"></i> Remove this note'.html_safe, f,:title => "This note will be removed") %>
+
+  <hr/>
+</div>

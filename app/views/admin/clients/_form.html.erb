@@ -1,5 +1,7 @@
 <%= form_for([:admin, object], :url => admin_client_path(@client), :html => { :class => 'form form-horizontal' }) do |f| %>
 
+  <%= render 'errors', object: @user, model_name: "user" %>
+
   <%= hidden_field_tag :anchor %>
 
   <ul class="nav nav-tabs" id="tabs">
@@ -7,14 +9,13 @@
     <% if f.object.persisted? %>
       <li data-toggle="tab"><%= link_to "Phones", "#phones" %></li>
       <li data-toggle="tab"><%= link_to "Survey Responses (#{@client.call_surveys.count})", "#responses" %></li>
+      <li data-toggle="tab"><%= link_to "Notes (#{@client.notes.count})", "#notes" %></li>
     <% end %>
   </ul>
 
   <div class="tab-content">
     <div class="tab-pane active" id="form">
       <legend>Personal Info</legend>
-
-      <%= render 'errors', object: @user, model_name: "user" %>
 
       <div class="control-group">
         <%= f.label :first_name, "Name", :class => 'control-label' %>
@@ -91,6 +92,18 @@
 
       <div class="tab-pane" id="responses">
         <%= render "admin/surveys", target: @client %>
+      </div>
+
+      <div class="tab-pane" id="notes">
+        <div class="control-group">
+          <%= f.fields_for :client do |fields_for_client| %>
+            <%= fields_for_client.fields_for :notes, localized(@notes) do |fields_for_notes| %>
+              <%= render "note_fields", :f => fields_for_notes %>
+            <% end %>
+
+            <%= link_to_add_fields("Add a new note", fields_for_client, :notes, :class => "btn btn-small", :title => "Add a new note to this Client.") %>
+          <% end %>
+        </div>
       </div>
     <% end %>
   </div>

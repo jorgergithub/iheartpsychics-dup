@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131216162209) do
+ActiveRecord::Schema.define(version: 20131218002015) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -125,6 +125,15 @@ ActiveRecord::Schema.define(version: 20131216162209) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "client_notes", force: true do |t|
+    t.text     "description"
+    t.integer  "client_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "client_notes", ["client_id"], name: "index_client_notes_on_client_id", using: :btree
 
   create_table "client_phones", force: true do |t|
     t.integer  "client_id"
@@ -369,7 +378,6 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.datetime "updated_at"
   end
 
-  add_index "psychic_events", ["psychic_id"], name: "idx_psychic_events_psychic_id", using: :btree
   add_index "psychic_events", ["psychic_id"], name: "index_psychic_events_on_psychic_id", using: :btree
 
   create_table "psychic_faq_categories", force: true do |t|
@@ -582,6 +590,8 @@ ActiveRecord::Schema.define(version: 20131216162209) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+
+  add_foreign_key "client_notes", "clients", name: "client_notes_client_id_fk"
 
   add_foreign_key "faqs", "categories", name: "faqs_category_id_fk"
 
