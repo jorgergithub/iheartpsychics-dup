@@ -25,10 +25,6 @@ module CallsHelper
     phrase.strip
   end
 
-  def total_cost_of_calls(calls)
-    calls.map{ |item| item.price_f }.reduce(:+)
-  end
-
   def total_price_of_calls(calls)
     calls.map{ |item| item.cost }.reduce(:+)
   end

@@ -26,9 +26,10 @@
             <th>Time</th>
             <th>From</th>
             <th>Psychic</th>
+            <th>Client</th>
             <th>Duration</th>
             <th>Refunded?</th>
-            <th>Cost</th>
+            <th>Price/minute</th>
             <th>Price</th>
             <th>Revenue</th>
           </tr>
@@ -40,7 +41,8 @@
               <td><%= call.parsed_start_date_only %></td>
               <td><%= call.parsed_start_time_only %></td>
               <td><%= call.formatted_number %></td>
-              <td><%= call.psychic_alias_name %></td>
+              <td><%= link_to call.psychic_alias_name, edit_admin_psychic_path(call.psychic) %></td>
+              <td><%= link_to call.client.full_name, edit_admin_client_path(call.client) %></td>
               <td class="right">
                 <%= call.formatted_duration %>
               </td>
@@ -50,7 +52,7 @@
                 <% end %>
               </td>
               <td class="right">
-                <%= number_to_currency call.price_f %>
+                <%= number_to_currency call.calculate_cost_per_minute %>
               </td>
               <td class="right">
                 <%= number_to_currency call.cost %>
@@ -64,8 +66,7 @@
 
         <tfoot>
           <tr>
-            <td colspan="7"><strong>Total</strong></td>
-            <td class="right"><%= number_to_currency @total_cost_of_calls %></td>
+            <td colspan="9"><strong>Total</strong></td>
             <td class="right"><%= number_to_currency @total_price_of_calls %></td>
             <td class="right"><%= number_to_currency @total_revenue_of_calls %></td>
           </tr>

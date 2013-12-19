@@ -36,7 +36,6 @@ class Admin::CallsController < ApplicationController
 
     @calls = @all_calls.page(params[:page]).per(params[:per])
 
-    @total_cost_of_calls = total_cost_of_calls(@all_calls)
     @total_price_of_calls = total_price_of_calls(@all_calls)
     @total_revenue_of_calls = total_revenue_of_calls(@all_calls)
   end
