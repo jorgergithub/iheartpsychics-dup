@@ -15,18 +15,20 @@
           </ul>
         </li>
 
-        <li class="footer-links-groups-link">
-          <h1 class="footer-links-group-title">Our Psychics</h1>
-          <ul class="footer-links-group-links">
-            <li class="footer-links-group-link">
-              <a href="/?featured=true#search" class="footer-psychics-featured-link">Featured</a>
-            </li>
+        <% if consumer? %>
+          <li class="footer-links-groups-link">
+            <h1 class="footer-links-group-title">Our Psychics</h1>
+            <ul class="footer-links-group-links">
+              <li class="footer-links-group-link">
+                <a href="/?featured=true#search" class="footer-psychics-featured-link">Featured</a>
+              </li>
 
-            <li class="footer-links-group-link">
-              <a href="/?status=available#search" class="footer-psychics-available-link">Currently Available</a>
-            </li>
-          </ul>
-        </li>
+              <li class="footer-links-group-link">
+                <a href="/?status=available#search" class="footer-psychics-available-link">Currently Available</a>
+              </li>
+            </ul>
+          </li>
+        <% end %>
 
         <li class="footer-links-groups-link">
           <h1 class="footer-links-group-title">Site</h1>
