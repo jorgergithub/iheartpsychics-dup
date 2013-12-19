@@ -187,6 +187,10 @@ class Client < ActiveRecord::Base
     balance >= psychic.price
   end
 
+  def self.additional_csv_columns
+    ["first_name", "last_name", "username", "email", "time_zone"]
+  end
+
   private
 
   def set_unsubscribe_key
