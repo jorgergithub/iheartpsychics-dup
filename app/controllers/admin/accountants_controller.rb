@@ -26,6 +26,12 @@ class Admin::AccountantsController < AuthorizedController
     end
   end
 
+  def destroy
+    @accountant.destroy
+
+    redirect_to admin_accountants_path, notice: 'Accountant was successfully deleted.'
+  end
+
   protected
 
   def find_accountant
