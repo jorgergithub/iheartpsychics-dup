@@ -25,15 +25,16 @@ class Admin::CallsController < ApplicationController
   end
 
   def summary
-    @calls = Call.all.page(params[:page]).per(params[:per])
     @start_date = params[:start_date]
     @end_date = params[:end_date]
 
     if @start_date.present? && @end_date.present?
-      @calls = @calls.period(Date.strptime(params[:start_date], "%d-%m-%Y"),Date.strptime(params[:end_date], "%d-%m-%Y"))
+      @all_calls = Call.period(Date.strptime(params[:start_date], "%d-%m-%Y"),Date.strptime(params[:end_date], "%d-%m-%Y"))
+    else
+      @all_calls = Call.all
     end
 
-    @all_calls = Call.all
+    @calls = @all_calls.page(params[:page]).per(params[:per])
 
     @total_cost_of_calls = total_cost_of_calls(@all_calls)
     @total_price_of_calls = total_price_of_calls(@all_calls)
