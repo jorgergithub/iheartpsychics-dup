@@ -29,12 +29,9 @@ class User < ActiveRecord::Base
 
   validates :username, :time_zone, presence: true
   validates :username, uniqueness: true
-  validate  :username_length
+  validates :password, length: { minimum: 8 }, allow_blank: true, if: ->(user) { user.psychic? && user.errors[:password].blank? }
   validates :time_zone, :inclusion => { in: ActiveSupport::TimeZone.zones_map(&:name), allow_blank: true }
-
-  def username_length
-    errors.add(:username, "must have at least 6 characters") if username.size < 6
-  end
+  validate  :username_length
 
   before_create :build_relation
 
@@ -129,6 +126,10 @@ class User < ActiveRecord::Base
   end
 
   protected
+
+  def username_length
+    errors.add(:username, "must have at least 6 characters") if username.size < 6
+  end
 
   def build_relation
     if create_as == "client"
