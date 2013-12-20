@@ -10,11 +10,35 @@ Module("IHP.Pages.HomeIndex", function(HomeIndex) {
 
   HomeIndex.fn.addEventListeners = function() {
     this.el.on("click", ".sign_up_link", this.redirectToSignup);
+
+    $(window).scroll(this.activateNavigationItem);
   };
 
   HomeIndex.fn.redirectToSignup = function(e) {
     e.preventDefault();
     window.location.href = "/users/sign_up";
+  };
+
+  HomeIndex.fn.activateNavigationItem = function() {
+    function isOnScreen(element) {
+      var elementTop = element.offset().top;
+      var elementBottom = elementTop + element.height();
+
+      var scrollTop = $(window).scrollTop();
+      var scrollBottom = scrollTop + $(window).height();
+
+      return (elementTop < scrollBottom) && (elementBottom > scrollTop);
+    }
+
+    $("li.nav-link").removeClass("active");
+    
+    if (isOnScreen($('.container-psychics'))) {
+      $("li.search_link").addClass("active");
+    } else if (isOnScreen($('.container-offers'))) {
+      $("li.offers_link").addClass("active");
+    } else {
+      $("li.home_link").addClass("active");
+    };
   };
 });
 

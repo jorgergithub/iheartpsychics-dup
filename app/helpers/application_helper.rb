@@ -38,14 +38,14 @@ module ApplicationHelper
     end
   end
 
-  def nav_link(name, link, controllers=[])
+  def nav_link(name, link, controllers=[], html = {})
     active = controllers.include?(controller_name)
 
     unless active
       active = (link == request.env['PATH_INFO'])
     end
 
-    content_tag(:li, class: "nav-link#{active ? " active" : ""}") do
+    content_tag(:li, class: "nav-link#{active ? " active" : ""} #{html[:class]}") do
       link_to name, link
     end
   end
