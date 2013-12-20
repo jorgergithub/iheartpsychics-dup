@@ -1,11 +1,14 @@
 <div id="prices_modal" class="modal large">
   <table>
     <tr>
-      <% Package.all.each do |package| %>
+      <% Package.active[0..2].each do |package| %>
         <td class="package-item" data-package-id="<%= package.id %>">
           <header>
             <h1><small>$</small><%= package.price.to_i %></h1>
-            <%= image_tag "modal/#{package.discount}_off.png" %>
+            <% if package.discount > 0 %>
+              <div class="container-offer-discount-bg"></div>
+              <div class="container-offer-discount-<%= package.discount %>"></div>
+            <% end %>
           </header>
 
           <h1>
