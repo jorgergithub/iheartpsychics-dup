@@ -4,7 +4,7 @@
       <div class="row">
         <div class="field">
           <%= f.label :card_number, "Credit Card#" %>
-          <%= f.text_field :card_number, placeholder: "1234 1324 1234 1234", maxlength: 16,data: { stripe: "number" } %>
+          <%= f.text_field :card_number, placeholder: "1234 1234 1234 1234", maxlength: 16, data: { stripe: "number" } %>
           <i class="card_type">
             <%= image_tag "credit_card_icons/generic_2.png", class: "generic_card" %>
             <%= image_tag "credit_card_icons/visa.png", class: "visa" %>

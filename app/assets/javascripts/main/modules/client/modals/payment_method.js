@@ -49,8 +49,17 @@ Module("IHP.Modals.SelectPaymentMethodModal", function(SelectPaymentMethodModal)
   };
 
   SelectPaymentMethodModal.fn.assign = function() {
+    var orderCardNumber = $(".new_credit_card_panel #order_card_number", this.el);
+
     $(".new_credit_card_panel form", this.el)[0].reset();
-    $(".new_credit_card_panel #order_card_number", this.el).mask("0000 0000 0000 0000")
+
+    orderCardNumber.keyup(function() {
+      orderCardNumber.mask("0000 0000 0000 0000");
+
+      if(orderCardNumber.val().length < 18){
+        orderCardNumber.mask("0000 000000 00000");
+      }
+    });
 
     this.setPackage();
     this.showFirstPanel();
