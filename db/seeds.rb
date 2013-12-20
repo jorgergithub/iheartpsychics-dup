@@ -124,7 +124,7 @@ PageSeo.create(url: "/training_items", page: "Training | I Heart Psychics", titl
 PageSeo.create(url: "", page: "All other pages", title: "High Quality Live Phone Psychic Readings | I Heart Psychics", description: "I Heart Psychics is an innovative and simple platform that connects consumers to high quality readings, astrological, metaphysical and spiritual content.", keywords: "I Heart Psychics, iheartpsychics, iheartpsychics.co, Psychic, tarot reading, psychic, clairvoyant, fortune teller, california psychics, tarot card reading, physic, tarot card meanings, psychic readings, free tarot card reading, free psychic reading, psychic source, psychic sofa, mediums, online tarot, free tarot reading online, psychics, free online tarot readings, psychic tv, free tarot readings, tarot on line, online tarot reading, psychic sally, psychic detective yakumo, tarot reading online, free physic reading, free love tarot reading, psychic medium")
 
 admin = User.create!(first_name: 'Master', last_name: 'Admin',
-                    username: 'admin', email: 'admin@iheartpsychics.co',
+                    username: 'adminn', email: 'admin@iheartpsychics.co',
                     password: 'ipass123', time_zone: "Eastern Time (US & Canada)",
                     create_as: 'admin', confirmed_at: Time.now)
 
@@ -134,7 +134,7 @@ wadmin = User.create!(first_name: 'Website', last_name: 'Admin',
                      time_zone: "Eastern Time (US & Canada)", confirmed_at: Time.now)
 
 mdirector = User.create!(first_name: 'Manager', last_name: 'Director',
-                        username: 'mdir', email: 'mdir@iheartpsychics.co',
+                        username: 'mdirrr', email: 'mdir@iheartpsychics.co',
                         password: 'ipass123', create_as: 'manager_director',
                         time_zone: "Eastern Time (US & Canada)", confirmed_at: Time.now)
 
@@ -203,7 +203,7 @@ app2.approve!
 #   date_of_birth: "1988-03-01", us_citizen: true, has_experience: true
 
 csr = User.create!(first_name: 'Carlos', last_name: 'Taborda',
-                  username: 'csr', email: 'carlos@carlos.is',
+                  username: 'carlos', email: 'carlos@carlos.is',
                   password: 'ipass123', create_as: 'csr',
                   time_zone: "Eastern Time (US & Canada)",
                   confirmed_at: Time.now)
@@ -280,6 +280,7 @@ user = User.new(first_name: "Felipe",
 client = user.build_client
 client.balance = 250
 client.birthday = Date.today
+client.pin = "2244"
 phone = client.phones.new
 phone.number = "+17863295532"
 user.save!
