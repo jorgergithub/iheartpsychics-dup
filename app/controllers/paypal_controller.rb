@@ -5,7 +5,7 @@ class PaypalController < ApplicationController
     Rails.logger.info "[PAYPAL-CALLBACK] #{params.inspect}"
 
     if params[:payment_status] == "Completed"
-      invoice_id = params[:invoice].split("_")[1]
+      invoice_id = params[:invoice].split("_").last
       if order = Order.find(invoice_id)
         order.pay_with_paypal(params)
       else
