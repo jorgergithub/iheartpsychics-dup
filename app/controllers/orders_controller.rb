@@ -49,11 +49,11 @@ class OrdersController < AuthorizedController
   private
 
   def find_order
-    @client = current_client
+    @client = current_client || Client.find(order_params[:client_id])
     @order = @client.orders.find(params[:id]) if params[:id]
   end
 
   def order_params
-    params.require(:order).permit(:package_id, :card_id, :stripe_token)
+    params.require(:order).permit(:package_id, :card_id, :stripe_token, :client_id)
   end
 end

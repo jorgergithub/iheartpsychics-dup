@@ -51,6 +51,7 @@ class Ability
       admin/manager_directors
       admin/newsletters
       admin/orders
+      orders
       admin/packages
       admin/psychic_faq_categories
       admin/psychics
@@ -81,6 +82,7 @@ class Ability
       admin/calls
       admin/clients
       admin/orders
+      orders
       admin/psychics
       admin/refunds
     )
