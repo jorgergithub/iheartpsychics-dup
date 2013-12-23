@@ -14,12 +14,11 @@ class ClientsController < AuthorizedController
       ClientMailer.delay.pin_email(@client, @pin)
     end
 
-    @transactions = @client.transactions.order('id desc').page(params[:page_credits]).per(params[:per])
+    @transactions = @client.transactions.includes(:order).order('id desc').page(params[:page_credits]).per(params[:per])
     @phones = @client.phones.order(:id).page(params[:page_phones]).per(params[:per])
     @edit_phone = @client.phones.any? ? @client.phones.first : @client.phones.build
     @psychics = @client.psychics.order(:id).page(params[:page_psychics]).per(params[:per])
-    @processed_calls = @client.calls.processed.order(id: :desc).page(params[:page_processed_calls]).per(params[:per])
-    @callbacks = @client.callbacks.current.page(params[:page_callbacks]).per(params[:per])
+    @processed_calls = @client.calls.processed.includes(:psychic => :user).order(id: :desc).page(params[:page_processed_calls]).per(params[:per])
   end
 
   def edit

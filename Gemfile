@@ -46,6 +46,7 @@ gem "capistrano"             , "~> 3.0.1"
 gem 'capistrano-bundler'
 
 group :development, :test do
+  gem 'bullet'               , '~> 4.7.1'
   gem 'factory_girl_rails'   , '~> 4.2.1'
   gem 'growl'                , '~> 1.0.3'
   gem 'guard'                , '~> 1.8.2'

@@ -35,4 +35,12 @@ IHeartPsychics::Application.configure do
   config.action_mailer.smtp_settings = {
     :address              => "0.0.0.0",
     :port                 => 1025 }
+
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.rails_logger = true
+    Bullet.add_footer = true
+  end
 end

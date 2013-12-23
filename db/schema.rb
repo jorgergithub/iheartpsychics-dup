@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131216162209) do
+ActiveRecord::Schema.define(version: 20131223172312) do
 
   create_table "admins", force: true do |t|
     t.integer "user_id"
@@ -25,6 +25,10 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "answers", ["call_survey_id"], name: "index_answers_on_call_survey_id", using: :btree
+  add_index "answers", ["option_id"], name: "index_answers_on_option_id", using: :btree
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
   create_table "call_scripts", force: true do |t|
     t.string "call_sid"
@@ -40,6 +44,9 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "call_surveys", ["call_id"], name: "index_call_surveys_on_call_id", using: :btree
+  add_index "call_surveys", ["survey_id"], name: "index_call_surveys_on_survey_id", using: :btree
 
   create_table "callbacks", force: true do |t|
     t.integer  "psychic_id"
@@ -88,6 +95,7 @@ ActiveRecord::Schema.define(version: 20131216162209) do
   end
 
   add_index "calls", ["client_id"], name: "index_calls_on_client_id", using: :btree
+  add_index "calls", ["invoice_id"], name: "index_calls_on_invoice_id", using: :btree
   add_index "calls", ["psychic_id"], name: "index_calls_on_psychic_id", using: :btree
   add_index "calls", ["sid"], name: "index_calls_on_sid", using: :btree
 
@@ -103,6 +111,8 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "cards", ["client_id"], name: "index_cards_on_client_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -134,6 +144,7 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.string   "desc"
   end
 
+  add_index "client_phones", ["client_id"], name: "index_client_phones_on_client_id", using: :btree
   add_index "client_phones", ["number"], name: "index_client_phones_on_number", unique: true, using: :btree
 
   create_table "clients", force: true do |t|
@@ -147,7 +158,10 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.string   "unsubscribe_key"
     t.string   "avatar_id"
     t.date     "birthday"
+    t.boolean  "disabled",                                    default: false
   end
+
+  add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
 
   create_table "clients_psychics", id: false, force: true do |t|
     t.integer "client_id"
@@ -167,6 +181,9 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.boolean  "refunded"
   end
 
+  add_index "credits", ["client_id"], name: "index_credits_on_client_id", using: :btree
+  add_index "credits", ["target_id", "target_type"], name: "index_credits_on_target_id_and_target_type", using: :btree
+
   create_table "customer_service_representatives", force: true do |t|
     t.integer  "user_id"
     t.string   "phone"
@@ -174,6 +191,8 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.datetime "updated_at"
     t.boolean  "available"
   end
+
+  add_index "customer_service_representatives", ["user_id"], name: "index_customer_service_representatives_on_user_id", using: :btree
 
   create_table "daily_fortunes", force: true do |t|
     t.date     "start_date", null: false
@@ -252,6 +271,9 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.date     "end_date"
   end
 
+  add_index "invoices", ["psychic_id"], name: "index_invoices_on_psychic_id", using: :btree
+  add_index "invoices", ["tier_id"], name: "index_invoices_on_tier_id", using: :btree
+
   create_table "newsletters", force: true do |t|
     t.string   "title"
     t.text     "body"
@@ -268,6 +290,8 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.datetime "updated_at"
   end
 
+  add_index "options", ["question_id"], name: "index_options_on_question_id", using: :btree
+
   create_table "order_items", force: true do |t|
     t.integer  "order_id"
     t.integer  "package_id"
@@ -279,6 +303,9 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.datetime "updated_at"
   end
 
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
+  add_index "order_items", ["package_id"], name: "index_order_items_on_package_id", using: :btree
+
   create_table "orders", force: true do |t|
     t.integer  "client_id"
     t.decimal  "total",          precision: 8, scale: 2
@@ -287,6 +314,8 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.datetime "updated_at"
     t.string   "payment_method"
   end
+
+  add_index "orders", ["client_id"], name: "index_orders_on_client_id", using: :btree
 
   create_table "packages", force: true do |t|
     t.string   "name"
@@ -317,6 +346,8 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "payments", ["invoice_id"], name: "index_payments_on_invoice_id", using: :btree
 
   create_table "psychic_applications", force: true do |t|
     t.string   "first_name"
@@ -369,7 +400,6 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.datetime "updated_at"
   end
 
-  add_index "psychic_events", ["psychic_id"], name: "idx_psychic_events_psychic_id", using: :btree
   add_index "psychic_events", ["psychic_id"], name: "index_psychic_events_on_psychic_id", using: :btree
 
   create_table "psychic_faq_categories", force: true do |t|
@@ -468,6 +498,7 @@ ActiveRecord::Schema.define(version: 20131216162209) do
   end
 
   add_index "psychics", ["extension"], name: "index_psychics_on_extension", unique: true, using: :btree
+  add_index "psychics", ["user_id"], name: "index_psychics_on_user_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.integer  "survey_id"
@@ -476,6 +507,9 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "questions", ["id", "type"], name: "index_questions_on_id_and_type", using: :btree
+  add_index "questions", ["survey_id"], name: "index_questions_on_survey_id", using: :btree
 
   create_table "reviews", force: true do |t|
     t.integer  "psychic_id"
@@ -489,6 +523,7 @@ ActiveRecord::Schema.define(version: 20131216162209) do
   end
 
   add_index "reviews", ["call_id"], name: "index_reviews_on_call_id", using: :btree
+  add_index "reviews", ["client_id"], name: "index_reviews_on_client_id", using: :btree
   add_index "reviews", ["psychic_id"], name: "index_reviews_on_psychic_id", using: :btree
 
   create_table "schedule_jobs", force: true do |t|
@@ -551,6 +586,10 @@ ActiveRecord::Schema.define(version: 20131216162209) do
     t.decimal  "amount",         precision: 8, scale: 2
     t.string   "card"
   end
+
+  add_index "transactions", ["client_id"], name: "index_transactions_on_client_id", using: :btree
+  add_index "transactions", ["order_id"], name: "index_transactions_on_order_id", using: :btree
+  add_index "transactions", ["transaction_id"], name: "index_transactions_on_transaction_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

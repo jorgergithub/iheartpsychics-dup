@@ -40,7 +40,7 @@ class PsychicsController < AuthorizedController
 
   def search
     @client = current_client
-    @psychics = Psychic.enabled.order("status")
+    @psychics = Psychic.enabled.includes(:user).order("status")
 
     if params[:speciality]
       @psychics = @psychics.add_specialty_filter(params[:speciality])
