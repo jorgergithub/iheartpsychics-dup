@@ -5,7 +5,7 @@
     display: inline-block;
     text-align: center;
     background: #e7e9ec;
-    width: 448px;
+    width: 900px;
     padding: 25px 0px;
     color: #5d687a;
   }
@@ -57,7 +57,11 @@
     display: none;
   }
 
-  .credit_cards_panel {
+  // .credit_cards_panel {
+  //   display: block;
+  // }
+
+  .paypal_panel {
     display: block;
   }
 
