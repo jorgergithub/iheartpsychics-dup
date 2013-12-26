@@ -104,6 +104,7 @@ class Call < ActiveRecord::Base
       self.duration = CallDurationRounder.new(twilio_call.duration).round
       self.calculate_cost_per_minute
       self.cost = self.duration * self.cost_per_minute
+      self.rate = self.psychic.price
       self.client.discount_credits(self)
 
       self.original_duration = twilio_call.duration

@@ -49,7 +49,7 @@ describe Invoice do
   end
 
   describe ".create_for" do
-    let(:psychic) { create(:psychic) }
+    let(:psychic) { create(:psychic, price: 4.50) }
 
     before do
       Tier.create(from: 0, to: 999, name: "Bronze", percent: 14)
@@ -61,8 +61,8 @@ describe Invoice do
 
     context "when some calls are already invoiced" do
       let!(:other_invoice) { create(:invoice) }
-      let!(:call1) { create(:call, psychic: psychic, original_duration: "30000", started_at: "2013-01-01 10:00", cost: 4.50 * 500) } # 2250
-      let!(:call2) { create(:call, psychic: psychic, original_duration: "27600", started_at: "2013-01-02 11:00", cost: 4.50 * 460, invoice: other_invoice) } # 2070
+      let!(:call1) { create(:call, psychic: psychic, original_duration: "30000", started_at: "2013-01-01 10:00", rate: psychic.price, cost: 4.50 * 500) } # 2250
+      let!(:call2) { create(:call, psychic: psychic, original_duration: "27600", started_at: "2013-01-02 11:00", rate: psychic.price, cost: 4.50 * 460, invoice: other_invoice) } # 2070
 
       let(:invoice) { Invoice.last }
 
@@ -84,9 +84,9 @@ describe Invoice do
     end
 
     context "when psychic has between 1000 and 1199 minutes" do
-      let!(:call1) { create(:call, psychic: psychic, original_duration: "30000", started_at: "2013-01-01 10:00", cost: 4.50 * 500) } # 2250
-      let!(:call2) { create(:call, psychic: psychic, original_duration: "27600", started_at: "2013-01-02 11:00", cost: 4.50 * 460) } # 2070
-      let!(:call3) { create(:call, psychic: psychic, original_duration: "10800", started_at: "2013-01-02 11:00", cost: 4.50 * 180) } #  810 == 5130
+      let!(:call1) { create(:call, psychic: psychic, original_duration: "30000", started_at: "2013-01-01 10:00", rate: psychic.price, cost: 4.50 * 500) } # 2250
+      let!(:call2) { create(:call, psychic: psychic, original_duration: "27600", started_at: "2013-01-02 11:00", rate: psychic.price, cost: 4.50 * 460) } # 2070
+      let!(:call3) { create(:call, psychic: psychic, original_duration: "10800", started_at: "2013-01-02 11:00", rate: psychic.price, cost: 4.50 * 180) } #  810 == 5130
 
       let(:invoice) { Invoice.first }
 
@@ -127,9 +127,9 @@ describe Invoice do
       end
 
       context "when there are calls placed between 12AM and 8AM" do
-        let!(:call1) { create(:call, psychic: psychic, original_duration: "30000", started_at: "2013-01-01 10:00", cost: 4.50 * 500) } # 2250
-        let!(:call2) { create(:call, psychic: psychic, original_duration: "27600", started_at: "2013-01-02 00:30", cost: 4.50 * 460) } # 2070
-        let!(:call3) { create(:call, psychic: psychic, original_duration: "10800", started_at: "2013-01-04 00:30", cost: 4.50 * 180) } #  810 == 5130
+        let!(:call1) { create(:call, psychic: psychic, original_duration: "30000", started_at: "2013-01-01 10:00", rate: psychic.price, cost: 4.50 * 500) } # 2250
+        let!(:call2) { create(:call, psychic: psychic, original_duration: "27600", started_at: "2013-01-02 00:30", rate: psychic.price, cost: 4.50 * 460) } # 2070
+        let!(:call3) { create(:call, psychic: psychic, original_duration: "10800", started_at: "2013-01-04 00:30", rate: psychic.price, cost: 4.50 * 180) } #  810 == 5130
 
         it "has the same calls" do
           expect(invoice.calls.count).to eql(3)
@@ -154,8 +154,8 @@ describe Invoice do
     end
 
     context "when psychic has up to 1000 minutes" do
-      let!(:call1) { create(:call, psychic: psychic, original_duration: "30000", started_at: "2013-01-01 10:00", cost: 4.50 * 500) }
-      let!(:call2) { create(:call, psychic: psychic, original_duration: "29940", started_at: "2013-01-02 11:00", cost: 4.50 * 499) }
+      let!(:call1) { create(:call, psychic: psychic, original_duration: "30000", started_at: "2013-01-01 10:00", rate: psychic.price, cost: 4.50 * 500) }
+      let!(:call2) { create(:call, psychic: psychic, original_duration: "29940", started_at: "2013-01-02 11:00", rate: psychic.price, cost: 4.50 * 499) }
       let(:invoice) { Invoice.first }
 
       before {
@@ -187,8 +187,8 @@ describe Invoice do
       end
 
       context "when there are calls placed between 12AM and 8AM" do
-        let!(:call1) { create(:call, psychic: psychic, original_duration: "30000", started_at: "2013-01-01 10:00", cost: 4.50 * 500) }
-        let!(:call2) { create(:call, psychic: psychic, original_duration: "29940", started_at: "2013-01-02 05:00", cost: 4.50 * 499) }
+        let!(:call1) { create(:call, psychic: psychic, original_duration: "30000", started_at: "2013-01-01 10:00", rate: psychic.price, cost: 4.50 * 500) }
+        let!(:call2) { create(:call, psychic: psychic, original_duration: "29940", started_at: "2013-01-02 05:00", rate: psychic.price, cost: 4.50 * 499) }
 
         it "has the same minutes payout" do
           expect(invoice.minutes_payout.to_f).to eql(629.37)
@@ -205,6 +205,40 @@ describe Invoice do
         it "sets the total with a sum of minutes and bonuses" do
           expect(invoice.total.to_f).to eql(664.3)
         end
+      end
+    end
+
+    context "when call has a discounted price" do
+      let!(:call1) { create(:call, psychic: psychic, original_duration: "30000", started_at: "2013-01-01 10:00", rate: psychic.price, cost: 1 * 500) }
+      let!(:call2) { create(:call, psychic: psychic, original_duration: "29940", started_at: "2013-01-02 11:00", rate: psychic.price, cost: 1 * 499) }
+      let(:invoice) { Invoice.first }
+
+      before {
+        Invoice.create_for("2013-01-01 00:00", "2013-01-08 00:00")
+      }
+
+      it "creates one invoice" do
+        expect(Invoice.count).to eql(1)
+      end
+
+      it "sets the number of minutes" do
+        expect(invoice.total_minutes).to eql(999)
+      end
+
+      it "sets the correct tier" do
+        expect(invoice.tier).to eql(Tier.where(name: "Bronze").take)
+      end
+
+      it "sets the minutes payout" do
+        expect(invoice.minutes_payout.to_f).to eql(629.37)
+      end
+
+      it "sets the total to the minutes total" do
+        expect(invoice.total.to_f).to eql(629.37)
+      end
+
+      it "sets the average minutes per call" do
+        expect(invoice.avg_minutes.to_f).to eql(499.5)
       end
     end
   end

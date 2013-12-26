@@ -56,6 +56,10 @@ describe Call do
       expect(call.ended_at.in_time_zone.to_s).to eql("2013-07-17 19:51:57 -0400")
     end
 
+    it "saves the psychic rate used on the call" do
+      expect(call.rate).to eql(4.5)
+    end
+
     it "save fields correctly" do
       expect(call.date_created).to eql("Wed, 17 Jul 2013 23:50:32 +0000")
       expect(call.date_updated).to eql("Wed, 17 Jul 2013 23:51:57 +0000")

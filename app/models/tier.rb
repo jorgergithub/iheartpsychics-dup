@@ -6,6 +6,6 @@ class Tier < ActiveRecord::Base
   end
 
   def payout_for(call)
-    call.cost * percent / 100
+    (call.duration * call.rate) * percent / 100
   end
 end
