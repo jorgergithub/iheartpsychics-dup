@@ -72,7 +72,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def find_horoscope
-    @horoscope = Horoscope.last_by_date
+    @horoscope = Horoscope.any? ? Horoscope.last_by_date : Horoscope.new
   end
 
   def user_time_zone(&block)
