@@ -16,11 +16,13 @@
 </section>
 
 <div class="modal_list">
-  <% if @client.favorite_psychics.any? %>
-    <%= render "clients/modals/purchase/psychics" %>
-  <% else %>
-    <%= render "clients/modals/purchase/thank_you" %>
+  <% if @client %>
+    <% if @client.favorite_psychics.any? %>
+      <%= render "clients/modals/purchase/psychics" %>
+    <% else %>
+      <%= render "clients/modals/purchase/thank_you" %>
+    <% end %>
+    <%= render "clients/modals/prices" %>
+    <%= render "clients/modals/purchase/select_payment_method" %>
   <% end %>
-  <%= render "clients/modals/prices" %>
-  <%= render "clients/modals/purchase/select_payment_method" %>
 </div>
