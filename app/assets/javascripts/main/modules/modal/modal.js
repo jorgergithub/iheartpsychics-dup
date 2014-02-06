@@ -67,7 +67,7 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
     var $spinner = $(".spinner_overlay");
 
     $("body").off("click", ".overlay");
-    
+
     $submitButtons.prop("disabled", true);
     $spinner.fadeIn();
   }
@@ -82,7 +82,10 @@ Module("IHP.Main.Modal.Modal", function(Modal) {
 
     this.addEventListeners();
     $submitButtons.prop("disabled", false);
-    $(".spinner_overlay").fadeOut();
+
+    if (!$form.attr("data-keepspinner")) {
+      $(".spinner_overlay").fadeOut();
+    }
   };
 
   Modal.fn.resetForm = function(e) {
