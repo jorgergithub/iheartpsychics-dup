@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :find_page_seo
   before_action :find_horoscope
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :find_current_user
   around_action :user_time_zone, if: :current_user
 
   layout :layout_by_resource
@@ -103,6 +104,10 @@ class ApplicationController < ActionController::Base
 
   def find_page_seo
     @page_seo = PageSeo.for(request.path)
+  end
+
+  def find_current_user
+    @client = current_client unless @client
   end
 
   def build_new_user
